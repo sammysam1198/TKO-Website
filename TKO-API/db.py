@@ -47,6 +47,23 @@ def init_db():
             """
         )
 
+        cur.execute(
+            """
+            CREATE TABLE IF NOT EXISTS tko_users (
+                id SERIAL PRIMARY KEY,
+                first_name VARCHAR(100) NOT NULL,
+                last_name VARCHAR(100) NOT NULL,
+                email VARCHAR(255) NOT NULL UNIQUE,
+                username VARCHAR(50) NOT NULL UNIQUE,
+                password_hash TEXT NOT NULL,
+                agreed_to_terms BOOLEAN NOT NULL DEFAULT FALSE,
+                profile_image_url TEXT,
+                created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );
+            """
+        )
+
         conn.commit()
     finally:
         cur.close()
