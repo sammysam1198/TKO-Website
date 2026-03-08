@@ -45,7 +45,7 @@ def verify_password(password: str, password_hash: str) -> bool:
 def create_auth_token(user: dict) -> str:
     secret = os.getenv("JWT_SECRET", "dev-secret-change-me")
     payload = {
-        "sub": user["id"],
+        "sub": str(user["id"]),
         "username": user["username"],
         "email": user["email"],
         "exp": datetime.now(timezone.utc) + timedelta(days=7),
