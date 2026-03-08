@@ -1200,6 +1200,78 @@
     authMessage.textContent = "";
   }
 
+  function attachLoggedOutButtonEvents() {
+    const signUpBtn = document.getElementById("openSignUp");
+    const signInBtn = document.getElementById("openSignIn");
+
+    if (signUpBtn) {
+      signUpBtn.addEventListener("click", () => openAuthModal("signup"));
+    }
+
+    if (signInBtn) {
+      signInBtn.addEventListener("click", () => openAuthModal("signin"));
+    }
+  }
+
+  function renderLoggedOutState() {
+    authControls.innerHTML = `
+      <button id="openSignUp" class="auth-btn signup" type="button">Sign Up</button>
+      <button id="openSignIn" class="auth-btn signin" type="button">Sign In</button>
+    `;
+
+    attachLoggedOutButtonEvents();
+  }
+
+  function renderLoggedInState(user) {
+    authControls.innerHTML = `
+      <div class="profile-bubble">
+        <span class="profile-name">👤 ${user.username}</span>
+        <button id="logoutBtn" class="logout-btn" type="button">Log Out</button>
+      </div>
+    `;
+
+    const logoutBtn = document.getElementById("logoutBtn");
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("tko_token");
+      renderLoggedOutState();
+    });
+  }
+
+  async function loadCurrentUser() {
+    const token = localStorage.getItem("tko_token");
+
+    if (!token) {
+      renderLoggedOutState();
+      return;
+    }
+
+    try {
+      const response = await fetch(`${API_BASE}/api/tko/auth/me`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        localStorage.removeItem("tko_token");
+        renderLoggedOutState();
+        return;
+      }
+
+      const user = data.user || data;
+      renderLoggedInState(user);
+    } catch (error) {
+      console.error(error);
+      localStorage.removeItem("tko_token");
+      renderLoggedOutState();
+    }
+  }
+  
+  
+
   function showSignUpTab() {
     signUpForm.classList.remove("hidden");
     signInForm.classList.add("hidden");
@@ -1220,8 +1292,7 @@
     authMessage.textContent = "";
   }
 
-  openSignUpBtn.addEventListener("click", () => openAuthModal("signup"));
-  openSignInBtn.addEventListener("click", () => openAuthModal("signin"));
+  attachLoggedOutButtonEvents();
 
   closeAuthModalBtn.addEventListener("click", closeAuthModal);
   authBackdrop.addEventListener("click", closeAuthModal);
@@ -1307,7 +1378,9 @@
       }
 
       localStorage.setItem("tko_token", data.token);
-
+      
+      await loadCurrentUser();
+      
       authMessage.textContent = "Signed in successfully.";
       signInForm.reset();
 
@@ -1319,20 +1392,7 @@
       console.error(error);
     }
   });
+  loadCurrentUser();
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
