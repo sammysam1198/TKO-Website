@@ -1134,8 +1134,164 @@
       </form>
     </div>
   </div>
+<script>
+  const API_BASE = "https://YOUR-RENDER-BACKEND-URL.onrender.com";
+
+  const authModal = document.getElementById("authModal");
+  const openSignUpBtn = document.getElementById("openSignUp");
+  const openSignInBtn = document.getElementById("openSignIn");
+  const closeAuthModalBtn = document.getElementById("closeAuthModal");
+  const authBackdrop = document.querySelector(".auth-modal-backdrop");
+
+  const showSignUpTabBtn = document.getElementById("showSignUpTab");
+  const showSignInTabBtn = document.getElementById("showSignInTab");
+
+  const signUpForm = document.getElementById("signUpForm");
+  const signInForm = document.getElementById("signInForm");
+  const authMessage = document.getElementById("authMessage");
+
+  function openAuthModal(mode = "signup") {
+    authModal.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+
+    if (mode === "signup") {
+      showSignUpTab();
+    } else {
+      showSignInTab();
+    }
+
+    authMessage.textContent = "";
+  }
+
+  function closeAuthModal() {
+    authModal.classList.add("hidden");
+    document.body.style.overflow = "";
+    authMessage.textContent = "";
+  }
+
+  function showSignUpTab() {
+    signUpForm.classList.remove("hidden");
+    signInForm.classList.add("hidden");
+
+    showSignUpTabBtn.classList.add("active");
+    showSignInTabBtn.classList.remove("active");
+
+    authMessage.textContent = "";
+  }
+
+  function showSignInTab() {
+    signInForm.classList.remove("hidden");
+    signUpForm.classList.add("hidden");
+
+    showSignInTabBtn.classList.add("active");
+    showSignUpTabBtn.classList.remove("active");
+
+    authMessage.textContent = "";
+  }
+
+  openSignUpBtn.addEventListener("click", () => openAuthModal("signup"));
+  openSignInBtn.addEventListener("click", () => openAuthModal("signin"));
+
+  closeAuthModalBtn.addEventListener("click", closeAuthModal);
+  authBackdrop.addEventListener("click", closeAuthModal);
+
+  showSignUpTabBtn.addEventListener("click", showSignUpTab);
+  showSignInTabBtn.addEventListener("click", showSignInTab);
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !authModal.classList.contains("hidden")) {
+      closeAuthModal();
+    }
+  });
+
+  signUpForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const first_name = document.getElementById("signupFirstName").value.trim();
+    const last_name = document.getElementById("signupLastName").value.trim();
+    const email = document.getElementById("signupEmail").value.trim();
+    const username = document.getElementById("signupUsername").value.trim();
+    const password = document.getElementById("signupPassword").value;
+    const agreed_to_terms = document.getElementById("signupTerms").checked;
+
+    authMessage.textContent = "Creating account...";
+
+    try {
+      const response = await fetch(`${API_BASE}/api/tko/auth/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          first_name,
+          last_name,
+          email,
+          username,
+          password,
+          agreed_to_terms
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        authMessage.textContent = data.error || data.message || "Sign up failed.";
+        return;
+      }
+
+      authMessage.textContent = "Account created successfully. You can sign in now.";
+      signUpForm.reset();
+      showSignInTab();
+    } catch (error) {
+      authMessage.textContent = "Network error during sign up.";
+      console.error(error);
+    }
+  });
+
+  signInForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const login = document.getElementById("signinLogin").value.trim();
+    const password = document.getElementById("signinPassword").value;
+
+    authMessage.textContent = "Signing in...";
+
+    try {
+      const response = await fetch(`${API_BASE}/api/tko/auth/signin`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          login,
+          password
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        authMessage.textContent = data.error || data.message || "Sign in failed.";
+        return;
+      }
+
+      localStorage.setItem("tko_token", data.token);
+
+      authMessage.textContent = "Signed in successfully.";
+      signInForm.reset();
+
+      setTimeout(() => {
+        closeAuthModal();
+      }, 600);
+    } catch (error) {
+      authMessage.textContent = "Network error during sign in.";
+      console.error(error);
+    }
+  });
+</script>
 </body>
 </html>
+
 
 
 
