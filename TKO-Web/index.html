@@ -220,6 +220,147 @@
       box-shadow: 0 8px 24px rgba(255, 150, 82, 0.24);
     }
 
+        .hidden {
+      display: none !important;
+    }
+
+    .auth-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .auth-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(6px);
+    }
+
+    .auth-modal-content {
+      position: relative;
+      width: min(100%, 520px);
+      background: linear-gradient(180deg, rgba(18,18,28,0.96), rgba(10,10,18,0.98));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+      z-index: 1;
+    }
+
+    .auth-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .auth-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .auth-tab {
+      flex: 1;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 16px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      background: rgba(255,255,255,0.08);
+      color: white;
+    }
+
+    .auth-tab.active {
+      background: linear-gradient(90deg, var(--hotpink), var(--peach));
+      color: black;
+    }
+
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .auth-form h2 {
+      margin: 0 0 8px;
+      font-size: 1.35rem;
+    }
+
+    .auth-form label {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.88);
+    }
+
+    .auth-form input {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.06);
+      color: white;
+      font-size: 0.98rem;
+      outline: none;
+    }
+
+    .auth-form input:focus {
+      border-color: var(--hotpink);
+      box-shadow: 0 0 0 3px rgba(255, 94, 161, 0.16);
+    }
+
+    .auth-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .auth-checkbox input {
+      width: auto;
+    }
+
+    .auth-submit {
+      margin-top: 10px;
+      border: none;
+      border-radius: 999px;
+      padding: 13px 18px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+    }
+
+    .signup-submit {
+      background: var(--hotpink);
+      color: black;
+    }
+
+    .signin-submit {
+      background: var(--peach);
+      color: black;
+    }
+
+    .auth-message {
+      min-height: 24px;
+      margin-bottom: 14px;
+      font-size: 0.9rem;
+      color: var(--peach);
+    }
+
     .hero {
       min-height: 88vh;
       display: flex;
@@ -941,8 +1082,61 @@
       <p class="footer-copy">© Copyright 2026. Built by Sammi Fishbein and Dominique Smith for TKO™ with HTML/CSS. All rights reserved. </p>
     </div>
   </footer>
+    <div id="authModal" class="auth-modal hidden">
+    <div class="auth-modal-backdrop"></div>
+
+    <div class="auth-modal-content">
+      <button id="closeAuthModal" class="auth-close-btn" type="button" aria-label="Close modal">×</button>
+
+      <div class="auth-tabs">
+        <button id="showSignUpTab" class="auth-tab active" type="button">Sign Up</button>
+        <button id="showSignInTab" class="auth-tab" type="button">Sign In</button>
+      </div>
+
+      <div id="authMessage" class="auth-message"></div>
+
+      <form id="signUpForm" class="auth-form">
+        <h2>Create Account</h2>
+
+        <label for="signupFirstName">First Name</label>
+        <input id="signupFirstName" name="first_name" type="text" required />
+
+        <label for="signupLastName">Last Name</label>
+        <input id="signupLastName" name="last_name" type="text" required />
+
+        <label for="signupEmail">Email</label>
+        <input id="signupEmail" name="email" type="email" required />
+
+        <label for="signupUsername">Username</label>
+        <input id="signupUsername" name="username" type="text" required />
+
+        <label for="signupPassword">Password</label>
+        <input id="signupPassword" name="password" type="password" required />
+
+        <label class="auth-checkbox">
+          <input id="signupTerms" name="agreed_to_terms" type="checkbox" required />
+          <span>I agree to the terms</span>
+        </label>
+
+        <button class="auth-submit signup-submit" type="submit">Create Account</button>
+      </form>
+
+      <form id="signInForm" class="auth-form hidden">
+        <h2>Welcome Back</h2>
+
+        <label for="signinLogin">Username or Email</label>
+        <input id="signinLogin" name="login" type="text" required />
+
+        <label for="signinPassword">Password</label>
+        <input id="signinPassword" name="password" type="password" required />
+
+        <button class="auth-submit signin-submit" type="submit">Sign In</button>
+      </form>
+    </div>
+  </div>
 </body>
 </html>
+
 
 
 
