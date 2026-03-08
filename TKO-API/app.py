@@ -7,6 +7,7 @@ from db import init_db
 from routes.core_routes import core_bp
 from routes.subscriber_routes import subscriber_bp
 from routes.post_routes import post_bp
+from routes.auth_routes import auth_bp
 
 app = Flask(__name__)
 CORS(app)
