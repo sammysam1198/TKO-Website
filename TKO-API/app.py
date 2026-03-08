@@ -15,6 +15,7 @@ CORS(app)
 app.register_blueprint(core_bp)
 app.register_blueprint(subscriber_bp)
 app.register_blueprint(post_bp)
+app.register_blueprint(auth_bp)
 
 # Run table creation when the app starts on Render too
 init_db()
