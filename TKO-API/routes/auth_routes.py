@@ -160,7 +160,7 @@ def me():
     except Exception:
         return jsonify({"ok": False, "error": "Invalid or expired token"}), 401
 
-    user_id = payload["sub"]
+    user_id = int(payload["sub"])
 
     conn = get_db_conn()
     cur = conn.cursor(cursor_factory=RealDictCursor)
