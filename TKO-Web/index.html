@@ -180,10 +180,36 @@
       color: white;
     }
 
-        .header-right {
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .profile-bubble {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: white;
+      font-weight: 700;
+    }
+
+    .profile-name {
+      white-space: nowrap;
+    }
+
+    .logout-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: var(--peach);
+      color: black;
+      font-weight: 700;
+      cursor: pointer;
     }
 
     .auth-buttons {
@@ -883,7 +909,7 @@
           <a href="#guest-book">Guest Book</a>
         </nav>
 
-        <div class="auth-buttons">
+        <div id="authControls" class="auth-buttons">
           <button id="openSignUp" class="auth-btn signup" type="button">Sign Up</button>
           <button id="openSignIn" class="auth-btn signin" type="button">Sign In</button>
         </div>
@@ -1296,6 +1322,7 @@
 </script>
 </body>
 </html>
+
 
 
 
