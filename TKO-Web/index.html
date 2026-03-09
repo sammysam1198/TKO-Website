@@ -449,6 +449,15 @@
       gap: 24px;
     }
 
+    .about-grid {
+      grid-template-columns: 2fr 1fr;
+      align-items: start;
+    }
+
+    .about-cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .hero-grid {
       grid-template-columns: 1.1fr 0.9fr;
       align-items: center;
@@ -875,9 +884,21 @@
     }
 
     @media (max-width: 720px) {
-     .info-grid {
-      grid-template-columns: 1fr;
+       .info-grid {
+        grid-template-columns: 1fr;
+      }
     }
+
+    @media (max-width: 900px) {
+
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-cards {
+        grid-template-columns: 1fr;
+      }
+
     }
     
     @media (max-width: 720px) {
@@ -1467,4 +1488,5 @@
 </script>
 </body>
 </html>
+
 
