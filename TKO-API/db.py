@@ -63,7 +63,17 @@ def init_db():
             );
             """
         )
-
+        cur.execute(
+            """
+            CREATE TABLE IF NOT EXISTS newsletter_subscribers (
+                id SERIAL PRIMARY KEY,
+                first_name VARCHAR(100),
+                email VARCHAR(255) NOT NULL UNIQUE,
+                message TEXT,
+                created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );
+            """
+        )
         conn.commit()
     finally:
         cur.close()
