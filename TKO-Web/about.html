@@ -4,30 +4,61 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About | TKO Official Site</title>
+
   <style>
     :root {
-      --bg: #111111;
-      --panel: rgba(255, 255, 255, 0.08);
-      --panel-border: rgba(255, 255, 255, 0.14);
+      --bg: #090909;
+      --panel: rgba(18, 18, 18, 0.74);
+      --panel-strong: rgba(10, 10, 10, 0.82);
+      --panel-border: rgba(255, 255, 255, 0.12);
       --text: #ffffff;
-      --muted: rgba(255, 255, 255, 0.72);
-      --peach: #ff9652;
-      --coral: #ff6a7c;
-      --pink: #ff38b6;
-      --hotpink: #ff5ea1;
-      --radius-xl: 32px;
-      --radius-lg: 24px;
-      --shadow: 0 18px 60px rgba(0, 0, 0, 0.3);
-      --max-width: 1200px;
+      --muted: rgba(255, 255, 255, 0.78);
+      --soft: rgba(255, 255, 255, 0.56);
+
+      --peach: #ff8a3d;
+      --orange: #ff5f00;
+      --pink: #ff00b8;
+      --magenta: #ff3dc8;
+      --purple: #9b3dff;
+
+      --radius-xl: 34px;
+      --radius-lg: 26px;
+      --radius-md: 18px;
+
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
+      --max-width: 1240px;
+      --ease: 280ms cubic-bezier(.2,.8,.2,1);
     }
 
-    * { box-sizing: border-box; }
-    body {
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
       margin: 0;
+      padding: 0;
+      min-height: 100%;
       font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      background:
+        linear-gradient(rgba(0,0,0,0.52), rgba(0,0,0,0.66)),
+        url("assets/texture_web1_3.png") center center / cover no-repeat fixed;
+    }
+
+    body {
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(255,95,0,0.18), transparent 28%),
+        radial-gradient(circle at 82% 22%, rgba(255,0,184,0.15), transparent 25%),
+        radial-gradient(circle at 50% 85%, rgba(155,61,255,0.10), transparent 32%);
+      pointer-events: none;
+      z-index: 0;
     }
 
     a {
@@ -37,22 +68,24 @@
 
     .display-title {
       font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-      letter-spacing: 0.04em;
       text-transform: uppercase;
+      letter-spacing: 0.045em;
     }
 
     .container {
       width: min(calc(100% - 48px), var(--max-width));
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     .site-header {
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(0, 0, 0, 0.65);
       backdrop-filter: blur(18px);
+      background: rgba(10, 10, 10, 0.55);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
     .site-header .container {
@@ -64,17 +97,19 @@
     }
 
     .brand-title {
-      font-size: 1.8rem;
-      color: #ff7d77;
       margin: 0;
+      font-size: 1.8rem;
+      line-height: 1;
+      color: #ff8a7a;
+      text-shadow: 0 0 20px rgba(255, 90, 130, 0.16);
     }
 
     .brand-subtitle {
       margin: 4px 0 0;
       font-size: 0.72rem;
-      letter-spacing: 0.35em;
+      letter-spacing: 0.34em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.58);
     }
 
     .nav {
@@ -84,86 +119,341 @@
     }
 
     .nav a {
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 999px;
       padding: 10px 16px;
-      font-size: 0.92rem;
-      color: rgba(255,255,255,0.85);
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.88);
+      transition: background var(--ease), border-color var(--ease), transform var(--ease);
     }
 
-    .page-hero {
-      padding: 72px 0 28px;
+    .nav a:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.2);
+      transform: translateY(-1px);
+    }
+
+    .page-shell {
+      padding: 70px 0 56px;
+    }
+
+    .about-panel {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      padding: 34px;
+      background:
+        linear-gradient(180deg, rgba(20,20,20,0.70), rgba(10,10,10,0.84)),
+        rgba(12, 12, 12, 0.74);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+    }
+
+    .about-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(255,95,0,0.08), transparent 32%),
+        linear-gradient(300deg, rgba(255,0,184,0.08), transparent 30%);
+      pointer-events: none;
+    }
+
+    .panel-inner {
+      position: relative;
+      z-index: 1;
     }
 
     .section-eyebrow {
       margin: 0 0 10px;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.36em;
       text-transform: uppercase;
-      letter-spacing: 0.35em;
-      color: #ff8f81;
+      color: #ffb18d;
     }
 
     .section-title {
       margin: 0;
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      line-height: 0.95;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 0.92;
+      max-width: 720px;
     }
 
-    .panel {
-      background: var(--panel);
-      border: 1px solid var(--panel-border);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
-      border-radius: var(--radius-xl);
-      padding: 32px;
+    .hero-copy {
+      max-width: 850px;
+      margin: 18px 0 0;
+      font-size: 1.06rem;
+      line-height: 1.8;
+      color: var(--muted);
     }
 
-    .content-grid {
+    .about-stage {
+      margin-top: 34px;
+      position: relative;
+      min-height: 540px;
+    }
+
+    .about-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 24px;
-      margin-top: 28px;
+      transition: opacity var(--ease), transform var(--ease);
     }
 
-    .card {
-      border-radius: var(--radius-lg);
-      padding: 24px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
+    .about-card {
+      position: relative;
+      min-height: 210px;
+      padding: 28px 28px 26px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03)),
+        rgba(255,255,255,0.03);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.05),
+        0 14px 36px rgba(0,0,0,0.18);
+      cursor: pointer;
+      transition:
+        transform var(--ease),
+        border-color var(--ease),
+        background var(--ease),
+        box-shadow var(--ease),
+        opacity var(--ease);
+      overflow: hidden;
     }
 
-    .label {
-      font-size: 0.72rem;
+    .about-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity var(--ease);
+      background:
+        radial-gradient(circle at top left, rgba(255,95,0,0.16), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(255,0,184,0.14), transparent 34%);
+      pointer-events: none;
+    }
+
+    .about-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.2);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.06),
+        0 20px 48px rgba(0,0,0,0.26);
+    }
+
+    .about-card:hover::before {
+      opacity: 1;
+    }
+
+    .card-label {
+      margin: 0;
+      font-size: 0.78rem;
+      letter-spacing: 0.34em;
       text-transform: uppercase;
-      letter-spacing: 0.3em;
-      opacity: 0.55;
+      color: rgba(255,255,255,0.62);
     }
 
-    .small-copy {
-      margin-top: 14px;
-      font-size: 0.96rem;
+    .card-title {
+      margin: 18px 0 0;
+      font-size: 1.55rem;
+      line-height: 1.1;
+    }
+
+    .card-copy {
+      margin: 16px 0 0;
+      font-size: 1rem;
       line-height: 1.8;
-      opacity: 0.82;
+      color: var(--muted);
+      max-width: 95%;
+    }
+
+    .card-hint {
+      margin-top: 22px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.86rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.58);
+    }
+
+    .card-hint::after {
+      content: "↗";
+      font-size: 1rem;
+    }
+
+    .expanded-card {
+      position: absolute;
+      inset: 0;
+      display: none;
+      border-radius: 30px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(15,15,15,0.78), rgba(8,8,8,0.90)),
+        rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 26px 80px rgba(0,0,0,0.35);
+      padding: 34px 34px 38px;
+    }
+
+    .expanded-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 0% 0%, rgba(255,95,0,0.18), transparent 30%),
+        radial-gradient(circle at 100% 0%, rgba(255,0,184,0.16), transparent 30%),
+        linear-gradient(135deg, rgba(255,255,255,0.03), transparent 40%);
+      pointer-events: none;
+    }
+
+    .expanded-card.active {
+      display: block;
+      animation: expandIn 320ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    @keyframes expandIn {
+      from {
+        opacity: 0;
+        transform: scale(0.985);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .expanded-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      padding-top: 18px;
+    }
+
+    .close-bubble {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      width: 46px;
+      height: 46px;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--ease), transform var(--ease), border-color var(--ease);
+      z-index: 3;
+    }
+
+    .close-bubble:hover {
+      background: rgba(255,255,255,0.14);
+      border-color: rgba(255,255,255,0.28);
+      transform: scale(1.04);
+    }
+
+    .expanded-label {
+      margin: 18px 0 0;
+      font-size: 0.82rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: #ffc0a1;
+    }
+
+    .expanded-title {
+      margin: 12px 0 0;
+      font-size: clamp(2.4rem, 5vw, 4.8rem);
+      line-height: 0.94;
+    }
+
+    .expanded-copy {
+      margin: 24px 0 0;
+      font-size: 1.06rem;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.86);
+      max-width: 820px;
+    }
+
+    .expanded-subcopy {
+      margin: 18px 0 0;
+      font-size: 1rem;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.72);
+      max-width: 800px;
+    }
+
+    .grid-hidden .about-grid {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(0.985);
     }
 
     .site-footer {
-      border-top: 1px solid rgba(255,255,255,0.1);
-      padding: 32px 0;
-      margin-top: 48px;
+      padding: 32px 0 42px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.26);
+      backdrop-filter: blur(8px);
+      position: relative;
+      z-index: 1;
     }
 
     .footer-copy {
-      color: rgba(255,255,255,0.45);
+      color: rgba(255,255,255,0.48);
       font-size: 0.95rem;
     }
 
-    @media (max-width: 900px) {
-      .content-grid {
+    @media (max-width: 980px) {
+      .about-grid {
         grid-template-columns: 1fr;
+      }
+
+      .about-stage {
+        min-height: 980px;
       }
 
       .nav {
         display: none;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        width: min(calc(100% - 28px), var(--max-width));
+      }
+
+      .about-panel {
+        padding: 22px;
+      }
+
+      .about-card {
+        min-height: 180px;
+        padding: 22px;
+      }
+
+      .expanded-card {
+        padding: 26px 20px 28px;
+      }
+
+      .expanded-inner {
+        padding-top: 26px;
+      }
+
+      .about-stage {
+        min-height: 920px;
+      }
+
+      .hero-copy,
+      .card-copy,
+      .expanded-copy,
+      .expanded-subcopy {
+        line-height: 1.7;
       }
     }
   </style>
@@ -173,7 +463,7 @@
     <div class="container">
       <div class="brand">
         <h1 class="display-title brand-title">T.K.O!™ Official Site</h1>
-        <p class="brand-subtitle">Stuff</p>
+        <p class="brand-subtitle">Visual world / rhythm narrative</p>
       </div>
 
       <nav class="nav">
@@ -186,43 +476,95 @@
     </div>
   </header>
 
-  <main class="page-hero">
+  <main class="page-shell">
     <div class="container">
-      <section class="panel">
-        <p class="section-eyebrow">About TKO</p>
-        <h2 class="display-title section-title">About Us</h2>
-        <p class="small-copy">
-          This page introduces the world of TKO, the people behind it, the purpose of the site,
-          and the long-term vision for the project.
-        </p>
+      <section class="about-panel">
+        <div class="panel-inner">
+          <p class="section-eyebrow">About TKO</p>
+          <h2 class="display-title section-title">World, Vision, Identity</h2>
+          <p class="hero-copy">
+            TKO is more than just a game page. It is a stylized project space for the world,
+            music, imagery, and emotional atmosphere surrounding the universe you’re building.
+            Click any card below to expand it.
+          </p>
 
-        <div class="content-grid">
-          <div class="card">
-            <p class="label">About the Game</p>
-            <p class="small-copy">
-              Describe the game world, genre, tone, story, gameplay direction, and what makes it unique.
-            </p>
-          </div>
+          <div class="about-stage" id="aboutStage">
+            <div class="about-grid" id="aboutGrid">
+              <article
+                class="about-card"
+                data-key="game"
+                data-label="About the Game"
+                data-title="About the Game"
+                data-copy="TKO is a narrative rhythm game and visual-world experience built around atmosphere, identity, music, and stylized emotional storytelling. It is meant to feel immersive, strange, expressive, and artistically alive."
+                data-subcopy="The goal is not just to present mechanics, but to create a world people feel drawn into. The rhythm elements, visual language, interface style, and music all work together as one cohesive experience."
+              >
+                <p class="card-label">About the Game</p>
+                <h3 class="display-title card-title">The World of TKO</h3>
+                <p class="card-copy">
+                  Describe the game world, genre, tone, story, gameplay direction, and what makes it unique.
+                </p>
+                <span class="card-hint">Expand</span>
+              </article>
 
-          <div class="card">
-            <p class="label">The Creators</p>
-            <p class="small-copy">
-              Introduce the people behind the development, writing, art, music, and design.
-            </p>
-          </div>
+              <article
+                class="about-card"
+                data-key="creators"
+                data-label="The Creators"
+                data-title="The Creators"
+                data-copy="TKO is being shaped through a blend of technical development, music, visual design, and worldbuilding. It lives at the intersection of software, aesthetic identity, and creative direction."
+                data-subcopy="This section can highlight the people behind the project, what each person contributes, and how the vision comes together across art, code, music, writing, and design."
+              >
+                <p class="card-label">The Creators</p>
+                <h3 class="display-title card-title">Who’s Building It</h3>
+                <p class="card-copy">
+                  Introduce the people behind the development, writing, art, music, and design.
+                </p>
+                <span class="card-hint">Expand</span>
+              </article>
 
-          <div class="card">
-            <p class="label">The Website</p>
-            <p class="small-copy">
-              Explain that the website is the hub for updates, releases, newsletters, downloads, and community.
-            </p>
-          </div>
+              <article
+                class="about-card"
+                data-key="website"
+                data-label="The Website"
+                data-title="The Website"
+                data-copy="The TKO website is the main public-facing hub for the project. It is where visitors can learn about the game, follow development, discover music releases, join the newsletter, and participate in community spaces."
+                data-subcopy="Instead of feeling like a generic product site, it should feel like a real extension of the world itself — stylish, immersive, and clearly tied to the identity of the project."
+              >
+                <p class="card-label">The Website</p>
+                <h3 class="display-title card-title">The Hub</h3>
+                <p class="card-copy">
+                  Explain that the website is the hub for updates, releases, newsletters, downloads, and community.
+                </p>
+                <span class="card-hint">Expand</span>
+              </article>
 
-          <div class="card">
-            <p class="label">Our Vision</p>
-            <p class="small-copy">
-              Share the long-term dream for TKO and the kind of experience you want people to feel.
-            </p>
+              <article
+                class="about-card"
+                data-key="vision"
+                data-label="Our Vision"
+                data-title="Our Vision"
+                data-copy="The long-term dream for TKO is to build something memorable, emotionally resonant, visually distinctive, and musically powerful — a world people want to revisit and follow over time."
+                data-subcopy="That means building not just a game, but a recognizable creative identity around it: visuals, soundtrack, updates, community, and a sense of artistic continuity that makes the project feel alive."
+              >
+                <p class="card-label">Our Vision</p>
+                <h3 class="display-title card-title">Where It’s Going</h3>
+                <p class="card-copy">
+                  Share the long-term dream for TKO and the kind of experience you want people to feel.
+                </p>
+                <span class="card-hint">Expand</span>
+              </article>
+            </div>
+
+            <div class="expanded-card" id="expandedCard">
+              <button class="close-bubble" id="closeExpanded" aria-label="Close expanded card">✕</button>
+
+              <div class="expanded-inner">
+                <p class="expanded-label" id="expandedLabel"></p>
+                <h3 class="display-title expanded-title" id="expandedTitle"></h3>
+                <p class="expanded-copy" id="expandedCopy"></p>
+                <p class="expanded-subcopy" id="expandedSubcopy"></p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -235,5 +577,42 @@
       <p class="footer-copy">© Copyright 2026. Built by Sammi Fishbein and Dominique Smith for T.K.O!™.</p>
     </div>
   </footer>
+
+  <script>
+    const aboutStage = document.getElementById("aboutStage");
+    const aboutGrid = document.getElementById("aboutGrid");
+    const cards = document.querySelectorAll(".about-card");
+
+    const expandedCard = document.getElementById("expandedCard");
+    const closeExpanded = document.getElementById("closeExpanded");
+    const expandedLabel = document.getElementById("expandedLabel");
+    const expandedTitle = document.getElementById("expandedTitle");
+    const expandedCopy = document.getElementById("expandedCopy");
+    const expandedSubcopy = document.getElementById("expandedSubcopy");
+
+    function openCard(card) {
+      expandedLabel.textContent = card.dataset.label || "";
+      expandedTitle.textContent = card.dataset.title || "";
+      expandedCopy.textContent = card.dataset.copy || "";
+      expandedSubcopy.textContent = card.dataset.subcopy || "";
+
+      aboutStage.classList.add("grid-hidden");
+      expandedCard.classList.add("active");
+    }
+
+    function closeCard() {
+      expandedCard.classList.remove("active");
+      aboutStage.classList.remove("grid-hidden");
+    }
+
+    cards.forEach((card) => {
+      card.addEventListener("click", () => openCard(card));
+    });
+
+    closeExpanded.addEventListener("click", (e) => {
+      e.stopPropagation();
+      closeCard();
+    });
+  </script>
 </body>
 </html>
