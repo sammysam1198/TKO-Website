@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TKO | Music</title>
+
+  <style>
+    :root {
+      --bg-1: #0a0814;
+      --bg-2: #160f2a;
+      --panel: rgba(18, 14, 34, 0.78);
+      --panel-strong: rgba(15, 12, 28, 0.9);
+      --text: #f5ebff;
+      --muted: #c7b3da;
+      --pink: #ff4fd8;
+      --hot-pink: #ff2fa8;
+      --purple: #915eff;
+      --blue: #5edbff;
+      --orange: #ff9b4d;
+      --yellow: #ffd95e;
+      --border: rgba(255, 255, 255, 0.14);
+      --shadow-glow: 0 0 20px rgba(255, 79, 216, 0.22),
+                     0 0 40px rgba(145, 94, 255, 0.16);
+      --shadow-card: 0 18px 50px rgba(0, 0, 0, 0.45);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --max-width: 1400px;
+      --nav-height: 84px;
+      --grid-gap: 24px;
+      --transition: 220ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255, 79, 216, 0.16), transparent 28%),
+        radial-gradient(circle at 85% 15%, rgba(94, 219, 255, 0.14), transparent 24%),
+        radial-gradient(circle at 75% 78%, rgba(255, 155, 77, 0.14), transparent 24%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2) 45%, #0d091d 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.2) 1px, transparent 1px);
+      background-size: 14px 14px;
+      mix-blend-mode: soft-light;
+      z-index: 0;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.18;
+      background:
+        linear-gradient(
+          180deg,
+          transparent 0%,
+          rgba(255,255,255,0.03) 49%,
+          transparent 50%,
+          rgba(255,255,255,0.02) 51%,
+          transparent 100%
+        );
+      background-size: 100% 5px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .page-shell {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+    }
+
+    /* =========================
+       NAV
+       ========================= */
+    .site-nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: linear-gradient(
+        180deg,
+        rgba(8, 8, 16, 0.88),
+        rgba(8, 8, 16, 0.62)
+      );
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .site-nav {
+      max-width: var(--max-width);
+      min-height: var(--nav-height);
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      background:
+        linear-gradient(135deg, rgba(255,79,216,0.25), rgba(94,219,255,0.2)),
+        rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: var(--shadow-glow);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      letter-spacing: 1px;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .brand-text strong {
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+    }
+
+    .brand-text span {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 4px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-link {
+      padding: 12px 18px;
+      border-radius: 999px;
+      color: var(--muted);
+      border: 1px solid transparent;
+      transition: var(--transition);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.86rem;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      color: var(--text);
+      border-color: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      transform: translateY(-1px);
+    }
+
+    .nav-link.active {
+      color: var(--text);
+      background:
+        linear-gradient(135deg, rgba(255,79,216,0.18), rgba(94,219,255,0.12));
+      border-color: rgba(255,255,255,0.12);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.03), var(--shadow-glow);
+    }
+
+    /* =========================
+       HERO
+       ========================= */
+    .hero {
+      position: relative;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 72px 24px 38px;
+    }
+
+    .hero-panel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 34px;
+      padding: 52px 36px 40px;
+      background:
+        linear-gradient(140deg, rgba(255,79,216,0.1), rgba(145,94,255,0.08) 35%, rgba(94,219,255,0.08) 100%),
+        var(--panel);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: var(--shadow-card), var(--shadow-glow);
+      isolation: isolate;
+    }
+
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          115deg,
+          transparent 0%,
+          rgba(255,255,255,0.05) 22%,
+          transparent 40%
+        );
+      pointer-events: none;
+    }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      right: -110px;
+      top: -140px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,79,216,0.2), transparent 65%);
+      filter: blur(8px);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #ffe9ff;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--blue));
+      box-shadow: 0 0 14px rgba(255,79,216,0.75);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .hero-copy h1 {
+      margin: 0 0 18px;
+      font-size: clamp(2.6rem, 6vw, 5.2rem);
+      line-height: 0.95;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-shadow: 0 0 26px rgba(255, 79, 216, 0.3);
+    }
+
+    .hero-copy p {
+      margin: 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .stat-card {
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-lg);
+      padding: 18px 18px 16px;
+      min-height: 110px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+    }
+
+    .stat-label {
+      display: block;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #ead6ff;
+      margin-bottom: 10px;
+      font-weight: 800;
+    }
+
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-note {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    /* =========================
+       SECTION / ARTISTS
+       ========================= */
+    .section {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 20px 24px 80px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .section-heading p {
+      margin: 0;
+      max-width: 720px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .artists-stack {
+      display: grid;
+      gap: 28px;
+    }
+
+    .artist-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 30px;
+      padding: 28px;
+      background:
+        linear-gradient(135deg, rgba(255,79,216,0.08), rgba(94,219,255,0.06)),
+        var(--panel-strong);
+      border: 1px solid rgba(255,255,255,0.11);
+      box-shadow: var(--shadow-card);
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+
+    .artist-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.2);
+      box-shadow: var(--shadow-card), var(--shadow-glow);
+    }
+
+    .artist-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(
+          115deg,
+          transparent 0%,
+          rgba(255,255,255,0.04) 20%,
+          transparent 36%
+        );
+    }
+
+    .artist-grid {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .artist-left,
+    .artist-right {
+      min-width: 0;
+    }
+
+    .artist-left {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .artist-header {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .artist-kicker {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #ffe8fb;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .artist-kicker::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      box-shadow: 0 0 12px rgba(255,155,77,0.8);
+    }
+
+    .artist-logo-wrap {
+      min-height: 160px;
+      border-radius: 24px;
+      padding: 24px;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at top left, rgba(255,79,216,0.12), transparent 38%),
+        radial-gradient(circle at bottom right, rgba(94,219,255,0.1), transparent 30%),
+        rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .artist-logo {
+      max-height: 120px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 0 18px rgba(255,79,216,0.25));
+    }
+
+    .artist-name-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .artist-name {
+      margin: 0;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .artist-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 800;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+    }
+
+    .artist-bio {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 1rem;
+    }
+
+    .artist-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .meta-box {
+      border-radius: 16px;
+      padding: 14px 14px 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .meta-box span {
+      display: block;
+      font-size: 0.72rem;
+      color: #efdcff;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 8px;
+      font-weight: 800;
+    }
+
+    .meta-box strong {
+      display: block;
+      font-size: 0.96rem;
+      line-height: 1.35;
+      color: var(--text);
+    }
+
+    .button-cluster {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .platform-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background:
+        linear-gradient(135deg, rgba(255,79,216,0.12), rgba(94,219,255,0.08));
+      color: var(--text);
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      transition: var(--transition);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    .platform-btn:hover,
+    .platform-btn:focus-visible {
+      transform: translateY(-2px) scale(1.01);
+      border-color: rgba(255,255,255,0.2);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .platform-btn.secondary {
+      background: rgba(255,255,255,0.04);
+    }
+
+    .embed-card {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      height: 100%;
+    }
+
+    .embed-shell {
+      overflow: hidden;
+      border-radius: 24px;
+      background:
+        linear-gradient(160deg, rgba(255,79,216,0.08), rgba(94,219,255,0.06)),
+        rgba(255,255,255,0.035);
+      border: 1px solid rgba(255,255,255,0.09);
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .embed-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 18px 0;
+      flex-wrap: wrap;
+    }
+
+    .embed-title {
+      margin: 0;
+      font-size: 0.92rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #ffe9ff;
+    }
+
+    .embed-note {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .video-frame-wrap {
+      padding: 18px;
+      padding-top: 14px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      background:
+        linear-gradient(135deg, rgba(255,79,216,0.14), rgba(94,219,255,0.08)),
+        #0f0d19;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 24px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+
+    .video-placeholder strong {
+      display: block;
+      color: var(--text);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .support-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      padding: 0 18px 18px;
+    }
+
+    .support-link-card {
+      border-radius: 18px;
+      padding: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      justify-content: space-between;
+      min-height: 104px;
+    }
+
+    .support-link-card span {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #e8d7ff;
+      font-weight: 800;
+    }
+
+    .support-link-card strong {
+      font-size: 1rem;
+      line-height: 1.35;
+    }
+
+    .support-link-card a {
+      color: var(--blue);
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .support-link-card a:hover {
+      text-decoration: underline;
+    }
+
+    /* =========================
+       FEATURE STRIP
+       ========================= */
+    .feature-strip {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px 88px;
+    }
+
+    .feature-panel {
+      border-radius: 30px;
+      padding: 28px;
+      background:
+        linear-gradient(135deg, rgba(255,155,77,0.08), rgba(255,79,216,0.08), rgba(94,219,255,0.06)),
+        var(--panel);
+      border: 1px solid rgba(255,255,255,0.11);
+      box-shadow: var(--shadow-card);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature-tile {
+      border-radius: 22px;
+      padding: 20px;
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .feature-tile h3 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .feature-tile p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.96rem;
+    }
+
+    /* =========================
+       FOOTER
+       ========================= */
+    .site-footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: rgba(8,8,16,0.45);
+    }
+
+    .site-footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 26px 24px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    /* =========================
+       RESPONSIVE
+       ========================= */
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .artist-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .site-nav {
+        padding: 12px 16px;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .hero,
+      .section,
+      .feature-strip {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .hero-panel {
+        padding: 34px 22px 28px;
+      }
+
+      .artist-card,
+      .feature-panel {
+        padding: 20px;
+      }
+
+      .artist-meta,
+      .support-links,
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy h1 {
+        line-height: 1.02;
+      }
+
+      .brand-text span,
+      .nav-link,
+      .eyebrow,
+      .artist-kicker,
+      .artist-tag,
+      .stat-label,
+      .meta-box span,
+      .embed-title {
+        letter-spacing: 0.1em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+
+    <!-- =========================
+         NAVIGATION
+         ========================= -->
+    <div class="site-nav-wrap">
+      <nav class="site-nav" aria-label="Main navigation">
+        <a class="brand" href="index.html">
+          <div class="brand-mark">TKO</div>
+          <div class="brand-text">
+            <strong>TKO</strong>
+            <span>Official Website</span>
+          </div>
+        </a>
+
+        <div class="nav-links">
+          <a class="nav-link" href="index.html">Home</a>
+          <a class="nav-link" href="about.html">About</a>
+          <a class="nav-link active" href="music.html">Music</a>
+          <a class="nav-link" href="community.html">Community</a>
+          <a class="nav-link" href="newsletter.html">Newsletter</a>
+        </div>
+      </nav>
+    </div>
+
+    <!-- =========================
+         HERO
+         ========================= -->
+    <header class="hero">
+      <div class="hero-panel">
+        <div class="eyebrow">TKO Sound Archive</div>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <h1>Music</h1>
+            <p>
+              The sound of TKO lives between memory, motion, atmosphere, and emotion.
+              This page highlights the featured artists connected to the project right now,
+              with direct access to streaming platforms, video content, and future soundtrack
+              expansion as the world of TKO continues to grow.
+            </p>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-card">
+              <span class="stat-label">Featured Artists</span>
+              <div class="stat-value">02</div>
+              <div class="stat-note">Chroma Glow and Beta Memory currently anchor the music section.</div>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-label">Platform Access</span>
+              <div class="stat-value">Multi</div>
+              <div class="stat-note">Direct links to Spotify, Apple Music, Bandcamp, TIDAL, and YouTube.</div>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-label">Current Phase</span>
+              <div class="stat-value">Live</div>
+              <div class="stat-note">Music page foundation built for future OST drops, artist additions, and featured releases.</div>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-label">Site Direction</span>
+              <div class="stat-value">Expand</div>
+              <div class="stat-note">Designed to scale into a broader soundtrack and media gallery later.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- =========================
+         ARTISTS SECTION
+         ========================= -->
+    <main class="section">
+      <div class="section-heading">
+        <div>
+          <h2>Featured Artists</h2>
+        </div>
+        <p>
+          Each artist panel is designed to feel like its own portal into the TKO universe:
+          part discography hub, part visual profile, and part launchpad for future releases.
+        </p>
+      </div>
+
+      <div class="artists-stack">
+
+        <!-- =========================
+             CHROMA GLOW
+             ========================= -->
+        <article class="artist-card" id="chroma-glow">
+          <div class="artist-grid">
+            <div class="artist-left">
+              <div class="artist-header">
+                <div class="artist-kicker">Artist Profile</div>
+
+                <div class="artist-logo-wrap">
+                  <!-- Replace with your actual logo path -->
+                  <img
+                    class="artist-logo"
+                    src="assets/logos/chroma-glow-logo.png"
+                    alt="Chroma Glow logo"
+                  />
+                </div>
+
+                <div class="artist-name-row">
+                  <h3 class="artist-name">Chroma Glow</h3>
+                  <span class="artist-tag">Synthwave / Chillsynth</span>
+                </div>
+              </div>
+
+              <p class="artist-bio">
+                Sammi, the multi-instrumentalist and Berklee student behind Chroma Glow, started
+                the project as an experiment. Chroma Glow was initially an EDM idea, but upon the
+                creation of singles such as Return, Aestas Stella and later Airstream '91 Sammi quickly
+                gained a small following that expanded with singles like Quattro, Buoyancy and the later
+                10 song album F A L L.
+              </p>
+
+              <div class="artist-meta">
+                <div class="meta-box">
+                  <span>Role</span>
+                  <strong>Featured Artist</strong>
+                </div>
+                <div class="meta-box">
+                  <span>Focus</span>
+                  <strong>Chillsynth</strong>
+                </div>
+                <div class="meta-box">
+                  <span>Universe</span>
+                  <strong>The Chromaverse</strong>
+                </div>
+              </div>
+
+              <div class="button-cluster">
+                <a class="platform-btn" href="https://open.spotify.com/artist/6urtYaQRK6hdJzJ9XrpWXs" target="_blank" rel="noopener noreferrer">Spotify</a>
+                <a class="platform-btn" href="https://music.apple.com/us/artist/chroma-glow/1787981160" target="_blank" rel="noopener noreferrer">Apple Music</a>
+                <a class="platform-btn" href="https://chromaglow.bandcamp.com/" target="_blank" rel="noopener noreferrer">Bandcamp</a>
+                <a class="platform-btn" href="https://tidal.com/artist/52836123" target="_blank" rel="noopener noreferrer">TIDAL</a>
+                <a class="platform-btn" href="https://youtube.com/@chroma_glow_synths" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <!-- Replace with actual Instagram if desired -->
+                <a class="platform-btn secondary" href="https://www.instagram.com/chroma_glow_synths/" target="_blank" rel="noopener noreferrer">Instagram</a>
+              </div>
+            </div>
+
+            <div class="artist-right">
+              <div class="embed-card">
+                <div class="embed-shell">
+                  <div class="embed-header">
+                    <h4 class="embed-title">Featured Video</h4>
+                    <span class="embed-note">Replace placeholder with official embed</span>
+                  </div>
+
+                  <div class="video-frame-wrap">
+                    <div class="video-frame">
+
+                     <iframe 
+                          width="560" height="315" src="https://www.youtube.com/embed/NE0bdOZpBFw?si=8u2mQI5jqr9er1Gx"
+                          title="YouTube video player" 
+                           frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                         referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                      </iframe>
+                    </div>
+                  </div>
+
+                  <div class="support-links">
+                    <div class="support-link-card">
+                      <span>Artist Hub</span>
+                      <strong>Explore Chroma Glow releases across streaming platforms.</strong>
+                      <a href="https://open.spotify.com/artist/6urtYaQRK6hdJzJ9XrpWXs" target="_blank" rel="noopener noreferrer">Open artist page</a>
+                    </div>
+
+                    <div class="support-link-card">
+                      <span>Visual / Social</span>
+                      <strong>Use this area for Instagram, visual promos, or future release spotlights.</strong>
+                      <a href="#" target="_blank" rel="noopener noreferrer">Add Instagram link</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- =========================
+             BETA MEMORY
+             ========================= -->
+        <article class="artist-card" id="beta-memory">
+          <div class="artist-grid">
+            <div class="artist-left">
+              <div class="artist-header">
+                <div class="artist-kicker">Artist Profile</div>
+
+                <div class="artist-logo-wrap">
+                  <!-- Replace with your actual logo path -->
+                  <img
+                    class="artist-logo"
+                    src="assets/logos/beta-memory-logo.png"
+                    alt="Beta Memory logo"
+                  />
+                </div>
+
+                <div class="artist-name-row">
+                  <h3 class="artist-name">Beta Memory</h3>
+                  <span class="artist-tag">Electronic / Dreamlike</span>
+                </div>
+              </div>
+
+              <p class="artist-bio">
+                Beta Memory brings an alternate emotional texture into the TKO musical space:
+                reflective, digital, atmospheric, and memory-driven. The project complements
+                the larger visual world with an introspective sonic identity that can evolve
+                alongside future story, soundtrack, and collaborative releases.
+              </p>
+
+              <div class="artist-meta">
+                <div class="meta-box">
+                  <span>Role</span>
+                  <strong>Featured Artist</strong>
+                </div>
+                <div class="meta-box">
+                  <span>Focus</span>
+                  <strong>Electronic / Ambient Identity</strong>
+                </div>
+                <div class="meta-box">
+                  <span>Future Use</span>
+                  <strong>OST / Expanded Artist Presence</strong>
+                </div>
+              </div>
+
+              <div class="button-cluster">
+                <a class="platform-btn" href="https://open.spotify.com/artist/1SKfP2IMnM7xAx11Zxk5pZ" target="_blank" rel="noopener noreferrer">Spotify</a>
+                <a class="platform-btn" href="https://music.apple.com/us/artist/beta-memory/1845950886" target="_blank" rel="noopener noreferrer">Apple Music</a>
+                <a class="platform-btn" href="https://betamemory.bandcamp.com/" target="_blank" rel="noopener noreferrer">Bandcamp</a>
+                <!-- Add TIDAL if/when you have it -->
+                <a class="platform-btn secondary" href="#" target="_blank" rel="noopener noreferrer">TIDAL</a>
+                <!-- Add YouTube if/when you have it -->
+                <a class="platform-btn secondary" href="#" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <!-- Replace with actual Instagram if desired -->
+                <a class="platform-btn secondary" href="#" target="_blank" rel="noopener noreferrer">Instagram</a>
+              </div>
+            </div>
+
+            <div class="artist-right">
+              <div class="embed-card">
+                <div class="embed-shell">
+                  <div class="embed-header">
+                    <h4 class="embed-title">Featured Video / Visual Slot</h4>
+                    <span class="embed-note">Ready for video, teaser, or trailer content</span>
+                  </div>
+
+                  <div class="video-frame-wrap">
+                    <div class="video-frame">
+                      <div class="video-placeholder">
+                        <div>
+                          <strong>Beta Memory Feature Slot</strong>
+                          Add a YouTube embed here when a featured track, visualizer,
+                          teaser, or live performance link is ready.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="support-links">
+                    <div class="support-link-card">
+                      <span>Bandcamp</span>
+                      <strong>Direct support and catalog browsing for Beta Memory.</strong>
+                      <a href="https://betamemory.bandcamp.com/" target="_blank" rel="noopener noreferrer">Open Bandcamp</a>
+                    </div>
+
+                    <div class="support-link-card">
+                      <span>Future Expansion</span>
+                      <strong>This area can later become an Instagram embed, promo card, or release spotlight.</strong>
+                      <a href="#" target="_blank" rel="noopener noreferrer">Add social link</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </main>
+
+    <!-- =========================
+         FUTURE EXPANSION STRIP
+         ========================= -->
+    <section class="feature-strip">
+      <div class="feature-panel">
+        <div class="section-heading" style="margin-bottom: 22px;">
+          <div>
+            <h2 style="font-size: clamp(1.4rem, 3vw, 2.2rem);">Future Music Expansion</h2>
+          </div>
+          <p>
+            This page is intentionally structured to scale. The current version highlights
+            core artists, but the layout is ready for deeper soundtrack and media integration.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-tile">
+            <h3>Official OST</h3>
+            <p>
+              Add soundtrack releases, cover art tiles, track listings, and direct streaming links
+              as the TKO world develops.
+            </p>
+          </div>
+
+          <div class="feature-tile">
+            <h3>Artist Pages</h3>
+            <p>
+              Expand each featured artist into their own dedicated page with a full bio,
+              release history, visuals, and embedded media.
+            </p>
+          </div>
+
+          <div class="feature-tile">
+            <h3>Dynamic Backend</h3>
+            <p>
+              Later, this section can be populated from the Flask/PostgreSQL backend so new
+              releases and artist content update without manually editing HTML.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+         FOOTER
+         ========================= -->
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <div>© 2026 TKO. All rights reserved.</div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="music.html">Music</a>
+          <a href="community.html">Community</a>
+          <a href="newsletter.html">Newsletter</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
