@@ -1134,18 +1134,36 @@
               Logged-in users will eventually see the latest newsletter here, with a link to older archived posts.
             </p>
           </div>
-
-          <div class="newsletter-form">
-            <div class="form-grid-2">
-              <input class="input" type="text" placeholder="First name" />
-              <input class="input" type="email" placeholder="Email address" />
-            </div>
-            <textarea class="textarea" placeholder="What kind of updates do you want most?"></textarea>
-            <button class="button button-white" type="button">Subscribe</button>
+        <div class="newsletter-form">
+          <div class="form-grid-2">
+              <input
+              id="newsletterFirstName"
+              class="input"
+              type="text"
+              placeholder="First name"
+            />
+            <input
+              id="newsletterEmail"
+              class="input"
+              type="email"
+              placeholder="Email address"
+            />
           </div>
+
+          <textarea
+            id="newsletterMessage"
+            class="textarea"
+            placeholder="What kind of updates do you want most?"
+          ></textarea>
+
+          <button id="newsletterSubscribeBtn" class="button button-white" type="button">
+            Subscribe
+          </button>
+
+          <p id="newsletterStatus" class="small-copy" style="margin-top: 12px;"></p>
         </div>
       </section>
-
+      
       <section id="releases-music" class="section">
         <p class="section-eyebrow">Releases</p>
         <h2 class="display-title section-title">Game + Music</h2>
@@ -1310,6 +1328,12 @@
   </div>
 <script>
   const API_BASE = "https://tko-api-server.onrender.com";
+
+  const newsletterFirstName = document.getElementById("newsletterFirstName");
+  const newsletterEmail = document.getElementById("newsletterEmail");
+  const newsletterMessage = document.getElementById("newsletterMessage");
+  const newsletterSubscribeBtn = document.getElementById("newsletterSubscribeBtn");
+  const newsletterStatus = document.getElementById("newsletterStatus");
 
   const authModal = document.getElementById("authModal");
   const openSignUpBtn = document.getElementById("openSignUp");
@@ -1535,10 +1559,57 @@
       console.error(error);
     }
   });
+
+  newsletterSubscribeBtn.addEventListener("click", async () => {
+  const first_name = newsletterFirstName.value.trim();
+  const email = newsletterEmail.value.trim();
+  const message = newsletterMessage.value.trim();
+
+  newsletterStatus.textContent = "";
+
+  if (!email) {
+    newsletterStatus.textContent = "Please enter your email address.";
+    return;
+  }
+
+  newsletterStatus.textContent = "Subscribing...";
+
+  try {
+    const response = await fetch(`${API_BASE}/api/tko/newsletter/subscribe`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        first_name,
+        email,
+        message
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      newsletterStatus.textContent =
+        data.error || data.message || "Subscription failed.";
+      return;
+    }
+
+    newsletterStatus.textContent = "Subscribed successfully!";
+    newsletterFirstName.value = "";
+    newsletterEmail.value = "";
+    newsletterMessage.value = "";
+  } catch (error) {
+    console.error(error);
+    newsletterStatus.textContent = "Network error during subscription.";
+  }
+});
+  
   loadCurrentUser();
 </script>
 </body>
 </html>
+
 
 
 
