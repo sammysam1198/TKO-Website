@@ -32,6 +32,10 @@
       scroll-behavior: smooth;
     }
 
+    section {
+      scroll-margin-top: 110px;
+    }
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
@@ -128,6 +132,40 @@
       mix-blend-mode: multiply;
     }
 
+    .content-section {
+      padding: 90px 0;
+    }
+
+    .content-section h2 {
+      margin-bottom: 22px;
+      font-size: 2rem;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .info-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+    }
+
+    .info-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.15rem;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.6;
+    }
+    
     .site-header {
       position: sticky;
       top: 0;
@@ -837,6 +875,12 @@
     }
 
     @media (max-width: 720px) {
+     .info-grid {
+      grid-template-columns: 1fr;
+    }
+    }
+    
+    @media (max-width: 720px) {
       .container {
         width: min(calc(100% - 28px), var(--max-width));
       }
@@ -946,11 +990,11 @@
             <p class="label">Site Sections</p>
             <p class="small-copy">
               Home<br />
-              About the Game<br />
-              Creators + Web Dev<br />
-              Newsletter Sign-up<br />
-              Releases + Music<br />
-              Guest book / forum
+              About<br />
+              Newsletter<br />
+              Releases &amp; Music<br />
+              Game Versions<br />
+              Guest Book / Forum
             </p>
           </div>
         </div>
@@ -973,20 +1017,26 @@
             This layout is designed to support big visual branding with readable text blocks underneath.
           </p>
 
-          <div class="about-cards">
-            <div class="about-card">
-              <p class="label">The Game</p>
-              <p class="small-copy">Describe gameplay, core mechanics, genre, and player experience.</p>
-            </div>
+            <div class="about-cards">
+              <div class="about-card">
+              <p class="label">About the Game</p>
+                <p class="small-copy">Describe the game world, gameplay style, tone, story, and what makes TKO feel unique.</p>
+              </div>
 
-            <div class="about-card">
-              <p class="label">The Creators</p>
-              <p class="small-copy">Introduce team, their roles, vision, and inspiration.</p>
-            </div>
+              <div class="about-card">
+                <p class="label">The Creators</p>
+                <p class="small-copy">Introduce the people behind the game, music, art, writing, and development.</p>
+              </div>
 
-            <div class="about-card">
-              <p class="label">The Music</p>
-              <p class="small-copy">A section talking abt music production</p>
+              <div class="about-card">
+                <p class="label">The Website</p>
+                <p class="small-copy">Explain what this website is for: updates, newsletters, downloads, music, and community features.</p>
+              </div>
+
+              <div class="about-card">
+                <p class="label">Our Vision</p>
+                <p class="small-copy">Talk about the long-term goal of the project and the experience you want players to have.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -1006,7 +1056,10 @@
             <p class="eyebrow">Newsletter</p>
             <h2 class="display-title section-title">Stay in the loop</h2>
             <p>
-              Collect emails for demo announcements, soundtrack drops, release dates, devlogs, and special art posts.
+              Sign up or sign in to access newsletters, release updates, demo announcements, soundtrack drops, and future devlogs.
+            </p>
+            <p class="small-copy" style="margin-top: 14px;">
+              Logged-in users will eventually see the latest newsletter here, with a link to older archived posts.
             </p>
           </div>
 
@@ -1027,28 +1080,46 @@
 
         <div class="release-grid">
           <article class="panel noisy-border release-card">
-            <p class="label">Build</p>
-            <h3 class="display-title">Game Release 01</h3>
+            <p class="label">Music</p>
+            <h3 class="display-title">OST</h3>
             <p class="small-copy">
-              Patch notes, demo downloads, trailer embeds, and feature highlights can live here.
+              Official soundtrack links, store links, streaming platforms, and promo content.
             </p>
             <a class="button-outline" href="#">Open</a>
           </article>
 
           <article class="panel noisy-border release-card">
             <p class="label">Music</p>
-            <h3 class="display-title">OST / Music Drop</h3>
+            <h3 class="display-title">Beta Memory</h3>
             <p class="small-copy">
-              Single releases, soundtrack previews, streaming links, and featured tracks.
+              Streaming links, purchase links, merch requests, and release-related updates.
             </p>
             <a class="button-outline" href="#">Open</a>
           </article>
 
           <article class="panel noisy-border release-card">
-            <p class="label">News</p>
-            <h3 class="display-title">Devlog / Update</h3>
+            <p class="label">Artist</p>
+            <h3 class="display-title">Chroma Glow</h3>
             <p class="small-copy">
-              Behind-the-scenes progress updates, character reveals, and production notes.
+              Artist releases, social links, streaming platforms, and merch-related content.
+            </p>
+            <a class="button-outline" href="#">Open</a>
+          </article>
+
+          <article class="panel noisy-border release-card">
+            <p class="label">Game</p>
+            <h3 class="display-title">Game Versions</h3>
+            <p class="small-copy">
+              Download links for known users, current public or private builds, and version notes.
+            </p>
+            <a class="button-outline" href="#">Open</a>
+          </article>
+
+          <article class="panel noisy-border release-card">
+            <p class="label">Archive</p>
+            <h3 class="display-title">Legacy Versions</h3>
+            <p class="small-copy">
+              Older builds, archived downloads, and historical versions for known users.
             </p>
             <a class="button-outline" href="#">Open</a>
           </article>
@@ -1396,3 +1467,4 @@
 </script>
 </body>
 </html>
+
