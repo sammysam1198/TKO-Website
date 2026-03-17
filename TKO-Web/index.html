@@ -1049,6 +1049,11 @@
       transform: translateX(-50%);
       width: min(92vw, 980px);
       height: 78vh;
+      min-width: 700px;
+      min-height: 460px;
+      max-width: 96vw;
+      max-height: 88vh;
+      resize: both;
       z-index: 3200;
       border-radius: 24px;
       overflow: hidden;
@@ -1166,9 +1171,8 @@
     .dev-console-body {
       display: grid;
       grid-template-columns: 260px 1fr;
+      height: calc(100% - 110px);
       min-height: 0;
-      height: calc(78vh - 110px);
-      max-height: calc(78vh - 110px);
     }
 
     .dev-console-sidebar {
@@ -1181,8 +1185,8 @@
 
     .dev-console-main {
       padding: 18px;
-      overflow-y: auto;
       min-height: 0;
+      overflow: hidden;
     }
 
     .dev-meta-block {
@@ -1209,12 +1213,14 @@
 
     .dev-pane {
       display: none;
-      overflow-y: auto;
+      height: 100%;
       min-height: 0;
     }
 
     .dev-pane.active {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
     .dev-pane.active {
@@ -1224,6 +1230,9 @@
     .dev-feed {
       display: grid;
       gap: 14px;
+      overflow-y: auto;
+      min-height: 0;
+      padding-right: 4px;
     }
 
     .dev-entry {
@@ -1298,9 +1307,10 @@
     }
 
     .dev-composer {
-      margin-top: 16px;
+      margin-top: auto;
       border-top: 1px solid rgba(255,255,255,0.08);
       padding-top: 16px;
+      flex-shrink: 0;
     }
 
     .dev-composer textarea {
@@ -1659,7 +1669,7 @@
         </div>
       </aside>
 
-      <section class="dev-console-main">
+     <section class="dev-console-main">
         <div id="devPaneChat" class="dev-pane active">
           <div id="devChatFeed" class="dev-feed"></div>
 
@@ -1673,10 +1683,24 @@
 
         <div id="devPaneIssues" class="dev-pane">
           <div id="devIssuesFeed" class="dev-feed"></div>
+
+          <div class="dev-composer">
+            <textarea id="devIssuesInput" placeholder="Log a development issue..."></textarea>
+            <div class="dev-composer-actions">
+              <button id="sendDevIssue" class="dev-console-icon-btn" type="button">Post Issue</button>
+            </div>
+          </div>
         </div>
 
         <div id="devPaneLog" class="dev-pane">
           <div id="devLogFeed" class="dev-feed"></div>
+
+          <div class="dev-composer">
+            <textarea id="devLogInput" placeholder="Add a dev log entry..."></textarea>
+            <div class="dev-composer-actions">
+              <button id="sendDevLog" class="dev-console-icon-btn" type="button">Post Log</button>
+            </div>
+          </div>
         </div>
       </section>
     </div>
@@ -1729,6 +1753,12 @@
 
   const devChatInput = document.getElementById("devChatInput");
   const sendDevChatBtn = document.getElementById("sendDevChat");
+
+  const devIssuesInput = document.getElementById("devIssuesInput");
+  const sendDevIssueBtn = document.getElementById("sendDevIssue");
+
+  const devLogInput = document.getElementById("devLogInput");
+  const sendDevLogBtn = document.getElementById("sendDevLog");
 
   let devConsoleUnlocked = false;
 
