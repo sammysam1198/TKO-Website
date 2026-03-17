@@ -74,6 +74,42 @@ def init_db():
             );
             """
         )
+
+         cur.execute(
+            """
+            CREATE TABLE IF NOT EXISTS dev_messages (
+                id SERIAL PRIMARY KEY,
+                user_id INTEGER REFERENCES tko_users(id) ON DELETE SET NULL,
+                username VARCHAR(50),
+                message TEXT NOT NULL,
+                created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );
+            """
+        )
+
+        cur.execute(
+            """
+            CREATE TABLE IF NOT EXISTS dev_issues (
+                id SERIAL PRIMARY KEY,
+                title TEXT NOT NULL,
+                description TEXT,
+                severity VARCHAR(20) DEFAULT 'normal',
+                created_by VARCHAR(50),
+                created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );
+            """
+        )
+
+        cur.execute(
+            """
+            CREATE TABLE IF NOT EXISTS dev_logs (
+                id SERIAL PRIMARY KEY,
+                message TEXT NOT NULL,
+                level VARCHAR(20) DEFAULT 'info',
+                created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );
+            """
+        )
         conn.commit()
     finally:
         cur.close()
