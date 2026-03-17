@@ -1759,60 +1759,9 @@
   const sendDevLogBtn = document.getElementById("sendDevLog");
 
   let devConsoleUnlocked = false;
-
-  const devChatMessages = [
-    {
-      author: "system",
-      time: "just now",
-      body: "Developer console shell initialized.\nUI is live. Backend persistence can be connected next."
-    },
-    {
-      author: "dom",
-      time: "today",
-      body: "Forum backend is the next major integration target."
-    },
-    {
-      author: "astra",
-      time: "today",
-      body: "Syntax-highlighted code support can be layered in after backend storage is wired.",
-      code: `~~~python
-def open_console():
-    return {"status": "ready"}
-~~~`
-    }
-  ];
-
-  const devIssues = [
-    {
-      title: "Forum routes not yet connected to true channel/thread model",
-      severity: "functional",
-      author: "astra",
-      time: "today",
-      body: "Current community posting system still maps closer to a guestbook than the planned forum hierarchy."
-    },
-    {
-      title: "Developer console backend persistence still pending",
-      severity: "critical",
-      author: "astra",
-      time: "today",
-      body: "Console unlock route is live after backend patch, but message/issues/log table persistence is still phase two."
-    }
-  ];
-
-  const devLogEntries = [
-    {
-      title: "Added hidden footer trigger",
-      author: "astra",
-      time: "today",
-      body: "The word reserved now acts as the hidden entry point for the internal console."
-    },
-    {
-      title: "Built draggable console shell",
-      author: "astra",
-      time: "today",
-      body: "Console includes Active Chat, Issues, and Dev Log tabs with pop-out support."
-    }
-  ];
+  let devChatMessages = [];
+  let devIssues = [];
+  let devLogEntries = [];
 
   function openAuthModal(mode = "signup") {
     authModal.classList.remove("hidden");
@@ -2041,28 +1990,127 @@ def open_console():
     return { response, data };
   }
 
-    async function loadDevMessages() {
-    const res = await fetch("/api/tko/dev-console/messages");
-    const data = await res.json();
-    devChatMessages = data.messages;
+     async function loadDevMessages() {
+    const response = await fetch(`${API_BASE}/api/tko/dev-console/messages`);
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error("Failed to load dev messages", data);
+      return;
+    }
+
+    devChatMessages = (data.messages || []).map((entry) => ({
+      author: entry.username || "dev",
+      time: entry.created_at || "just now",
+      body: entry.message || ""
+     }));
+
     renderDevChat();
+   }
+
+  async function postDevMessage(messageText) {
+  const response = await fetch(`${API_BASE}/api/tko/dev-console/messages`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      username: "sammi",
+      message: messageText
+    })
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || "Failed to post dev message");
   }
 
-    async function sendMessage() {
-    const text = input.value.trim();
+  return data;
+}
 
-    await fetch("/api/tko/dev-console/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        message: text,
-        username: "sammi"
-      })
-    });
+async function loadDevIssues() {
+  const response = await fetch(`${API_BASE}/api/tko/dev-console/issues`);
+  const data = await response.json();
 
-    loadDevMessages();
+  if (!response.ok) {
+    console.error("Failed to load dev issues", data);
+    return;
   }
-  
+
+  devIssues = (data.issues || []).map((issue) => ({
+    title: issue.title || "Untitled issue",
+    severity: issue.severity || "normal",
+    author: issue.created_by || "dev",
+    time: issue.created_at || "just now",
+    body: issue.description || ""
+  }));
+
+  renderDevIssues();
+}
+
+async function postDevIssue(titleText) {
+  const response = await fetch(`${API_BASE}/api/tko/dev-console/issues`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      title: titleText,
+      description: titleText,
+      severity: "normal",
+      created_by: "sammi"
+    })
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || "Failed to post dev issue");
+  }
+
+  return data;
+}
+
+async function loadDevLogs() {
+  const response = await fetch(`${API_BASE}/api/tko/dev-console/logs`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    console.error("Failed to load dev logs", data);
+    return;
+  }
+
+  devLogEntries = (data.logs || []).map((entry) => ({
+    title: entry.message || "Log entry",
+    author: "system",
+    time: entry.created_at || "just now",
+    body: entry.message || ""
+  }));
+
+  renderDevLog();
+}
+
+async function postDevLog(messageText) {
+  const response = await fetch(`${API_BASE}/api/tko/dev-console/logs`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      message: messageText,
+      level: "info"
+    })
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || "Failed to post dev log");
+  }
+
+  return data;
+}
 
   function setupDevDragging() {
     let isDragging = false;
@@ -2228,26 +2276,7 @@ def open_console():
     }
   });
 
-  sendDevChatBtn.addEventListener("click", () => {
-    const body = devChatInput.value.trim();
-
-    if (!body) {
-      return;
-    }
-
-    devChatMessages.unshift({
-      author: "sammi",
-      time: "just now",
-      body
-    });
-
-    devChatInput.value = "";
-    renderDevChat();
-  });
-
-  sendDevIssueBtn.addEventListener("click", () => {
-  const body = devIssuesInput.value.trim();
-
+ sendDevChatBtn.addEventListener
   if (!body) {
     return;
   }
