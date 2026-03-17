@@ -141,6 +141,27 @@ def create_issue():
         conn.close()
 
 
+@dev_console_bp.get("/logs")
+def get_logs():
+    conn = get_db_conn()
+    cur = conn.cursor(cursor_factory=RealDictCursor)
+
+    try:
+        cur.execute(
+            """
+            SELECT * FROM dev_logs
+            ORDER BY created_at DESC;
+            """
+        )
+        rows = cur.fetchall()
+
+        return jsonify({"ok": True, "logs": rows_with_iso_dates(rows)})
+
+    finally:
+        cur.close()
+        conn.close()
+
+
 @dev_console_bp.post("/logs")
 def create_log():
     data = request.get_json(silent=True) or {}
