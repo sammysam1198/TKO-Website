@@ -1,4 +1,4 @@
-from config.db import get_db_conn
+from db import get_db_conn
 
 
 def create_subscriber(first_name, email, message):
