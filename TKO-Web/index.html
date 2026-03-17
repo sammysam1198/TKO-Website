@@ -2224,6 +2224,25 @@ def open_console():
     renderDevChat();
   });
 
+  sendDevIssueBtn.addEventListener("click", () => {
+  const body = devIssuesInput.value.trim();
+
+  if (!body) {
+    return;
+  }
+
+  devIssues.unshift({
+    title: body,
+    severity: "normal",
+    author: "sammi",
+    time: "just now",
+    body
+  });
+
+  devIssuesInput.value = "";
+  renderDevIssues();
+});
+
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && !authModal.classList.contains("hidden")) {
       closeAuthModal();
