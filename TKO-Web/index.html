@@ -2041,6 +2041,29 @@ def open_console():
     return { response, data };
   }
 
+    async function loadDevMessages() {
+    const res = await fetch("/api/tko/dev-console/messages");
+    const data = await res.json();
+    devChatMessages = data.messages;
+    renderDevChat();
+  }
+
+    async function sendMessage() {
+    const text = input.value.trim();
+
+    await fetch("/api/tko/dev-console/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: text,
+        username: "sammi"
+      })
+    });
+
+    loadDevMessages();
+  }
+  
+
   function setupDevDragging() {
     let isDragging = false;
     let offsetX = 0;
