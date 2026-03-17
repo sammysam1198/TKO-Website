@@ -1187,6 +1187,9 @@
       padding: 18px;
       min-height: 0;
       overflow: hidden;
+
+      display: flex;
+      flex-direction: column;
     }
 
     .dev-meta-block {
@@ -1215,12 +1218,15 @@
       display: none;
       height: 100%;
       min-height: 0;
+      overflow: hidden;
     }
 
     .dev-pane.active {
       display: flex;
       flex-direction: column;
       gap: 16px;
+      flex: 1;
+      min-height: 0;
     }
 
   
