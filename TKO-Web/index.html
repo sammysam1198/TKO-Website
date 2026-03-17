@@ -2228,11 +2228,11 @@ async function postDevLog(messageText) {
     popup.document.close();
   }
 
-  attachLoggedOutButtonEvents();
+   attachLoggedOutButtonEvents();
   setupDevDragging();
-  renderDevChat();
-  renderDevIssues();
-  renderDevLog();
+  loadDevMessages();
+  loadDevIssues();
+  loadDevLogs();
 
   closeAuthModalBtn.addEventListener("click", closeAuthModal);
   authBackdrop.addEventListener("click", closeAuthModal);
@@ -2276,21 +2276,49 @@ async function postDevLog(messageText) {
     }
   });
 
- sendDevChatBtn.addEventListener
+  sendDevChatBtn.addEventListener("click", async () => {
+  const body = devChatInput.value.trim();
   if (!body) {
     return;
   }
 
-  devIssues.unshift({
-    title: body,
-    severity: "normal",
-    author: "sammi",
-    time: "just now",
-    body
-  });
+  try {
+    await postDevMessage(body);
+    devChatInput.value = "";
+    await loadDevMessages();
+  } catch (error) {
+    console.error(error);
+  }
+});
 
-  devIssuesInput.value = "";
-  renderDevIssues();
+sendDevIssueBtn.addEventListener("click", async () => {
+  const body = devIssuesInput.value.trim();
+  if (!body) {
+    return;
+  }
+
+  try {
+    await postDevIssue(body);
+    devIssuesInput.value = "";
+    await loadDevIssues();
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+sendDevLogBtn.addEventListener("click", async () => {
+  const body = devLogInput.value.trim();
+  if (!body) {
+    return;
+  }
+
+  try {
+    await postDevLog(body);
+    devLogInput.value = "";
+    await loadDevLogs();
+  } catch (error) {
+    console.error(error);
+  }
 });
 
   document.addEventListener("keydown", (event) => {
