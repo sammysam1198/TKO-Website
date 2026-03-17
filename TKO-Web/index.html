@@ -922,10 +922,424 @@
       outline: none;
     }
 
-.secret-footer-link {
-  cursor: default;
-  transition: none;
-}
+    .secret-footer-link {
+      cursor: default;
+      transition: none;
+    }
+
+    .dev-console-trigger {
+      display: inline-block;
+      position: relative;
+      color: rgba(255,255,255,0.45);
+      cursor: pointer;
+      transition: color 0.22s ease, text-shadow 0.22s ease, transform 0.22s ease;
+    }
+
+    .dev-console-trigger:hover {
+      color: #ff9a73;
+      text-shadow: 0 0 12px rgba(255, 106, 124, 0.38);
+      transform: translateY(-1px);
+    }
+
+    .dev-console-trigger::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -2px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255,150,82,0), rgba(255,150,82,0.8), rgba(255,56,182,0));
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.22s ease;
+    }
+
+    .dev-console-trigger:hover::after {
+      transform: scaleX(1);
+    }
+
+    .dev-auth-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .dev-auth-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(8px);
+    }
+
+    .dev-auth-box {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 420px);
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(5, 5, 8, 0.96);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+      padding: 22px;
+    }
+
+    .dev-auth-box form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .dev-auth-input {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 14px;
+      background: #000;
+      color: #fff;
+      padding: 14px 16px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 0.98rem;
+      outline: none;
+    }
+
+    .dev-auth-input:focus {
+      border-color: var(--hotpink);
+      box-shadow: 0 0 0 3px rgba(255, 94, 161, 0.14);
+    }
+
+    .dev-auth-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .dev-auth-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .dev-auth-btn.cancel {
+      background: rgba(255,255,255,0.08);
+      color: white;
+    }
+
+    .dev-auth-btn.submit {
+      background: linear-gradient(90deg, var(--hotpink), var(--peach));
+      color: black;
+    }
+
+    .dev-auth-status {
+      min-height: 20px;
+      font-size: 0.88rem;
+      color: #ffb18c;
+    }
+
+    .dev-console {
+      position: fixed;
+      top: 120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(92vw, 980px);
+      min-height: 560px;
+      max-height: 78vh;
+      z-index: 3200;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      background:
+        linear-gradient(180deg, rgba(255,150,82,0.08), rgba(255,56,182,0.03)),
+        rgba(8, 8, 12, 0.97);
+      box-shadow: 0 28px 90px rgba(0,0,0,0.55);
+      backdrop-filter: blur(14px);
+    }
+
+    .dev-console.hidden {
+      display: none !important;
+    }
+
+    .dev-console-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 18px;
+      background: linear-gradient(90deg, rgba(255,150,82,0.16), rgba(255,56,182,0.13));
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      cursor: grab;
+      user-select: none;
+    }
+
+    .dev-console-header:active {
+      cursor: grabbing;
+    }
+
+    .dev-console-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .dev-console-title {
+      margin: 0;
+      font-size: 0.98rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .dev-console-subtitle {
+      margin: 0;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.54);
+    }
+
+    .dev-console-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .dev-console-icon-btn {
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.08);
+      color: white;
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .dev-console-icon-btn:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.24);
+      transform: translateY(-1px);
+    }
+
+    .dev-console-tabs {
+      display: flex;
+      gap: 10px;
+      padding: 14px 18px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .dev-console-tab {
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,0.62);
+      padding: 12px 4px 14px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .dev-console-tab.active {
+      color: white;
+    }
+
+    .dev-console-tab.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--peach), var(--hotpink));
+    }
+
+    .dev-console-body {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 470px;
+      max-height: calc(78vh - 110px);
+    }
+
+    .dev-console-sidebar {
+      padding: 18px;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      overflow-y: auto;
+    }
+
+    .dev-console-main {
+      padding: 18px;
+      overflow-y: auto;
+    }
+
+    .dev-meta-block {
+      border-radius: 18px;
+      padding: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 14px;
+    }
+
+    .dev-meta-label {
+      margin: 0 0 8px;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.48);
+    }
+
+    .dev-meta-value {
+      margin: 0;
+      font-size: 0.96rem;
+      color: rgba(255,255,255,0.88);
+    }
+
+    .dev-pane {
+      display: none;
+    }
+
+    .dev-pane.active {
+      display: block;
+    }
+
+    .dev-feed {
+      display: grid;
+      gap: 14px;
+    }
+
+    .dev-entry {
+      border-radius: 18px;
+      padding: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .dev-entry-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .dev-entry-author {
+      margin: 0;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .dev-entry-time {
+      margin: 0;
+      font-size: 0.76rem;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .dev-entry-body {
+      margin: 0;
+      color: rgba(255,255,255,0.78);
+      white-space: pre-wrap;
+      line-height: 1.7;
+    }
+
+    .dev-entry-code {
+      margin-top: 12px;
+      border-radius: 14px;
+      padding: 14px;
+      background: #050505;
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow-x: auto;
+      color: #ffd3ea;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .dev-issue-badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .dev-issue-badge.functional {
+      background: rgba(255, 210, 79, 0.16);
+      color: #ffd24f;
+      border: 1px solid rgba(255, 210, 79, 0.28);
+    }
+
+    .dev-issue-badge.critical {
+      background: rgba(255, 73, 73, 0.15);
+      color: #ff5858;
+      border: 1px solid rgba(255, 88, 88, 0.3);
+    }
+
+    .dev-composer {
+      margin-top: 16px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 16px;
+    }
+
+    .dev-composer textarea {
+      width: 100%;
+      min-height: 100px;
+      resize: vertical;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: white;
+      padding: 14px;
+      font: inherit;
+      outline: none;
+    }
+
+    .dev-composer textarea:focus {
+      border-color: var(--hotpink);
+    }
+
+    .dev-composer-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 12px;
+    }
+
+    .dev-empty-note {
+      margin: 0;
+      color: rgba(255,255,255,0.48);
+    }
+
+    @media (max-width: 900px) {
+      .dev-console {
+        width: 95vw;
+        left: 2.5vw;
+        top: 86px;
+        transform: none;
+      }
+
+      .dev-console-body {
+        grid-template-columns: 1fr;
+      }
+
+      .dev-console-sidebar {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+    }
 
     @media (max-width: 980px) {
       .hero-grid,
@@ -1123,7 +1537,7 @@
         <h2 class="display-title brand-title" style="margin: 0; font-size: 1.9rem;">T.K.O!™ Official Site</h2>
         <p style="margin: 6px 0 0; color: rgba(255,255,255,0.5);">Website concept mockup</p>
       </div>
-     <p class="footer-copy">© Copyright 2026. Built by <a href="portfolio.html" class="secret-footer-link">Sammi Fishbein</a> and Dominique Smith for T.K.O!™ with HTML/CSS. All rights reserved.</p>
+     <p class="footer-copy">© Copyright 2026. Built by <a href="portfolio.html" class="secret-footer-link">Sammi Fishbein</a> and Dominique Smith for T.K.O!™ with HTML/CSS. All rights <span id="openDevConsolePrompt" class="dev-console-trigger">reserved</span>.</p>
     </div>
   </footer>
     <div id="authModal" class="auth-modal hidden">
@@ -1178,8 +1592,93 @@
       </form>
     </div>
   </div>
+   <div id="devAuthModal" class="dev-auth-modal hidden">
+    <div id="devAuthBackdrop" class="dev-auth-backdrop"></div>
+
+    <div class="dev-auth-box">
+      <form id="devAuthForm">
+        <div id="devAuthStatus" class="dev-auth-status"></div>
+        <input
+          id="devPasswordInput"
+          class="dev-auth-input"
+          type="password"
+          autocomplete="off"
+          spellcheck="false"
+          aria-label="Developer console password"
+        />
+        <div class="dev-auth-actions">
+          <button id="cancelDevAuth" class="dev-auth-btn cancel" type="button">Cancel</button>
+          <button class="dev-auth-btn submit" type="submit">Enter</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="devConsole" class="dev-console hidden">
+    <div id="devConsoleHeader" class="dev-console-header">
+      <div class="dev-console-title-wrap">
+        <p class="dev-console-title">TKO Developer Console</p>
+        <p class="dev-console-subtitle">Internal tools / hidden shell / frontend pass</p>
+      </div>
+
+      <div class="dev-console-actions">
+        <button id="popoutDevConsole" class="dev-console-icon-btn" type="button">Pop Out</button>
+        <button id="closeDevConsole" class="dev-console-icon-btn" type="button">Close</button>
+      </div>
+    </div>
+
+    <div class="dev-console-tabs">
+      <button class="dev-console-tab active" type="button" data-dev-tab="chat">Active Chat</button>
+      <button class="dev-console-tab" type="button" data-dev-tab="issues">Issues</button>
+      <button class="dev-console-tab" type="button" data-dev-tab="log">Dev Log</button>
+    </div>
+
+    <div class="dev-console-body">
+      <aside class="dev-console-sidebar">
+        <div class="dev-meta-block">
+          <p class="dev-meta-label">Access</p>
+          <p class="dev-meta-value">Authorized developer session</p>
+        </div>
+
+        <div class="dev-meta-block">
+          <p class="dev-meta-label">Project</p>
+          <p class="dev-meta-value">TKO Website / narrative rhythm game hub</p>
+        </div>
+
+        <div class="dev-meta-block">
+          <p class="dev-meta-label">Mode</p>
+          <p class="dev-meta-value">Frontend shell with live unlock route</p>
+        </div>
+      </aside>
+
+      <section class="dev-console-main">
+        <div id="devPaneChat" class="dev-pane active">
+          <div id="devChatFeed" class="dev-feed"></div>
+
+          <div class="dev-composer">
+            <textarea id="devChatInput" placeholder="Internal developer note..."></textarea>
+            <div class="dev-composer-actions">
+              <button id="sendDevChat" class="dev-console-icon-btn" type="button">Post Note</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="devPaneIssues" class="dev-pane">
+          <div id="devIssuesFeed" class="dev-feed"></div>
+        </div>
+
+        <div id="devPaneLog" class="dev-pane">
+          <div id="devLogFeed" class="dev-feed"></div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  
 <script>
   const API_BASE = "https://tko-api-server.onrender.com";
+
+  const authControls = document.getElementById("authControls");
 
   const newsletterFirstName = document.getElementById("newsletterFirstName");
   const newsletterEmail = document.getElementById("newsletterEmail");
@@ -1188,8 +1687,6 @@
   const newsletterStatus = document.getElementById("newsletterStatus");
 
   const authModal = document.getElementById("authModal");
-  const openSignUpBtn = document.getElementById("openSignUp");
-  const openSignInBtn = document.getElementById("openSignIn");
   const closeAuthModalBtn = document.getElementById("closeAuthModal");
   const authBackdrop = document.querySelector(".auth-modal-backdrop");
 
@@ -1199,6 +1696,87 @@
   const signUpForm = document.getElementById("signUpForm");
   const signInForm = document.getElementById("signInForm");
   const authMessage = document.getElementById("authMessage");
+
+  const devAuthModal = document.getElementById("devAuthModal");
+  const devAuthBackdrop = document.getElementById("devAuthBackdrop");
+  const devAuthForm = document.getElementById("devAuthForm");
+  const devAuthStatus = document.getElementById("devAuthStatus");
+  const devPasswordInput = document.getElementById("devPasswordInput");
+  const cancelDevAuthBtn = document.getElementById("cancelDevAuth");
+  const openDevConsolePrompt = document.getElementById("openDevConsolePrompt");
+
+  const devConsole = document.getElementById("devConsole");
+  const devConsoleHeader = document.getElementById("devConsoleHeader");
+  const closeDevConsoleBtn = document.getElementById("closeDevConsole");
+  const popoutDevConsoleBtn = document.getElementById("popoutDevConsole");
+  const devTabButtons = document.querySelectorAll(".dev-console-tab");
+
+  const devPaneChat = document.getElementById("devPaneChat");
+  const devPaneIssues = document.getElementById("devPaneIssues");
+  const devPaneLog = document.getElementById("devPaneLog");
+
+  const devChatFeed = document.getElementById("devChatFeed");
+  const devIssuesFeed = document.getElementById("devIssuesFeed");
+  const devLogFeed = document.getElementById("devLogFeed");
+
+  const devChatInput = document.getElementById("devChatInput");
+  const sendDevChatBtn = document.getElementById("sendDevChat");
+
+  let devConsoleUnlocked = false;
+
+  const devChatMessages = [
+    {
+      author: "system",
+      time: "just now",
+      body: "Developer console shell initialized.\nUI is live. Backend persistence can be connected next."
+    },
+    {
+      author: "dom",
+      time: "today",
+      body: "Forum backend is the next major integration target."
+    },
+    {
+      author: "astra",
+      time: "today",
+      body: "Syntax-highlighted code support can be layered in after backend storage is wired.",
+      code: `~~~python
+def open_console():
+    return {"status": "ready"}
+~~~`
+    }
+  ];
+
+  const devIssues = [
+    {
+      title: "Forum routes not yet connected to true channel/thread model",
+      severity: "functional",
+      author: "astra",
+      time: "today",
+      body: "Current community posting system still maps closer to a guestbook than the planned forum hierarchy."
+    },
+    {
+      title: "Developer console backend persistence still pending",
+      severity: "critical",
+      author: "astra",
+      time: "today",
+      body: "Console unlock route is live after backend patch, but message/issues/log table persistence is still phase two."
+    }
+  ];
+
+  const devLogEntries = [
+    {
+      title: "Added hidden footer trigger",
+      author: "astra",
+      time: "today",
+      body: "The word reserved now acts as the hidden entry point for the internal console."
+    },
+    {
+      title: "Built draggable console shell",
+      author: "astra",
+      time: "today",
+      body: "Console includes Active Chat, Issues, and Dev Log tabs with pop-out support."
+    }
+  ];
 
   function openAuthModal(mode = "signup") {
     authModal.classList.remove("hidden");
@@ -1288,8 +1866,6 @@
       renderLoggedOutState();
     }
   }
-  
-  
 
   function showSignUpTab() {
     signUpForm.classList.remove("hidden");
@@ -1311,7 +1887,245 @@
     authMessage.textContent = "";
   }
 
+  function openDevAuthModal() {
+    devAuthModal.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+    devAuthStatus.textContent = "";
+    devPasswordInput.value = "";
+    setTimeout(() => devPasswordInput.focus(), 40);
+  }
+
+  function closeDevAuthModal() {
+    devAuthModal.classList.add("hidden");
+    document.body.style.overflow = devConsole.classList.contains("hidden") ? "" : "hidden";
+    devAuthStatus.textContent = "";
+    devPasswordInput.value = "";
+  }
+
+  function openDevConsole() {
+    devConsole.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeDevConsole() {
+    devConsole.classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+
+  function formatCodeBlock(code) {
+    return `<pre class="dev-entry-code">${escapeHtml(code)}</pre>`;
+  }
+
+  function escapeHtml(value) {
+    return value
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function renderDevChat() {
+    if (!devChatMessages.length) {
+      devChatFeed.innerHTML = `<p class="dev-empty-note">No messages yet.</p>`;
+      return;
+    }
+
+    devChatFeed.innerHTML = devChatMessages.map((entry) => `
+      <article class="dev-entry">
+        <div class="dev-entry-top">
+          <p class="dev-entry-author">${escapeHtml(entry.author)}</p>
+          <p class="dev-entry-time">${escapeHtml(entry.time)}</p>
+        </div>
+        <p class="dev-entry-body">${escapeHtml(entry.body)}</p>
+        ${entry.code ? formatCodeBlock(entry.code) : ""}
+      </article>
+    `).join("");
+  }
+
+  function renderDevIssues() {
+    if (!devIssues.length) {
+      devIssuesFeed.innerHTML = `<p class="dev-empty-note">No issues logged.</p>`;
+      return;
+    }
+
+    devIssuesFeed.innerHTML = devIssues.map((issue) => `
+      <article class="dev-entry">
+        <div class="dev-entry-top">
+          <p class="dev-entry-author">${escapeHtml(issue.title)}</p>
+          <p class="dev-entry-time">${escapeHtml(issue.time)}</p>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <span class="dev-issue-badge ${escapeHtml(issue.severity)}">${escapeHtml(issue.severity)}</span>
+        </div>
+        <p class="dev-entry-body">${escapeHtml(issue.body)}</p>
+        <p class="dev-entry-time" style="margin-top: 10px;">Logged by ${escapeHtml(issue.author)}</p>
+      </article>
+    `).join("");
+  }
+
+  function renderDevLog() {
+    if (!devLogEntries.length) {
+      devLogFeed.innerHTML = `<p class="dev-empty-note">No log entries yet.</p>`;
+      return;
+    }
+
+    devLogFeed.innerHTML = devLogEntries.map((entry) => `
+      <article class="dev-entry">
+        <div class="dev-entry-top">
+          <p class="dev-entry-author">${escapeHtml(entry.title)}</p>
+          <p class="dev-entry-time">${escapeHtml(entry.time)}</p>
+        </div>
+        <p class="dev-entry-body">${escapeHtml(entry.body)}</p>
+        <p class="dev-entry-time" style="margin-top: 10px;">Logged by ${escapeHtml(entry.author)}</p>
+      </article>
+    `).join("");
+  }
+
+  function activateDevTab(tabName) {
+    devTabButtons.forEach((button) => {
+      button.classList.toggle("active", button.dataset.devTab === tabName);
+    });
+
+    devPaneChat.classList.toggle("active", tabName === "chat");
+    devPaneIssues.classList.toggle("active", tabName === "issues");
+    devPaneLog.classList.toggle("active", tabName === "log");
+  }
+
+  async function unlockDevConsole(password) {
+    const response = await fetch(`${API_BASE}/api/tko/dev-console/unlock`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ password })
+    });
+
+    const data = await response.json();
+    return { response, data };
+  }
+
+  function setupDevDragging() {
+    let isDragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    devConsoleHeader.addEventListener("mousedown", (event) => {
+      if (event.target.closest("button")) {
+        return;
+      }
+
+      const rect = devConsole.getBoundingClientRect();
+
+      isDragging = true;
+      offsetX = event.clientX - rect.left;
+      offsetY = event.clientY - rect.top;
+
+      devConsole.style.left = `${rect.left}px`;
+      devConsole.style.top = `${rect.top}px`;
+      devConsole.style.transform = "none";
+    });
+
+    document.addEventListener("mousemove", (event) => {
+      if (!isDragging) {
+        return;
+      }
+
+      const nextLeft = Math.max(8, Math.min(window.innerWidth - devConsole.offsetWidth - 8, event.clientX - offsetX));
+      const nextTop = Math.max(8, Math.min(window.innerHeight - 80, event.clientY - offsetY));
+
+      devConsole.style.left = `${nextLeft}px`;
+      devConsole.style.top = `${nextTop}px`;
+    });
+
+    document.addEventListener("mouseup", () => {
+      isDragging = false;
+    });
+  }
+
+  function popoutDevConsole() {
+    const popup = window.open("", "tko_dev_console", "width=1100,height=780,resizable=yes,scrollbars=yes");
+
+    if (!popup) {
+      return;
+    }
+
+    popup.document.write(`
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <title>TKO Developer Console</title>
+        <style>
+          body {
+            margin: 0;
+            padding: 22px;
+            background: #09090d;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+          }
+          .wrap {
+            max-width: 1000px;
+            margin: 0 auto;
+          }
+          .title {
+            margin: 0 0 8px;
+            font-size: 1.2rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+          }
+          .subtitle {
+            margin: 0 0 22px;
+            color: rgba(255,255,255,0.55);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-size: 0.8rem;
+          }
+          .entry {
+            border-radius: 18px;
+            padding: 16px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            margin-bottom: 14px;
+          }
+          .code {
+            margin-top: 12px;
+            border-radius: 14px;
+            padding: 14px;
+            background: #050505;
+            border: 1px solid rgba(255,255,255,0.08);
+            overflow-x: auto;
+            color: #ffd3ea;
+            white-space: pre-wrap;
+            font-family: Consolas, Monaco, monospace;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="wrap">
+          <h1 class="title">TKO Developer Console</h1>
+          <p class="subtitle">Pop-out view</p>
+          ${devChatMessages.map((entry) => `
+            <div class="entry">
+              <strong>${escapeHtml(entry.author)}</strong>
+              <div style="opacity:.55; font-size:.82rem; margin-top:4px;">${escapeHtml(entry.time)}</div>
+              <p style="white-space: pre-wrap; line-height:1.7;">${escapeHtml(entry.body)}</p>
+              ${entry.code ? `<div class="code">${escapeHtml(entry.code)}</div>` : ""}
+            </div>
+          `).join("")}
+        </div>
+      </body>
+      </html>
+    `);
+
+    popup.document.close();
+  }
+
   attachLoggedOutButtonEvents();
+  setupDevDragging();
+  renderDevChat();
+  renderDevIssues();
+  renderDevLog();
 
   closeAuthModalBtn.addEventListener("click", closeAuthModal);
   authBackdrop.addEventListener("click", closeAuthModal);
@@ -1319,9 +2133,70 @@
   showSignUpTabBtn.addEventListener("click", showSignUpTab);
   showSignInTabBtn.addEventListener("click", showSignInTab);
 
+  openDevConsolePrompt.addEventListener("click", openDevAuthModal);
+  cancelDevAuthBtn.addEventListener("click", closeDevAuthModal);
+  devAuthBackdrop.addEventListener("click", closeDevAuthModal);
+  closeDevConsoleBtn.addEventListener("click", closeDevConsole);
+  popoutDevConsoleBtn.addEventListener("click", popoutDevConsole);
+
+  devTabButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      activateDevTab(button.dataset.devTab);
+    });
+  });
+
+  devAuthForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const password = devPasswordInput.value;
+    devAuthStatus.textContent = "Checking access...";
+
+    try {
+      const { response, data } = await unlockDevConsole(password);
+
+      if (!response.ok) {
+        devAuthStatus.textContent = data.error || "Access denied.";
+        return;
+      }
+
+      devConsoleUnlocked = true;
+      devAuthStatus.textContent = "Access granted.";
+      closeDevAuthModal();
+      openDevConsole();
+    } catch (error) {
+      console.error(error);
+      devAuthStatus.textContent = "Network error during verification.";
+    }
+  });
+
+  sendDevChatBtn.addEventListener("click", () => {
+    const body = devChatInput.value.trim();
+
+    if (!body) {
+      return;
+    }
+
+    devChatMessages.unshift({
+      author: "sammi",
+      time: "just now",
+      body
+    });
+
+    devChatInput.value = "";
+    renderDevChat();
+  });
+
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && !authModal.classList.contains("hidden")) {
       closeAuthModal();
+    }
+
+    if (event.key === "Escape" && !devAuthModal.classList.contains("hidden")) {
+      closeDevAuthModal();
+    }
+
+    if (event.key === "Escape" && !devConsole.classList.contains("hidden")) {
+      closeDevConsole();
     }
   });
 
@@ -1397,9 +2272,8 @@
       }
 
       localStorage.setItem("tko_token", data.token);
-      
       await loadCurrentUser();
-      
+
       authMessage.textContent = "Signed in successfully.";
       signInForm.reset();
 
@@ -1412,51 +2286,59 @@
     }
   });
 
-  newsletterSubscribeBtn.addEventListener("click", async () => {
-  const first_name = newsletterFirstName.value.trim();
-  const email = newsletterEmail.value.trim();
-  const message = newsletterMessage.value.trim();
+  if (
+    newsletterSubscribeBtn &&
+    newsletterFirstName &&
+    newsletterEmail &&
+    newsletterMessage &&
+    newsletterStatus
+  ) {
+    newsletterSubscribeBtn.addEventListener("click", async () => {
+      const first_name = newsletterFirstName.value.trim();
+      const email = newsletterEmail.value.trim();
+      const message = newsletterMessage.value.trim();
 
-  newsletterStatus.textContent = "";
+      newsletterStatus.textContent = "";
 
-  if (!email) {
-    newsletterStatus.textContent = "Please enter your email address.";
-    return;
-  }
+      if (!email) {
+        newsletterStatus.textContent = "Please enter your email address.";
+        return;
+      }
 
-  newsletterStatus.textContent = "Subscribing...";
+      newsletterStatus.textContent = "Subscribing...";
 
-  try {
-    const response = await fetch(`${API_BASE}/api/tko/newsletter/subscribe`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        first_name,
-        email,
-        message
-      })
+      try {
+        const response = await fetch(`${API_BASE}/api/tko/newsletter/subscribe`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            first_name,
+            email,
+            message
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          newsletterStatus.textContent =
+            data.error || data.message || "Subscription failed.";
+          return;
+        }
+
+        newsletterStatus.textContent = "Subscribed successfully!";
+        newsletterFirstName.value = "";
+        newsletterEmail.value = "";
+        newsletterMessage.value = "";
+      } catch (error) {
+        console.error(error);
+        newsletterStatus.textContent = "Network error during subscription.";
+      }
     });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      newsletterStatus.textContent =
-        data.error || data.message || "Subscription failed.";
-      return;
-    }
-
-    newsletterStatus.textContent = "Subscribed successfully!";
-    newsletterFirstName.value = "";
-    newsletterEmail.value = "";
-    newsletterMessage.value = "";
-  } catch (error) {
-    console.error(error);
-    newsletterStatus.textContent = "Network error during subscription.";
   }
-});
-  
+
   loadCurrentUser();
 </script>
 </body>
