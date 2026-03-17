@@ -49,11 +49,8 @@
       justify-content: space-between;
       align-items: center;
       gap: 16px;
-      padding: 16px 20px;
-      margin-bottom: 24px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 28px;
+      padding-top: 0;
     }
 
     .portfolio-topbar-left,
@@ -61,6 +58,25 @@
       display: flex;
       align-items: center;
       gap: 12px;
+    }
+
+    .portfolio-topbar-btn {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      transition: transform 0.2s ease, background 0.2s ease;
+      background: black;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+
+    .portfolio-topbar-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.08);
     }
 
     .container {
@@ -77,7 +93,7 @@
     }
 
     .hero {
-      padding: 100px 0 40px;
+      padding: 24px 0 40px;
       background:
         linear-gradient(180deg, rgba(255,150,82,0.10), rgba(255,56,182,0.05)),
         #111111;
@@ -272,21 +288,33 @@
       .section-inner {
         padding: 24px;
       }
+
+      .portfolio-topbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .portfolio-topbar-left,
+      .portfolio-topbar-right {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
     }
   </style>
 </head>
 <body>
-  <section class="hero">
+<section class="hero">
+  <div class="container">
     <div class="portfolio-topbar">
-    <div class="portfolio-topbar-left">
-      <a href="/" class="portfolio-topbar-btn">Back</a>
-    </div>
+      <div class="portfolio-topbar-left">
+        <a href="/" class="portfolio-topbar-btn">Back</a>
+      </div>
 
-    <div class="portfolio-topbar-right">
-      <a href="https://github.com/sammysam1198" class="portfolio-topbar-btn" target="_blank">GitHub</a>
-      <a href="/assets/resume.pdf" class="portfolio-topbar-btn" target="_blank">Resume</a>
+      <div class="portfolio-topbar-right">
+        <a href="https://github.com/sammysam1198" class="portfolio-topbar-btn" target="_blank">GitHub</a>
+        <a href="/assets/resume.pdf" class="portfolio-topbar-btn" target="_blank">Resume</a>
+      </div>
     </div>
-  </div>
     <div class="container">
       <p class="eyebrow">Hidden Signal</p>
       <h1 class="display-title">Sammi<br />Fishbein</h1>
@@ -322,11 +350,11 @@
             <div class="project-card">
               <p class="project-label">Narrative Rhythm Game Web Platform</p>
               <h3 class="project-heading-pink">T.K.O!</h3>
-              <p class="project-copy"><Strong>Architecture:</Strong>Frontend: HTML, CSS, JavaScript · Backend: Flask REST API · Database: PostgreSQL (Render)</p>
+              <p class="project-copy"><strong>Architecture:</strong>Frontend: HTML, CSS, JavaScript · Backend: Flask REST API · Database: PostgreSQL (Render)</p>
 
-              <p class="project-copy"><Strong>Key Features:</Strong>User authentication system (bcrypt, sessions) · RESTful API endpoints for content + user data · Modular backend structure (routes, services, repositories) · Cloud deployment with environment-based config</p>
+              <p class="project-copy"><strong>Key Features:</strong>User authentication system (bcrypt, sessions) · RESTful API endpoints for content + user data · Modular backend structure (routes, services, repositories) · Cloud deployment with environment-based config</p>
                 
-              <p class="project-copy"><Strong>Role:</Strong>Designed and built full system architecture, backend API, database schema, and frontend integration.</p>
+              <p class="project-copy"><strong>Role:</strong>Designed and built full system architecture, backend API, database schema, and frontend integration.</p>
               <div class="project-links">
                 <a href="https://tkofficial.onrender.com" target="_blank" rel="noopener noreferrer">Live Site</a>
                 <a href="https://github.com/sammysam1198/TKO-Website" target="_blank" rel="noopener noreferrer">GitHub</a>
