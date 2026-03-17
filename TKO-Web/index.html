@@ -1048,8 +1048,7 @@
       left: 50%;
       transform: translateX(-50%);
       width: min(92vw, 980px);
-      min-height: 560px;
-      max-height: 78vh;
+      height: 78vh;
       z-index: 3200;
       border-radius: 24px;
       overflow: hidden;
@@ -1167,7 +1166,8 @@
     .dev-console-body {
       display: grid;
       grid-template-columns: 260px 1fr;
-      min-height: 470px;
+      min-height: 0;
+      height: calc(78vh - 110px);
       max-height: calc(78vh - 110px);
     }
 
@@ -1176,11 +1176,13 @@
       border-right: 1px solid rgba(255,255,255,0.08);
       background: rgba(255,255,255,0.03);
       overflow-y: auto;
+      min-height: 0;
     }
 
     .dev-console-main {
       padding: 18px;
       overflow-y: auto;
+      min-height: 0;
     }
 
     .dev-meta-block {
@@ -1207,6 +1209,11 @@
 
     .dev-pane {
       display: none;
+      min-height: 0;
+    }
+
+    .dev-pane.active {
+      display: block;
     }
 
     .dev-pane.active {
