@@ -44,6 +44,25 @@
       text-transform: uppercase;
     }
 
+    .portfolio-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .portfolio-topbar-left,
+    .portfolio-topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
     .container {
       width: min(calc(100% - 48px), var(--max-width));
       margin: 0 auto;
@@ -257,12 +276,17 @@
 </head>
 <body>
   <section class="hero">
+    <div class="portfolio-topbar">
+    <div class="portfolio-topbar-left">
+      <a href="/" class="portfolio-topbar-btn">Back</a>
+    </div>
+
+    <div class="portfolio-topbar-right">
+      <a href="https://github.com/sammysam1198" class="portfolio-topbar-btn" target="_blank">GitHub</a>
+      <a href="/assets/resume.pdf" class="portfolio-topbar-btn" target="_blank">Resume</a>
+    </div>
+  </div>
     <div class="container">
-       <div class="button-row">
-        <a class="button button-light" href="https://github.com/sammysam1198" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a class="button button-dark" href="assets/Backend_MA_New.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
-        <a class="button button-dark" href="index.html">Back to TKO</a>
-      </div>
       <p class="eyebrow">Hidden Signal</p>
       <h1 class="display-title">Sammi<br />Fishbein</h1>
       <p class="subtitle">Backend Software Engineer | Python • Flask • PostgreSQL</p>
