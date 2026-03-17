@@ -84,6 +84,23 @@
       color: #ffb18f;
     }
 
+    .subtitle-pink {
+      margin: 16px 0 0;
+      font-size: 1.2rem;
+      color: #ff38b6;
+    }
+    .project-heading-pink {
+      margin: 18px 0 0;
+      font-size: 1.23rem;
+      color: #ff38b6;
+    }
+
+    .project-heading-peach {
+      margin: 18px 0 0;
+      font-size: 1.23rem;
+      color: #ff9652;
+    }
+    
     .hero-copy {
       max-width: 760px;
       margin-top: 22px;
@@ -247,7 +264,7 @@
       <p class="hero-copy">I design and deploy production systems with authentication, 
         relational data models, and cloud infrastructure.
       </p>
-      <p class="subtitle">Below are live systems I've built and deployed. </p>
+      <p class="subtitle-pink">Below are live systems I've built and deployed. </p>
 
       <div class="button-row">
         <a class="button button-light" href="https://github.com/sammysam1198" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -266,7 +283,7 @@
           <div class="projects-grid">
             <div class="project-card">
               <p class="project-label">Cloud Issue Tracking Platform</p>
-              <h3>ASTRA</h3>
+              <h3 class="project-heading-peach">ASTRA</h3>
               <p class="project-copy">
                 Modular issue tracking platform built with Python, Flask, and PostgreSQL,
                 featuring secure authentication, RBAC, API-driven workflows, reporting,
@@ -279,10 +296,21 @@
 
             <div class="project-card">
               <p class="project-label">Narrative Rhythm Game Web Platform</p>
-              <h3>T.K.O!</h3>
+              <h3 class="project-heading-pink">T.K.O!</h3>
               <p class="project-copy">
-                Full-stack platform and web hub supporting the T.K.O! world with custom frontend,
-                backend account systems, and infrastructure for music, community, and future expansion.
+                Architecture:
+                  - Frontend: HTML, CSS, JavaScript
+                  - Backend: Flask REST API
+                  - Database: PostgreSQL (Render)
+
+                  Key Features:
+                  - User authentication system (bcrypt, sessions)
+                  - RESTful API endpoints for content + user data
+                  - Modular backend structure (routes, services, repositories)
+                  - Cloud deployment with environment-based config
+
+                  Role:
+                  Designed and built full system architecture, backend API, database schema, and frontend integration.
               </p>
               <div class="project-links">
                 <a href="https://tkofficial.onrender.com" target="_blank" rel="noopener noreferrer">Live Site</a>
