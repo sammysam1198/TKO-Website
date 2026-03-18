@@ -22,7 +22,7 @@ def get_client_identifier():
 
 
 def sanitize_display_name(name: str) -> str:
-    """Sanitize display name - remove control chars, limit length."""
+    """remove control chars, limit length."""
     if not name:
         return name
     # Remove control characters
