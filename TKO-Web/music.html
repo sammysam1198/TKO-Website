@@ -521,7 +521,7 @@
 
     .music-platform-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(3, 1fr));
+      grid-template-columns: repeat(minmax(6, 1fr));
       gap: 18px;
       margin-top: 28px;
     }
@@ -531,7 +531,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 120px;
+      min-height: 140px;
       padding: 19px;
       background: #000;
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -550,11 +550,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 60px;
+      min-height: 70px;
       padding: 5px;
       background: #000;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 60px;
+      border-radius: 20px;
       overflow: hidden;
       text-decoration: none;
       transition:
@@ -579,6 +579,14 @@
       display: block;
       position: relative;
       z-index: 2;
+    }
+
+     .tile-top {
+      grid-column: span 2;
+    }
+
+    .tile-small {
+      grid-column: span 3;
     }
 
     /* platform hover states */
@@ -780,18 +788,19 @@
               </p>
 
              <div class="music-platform-grid">
-              <a class="music-tile spotify-tile" href="https://open.spotify.com/artist/6urtYaQRK6hdJzJ9XrpWXs?si=NcDhIe4TTkG4z-SautFBqA" target="_blank" rel="noopener noreferrer"><img src="assets/spotify.png" alt="Spotify" class="music-logo"></a> 
-               <a class="music-tile youtube-tile" href="https://www.youtube.com/@Chroma_Glow_Synths" target="_blank" rel="noopener noreferrer"><img src="assets/youtube full.png" alt="YouTube" class="music-logo"></a>
-               <a class="music-tile instagram-tile" href="https://www.instagram.com/chroma_glow_synths/" target="_blank" rel="noopener noreferrer"><img src="assets/instagram.png" alt="Instagram" class="music-logo"></a>
+              <a class="music-tile tile-top spotify-tile" href="https://open.spotify.com/artist/6urtYaQRK6hdJzJ9XrpWXs?si=NcDhIe4TTkG4z-SautFBqA" target="_blank" rel="noopener noreferrer"><img src="assets/spotify.png" alt="Spotify" class="music-logo"></a> 
+               <a class="music-tile tile-top youtube-tile" href="https://www.youtube.com/@Chroma_Glow_Synths" target="_blank" rel="noopener noreferrer"><img src="assets/youtube full.png" alt="YouTube" class="music-logo"></a>
+               <a class="music-tile tile-top instagram-tile" href="https://www.instagram.com/chroma_glow_synths/" target="_blank" rel="noopener noreferrer"><img src="assets/instagram.png" alt="Instagram" class="music-logo"></a>
+              
+              <a class="music-tile-small tile-small soundcloud-tile" style="grid-column: 3 / 4;" href="https://soundcloud.com/chromaglow" target="_blank" rel="noopener noreferrer"><img src="assets/soundcloud.png" alt="SoundCloud" class="music-logo"></a>
+              <a class="music-tile-small tile-small bandcamp-tile" style="grid-column: 3 / 4;" href="https://chromaglow.bandcamp.com/" target="_blank" rel="noopener noreferrer"><img src="assets/bandcamp.png" alt="Bandcamp" class="music-logo"></a>
+              
+              <a class="music-tile-small tile-small ytmusic-tile" style="grid-column: 1 / 2;" href="https://music.youtube.com/channel/UCOd3HzINSQkyXpCtzBxy3fw?si=kxKYlb-6e1BCqrML" target="_blank" rel="noopener noreferrer"><img src="assets/ytmusic.png" alt="YouTube Music" class="music-logo"></a>
+              <a class="music-tile-small tile-small tiktok-tile" style="grid-column: 3 / 4;" href="https://www.tiktok.com/@ashes_of_sam?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer"><img src="assets/tiktok.png" alt="TikTok" class="music-logo"></a>
 
-              <a class="music-tile-small apple-tile" style="grid-column: 1 / 2;" href="https://music.apple.com/in/artist/chroma-glow/1787981160" target="_blank" rel="noopener noreferrer"><img src="assets/apple.png" alt="Apple Music" class="music-logo"></a>
-              <a class="music-tile-small bandcamp-tile" style="grid-column: 3 / 4;" href="https://chromaglow.bandcamp.com/" target="_blank" rel="noopener noreferrer"><img src="assets/bandcamp.png" alt="Bandcamp" class="music-logo"></a>
+              <a class="music-tile-small tile-small tidal-tile" style="grid-column: 1 / 2;" href="https://tidal.com/artist/52836123" target="_blank" rel="noopener noreferrer"><img src="assets/tidal.png" alt="TIDAL" class="music-logo"></a>
+              <a class="music-tile-small tile-small apple-tile" style="grid-column: 1 / 2;" href="https://music.apple.com/in/artist/chroma-glow/1787981160" target="_blank" rel="noopener noreferrer"><img src="assets/apple.png" alt="Apple Music" class="music-logo"></a>
 
-              <a class="music-tile-small tidal-tile" style="grid-column: 1 / 2;" href="https://tidal.com/artist/52836123" target="_blank" rel="noopener noreferrer"><img src="assets/tidal.png" alt="TIDAL" class="music-logo"></a>
-              <a class="music-tile-small soundcloud-tile" style="grid-column: 3 / 4;" href="https://soundcloud.com/chromaglow" target="_blank" rel="noopener noreferrer"><img src="assets/soundcloud.png" alt="SoundCloud" class="music-logo"></a>
-
-              <a class="music-tile-small ytmusic-tile" style="grid-column: 1 / 2;" href="https://music.youtube.com/channel/UCOd3HzINSQkyXpCtzBxy3fw?si=kxKYlb-6e1BCqrML" target="_blank" rel="noopener noreferrer"><img src="assets/ytmusic.png" alt="YouTube Music" class="music-logo"></a>
-              <a class="music-tile-small tiktok-tile" style="grid-column: 3 / 4;" href="https://www.tiktok.com/@ashes_of_sam?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer"><img src="assets/tiktok.png" alt="TikTok" class="music-logo"></a>
               </div>
             </div>
 
