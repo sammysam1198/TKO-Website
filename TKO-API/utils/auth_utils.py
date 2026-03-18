@@ -1,6 +1,9 @@
 import os
 import re
+import time
+from collections import defaultdict
 from datetime import datetime, timedelta, timezone
+from threading import Lock
 
 import bcrypt
 import jwt
@@ -8,6 +11,22 @@ import jwt
 
 EMAIL_REGEX = re.compile(r"^[^@\s]+@[^@\s]+\.(com|net|org|edu|gov|me)$", re.IGNORECASE)
 USERNAME_REGEX = re.compile(r"^[A-Za-z0-9_.-]{3,50}$")
+
+_rate_limit_storage = defaultdict(list)
+_rate_limit_lock = Lock()
+
+
+def check_rate_limit(identifier: str, max_requests: int = 10, window: int = 60) -> bool:
+    """Returns True if request is allowed, False if rate limited."""
+    now = time.time()
+    with _rate_limit_lock:
+        _rate_limit_storage[identifier] = [
+            t for t in _rate_limit_storage[identifier] if now - t < window
+        ]
+        if len(_rate_limit_storage[identifier]) >= max_requests:
+            return False
+        _rate_limit_storage[identifier].append(now)
+        return True
 
 
 def is_valid_email(email: str) -> bool:
