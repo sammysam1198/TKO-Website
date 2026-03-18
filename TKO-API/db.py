@@ -75,7 +75,7 @@ def init_db():
             """
         )
 
-         cur.execute(
+        cur.execute(
             """
             CREATE TABLE IF NOT EXISTS dev_messages (
                 id SERIAL PRIMARY KEY,
@@ -110,6 +110,73 @@ def init_db():
             );
             """
         )
+        # Forum tables
+        cur.execute(
+            """
+            CREATE TABLE IF NOT EXISTS tko_forum_categories (
+                id SERIAL PRIMARY KEY,
+                slug VARCHAR(50) NOT NULL UNIQUE,
+                name VARCHAR(100) NOT NULL,
+                description TEXT,
+                display_order INTEGER NOT NULL DEFAULT 0,
+                created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );
+            """
+        )
+
+        cur.execute(
+            """
+            CREATE TABLE IF NOT EXISTS tko_forum_posts (
+                id SERIAL PRIMARY KEY,
+                category_id INTEGER NOT NULL REFERENCES tko_forum_categories(id),
+                user_id INTEGER REFERENCES tko_users(id) ON DELETE SET NULL,
+                parent_id INTEGER REFERENCES tko_forum_posts(id) ON DELETE CASCADE,
+                display_name VARCHAR(120) NOT NULL,
+                title VARCHAR(255),
+                content TEXT NOT NULL,
+                depth INTEGER NOT NULL DEFAULT 0,
+                reply_count INTEGER NOT NULL DEFAULT 0,
+                score INTEGER NOT NULL DEFAULT 0,
+                is_pinned BOOLEAN NOT NULL DEFAULT FALSE,
+                created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );
+            """
+        )
+
+        cur.execute(
+            """
+            CREATE TABLE IF NOT EXISTS tko_forum_votes (
+                id SERIAL PRIMARY KEY,
+                post_id INTEGER NOT NULL REFERENCES tko_forum_posts(id) ON DELETE CASCADE,
+                user_id INTEGER REFERENCES tko_users(id) ON DELETE CASCADE,
+                voter_fingerprint VARCHAR(64),
+                vote_type SMALLINT NOT NULL CHECK (vote_type IN (-1, 1)),
+                created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );
+            """
+        )
+
+        cur.execute(
+            """
+            CREATE INDEX IF NOT EXISTS idx_forum_posts_category ON tko_forum_posts(category_id);
+            CREATE INDEX IF NOT EXISTS idx_forum_posts_parent ON tko_forum_posts(parent_id);
+            CREATE INDEX IF NOT EXISTS idx_forum_posts_created ON tko_forum_posts(created_at DESC);
+            CREATE INDEX IF NOT EXISTS idx_forum_votes_post ON tko_forum_votes(post_id);
+            """
+        )
+
+        cur.execute(
+            """
+            INSERT INTO tko_forum_categories (slug, name, description, display_order)
+            VALUES
+                ('general', 'General', 'General discussion about TKO', 1),
+                ('music', 'Music', 'Music releases, artists, and soundtrack discussion', 2),
+                ('announcements', 'Announcements', 'Official project updates and news', 3)
+            ON CONFLICT (slug) DO NOTHING;
+            """
+        )
+
         conn.commit()
     finally:
         cur.close()
