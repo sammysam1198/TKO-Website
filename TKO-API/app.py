@@ -10,13 +10,9 @@ from routes.post_routes import post_bp
 from routes.auth_routes import auth_bp
 from routes.dev_console_routes import dev_console_bp
 from routes.forum_routes import forum_bp
-from routes.website_routes import website_bp
 
 
-app = Flask( __name__,
-    template_folder="TKO-Web/templates",
-    static_folder="TKO-Web/static"
-)
+app = Flask( __name__)
 CORS(app)
 
 # Security headers middleware
@@ -37,7 +33,6 @@ app.register_blueprint(post_bp)
 app.register_blueprint(auth_bp)
 app.register_blueprint(dev_console_bp)
 app.register_blueprint(forum_bp)
-app.register_blueprint(website_bp)
 
 # Run table creation when the app starts on Render too
 init_db()
