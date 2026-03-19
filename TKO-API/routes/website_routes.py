@@ -72,3 +72,9 @@ def tko_forum():
 @website_bp.route("/sammi/")
 def tko_sammi():
     return render_template("portfolio.html")
+
+
+@website_bp.route("/newsletter")
+@website_bp.route("/newsletter/")
+def tko_newsletter():
+    return render_template("newsletter.html.html")
