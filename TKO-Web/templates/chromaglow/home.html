@@ -424,15 +424,15 @@
     }
 
     .chapter-card.memory::before {
-      background-image: url("../memories_glow.png");
+      background-image: url("/static/chromaglow/covers/memories_glow.png");
     }
 
     .chapter-card.music::before {
-      background-image: url("../perennial.png");
+      background-image: url("/static/chromaglow/covers/perennial.png");
     }
 
     .chapter-card.about::before {
-      background-image: url("../quattro.png");
+      background-image: url("/static/chromaglow/covers/quattro.png");
     }
 
     .chapter-card-content {
@@ -486,7 +486,7 @@
       box-shadow: var(--shadow-xl);
       background:
         linear-gradient(to bottom, rgba(5, 6, 16, 0.16), rgba(5, 6, 16, 0.72)),
-        url("../Skyline_upscale.png") center center / cover no-repeat;
+        url("/static/chromaglow/covers/Skyline_upscale.png") center center / cover no-repeat;
       display: flex;
       align-items: flex-end;
       padding: 32px;
@@ -530,7 +530,7 @@
       box-shadow: var(--shadow-lg);
       background:
         linear-gradient(to bottom, rgba(3,4,10,0.10), rgba(3,4,10,0.54)),
-        url("../memories_glow.png") center center / cover no-repeat;
+        url("/static/chromaglow/covers/memories_glow.png") center center / cover no-repeat;
       position: relative;
     }
 
@@ -710,14 +710,14 @@
   <div class="site-bg"></div>
 
   <div class="hero-logo-layer" aria-hidden="true">
-    <img src="/chromaglow/assets/logos/chromaglowclear.png" alt="" />
+    <img src="/static/chromaglow/logos/chromaglowclear.png" alt="" />
   </div>
 
   <div class="site-shell">
     <header class="site-header">
       <div class="container">
         <a class="brand-mark" href="home.html">
-          <img src="/chromaglow/assets/covers/square (no title).png" alt="Chroma Glow mark" />
+          <img src="/static/chromaglow/covers/square (no title).png" alt="Chroma Glow mark" />
           <div class="brand-copy">
             <p class="display brand-title">Chroma Glow</p>
             <p class="brand-subtitle">f a l l i n g  t h r o u g h  i n f i n i t y </p>
@@ -725,12 +725,12 @@
         </a>
 
         <nav class="nav">
-          <a href="{{ url_for('website.chromaglow_home') }}">Home</a>
-          <a href="{{ url_for('website.chromaglow_about') }}">About</a>
-          <a href="{{ url_for('website.chromaglow_music') }}">Music</a>
-          <a href="{{ url_for('website.chromaglow_art') }}">Art</a>
-          <a href="{{ url_for('website.chromaglow_memoryroom') }}">Memory Room</a>
-          <a href="{{ url_for('website.chromaglow_links') }}">Links</a>
+          <a href="/templates/chromaglow/home.html">Home</a>
+          <a href="/templates/chromaglow/about.html">About</a>
+          <a href="/templates/chromaglow/music.html">Music</a>
+          <a href="/templates/chromaglow/art.html">Art</a>
+          <a href="/templates/chromaglow/memory_room.html">Memory Room</a>
+          <a href="/templates/chromaglow/links.html">Links</a>
         </nav>
       </div>
     </header>
@@ -748,8 +748,8 @@
             </p>
 
             <div class="hero-actions">
-              <a class="btn btn-primary" href="{{ url_for('website.chromaglow_music') }}">Enter the soundtrack</a>
-              <a class="btn btn-secondary" href="{{ url_for('website.chromaglow_memoryroom') }}">Step into the memory room</a>
+              <a class="btn btn-primary" href="/templates/chromaglow/music.html">Enter the soundtrack</a>
+              <a class="btn btn-secondary" href="/templates/chromaglow/memory_room.html">Step into the memory room</a>
             </div>
           </div>
         </div>
@@ -768,7 +768,7 @@
               </p>
 
               <div class="chapter-grid">
-                <a class="chapter-card memory" href="{{ url_for('website.chromaglow_memoryroom') }}">
+                <a class="chapter-card memory" href="/templates/chromaglow/memory_room.html">
                   <div class="chapter-card-content">
                     <p class="chapter-label">Archive</p>
                     <h3 class="chapter-title">Memory Room</h3>
@@ -779,7 +779,7 @@
                   </div>
                 </a>
 
-                <a class="chapter-card music" href="{{ url_for('website.chromaglow_music') }}">
+                <a class="chapter-card music" href="/templates/chromaglow/music.html">
                   <div class="chapter-card-content">
                     <p class="chapter-label">Sound</p>
                     <h3 class="chapter-title">Music</h3>
@@ -790,7 +790,7 @@
                   </div>
                 </a>
 
-                <a class="chapter-card about" href="{{ url_for('website.chromaglow_about') }}">
+                <a class="chapter-card about" href="/templates/chromaglow/music.html">
                   <div class="chapter-card-content">
                     <p class="chapter-label">Origin</p>
                     <h3 class="chapter-title">About</h3>
@@ -833,8 +833,8 @@
                   Something so sad you want to cry, but so beautiful you are grateful you lived it.
                 </p>
                 <div class="hero-actions" style="margin-top: 26px;">
-                  <a class="btn btn-primary" href="art.html">View the visual world</a>
-                  <a class="btn btn-secondary" href="links.html">Find everything</a>
+                  <a class="btn btn-primary" href="/templates/chromaglow/art.html">View the visual world</a>
+                  <a class="btn btn-secondary" href="/templates/chromaglow/links.html">Find everything</a>
                 </div>
               </div>
             </section>
@@ -854,10 +854,10 @@
           </div>
 
           <div class="footer-links">
-            <a href="{{ url_for('website.chromaglow_about') }}">About</a>
-            <a href="{{ url_for('website.chromaglow_music') }}">Music</a>
-            <a href="{{ url_for('website.chromaglow_memoryroom') }}">Memory Room</a>
-            <a href="{{ url_for('website.chromaglow_links') }}">Links</a>
+            <a href="/templates/chromaglow/about.html">About</a>
+            <a href="/templates/chromaglow/music.html">Music</a>
+            <a href="/templates/chromaglow/memory_room.html">Memory Room</a>
+            <a href="/templates/chromaglow/links.html">Links</a>
           </div>
         </div>
       </div>
