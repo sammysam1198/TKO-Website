@@ -1502,8 +1502,8 @@
         </p>
 
         <div class="button-row">
-          <a class="button button-dark" href="music.html">See Releases</a>
-          <a class="button button-light" href="newsletter.html">Join Newsletter</a>
+          <a class="button button-dark" href="{ url_for('website.music') }}">See Releases</a>
+          <a class="button button-light" href="{{ url_for('website.newsletter') }}">Join Newsletter</a>
         </div>
       </div>
     </div>
@@ -1527,7 +1527,7 @@
             <p class="small-copy">
               Learn about the game world, creators, artistic direction, and long-term vision.
             </p>
-            <a class="button-outline" href="about.html">Open About</a>
+            <a class="button-outline" href="{{ url_for('website.about') }}">Open About</a>
           </div>
 
           <div class="about-card">
@@ -1535,7 +1535,7 @@
             <p class="small-copy">
               Explore soundtrack releases, Chroma Glow material, and future streaming links.
             </p>
-            <a class="button-outline" href="music.html">Open Music</a>
+            <a class="button-outline" href="{{ url_for('website.music') }}">Open Music</a>
           </div>
 
           <div class="about-card">
@@ -1543,7 +1543,7 @@
             <p class="small-copy">
               Visit the guest book and future forum space for reactions, messages, and feedback.
             </p>
-            <a class="button-outline" href="community.html">Open Community</a>
+            <a class="button-outline" href="{{ url_for('website.community') }}">Open Community</a>
           </div>
 
           <div class="about-card">
@@ -1551,7 +1551,7 @@
             <p class="small-copy">
               Sign up for release announcements, devlogs, soundtrack drops, and project updates.
             </p>
-            <a class="button-outline" href="newsletter.html">Open Newsletter</a>
+            <a class="button-outline" href="{{ url_for('website.newsletter') }}">Open Newsletter</a>
           </div>
         </div>
       </div>
@@ -1565,7 +1565,7 @@
         <h2 class="display-title brand-title" style="margin: 0; font-size: 1.9rem;">T.K.O!™ Official Site</h2>
         <p style="margin: 6px 0 0; color: rgba(255,255,255,0.5);">Website concept mockup</p>
       </div>
-     <p class="footer-copy">© Copyright 2026. Built by <a href="portfolio.html" class="secret-footer-link">Sammi Fishbein</a> and Dominique Smith for T.K.O!™ with HTML/CSS. All rights <span id="openDevConsolePrompt" class="dev-console-trigger">reserved</span>.</p>
+     <p class="footer-copy">© Copyright 2026. Built by <a href="{{ url_for('website.sammi') }}" class="secret-footer-link">Sammi Fishbein</a> and Dominique Smith for T.K.O!™ with HTML/CSS. All rights <span id="openDevConsolePrompt" class="dev-console-trigger">reserved</span>.</p>
     </div>
   </footer>
     <div id="authModal" class="auth-modal hidden">
