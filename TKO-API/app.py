@@ -12,7 +12,11 @@ from routes.dev_console_routes import dev_console_bp
 from routes.forum_routes import forum_bp
 from routes.website_routes import website_bp
 
-app = Flask(__name__)
+
+app = Flask( __name__,
+    template_folder="TKO-Web/templates",
+    static_folder="TKO-Web/static"
+)
 CORS(app)
 
 # Security headers middleware
