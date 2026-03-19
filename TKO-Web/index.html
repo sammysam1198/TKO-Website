@@ -1477,11 +1477,11 @@
 
            <div class="header-right">
         <nav class="nav">
-          <a href="index.html">Home</a>
-          <a href="about.html">About</a>
-          <a href="music.html">Music</a>
-          <a href="community.html">Community</a>
-          <a href="newsletter.html">Newsletter</a>
+          <a href="{{ url_for('website.tko_home') }}">Home</a>
+          <a href="{{ url_for('website.tko_about') }}">About</a>
+          <a href="{{ url_for('website.tko_music') }}">Music</a>
+          <a href="{{ url_for('website.tko_community') }}">Community</a>
+          <a href="{{ url_for('website.tko_newsletter') }}">Newsletter</a>
         </nav>
              
         <div id="authControls" class="auth-buttons">
@@ -1502,8 +1502,8 @@
         </p>
 
         <div class="button-row">
-          <a class="button button-dark" href="{ url_for('website.music') }}">See Releases</a>
-          <a class="button button-light" href="{{ url_for('website.newsletter') }}">Join Newsletter</a>
+          <a class="button button-dark" href="{{ url_for('website.tko_music') }}">See Releases</a>
+          <a class="button button-light" href="{{ url_for('website.tko_newsletter') }}">Join Newsletter</a>
         </div>
       </div>
     </div>
@@ -1565,7 +1565,7 @@
         <h2 class="display-title brand-title" style="margin: 0; font-size: 1.9rem;">T.K.O!™ Official Site</h2>
         <p style="margin: 6px 0 0; color: rgba(255,255,255,0.5);">Website concept mockup</p>
       </div>
-     <p class="footer-copy">© Copyright 2026. Built by <a href="{{ url_for('website.sammi') }}" class="secret-footer-link">Sammi Fishbein</a> and Dominique Smith for T.K.O!™ with HTML/CSS. All rights <span id="openDevConsolePrompt" class="dev-console-trigger">reserved</span>.</p>
+     <p class="footer-copy">© Copyright 2026. Built by <a href="{{ url_for('website.tko_sammi') }}" class="secret-footer-link">Sammi Fishbein</a> and Dominique Smith for T.K.O!™ with HTML/CSS. All rights <span id="openDevConsolePrompt" class="dev-console-trigger">reserved</span>.</p>
     </div>
   </footer>
     <div id="authModal" class="auth-modal hidden">
