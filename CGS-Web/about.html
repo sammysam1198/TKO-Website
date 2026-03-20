@@ -420,6 +420,60 @@
   }
 
 
+    .about-hero {
+  position: relative;
+  padding: 48px 0 34px;
+  margin-bottom: 12px;
+}
+
+.about-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 18% 40%, rgba(255, 92, 200, 0.12), transparent 26%),
+    radial-gradient(circle at 78% 30%, rgba(114, 86, 255, 0.12), transparent 28%),
+    radial-gradient(circle at 50% 90%, rgba(70, 118, 255, 0.10), transparent 32%);
+  filter: blur(24px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.about-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+}
+
+.about-kicker {
+  margin: 0 0 12px;
+  font-size: 0.82rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.about-title {
+  margin: 0;
+  font-size: clamp(3.4rem, 8vw, 5.8rem);
+  line-height: 0.95;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  color: #ffffff;
+  text-shadow:
+    0 0 24px rgba(255, 255, 255, 0.06),
+    0 0 42px rgba(124, 94, 255, 0.08);
+}
+
+.about-subtitle {
+  margin: 18px 0 0;
+  max-width: 680px;
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+
   .expanded-card {
     position: absolute;
     inset: 0;
@@ -514,11 +568,15 @@
       <a href="/links.html">Links</a>
     </nav>
 
-    <div class="cg-hero-inner">
-      <p class="cg-kicker">The Story of Chroma Glow</p>
-      <h1>About</h1>
-      <p class="cg-subtitle">A project built from memory, motion, light, and sound.</p>
-    </div>
+    <section class="about-hero">
+      <div class="about-hero-inner">
+        <p class="about-kicker">The Story of Chroma Glow</p>
+        <h1 class="about-title">About</h1>
+        <p class="about-subtitle">
+          A project built from memory, motion, light, and sound.
+        </p>
+      </div>
+    </section>
   </header>
 
   <main class="cg-story">
