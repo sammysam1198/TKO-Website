@@ -420,10 +420,14 @@
   }
 
 
-    .about-hero {
+ .about-hero {
   position: relative;
-  padding: 48px 0 34px;
-  margin-bottom: 12px;
+  padding: 72px 0 48px;
+  margin-bottom: 20px;
+
+  display: flex;
+  justify-content: center;  
+  text-align: center;       
 }
 
 .about-hero::before {
@@ -442,7 +446,13 @@
 .about-hero-inner {
   position: relative;
   z-index: 1;
-  max-width: 900px;
+
+  max-width: 760px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;      
 }
 
 .about-kicker {
@@ -451,6 +461,20 @@
   letter-spacing: 0.24em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.62);
+}
+
+    .about-kicker::after {
+  content: "";
+  display: block;
+  width: 72px;
+  height: 1px;
+  margin: 14px auto 0;  /* THIS centers the line */
+  background: linear-gradient(
+    90deg,
+    rgba(255, 108, 199, 0.95),
+    rgba(112, 92, 255, 0.78),
+    rgba(70, 120, 255, 0)
+  );
 }
 
 .about-title {
@@ -466,8 +490,8 @@
 }
 
 .about-subtitle {
-  margin: 18px 0 0;
-  max-width: 680px;
+  margin: 18px auto 0;
+  max-width: 560px;
   font-size: 1.15rem;
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.78);
