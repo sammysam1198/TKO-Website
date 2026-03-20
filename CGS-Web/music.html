@@ -1,1 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Music | Chroma Glow</title>
+  <style>
+    :root {
+      --bg: #07070b;
+      --bg-2: #0b0d16;
+      --panel: rgba(16, 16, 24, 0.72);
+      --panel-2: rgba(12, 13, 22, 0.82);
+      --border: rgba(255, 255, 255, 0.12);
+      --border-strong: rgba(255, 255, 255, 0.20);
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, 0.74);
+      --soft: rgba(255, 255, 255, 0.58);
+      --pink: #ff63c7;
+      --purple: #8d63ff;
+      --blue: #5f82ff;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --max-width: 1240px;
+      --ease: 240ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 14% 12%, rgba(255, 99, 199, 0.16), transparent 24%),
+        radial-gradient(circle at 86% 18%, rgba(141, 99, 255, 0.16), transparent 24%),
+        radial-gradient(circle at 50% 84%, rgba(95, 130, 255, 0.16), transparent 30%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 52%, var(--bg) 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255, 99, 199, 0.09), transparent 28%),
+        radial-gradient(circle at 76% 22%, rgba(141, 99, 255, 0.08), transparent 28%),
+        radial-gradient(circle at 46% 76%, rgba(95, 130, 255, 0.10), transparent 34%);
+      filter: blur(24px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .site-shell {
+      position: relative;
+      z-index: 1;
+      width: min(var(--max-width), calc(100% - 40px));
+      margin: 0 auto;
+      padding: 24px 0 80px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 22px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(12, 12, 19, 0.52);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+      position: sticky;
+      top: 18px;
+      z-index: 20;
+    }
+
+    .brand {
+      font-size: 0.95rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.86);
+      white-space: nowrap;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .nav a {
+      color: var(--soft);
+      font-size: 0.95rem;
+      transition: color var(--ease), opacity var(--ease);
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: var(--text);
+    }
+
+    .hero {
+      min-height: 76vh;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: center;
+      padding: 52px 0 24px;
+    }
+
+    .hero-copy,
+    .hero-feature {
+      position: relative;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)),
+        linear-gradient(135deg, rgba(45, 20, 56, 0.40), rgba(14, 20, 40, 0.34)),
+        var(--panel);
+      backdrop-filter: blur(18px) saturate(130%);
+      -webkit-backdrop-filter: blur(18px) saturate(130%);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-copy {
+      padding: 52px 44px;
+    }
+
+    .hero-copy::before,
+    .hero-feature::before,
+    .music-card::before,
+    .resource-card::before,
+    .artist-card::before,
+    .spotlight::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at top left, rgba(255, 99, 199, 0.14), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(95, 130, 255, 0.14), transparent 32%),
+        linear-gradient(135deg, rgba(141, 99, 255, 0.06), transparent 46%);
+      opacity: 0.9;
+    }
+
+    .eyebrow {
+      margin: 0 0 16px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      color: rgba(255,255,255,0.62);
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow::after {
+      content: "";
+      display: block;
+      width: 74px;
+      height: 1px;
+      margin-top: 14px;
+      background: linear-gradient(90deg, var(--pink), var(--purple), rgba(95, 130, 255, 0));
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-subtitle {
+      margin: 20px 0 0;
+      max-width: 640px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.08rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 150px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      font-weight: 600;
+      transition: transform var(--ease), border-color var(--ease), background var(--ease);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-strong);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .button.primary {
+      border: none;
+      color: #09080d;
+      background: linear-gradient(135deg, var(--pink), var(--purple), var(--blue));
+    }
+
+    .hero-feature {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .embed-shell {
+      position: relative;
+      z-index: 1;
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.38);
+    }
+
+    .embed-shell iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .embed-meta {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: var(--muted);
+    }
+
+    .section {
+      padding: 34px 0;
+    }
+
+    .section-head {
+      margin-bottom: 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+    }
+
+    .section-copy {
+      margin: 10px 0 0;
+      max-width: 720px;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .filter-chip {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--soft);
+      background: rgba(255,255,255,0.03);
+      font-size: 0.92rem;
+    }
+
+    .filter-chip.active {
+      color: var(--text);
+      border-color: rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .music-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .music-card {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)),
+        linear-gradient(135deg, rgba(34, 18, 48, 0.46), rgba(12, 15, 28, 0.38)),
+        var(--panel-2);
+      box-shadow: 0 14px 42px rgba(0,0,0,0.24);
+      transition: transform var(--ease), border-color var(--ease), box-shadow var(--ease);
+    }
+
+    .music-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+      box-shadow: 0 20px 56px rgba(0,0,0,0.30);
+    }
+
+    .music-card-cover {
+      aspect-ratio: 1 / 1;
+      background: linear-gradient(135deg, rgba(255, 99, 199, 0.18), rgba(95, 130, 255, 0.18));
+      display: grid;
+      place-items: center;
+      position: relative;
+      z-index: 1;
+      color: rgba(255,255,255,0.80);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .music-card-body {
+      position: relative;
+      z-index: 1;
+      padding: 18px 18px 20px;
+    }
+
+    .music-card-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+      color: var(--soft);
+      font-size: 0.88rem;
+    }
+
+    .music-card h3 {
+      margin: 0;
+      font-size: 1.12rem;
+      line-height: 1.25;
+    }
+
+    .music-card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 0.96rem;
+    }
+
+    .spotlight {
+      position: relative;
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 28px;
+      padding: 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)),
+        linear-gradient(135deg, rgba(38, 18, 55, 0.42), rgba(12, 18, 36, 0.34)),
+        var(--panel);
+      backdrop-filter: blur(18px) saturate(125%);
+      -webkit-backdrop-filter: blur(18px) saturate(125%);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .spotlight-cover {
+      position: relative;
+      z-index: 1;
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(135deg, rgba(255, 99, 199, 0.18), rgba(95, 130, 255, 0.18));
+      display: grid;
+      place-items: center;
+      color: rgba(255,255,255,0.82);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .spotlight-body {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .spotlight-body h3 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+    }
+
+    .release-date {
+      margin: 12px 0 0;
+      color: var(--soft);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.86rem;
+    }
+
+    .spotlight-story {
+      margin: 18px 0 0;
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 1rem;
+    }
+
+    .tracklist {
+      margin: 20px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .spotlight-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .artist-grid,
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .artist-card,
+    .resource-card {
+      position: relative;
+      padding: 24px;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
+        linear-gradient(135deg, rgba(34, 18, 48, 0.42), rgba(12, 15, 28, 0.34)),
+        var(--panel);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 14px 42px rgba(0,0,0,0.22);
+      overflow: hidden;
+    }
+
+    .artist-card > *,
+    .resource-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .artist-card h3,
+    .resource-card h3 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .artist-card p,
+    .resource-card p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .card-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .mini-link {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      font-size: 0.92rem;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 18px;
+      align-items: start;
+      padding: 18px 20px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .timeline-date {
+      color: rgba(255,255,255,0.60);
+      font-size: 0.92rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .timeline-title {
+      font-weight: 700;
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    .timeline-note {
+      margin: 6px 0 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .footer {
+      margin-top: 40px;
+      padding: 24px 0 0;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: var(--soft);
+    }
+
+    @media (max-width: 1080px) {
+      .hero,
+      .spotlight {
+        grid-template-columns: 1fr;
+      }
+
+      .music-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .artist-grid,
+      .resource-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .site-shell {
+        width: min(var(--max-width), calc(100% - 24px));
+      }
+
+      .topbar {
+        border-radius: 28px;
+        padding: 16px;
+      }
+
+      .hero-copy,
+      .hero-feature,
+      .spotlight,
+      .artist-card,
+      .resource-card {
+        padding: 22px;
+      }
+
+      .music-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="site-shell">
+    <header class="topbar">
+      <div class="brand">Chroma Glow</div>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="music.html" class="active">Music</a>
+        <a href="/coming_soon">Memory Room</a>
+        <a href="/coming_soon">Change Log</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow">Discography</p>
+        <h1>Music</h1>
+        <p class="hero-subtitle">
+          A late-night archive of songs, memories, and releases. Stream featured tracks, explore singles and albums,
+          and step into the stories behind each chapter of Chroma Glow.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#releases">View Discography</a>
+          <a class="button" href="#spotlight">Featured Release</a>
+          <a class="button" href="#resources">Tools & Sound</a>
+        </div>
+      </div>
+
+      <div class="hero-feature">
+        <div class="embed-shell">
+          <!-- Replace the src below with your featured YouTube or Spotify embed -->
+          <iframe
+            src="https://www.youtube.com/embed/NE0bdOZpBFw"
+            title="Featured Chroma Glow track"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <div class="embed-meta">
+          <div>
+            <strong>Featured Track</strong><br />
+            <span>Teslachromatic</span>
+          </div>
+          <div>
+            <span>Swap this with Spotify later if you want a cleaner player.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="releases">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Releases</p>
+          <h2 class="section-title">Discography</h2>
+          <p class="section-copy">
+            Every release can become an expandable story card later with cover art, streaming links, Bandcamp buttons,
+            tracklists, and release notes.
+          </p>
+        </div>
+        <div class="filters" aria-label="Discography filters">
+          <span class="filter-chip active">All</span>
+          <span class="filter-chip">Singles</span>
+          <span class="filter-chip">Albums</span>
+          <span class="filter-chip">Recent</span>
+        </div>
+      </div>
+
+      <div class="music-grid">
+        <article class="music-card">
+          <div class="music-card-cover">Cover Art</div>
+          <div class="music-card-body">
+            <div class="music-card-meta">
+              <span>01/10/26</span>
+              <span>Single</span>
+            </div>
+            <h3>Teslachromatic</h3>
+            <p>Lead release placeholder. Add cover art, tags, and links to stream or buy.</p>
+          </div>
+        </article>
+
+        <article class="music-card">
+          <div class="music-card-cover">Cover Art</div>
+          <div class="music-card-body">
+            <div class="music-card-meta">
+              <span>01/02/26</span>
+              <span>Album</span>
+            </div>
+            <h3>Falling Through Infinity</h3>
+            <p>Album card placeholder. Later this can open a full panel with tracklist and story.</p>
+          </div>
+        </article>
+
+        <article class="music-card">
+          <div class="music-card-cover">Cover Art</div>
+          <div class="music-card-body">
+            <div class="music-card-meta">
+              <span>03/27/26</span>
+              <span>Single</span>
+            </div>
+            <h3>Remember California</h3>
+            <p>Remember the feeling. Of being seen, important, of meaning something to someone.</p>
+          </div>
+        </article>
+
+        <article class="music-card">
+          <div class="music-card-cover">Cover Art</div>
+          <div class="music-card-body">
+            <div class="music-card-meta">
+              <span>10/10/25</span>
+              <span>Single</span>
+            </div>
+            <h3>Buoyancy</h3>
+            <p>Placeholder for art, streaming links, and a short memory fragment tied to the release.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="spotlight">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Featured Release</p>
+          <h2 class="section-title">Release Spotlight</h2>
+          <p class="section-copy">
+            This is the expandable release container zone. Later we can make every card populate this section dynamically.
+          </p>
+        </div>
+      </div>
+
+      <article class="spotlight">
+        <div class="spotlight-cover">Album Cover</div>
+        <div class="spotlight-body">
+          <h3>Teslachromatic</h3>
+          <p class="release-date">Released January 10, 2026</p>
+          <p class="spotlight-story">
+            This was my first song 
+          </p>
+          <ol class="tracklist">
+            <li>Main track placeholder</li>
+            <li>Optional B-side or remix placeholder</li>
+            <li>Optional note if this later becomes an EP card instead</li>
+          </ol>
+          <div class="spotlight-actions">
+            <a class="button primary" href="#">Stream</a>
+            <a class="button" href="#">Buy on Bandcamp</a>
+            <a class="button" href="#">Watch on YouTube</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section" id="artists">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Associated Artists</p>
+          <h2 class="section-title">Other Artists</h2>
+          <p class="section-copy">
+            A place for collaborators, featured artists, or other projects you want represented on the site.
+          </p>
+        </div>
+      </div>
+
+      <div class="artist-grid">
+        <article class="artist-card">
+          <h3>Beta Memory</h3>
+          <p>
+            Artist profile placeholder. Add logo, one-sentence description, featured release, and streaming or social links.
+          </p>
+          <div class="card-links">
+            <a class="mini-link" href="#">Spotify</a>
+            <a class="mini-link" href="#">Bandcamp</a>
+            <a class="mini-link" href="#">Instagram</a>
+          </div>
+        </article>
+
+        <article class="artist-card">
+          <h3>Future Artist Slot</h3>
+          <p>
+            Use this for another collaborator or project tied into the wider Chroma Glow orbit.
+          </p>
+          <div class="card-links">
+            <a class="mini-link" href="#">Links</a>
+          </div>
+        </article>
+
+        <article class="artist-card">
+          <h3>Future Artist Slot</h3>
+          <p>
+            Another placeholder card for collective or friend projects if you want this to feel like an ecosystem.
+          </p>
+          <div class="card-links">
+            <a class="mini-link" href="#">Links</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="resources">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Tools & Sound</p>
+          <h2 class="section-title">Producer Resources</h2>
+          <p class="section-copy">
+            This section can become genuinely useful for other producers. Presets, plugin lists, and your master chain can all live here.
+          </p>
+        </div>
+      </div>
+
+      <div class="resource-grid">
+        <article class="resource-card">
+          <h3>Serum Presets</h3>
+          <p>
+            Add downloadable preset packs, version notes, or a preview description for each sound bank.
+          </p>
+          <div class="card-links">
+            <a class="mini-link" href="#">Download Pack</a>
+            <a class="mini-link" href="#">Preview Notes</a>
+          </div>
+        </article>
+
+        <article class="resource-card">
+          <h3>Plugins I Use</h3>
+          <p>
+            List synths, EQs, compressors, saturation tools, reverbs, and anything else central to your sound.
+          </p>
+          <div class="card-links">
+            <a class="mini-link" href="#">View List</a>
+          </div>
+        </article>
+
+        <article class="resource-card">
+          <h3>Master Chain</h3>
+          <p>
+            Share the broad chain order and philosophy. Keep it useful without having to reveal every exact setting.
+          </p>
+          <div class="card-links">
+            <a class="mini-link" href="#">See Chain</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="timeline">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Release Timeline</p>
+          <h2 class="section-title">Chronology</h2>
+          <p class="section-copy">
+            This is a clean way to show your release order now, and later we can connect each item to a real release card.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <article class="timeline-item">
+          <div class="timeline-date">01/31/25</div>
+          <div>
+            <p class="timeline-title">Superposition</p>
+            <p class="timeline-note">Single placeholder. Add release mood, short context, or production note later.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-date">02/28/25</div>
+          <div>
+            <p class="timeline-title">Return</p>
+            <p class="timeline-note">Single placeholder.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-date">04/25/25</div>
+          <div>
+            <p class="timeline-title">Aestas Stella</p>
+            <p class="timeline-note">Single placeholder.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-date">05/31/25</div>
+          <div>
+            <p class="timeline-title">Airstream 91</p>
+            <p class="timeline-note">Single placeholder.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-date">07/18/25</div>
+          <div>
+            <p class="timeline-title">Infinite Flight</p>
+            <p class="timeline-note">Single placeholder.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-date">08/21/25</div>
+          <div>
+            <p class="timeline-title">Quattro</p>
+            <p class="timeline-note">Single placeholder.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-date">09/12/25</div>
+          <div>
+            <p class="timeline-title">Bloom</p>
+            <p class="timeline-note">Single placeholder.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-date">10/10/25</div>
+          <div>
+            <p class="timeline-title">Buoyancy</p>
+            <p class="timeline-note">Single placeholder.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-date">11/14/25</div>
+          <div>
+            <p class="timeline-title">Perennial</p>
+            <p class="timeline-note">Single placeholder.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-date">01/02/26</div>
+          <div>
+            <p class="timeline-title">F A L L</p>
+            <p class="timeline-note">Single placeholder.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-date">01/02/26</div>
+          <div>
+            <p class="timeline-title">Amentalio</p>
+            <p class="timeline-note">Single placeholder.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-date">01/02/26</div>
+          <div>
+            <p class="timeline-title">Falling Through Infinity</p>
+            <p class="timeline-note">Album placeholder. Later connect this to tracklist and full story content.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-date">01/10/26</div>
+          <div>
+            <p class="timeline-title">Teslachromatic</p>
+            <p class="timeline-note">Single placeholder.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-date">02/27/26</div>
+          <div>
+            <p class="timeline-title">B I R C H</p>
+            <p class="timeline-note">Single placeholder.</p>
+          </div>
+        </article>
+        <article class="timeline-item">
+          <div class="timeline-date">03/27/26</div>
+          <div>
+            <p class="timeline-title">Remember California</p>
+            <p class="timeline-note">Single placeholder.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>Chroma Glow Music Page Skeleton</div>
+      <div>
+        <a href="changelog.html">Change Log</a>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
 
