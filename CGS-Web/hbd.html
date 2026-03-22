@@ -649,6 +649,62 @@
   text-shadow: 0 2px 12px rgba(0,0,0,0.4);
 }
 
+
+
+    .music-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.music-box {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.music-box button {
+  margin-top: 12px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #ffb8de, #ffe89a);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+    .music-toggle {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 999;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  font-size: 1.1rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+  transition: all 0.25s ease;
+}
+
+.music-toggle:hover {
+  transform: scale(1.08);
+  background: rgba(255,255,255,0.2);
+}
+    
+
 @media (max-width: 900px) {
   .photo-card.large,
   .photo-card.medium,
@@ -720,6 +776,8 @@
           <span class="petal" style="left: 88%; top: -52px;"></span>
         </div>
 
+        <button id="musicToggle" class="music-toggle">🔊</button>
+
         <div class="eyebrow">A birthday page made with love</div>
         <h1>To my <span class="soft">beautiful and wonderful wife</span> Shyanne</h1>
 
@@ -729,7 +787,7 @@
         </p>
 
         <div class="hero-note">
-          Follow the petals. Open each gift. There are real surprises waiting for you, which I know you will love.
+          Follow the petals. Open each gift. Real surprises are waiting for you, which I know you will love.
         </div>
       </div>
     </header>
@@ -1047,7 +1105,6 @@ Sammi</div>
     });
 
     const revealItems = document.querySelectorAll(".reveal");
-
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -1061,6 +1118,69 @@ Sammi</div>
     });
 
     revealItems.forEach((item) => revealObserver.observe(item));
+
+  const music = document.getElementById("bgMusic");
+  const toggle = document.getElementById("musicToggle");
+
+  let isPlaying = false;
+
+  // try autoplay
+  window.addEventListener("load", () => {
+    music.volume = 0.5;
+
+    const playPromise = music.play();
+
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          isPlaying = true;
+          toggle.textContent = "🔊";
+        })
+        .catch(() => {
+          showMusicPrompt();
+        });
+    }
+});
+
+// toggle button
+toggle.addEventListener("click", () => {
+  if (isPlaying) {
+    music.pause();
+    toggle.textContent = "🔇";
+  } else {
+    music.play();
+    toggle.textContent = "🔊";
+  }
+  isPlaying = !isPlaying;
+});
+
+// fallback prompt 
+function showMusicPrompt() {
+  const prompt = document.createElement("div");
+  prompt.innerHTML = `
+    <div class="music-overlay">
+      <div class="music-box">
+        <p>Tap to start the music 🎶</p>
+        <button id="startMusic">Play</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(prompt);
+
+  document.getElementById("startMusic").addEventListener("click", () => {
+    music.play();
+    isPlaying = true;
+    toggle.textContent = "🔊";
+    prompt.remove();
+  });
+}
+
+    
   </script>
+
+  <audio id="bgMusic" loop preload="auto">
+  <source src="/static/assets/yellow.mp3" type="audio/mpeg">
+  </audio>
+  
 </body>
 </html>
