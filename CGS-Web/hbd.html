@@ -650,61 +650,66 @@
 }
 
 
-
-    .music-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-}
-
-.music-box {
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
-  padding: 30px;
-  border-radius: 20px;
-  text-align: center;
-  color: white;
-  backdrop-filter: blur(10px);
-}
-
-.music-box button {
-  margin-top: 12px;
-  padding: 10px 18px;
-  border-radius: 12px;
-  border: none;
-  background: linear-gradient(135deg, #ffb8de, #ffe89a);
-  cursor: pointer;
-  font-weight: bold;
-}
-
     .music-toggle {
   position: fixed;
   top: 18px;
   right: 18px;
-  z-index: 999;
+  z-index: 1200;
   border: 1px solid rgba(255,255,255,0.2);
   background: rgba(255,255,255,0.12);
   backdrop-filter: blur(10px);
   color: #fff;
   font-size: 1.1rem;
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   cursor: pointer;
   box-shadow: 0 10px 24px rgba(0,0,0,0.25);
-  transition: all 0.25s ease;
+  transition: transform 0.25s ease, background 0.25s ease;
 }
 
 .music-toggle:hover {
   transform: scale(1.08);
   background: rgba(255,255,255,0.2);
 }
-    
 
+.music-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 10, 20, 0.72);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.music-overlay.hidden {
+  display: none;
+}
+
+.music-box {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 28px;
+  border-radius: 22px;
+  text-align: center;
+  color: white;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.music-box button {
+  margin-top: 12px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #ffb8de, #ffe89a);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+    
 @media (max-width: 900px) {
   .photo-card.large,
   .photo-card.medium,
@@ -1119,68 +1124,74 @@ Sammi</div>
 
     revealItems.forEach((item) => revealObserver.observe(item));
 
-  const music = document.getElementById("bgMusic");
-  const toggle = document.getElementById("musicToggle");
+ const bgMusic = document.getElementById("bgMusic");
+const musicToggle = document.getElementById("musicToggle");
+const musicOverlay = document.getElementById("musicOverlay");
+const startMusicBtn = document.getElementById("startMusicBtn");
 
-  let isPlaying = false;
+let musicStarted = false;
 
-  // try autoplay
-  window.addEventListener("load", () => {
-    music.volume = 0.5;
+bgMusic.volume = 0.5;
 
-    const playPromise = music.play();
-
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          isPlaying = true;
-          toggle.textContent = "🔊";
-        })
-        .catch(() => {
-          showMusicPrompt();
-        });
-    }
-});
-
-// toggle button
-toggle.addEventListener("click", () => {
-  if (isPlaying) {
-    music.pause();
-    toggle.textContent = "🔇";
-  } else {
-    music.play();
-    toggle.textContent = "🔊";
+async function startMusic() {
+  try {
+    await bgMusic.play();
+    musicStarted = true;
+    musicToggle.textContent = "🔊";
+    musicOverlay.classList.add("hidden");
+    console.log("Background music started.");
+  } catch (error) {
+    console.error("Music failed to start:", error);
+    musicToggle.textContent = "🔇";
   }
-  isPlaying = !isPlaying;
-});
-
-// fallback prompt 
-function showMusicPrompt() {
-  const prompt = document.createElement("div");
-  prompt.innerHTML = `
-    <div class="music-overlay">
-      <div class="music-box">
-        <p>Tap to start the music 🎶</p>
-        <button id="startMusic">Play</button>
-      </div>
-    </div>
-  `;
-  document.body.appendChild(prompt);
-
-  document.getElementById("startMusic").addEventListener("click", () => {
-    music.play();
-    isPlaying = true;
-    toggle.textContent = "🔊";
-    prompt.remove();
-  });
 }
 
+function stopMusic() {
+  bgMusic.pause();
+  musicToggle.textContent = "🔇";
+}
+
+startMusicBtn.addEventListener("click", async () => {
+  await startMusic();
+});
+
+musicToggle.addEventListener("click", async () => {
+  if (!musicStarted || bgMusic.paused) {
+    await startMusic();
+  } else {
+    stopMusic();
+  }
+});
+
+// Try autoplay once, but expect browsers may block it
+window.addEventListener("load", async () => {
+  try {
+    await bgMusic.play();
+    musicStarted = true;
+    musicToggle.textContent = "🔊";
+    musicOverlay.classList.add("hidden");
+    console.log("Autoplay worked.");
+  } catch (error) {
+    console.warn("Autoplay blocked. Waiting for user interaction.");
+    musicOverlay.classList.remove("hidden");
+  }
+});
     
   </script>
 
-  <audio id="bgMusic" loop preload="auto">
+ <button id="musicToggle" class="music-toggle" aria-label="Toggle music">🔇</button>
+
+<div id="musicOverlay" class="music-overlay">
+  <div class="music-box">
+    <p>This page has theme music 💛</p>
+    <button id="startMusicBtn" type="button">Tap to start</button>
+  </div>
+</div>
+
+<audio id="bgMusic" loop preload="auto">
   <source src="/static/assets/yellow.mp3" type="audio/mpeg">
-  </audio>
+  Your browser does not support the audio element.
+</audio>
   
 </body>
 </html>
