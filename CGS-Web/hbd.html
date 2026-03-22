@@ -709,6 +709,13 @@
   font-weight: 700;
 }
 
+    .music-error {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: #ffd6df;
+  min-height: 1.2em;
+}
+
     
 @media (max-width: 900px) {
   .photo-card.large,
@@ -1124,57 +1131,79 @@ Sammi</div>
 
     revealItems.forEach((item) => revealObserver.observe(item));
 
- const bgMusic = document.getElementById("bgMusic");
+const bgMusic = document.getElementById("bgMusic");
 const musicToggle = document.getElementById("musicToggle");
 const musicOverlay = document.getElementById("musicOverlay");
 const startMusicBtn = document.getElementById("startMusicBtn");
+const musicError = document.getElementById("musicError");
 
 let musicStarted = false;
 
 bgMusic.volume = 0.5;
 
-async function startMusic() {
+function setMusicUI(isPlaying) {
+  musicToggle.textContent = isPlaying ? "🔊" : "🔇";
+}
+
+async function tryStartMusic() {
+  musicError.textContent = "";
+
   try {
-    await bgMusic.play();
+    const playPromise = bgMusic.play();
+
+    if (playPromise !== undefined) {
+      await playPromise;
+    }
+
     musicStarted = true;
-    musicToggle.textContent = "🔊";
+    setMusicUI(true);
     musicOverlay.classList.add("hidden");
-    console.log("Background music started.");
+    return true;
   } catch (error) {
     console.error("Music failed to start:", error);
-    musicToggle.textContent = "🔇";
+    setMusicUI(false);
+    musicError.textContent = "Could not load or play yellow.mp3.";
+    return false;
   }
 }
 
 function stopMusic() {
   bgMusic.pause();
-  musicToggle.textContent = "🔇";
+  setMusicUI(false);
 }
 
 startMusicBtn.addEventListener("click", async () => {
-  await startMusic();
+  await tryStartMusic();
 });
 
 musicToggle.addEventListener("click", async () => {
   if (!musicStarted || bgMusic.paused) {
-    await startMusic();
+    await tryStartMusic();
   } else {
     stopMusic();
   }
 });
 
-// Try autoplay once, but expect browsers may block it
 window.addEventListener("load", async () => {
   try {
-    await bgMusic.play();
+    const playPromise = bgMusic.play();
+    if (playPromise !== undefined) {
+      await playPromise;
+    }
+
     musicStarted = true;
-    musicToggle.textContent = "🔊";
+    setMusicUI(true);
     musicOverlay.classList.add("hidden");
-    console.log("Autoplay worked.");
   } catch (error) {
-    console.warn("Autoplay blocked. Waiting for user interaction.");
+    console.warn("Autoplay blocked or file unavailable:", error);
     musicOverlay.classList.remove("hidden");
+    setMusicUI(false);
   }
+});
+
+bgMusic.addEventListener("error", () => {
+  console.error("Audio element error:", bgMusic.error);
+  musicError.textContent = "yellow.mp3 was not found or could not be decoded.";
 });
     
   </script>
@@ -1185,6 +1214,7 @@ window.addEventListener("load", async () => {
   <div class="music-box">
     <p>This page has theme music 💛</p>
     <button id="startMusicBtn" type="button">Tap to start</button>
+    <p id="musicError" class="music-error"></p>
   </div>
 </div>
 
