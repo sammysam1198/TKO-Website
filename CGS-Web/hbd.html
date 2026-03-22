@@ -579,6 +579,87 @@
       transform: translateY(0);
     }
 
+      .photo-section {
+  margin-top: 54px;
+}
+
+.photo-gallery {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(12, 1fr);
+  margin-top: 30px;
+}
+
+.photo-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 26px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.08);
+  box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.photo-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255,255,255,0.24);
+  box-shadow: 0 24px 50px rgba(0,0,0,0.32);
+}
+
+.photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-card.large {
+  grid-column: span 12;
+  min-height: 420px;
+}
+
+.photo-card.medium {
+  grid-column: span 6;
+  min-height: 320px;
+}
+
+.photo-card.small {
+  grid-column: span 4;
+  min-height: 260px;
+}
+
+.photo-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, transparent 55%, rgba(12, 16, 31, 0.55) 100%);
+  pointer-events: none;
+}
+
+.photo-caption {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
+  z-index: 2;
+  color: #fff8fd;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+
+@media (max-width: 900px) {
+  .photo-card.large,
+  .photo-card.medium,
+  .photo-card.small {
+    grid-column: span 12;
+    min-height: 280px;
+  }
+}
+
+    
+
     @media (max-width: 900px) {
       .gift-path::before {
         left: 28px;
@@ -714,6 +795,53 @@
             </div>
           </div>
 
+
+          <div class="photo-section reveal">
+  <div class="section-head">
+    <div class="section-kicker">Us</div>
+    <h2 class="section-title">A few of my favorite memories of you</h2>
+    <p class="section-copy">
+      Just some moments I love. Different versions of us, different nights, different moods,
+      all still you, all still ours.
+    </p>
+  </div>
+
+  <div class="photo-gallery">
+    <div class="photo-card large">
+      <img src="/static/assets/shyanne-1.jpg" alt="A favorite photo of Sammi and Shyanne together">
+      <div class="photo-caption">One of my favorite photos of us.</div>
+    </div>
+
+    <div class="photo-card medium">
+      <img src="/static/assets/shyanne-2.jpg" alt="Sammi and Shyanne together smiling">
+      <div class="photo-caption">Cute, chaotic, and very us.</div>
+    </div>
+
+    <div class="photo-card medium">
+      <img src="/static/assets/shyanne-3.jpg" alt="Sammi and Shyanne close together">
+      <div class="photo-caption">I love your face in every era and every light.</div>
+    </div>
+
+    <div class="photo-card small">
+      <img src="/static/assets/shyanne-4.jpg" alt="Sammi and Shyanne outdoors together">
+      <div class="photo-caption">A soft memory.</div>
+    </div>
+
+    <div class="photo-card small">
+      <img src="/static/assets/shyanne-5.jpg" alt="Sammi and Shyanne in costume together">
+      <div class="photo-caption">You make everything more fun.</div>
+    </div>
+
+    <div class="photo-card small">
+      <img src="/static/assets/shyanne-6.jpg" alt="Sammi and Shyanne together outside">
+      <div class="photo-caption">Still one of my favorite people in the world.</div>
+    </div>
+  </div>
+</div>
+
+
+
+          
           <div class="card-section reveal">
             <div class="section-head">
               <div class="section-kicker">Virtual card</div>
@@ -724,9 +852,10 @@
               <h3 class="letter-heading">My love,</h3>
               <div class="letter-body">[PUT YOUR PERSONAL LETTER TO SHYANNE HERE]
 
-I left this as a placeholder so you can replace it with whatever you want to say.
-
-You can make it sweet, funny, emotional, grateful, romantic, or all of the above.
+No matter what happens. Whether you and I have a house and dogs, and whether we have Laney or not
+                Whether you stay with me or have the life of your dreams with someone else,
+                I will ALWAYS, ALWAYS love you. and you will always have a home with me
+                and you will always have a home in my heart. Please remember that my love.
 
 Love,
 Sammi</div>
