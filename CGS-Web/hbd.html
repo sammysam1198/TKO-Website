@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Shyanne</title>
+  <style>
+    :root {
+      --bg-1: #0f1224;
+      --bg-2: #182039;
+      --panel: rgba(255, 255, 255, 0.12);
+      --panel-strong: rgba(255, 255, 255, 0.18);
+      --line: rgba(255, 255, 255, 0.16);
+      --text: #fdf7ff;
+      --muted: #d8d6ef;
+      --pink: #ffb8de;
+      --yellow: #ffe89a;
+      --blue: #a8d8ff;
+      --lavender: #d6c7ff;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --max-width: 1180px;
+      --transition: 260ms ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255, 184, 222, 0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(168, 216, 255, 0.16), transparent 24%),
+        radial-gradient(circle at bottom center, rgba(255, 232, 154, 0.14), transparent 30%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2) 42%, #111828 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 15% 20%, rgba(255,255,255,0.08) 0 2px, transparent 2px),
+        radial-gradient(circle at 82% 18%, rgba(255,255,255,0.06) 0 2px, transparent 2px),
+        radial-gradient(circle at 35% 80%, rgba(255,255,255,0.05) 0 2px, transparent 2px);
+      background-size: 320px 320px, 440px 440px, 520px 520px;
+      opacity: 0.45;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .page-shell {
+      position: relative;
+      width: 100%;
+    }
+
+    .hero {
+      position: relative;
+      padding: 88px 24px 56px;
+      overflow: hidden;
+    }
+
+    .hero-inner {
+      position: relative;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 52px 40px;
+      border: 1px solid var(--line);
+      border-radius: 38px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06)),
+        rgba(255,255,255,0.04);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      isolation: isolate;
+    }
+
+    .hero-inner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 184, 222, 0.26), transparent 30%),
+        radial-gradient(circle at 80% 22%, rgba(168, 216, 255, 0.22), transparent 30%),
+        radial-gradient(circle at 50% 100%, rgba(255, 232, 154, 0.18), transparent 34%);
+      border-radius: inherit;
+    }
+
+    .hero-petals {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .petal {
+      position: absolute;
+      width: 16px;
+      height: 12px;
+      border-radius: 16px 16px 16px 2px;
+      transform: rotate(35deg);
+      opacity: 0.55;
+      filter: blur(0.2px);
+      background: linear-gradient(135deg, #ffc3df, #ff95cb);
+      animation: drift 14s linear infinite;
+    }
+
+    .petal:nth-child(2n) {
+      background: linear-gradient(135deg, #ffd8a6, #ffe89a);
+      animation-duration: 18s;
+    }
+
+    .petal:nth-child(3n) {
+      background: linear-gradient(135deg, #d8cbff, #a8d8ff);
+      animation-duration: 20s;
+    }
+
+    @keyframes drift {
+      from {
+        transform: translateY(-40px) rotate(0deg);
+      }
+      to {
+        transform: translateY(720px) rotate(360deg);
+      }
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #fff7fd;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2.6rem, 7vw, 5.4rem);
+      line-height: 0.96;
+      max-width: 9ch;
+    }
+
+    .hero h1 .soft {
+      color: var(--pink);
+      text-shadow: 0 0 24px rgba(255, 184, 222, 0.24);
+    }
+
+    .hero-copy {
+      margin-top: 20px;
+      max-width: 760px;
+      font-size: 1.08rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .hero-note {
+      margin-top: 28px;
+      padding: 18px 20px;
+      max-width: 720px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: #fff8ff;
+      line-height: 1.65;
+    }
+
+    .section {
+      padding: 24px 24px 72px;
+    }
+
+    .section-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .section-kicker {
+      color: var(--yellow);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.8rem;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(2rem, 4.2vw, 3.4rem);
+    }
+
+    .section-copy {
+      max-width: 760px;
+      margin: 14px auto 0;
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 1rem;
+    }
+
+    .gift-path {
+      position: relative;
+      display: grid;
+      gap: 28px;
+      margin-top: 42px;
+    }
+
+    .gift-path::before {
+      content: "";
+      position: absolute;
+      left: calc(50% - 2px);
+      top: 24px;
+      bottom: 24px;
+      width: 4px;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 184, 222, 0.05),
+        rgba(255, 184, 222, 0.6),
+        rgba(255, 232, 154, 0.55),
+        rgba(168, 216, 255, 0.45),
+        rgba(255, 184, 222, 0.12)
+      );
+      border-radius: 999px;
+      box-shadow: 0 0 24px rgba(255, 184, 222, 0.2);
+    }
+
+    .gift-row {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 120px 1fr;
+      align-items: center;
+      min-height: 210px;
+    }
+
+    .gift-row:nth-child(even) .gift-card {
+      grid-column: 3;
+    }
+
+    .gift-row:nth-child(odd) .gift-card {
+      grid-column: 1;
+    }
+
+    .path-node {
+      grid-column: 2;
+      justify-self: center;
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.16);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.28), transparent 34%),
+        linear-gradient(135deg, rgba(255, 184, 222, 0.36), rgba(168, 216, 255, 0.22));
+      backdrop-filter: blur(10px);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.22);
+      position: relative;
+      z-index: 2;
+    }
+
+    .path-node::before {
+      content: "✿";
+      font-size: 1.6rem;
+      color: #fff5fb;
+    }
+
+    .gift-card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.13), rgba(255,255,255,0.08));
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+      overflow: hidden;
+    }
+
+    .gift-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(255, 184, 222, 0.18), transparent 28%),
+        radial-gradient(circle at bottom left, rgba(168, 216, 255, 0.12), transparent 32%);
+      pointer-events: none;
+    }
+
+    .gift-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255,255,255,0.26);
+      box-shadow: 0 24px 50px rgba(0,0,0,0.3);
+    }
+
+    .gift-label {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.12);
+      color: #fff7ff;
+    }
+
+    .gift-title {
+      margin: 0 0 12px;
+      font-size: 1.5rem;
+    }
+
+    .gift-desc {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .gift-btn {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      padding: 14px 18px;
+      border-radius: 16px;
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #182039;
+      background: linear-gradient(135deg, var(--pink), var(--yellow));
+      box-shadow: 0 10px 28px rgba(255, 184, 222, 0.26);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .gift-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px rgba(255, 184, 222, 0.34);
+    }
+
+    .card-section {
+      margin-top: 48px;
+    }
+
+    .letter-card {
+      position: relative;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 34px 28px;
+      border-radius: 34px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.09));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .letter-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          180deg,
+          rgba(255,255,255,0.05) 0,
+          rgba(255,255,255,0.05) 1px,
+          transparent 1px,
+          transparent 42px
+        );
+      opacity: 0.36;
+      pointer-events: none;
+    }
+
+    .letter-heading {
+      position: relative;
+      z-index: 1;
+      margin: 0 0 18px;
+      font-size: 2rem;
+      color: #fff8ff;
+    }
+
+    .letter-body {
+      position: relative;
+      z-index: 1;
+      font-family: "Segoe Script", "Brush Script MT", "Lucida Handwriting", cursive;
+      font-size: clamp(1.3rem, 2.2vw, 1.9rem);
+      line-height: 1.7;
+      color: #fffafc;
+      white-space: pre-line;
+      text-shadow: 0 1px 0 rgba(0,0,0,0.12);
+    }
+
+    .letter-placeholder {
+      display: inline-block;
+      margin-top: 18px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.1);
+      border: 1px dashed rgba(255,255,255,0.22);
+      font-family: inherit;
+      font-size: 0.98rem;
+      color: #fff3fb;
+    }
+
+    .footer-note {
+      text-align: center;
+      padding: 0 24px 54px;
+      color: rgba(255,255,255,0.64);
+      font-size: 0.94rem;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 20px;
+      background: rgba(8, 10, 20, 0.72);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+    }
+
+    .modal.active {
+      display: grid;
+    }
+
+    .modal-panel {
+      width: min(920px, 100%);
+      max-height: min(88vh, 980px);
+      overflow: auto;
+      border-radius: 30px;
+      background:
+        linear-gradient(180deg, rgba(31, 38, 67, 0.96), rgba(17, 24, 40, 0.96));
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.44);
+      padding: 26px;
+      position: relative;
+    }
+
+    .modal-close {
+      position: sticky;
+      top: 0;
+      float: right;
+      margin-left: auto;
+      border: 0;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: #fff;
+      background: rgba(255,255,255,0.12);
+    }
+
+    .modal-tag {
+      display: inline-block;
+      margin-bottom: 12px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: rgba(255,255,255,0.12);
+    }
+
+    .modal-title {
+      margin: 0 0 12px;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+    }
+
+    .modal-copy {
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 24px;
+      font-size: 1rem;
+    }
+
+    .modal-media {
+      display: grid;
+      gap: 20px;
+    }
+
+    .museum-photo,
+    .audio-panel,
+    .coupon-panel {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .museum-photo img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .audio-panel,
+    .coupon-panel {
+      padding: 22px;
+    }
+
+    .audio-panel h3,
+    .coupon-panel h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.25rem;
+    }
+
+    .audio-panel p,
+    .coupon-panel p {
+      margin-top: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 14px;
+    }
+
+    .coupon-stamps {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(70px, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .stamp {
+      min-height: 82px;
+      border-radius: 18px;
+      border: 1px dashed rgba(255,255,255,0.24);
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 8px;
+      background: rgba(255,255,255,0.06);
+      color: #fff6fb;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .tiny-note {
+      font-size: 0.86rem;
+      color: rgba(255,255,255,0.62);
+      margin-top: 12px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 700ms ease, transform 700ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      .gift-path::before {
+        left: 28px;
+      }
+
+      .gift-row {
+        grid-template-columns: 56px 1fr;
+        gap: 14px;
+        min-height: auto;
+      }
+
+      .path-node {
+        grid-column: 1;
+        grid-row: 1;
+        width: 56px;
+        height: 56px;
+      }
+
+      .gift-row:nth-child(even) .gift-card,
+      .gift-row:nth-child(odd) .gift-card {
+        grid-column: 2;
+      }
+
+      .hero-inner {
+        padding: 34px 22px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding-top: 60px;
+      }
+
+      .gift-card {
+        padding: 20px;
+      }
+
+      .coupon-stamps {
+        grid-template-columns: repeat(2, minmax(100px, 1fr));
+      }
+
+      .letter-body {
+        font-size: 1.28rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-inner reveal">
+        <div class="hero-petals" aria-hidden="true">
+          <span class="petal" style="left: 8%; top: -20px;"></span>
+          <span class="petal" style="left: 22%; top: -60px;"></span>
+          <span class="petal" style="left: 38%; top: -18px;"></span>
+          <span class="petal" style="left: 57%; top: -40px;"></span>
+          <span class="petal" style="left: 73%; top: -28px;"></span>
+          <span class="petal" style="left: 88%; top: -52px;"></span>
+        </div>
+
+        <div class="eyebrow">A birthday page made with love</div>
+        <h1>To my <span class="soft">beautiful and wonderful wife</span> Shyanne</h1>
+
+        <p class="hero-copy">
+          I wanted to make you something you could wander through, open slowly, and enjoy piece by piece.
+          So instead of just giving you gifts, I wanted to make you a little world of them.
+        </p>
+
+        <div class="hero-note">
+          Follow the petals. Open each gift. There are real surprises waiting for you, a couple songs, one very serious museum trip, and one extremely official argument coupon system.
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section">
+        <div class="section-inner">
+          <div class="section-head reveal">
+            <div class="section-kicker">Birthday gifts</div>
+            <h2 class="section-title">A little path of surprises</h2>
+            <p class="section-copy">
+              Each gift opens into its own little moment. Click them one by one and let the page unfold.
+            </p>
+          </div>
+
+          <div class="gift-path">
+            <div class="gift-row reveal">
+              <div class="gift-card">
+                <div class="gift-label">Gift One</div>
+                <h3 class="gift-title">A day of wonder</h3>
+                <p class="gift-desc">
+                  A trip to a place to grow, to learn, to discover, and to rediscover.
+                </p>
+                <button class="gift-btn" data-gift="museum">Open this gift</button>
+              </div>
+              <div class="path-node" aria-hidden="true"></div>
+            </div>
+
+            <div class="gift-row reveal">
+              <div class="gift-card">
+                <div class="gift-label">Gift Two</div>
+                <h3 class="gift-title">Tell Another Lie</h3>
+                <p class="gift-desc">
+                  Polished. Mastered. Complete. A song made for you, my love.
+                </p>
+                <button class="gift-btn" data-gift="song1">Open this gift</button>
+              </div>
+              <div class="path-node" aria-hidden="true"></div>
+            </div>
+
+            <div class="gift-row reveal">
+              <div class="gift-card">
+                <div class="gift-label">Gift Three</div>
+                <h3 class="gift-title">Restore</h3>
+                <p class="gift-desc">
+                  A synthwave song with Drozax and a little wish stitched into it.
+                </p>
+                <button class="gift-btn" data-gift="song2">Open this gift</button>
+              </div>
+              <div class="path-node" aria-hidden="true"></div>
+            </div>
+
+            <div class="gift-row reveal">
+              <div class="gift-card">
+                <div class="gift-label">Gift Four</div>
+                <h3 class="gift-title">Very serious legal immunity</h3>
+                <p class="gift-desc">
+                  A completely official “get out of any argument for free” card with five uses.
+                </p>
+                <button class="gift-btn" data-gift="coupon">Open this gift</button>
+              </div>
+              <div class="path-node" aria-hidden="true"></div>
+            </div>
+          </div>
+
+          <div class="card-section reveal">
+            <div class="section-head">
+              <div class="section-kicker">Virtual card</div>
+              <h2 class="section-title">A letter for you</h2>
+            </div>
+
+            <div class="letter-card">
+              <h3 class="letter-heading">My love,</h3>
+              <div class="letter-body">[PUT YOUR PERSONAL LETTER TO SHYANNE HERE]
+
+I left this as a placeholder so you can replace it with whatever you want to say.
+
+You can make it sweet, funny, emotional, grateful, romantic, or all of the above.
+
+Love,
+Sammi</div>
+              <div class="letter-placeholder">
+                Replace the placeholder text above with your final handwritten-style message.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer-note">
+        Made with love, petals, and at least one legally questionable coupon.
+      </div>
+    </main>
+  </div>
+
+  <div class="modal" id="giftModal" aria-hidden="true">
+    <div class="modal-panel">
+      <button class="modal-close" id="closeModal" aria-label="Close">✕</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <script>
+    const giftData = {
+      museum: {
+        tag: "Gift One",
+        title: "A trip to the Museum of Science",
+        copy: `
+          Your first gift. A trip to a place to grow, to learn, to discover and to rediscover.
+          An all day trip to the Museum of Science in Boston, complete with your choice of
+          planetarium and/or IMAX tickets.
+        `,
+        html: `
+          <div class="modal-media">
+            <div class="museum-photo">
+              <img src="/static/assets/boston-museum-of-science.jpg" alt="Boston Museum of Science">
+            </div>
+            <div class="audio-panel">
+              <h3>What this gift means</h3>
+              <p>
+                A whole day for curiosity, wonder, and doing something fun together.
+                Science, exhibits, giant screens, stars, weird cool stuff, and whatever
+                else catches your eye.
+              </p>
+              <p class="tiny-note">
+                Image path expected: <code>/static/assets/boston-museum-of-science.jpg</code>
+              </p>
+            </div>
+          </div>
+        `
+      },
+      song1: {
+        tag: "Gift Two",
+        title: "Tell Another Lie",
+        copy: `
+          Your second gift. Polished. Mastered. Complete. Tell Another Lie.
+          My song for you, my love.
+        `,
+        html: `
+          <div class="modal-media">
+            <div class="audio-panel">
+              <h3>Song player</h3>
+              <p>
+                This box opens into the finished version of <em>Tell Another Lie</em>.
+              </p>
+              <audio controls preload="metadata">
+                <source src="/static/assets/tell-another-lie.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio>
+              <p class="tiny-note">
+                Audio path expected: <code>/static/assets/tell-another-lie.mp3</code>
+              </p>
+            </div>
+          </div>
+        `
+      },
+      song2: {
+        tag: "Gift Three",
+        title: "Restore",
+        copy: `
+          A third gift. A synthwave song. Restore. With Drozax.
+          Hopefully we can restore what we had.
+        `,
+        html: `
+          <div class="modal-media">
+            <div class="audio-panel">
+              <h3>Song player</h3>
+              <p>
+                This box opens into <em>Restore</em>, the synthwave track with Drozax.
+              </p>
+              <audio controls preload="metadata">
+                <source src="/static/assets/restore.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio>
+              <p class="tiny-note">
+                Audio path expected: <code>/static/assets/restore.mp3</code>
+              </p>
+            </div>
+          </div>
+        `
+      },
+      coupon: {
+        tag: "Gift Four",
+        title: "Get out of any argument for free x5",
+        copy: `
+          A fourth gift. A get out of any argument for free card with five uses.
+          Extremely powerful. Potentially dangerous. Mostly a gag gift. But still binding.
+        `,
+        html: `
+          <div class="modal-media">
+            <div class="coupon-panel">
+              <h3>Official redemption card</h3>
+              <p>
+                This entitles Shyanne to win any disagreement, argument, tiny debate,
+                or completely unnecessary discussion about random things for a total of
+                five uses.
+              </p>
+              <div class="coupon-stamps">
+                <div class="stamp">Use 1</div>
+                <div class="stamp">Use 2</div>
+                <div class="stamp">Use 3</div>
+                <div class="stamp">Use 4</div>
+                <div class="stamp">Use 5</div>
+              </div>
+              <p class="tiny-note">
+                Terms and conditions: Sammi may sigh dramatically, but must still honor the card.
+              </p>
+            </div>
+          </div>
+        `
+      }
+    };
+
+    const modal = document.getElementById("giftModal");
+    const modalContent = document.getElementById("modalContent");
+    const closeModalBtn = document.getElementById("closeModal");
+    const giftButtons = document.querySelectorAll("[data-gift]");
+
+    function openGift(key) {
+      const gift = giftData[key];
+      if (!gift) return;
+
+      modalContent.innerHTML = `
+        <div class="modal-tag">${gift.tag}</div>
+        <h2 class="modal-title">${gift.title}</h2>
+        <p class="modal-copy">${gift.copy}</p>
+        ${gift.html}
+      `;
+
+      modal.classList.add("active");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      modal.classList.remove("active");
+      modal.setAttribute("aria-hidden", "true");
+      modalContent.innerHTML = "";
+      document.body.style.overflow = "";
+    }
+
+    giftButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        openGift(btn.dataset.gift);
+      });
+    });
+
+    closeModalBtn.addEventListener("click", closeModal);
+
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modal.classList.contains("active")) {
+        closeModal();
+      }
+    });
+
+    const revealItems = document.querySelectorAll(".reveal");
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.14,
+      rootMargin: "0px 0px -40px 0px"
+    });
+
+    revealItems.forEach((item) => revealObserver.observe(item));
+  </script>
+</body>
+</html>
