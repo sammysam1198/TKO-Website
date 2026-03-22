@@ -788,8 +788,6 @@
           <span class="petal" style="left: 88%; top: -52px;"></span>
         </div>
 
-        <button id="musicToggle" class="music-toggle">🔊</button>
-
         <div class="eyebrow">A birthday page made with love</div>
         <h1>To my <span class="soft">beautiful and wonderful wife</span> Shyanne</h1>
 
@@ -1130,90 +1128,15 @@ Sammi</div>
     });
 
     revealItems.forEach((item) => revealObserver.observe(item));
-
-const bgMusic = document.getElementById("bgMusic");
-const musicToggle = document.getElementById("musicToggle");
-const musicOverlay = document.getElementById("musicOverlay");
-const startMusicBtn = document.getElementById("startMusicBtn");
-const musicError = document.getElementById("musicError");
-
-let musicStarted = false;
-
-bgMusic.volume = 0.5;
-
-function setMusicUI(isPlaying) {
-  musicToggle.textContent = isPlaying ? "🔊" : "🔇";
-}
-
-async function tryStartMusic() {
-  musicError.textContent = "";
-
-  try {
-    const playPromise = bgMusic.play();
-
-    if (playPromise !== undefined) {
-      await playPromise;
-    }
-
-    musicStarted = true;
-    setMusicUI(true);
-    musicOverlay.classList.add("hidden");
-    return true;
-  } catch (error) {
-    console.error("Music failed to start:", error);
-    setMusicUI(false);
-    musicError.textContent = "Could not load or play yellow.mp3.";
-    return false;
-  }
-}
-
-function stopMusic() {
-  bgMusic.pause();
-  setMusicUI(false);
-}
-
-startMusicBtn.addEventListener("click", async () => {
-  await tryStartMusic();
-});
-
-musicToggle.addEventListener("click", async () => {
-  if (!musicStarted || bgMusic.paused) {
-    await tryStartMusic();
-  } else {
-    stopMusic();
-  }
-});
-
-window.addEventListener("load", async () => {
-  try {
-    const playPromise = bgMusic.play();
-    if (playPromise !== undefined) {
-      await playPromise;
-    }
-
-    musicStarted = true;
-    setMusicUI(true);
-    musicOverlay.classList.add("hidden");
-  } catch (error) {
-    console.warn("Autoplay blocked or file unavailable:", error);
-    musicOverlay.classList.remove("hidden");
-    setMusicUI(false);
-  }
-});
-
-bgMusic.addEventListener("error", () => {
-  console.error("Audio element error:", bgMusic.error);
-  musicError.textContent = "yellow.mp3 was not found or could not be decoded.";
-});
     
   </script>
 
- <button id="musicToggle" class="music-toggle" aria-label="Toggle music" onclick="toggleThemeMusic()">🔇</button>
+<button id="musicToggle" class="music-toggle" aria-label="Toggle music">🔇</button>
 
 <div id="musicOverlay" class="music-overlay">
   <div class="music-box">
     <p>This page has theme music 💛</p>
-    <button type="button" onclick="startThemeMusic()">Tap to start</button>
+    <button id="startMusicBtn" type="button">Tap to start</button>
   </div>
 </div>
 
@@ -1221,14 +1144,13 @@ bgMusic.addEventListener("error", () => {
   <source src="/static/assets/yellow.mp3" type="audio/mpeg">
 </audio>
 
-  <script>
+<script>
   const bgMusic = document.getElementById("bgMusic");
   const musicOverlay = document.getElementById("musicOverlay");
   const musicToggle = document.getElementById("musicToggle");
+  const startMusicBtn = document.getElementById("startMusicBtn");
 
-  if (bgMusic) {
-    bgMusic.volume = 0.5;
-  }
+  bgMusic.volume = 0.5;
 
   async function startThemeMusic() {
     try {
@@ -1238,13 +1160,10 @@ bgMusic.addEventListener("error", () => {
       console.log("Music started");
     } catch (err) {
       console.error("Could not start music:", err);
-      alert("Music could not start.");
     }
   }
 
   function toggleThemeMusic() {
-    if (!bgMusic) return;
-
     if (bgMusic.paused) {
       startThemeMusic();
     } else {
@@ -1253,8 +1172,8 @@ bgMusic.addEventListener("error", () => {
     }
   }
 
-  window.startThemeMusic = startThemeMusic;
-  window.toggleThemeMusic = toggleThemeMusic;
+  startMusicBtn.addEventListener("click", startThemeMusic);
+  musicToggle.addEventListener("click", toggleThemeMusic);
 </script>
   
 </body>
