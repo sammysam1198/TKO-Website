@@ -1208,20 +1208,54 @@ bgMusic.addEventListener("error", () => {
     
   </script>
 
- <button id="musicToggle" class="music-toggle" aria-label="Toggle music">🔇</button>
+ <button id="musicToggle" class="music-toggle" aria-label="Toggle music" onclick="toggleThemeMusic()">🔇</button>
 
 <div id="musicOverlay" class="music-overlay">
   <div class="music-box">
     <p>This page has theme music 💛</p>
-    <button id="startMusicBtn" type="button">Tap to start</button>
-    <p id="musicError" class="music-error"></p>
+    <button type="button" onclick="startThemeMusic()">Tap to start</button>
   </div>
 </div>
 
-<audio id="bgMusic" loop preload="auto">
+<audio id="bgMusic" loop>
   <source src="/static/assets/yellow.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
 </audio>
+
+  <script>
+  const bgMusic = document.getElementById("bgMusic");
+  const musicOverlay = document.getElementById("musicOverlay");
+  const musicToggle = document.getElementById("musicToggle");
+
+  if (bgMusic) {
+    bgMusic.volume = 0.5;
+  }
+
+  async function startThemeMusic() {
+    try {
+      await bgMusic.play();
+      musicOverlay.style.display = "none";
+      musicToggle.textContent = "🔊";
+      console.log("Music started");
+    } catch (err) {
+      console.error("Could not start music:", err);
+      alert("Music could not start.");
+    }
+  }
+
+  function toggleThemeMusic() {
+    if (!bgMusic) return;
+
+    if (bgMusic.paused) {
+      startThemeMusic();
+    } else {
+      bgMusic.pause();
+      musicToggle.textContent = "🔇";
+    }
+  }
+
+  window.startThemeMusic = startThemeMusic;
+  window.toggleThemeMusic = toggleThemeMusic;
+</script>
   
 </body>
 </html>
