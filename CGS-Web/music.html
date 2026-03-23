@@ -717,6 +717,213 @@
   line-height: 1.65;
 }
 
+.plugins-showcase {
+  margin-top: 28px;
+  display: grid;
+  gap: 22px;
+}
+
+.plugins-intro-card {
+  position: relative;
+  padding: 28px;
+  border-radius: 28px;
+  border: 1px solid var(--border);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)),
+    linear-gradient(135deg, rgba(34, 18, 48, 0.42), rgba(12, 15, 28, 0.34)),
+    var(--panel);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 14px 42px rgba(0,0,0,0.22);
+  overflow: hidden;
+}
+
+.plugins-intro-card::before,
+.plugin-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at top left, rgba(255, 99, 199, 0.12), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(95, 130, 255, 0.12), transparent 32%),
+    linear-gradient(135deg, rgba(141, 99, 255, 0.06), transparent 46%);
+  opacity: 0.95;
+}
+
+.plugins-intro-card > *,
+.plugin-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.plugins-intro-card p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 880px;
+}
+
+.plugin-category {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.04);
+  color: var(--soft);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.plugin-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+}
+
+.plugin-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 18px;
+  padding: 18px;
+  border-radius: 26px;
+  border: 1px solid var(--border);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015)),
+    linear-gradient(135deg, rgba(34, 18, 48, 0.40), rgba(12, 15, 28, 0.32)),
+    var(--panel-2);
+  box-shadow: 0 14px 42px rgba(0,0,0,0.20);
+  overflow: hidden;
+  transition: transform var(--ease), border-color var(--ease), box-shadow var(--ease);
+}
+
+.plugin-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-strong);
+  box-shadow: 0 20px 56px rgba(0,0,0,0.28);
+}
+
+.plugin-shot {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  background:
+    linear-gradient(135deg, rgba(255, 99, 199, 0.15), rgba(95, 130, 255, 0.15)),
+    rgba(0,0,0,0.28);
+  aspect-ratio: 16 / 9;
+  min-height: 180px;
+}
+
+.plugin-shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.plugin-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.plugin-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.04);
+  color: var(--soft);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.plugin-card h3 {
+  margin: 0;
+  font-size: 1.28rem;
+  line-height: 1.15;
+}
+
+.plugin-card p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  line-height: 1.72;
+  font-size: 0.96rem;
+}
+
+.plugin-notes {
+  margin-top: 12px;
+  color: var(--soft);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.plugin-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.plugin-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.04);
+  color: var(--text);
+  font-size: 0.92rem;
+  transition: transform var(--ease), border-color var(--ease), background var(--ease);
+}
+
+.plugin-link:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-strong);
+  background: rgba(255,255,255,0.08);
+}
+
+.plugin-grid-bottom {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.plugin-card--vertical {
+  grid-template-columns: 1fr;
+}
+
+.plugin-card--vertical .plugin-shot {
+  aspect-ratio: 4 / 5;
+  min-height: 340px;
+}
+
+@media (max-width: 900px) {
+  .plugin-card {
+    grid-template-columns: 1fr;
+  }
+
+  .plugin-grid-bottom {
+    grid-template-columns: 1fr;
+  }
+
+  .plugin-card--vertical .plugin-shot {
+    aspect-ratio: 16 / 9;
+    min-height: 220px;
+  }
+}
+
+    
+
 @media (max-width: 1080px) {
   .plugin-grid {
     grid-template-columns: 1fr;
@@ -1033,33 +1240,32 @@
       </div>
     </section>
 
-      <section class="section" id="plugins">
+<section class="section" id="plugins">
   <div class="section-head">
     <div>
       <p class="eyebrow">Tools & Sound</p>
       <h2 class="section-title">Plugins I Use</h2>
       <p class="section-copy">
         The sound of Chroma Glow lives somewhere between clean control and emotional blur.
-        These are the tools I keep coming back to for tone, width, movement, glue, and the
-        soft neon ache that holds the whole thing together.
+        These are the tools I keep coming back to for glow, weight, width, motion, and that
+        soft neon ache that sits behind everything.
       </p>
     </div>
   </div>
 
   <div class="plugins-showcase">
     <article class="plugins-intro-card">
-      <div class="plugin-category">Mixing Archive</div>
-      <h3>Production palette</h3>
+      <div class="plugin-category">Production Palette</div>
+      <h3>A late-night toolkit</h3>
       <p>
-        This section is meant to feel personal, not clinical. Less "gear list," more
-        "this is how the light gets into the room." Each card can hold a screenshot,
-        quick specs, and enough writing space for process notes, favorite use cases,
-        or even track-specific memories.
+        Less a gear list, more a map of how the atmosphere gets built. Some of these are
+        precision tools. Some of them are pure color. Most of them live somewhere in between.
       </p>
     </article>
 
     <div class="plugin-grid">
 
+      <!-- horizontal cards go here -->
       <article class="plugin-card">
         <div class="plugin-shot">
           <img src="assets/plugins/neutron-4-suite.jpg" alt="Neutron 4 Suite">
@@ -1072,143 +1278,14 @@
           </div>
           <h3>Neutron 4 Suite</h3>
           <p>
-            My main all-in-one mixing environment. It gives me EQ, compression, transient
-            shaping, excitation, sculpting, and utility modules in one place, so it is
-            perfect when I want to move fast but still stay precise. I use it most during
-            shaping and cleanup stages, especially when a sound needs definition without
-            losing emotion. It feels modern and efficient, but still flexible enough to push
-            into more character-heavy work when needed.
+            My main all-in-one mixing environment. I use it for shaping, cleanup, separation,
+            and general control when I want a sound to stay emotional but sit correctly in the
+            mix. It lets me move fast without feeling boxed into something sterile.
           </p>
-          <div class="plugin-notes">Includes modules like EQ, Exciter, Transient Shaper, Sculptor, and Gate. :contentReference[oaicite:3]{index=3}</div>
-        </div>
-      </article>
-
-      <article class="plugin-card">
-        <div class="plugin-shot">
-          <img src="assets/plugins/neutron-eq.jpg" alt="Neutron 4 EQ">
-        </div>
-        <div>
-          <div class="plugin-meta">
-            <span class="plugin-pill">Parametric EQ</span>
-            <span class="plugin-pill">Dynamic</span>
-            <span class="plugin-pill">Mix</span>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://www.izotope.com/en/products/neutron.html" target="_blank" rel="noopener noreferrer">Link</a>
+            <a class="plugin-link" href="https://www.izotope.com/en/products/music-production-suite" target="_blank" rel="noopener noreferrer">Bundle Link</a>
           </div>
-          <h3>Neutron 4 EQ</h3>
-          <p>
-            This is one of my cleaner surgical tools. I reach for it when I need to carve
-            space, reduce harshness, or make room for another element without the track
-            feeling hollow afterward. It is especially good when a sound needs to stay alive
-            but stop fighting the vocal, the lead, or the kick. It is one of those plugins
-            that helps a mix breathe rather than just making it “correct.”
-          </p>
-          <div class="plugin-notes">Part of Neutron 4’s mixing system and often used for precision shaping. :contentReference[oaicite:4]{index=4}</div>
-        </div>
-      </article>
-
-      <article class="plugin-card">
-        <div class="plugin-shot">
-          <img src="assets/plugins/neutron-multiband-compressor.jpg" alt="Neutron 4 Multiband Compressor">
-        </div>
-        <div>
-          <div class="plugin-meta">
-            <span class="plugin-pill">Multiband Compressor</span>
-            <span class="plugin-pill">Digital</span>
-            <span class="plugin-pill">Mix / Bus</span>
-          </div>
-          <h3>Neutron 4 Multiband Compressor</h3>
-          <p>
-            I use this when I need to control movement in specific frequency ranges instead
-            of flattening the whole signal. It is great for low-end cleanup, harsh upper-mid
-            control, and keeping dense synth layers from getting messy. Usually this is more
-            of a bus or problem-solving tool for me than a color box. It helps hold things
-            together without killing their motion.
-          </p>
-          <div class="plugin-notes">Neutron’s module-based workflow makes it useful for targeted dynamic control. :contentReference[oaicite:5]{index=5}</div>
-        </div>
-      </article>
-
-      <article class="plugin-card">
-        <div class="plugin-shot">
-          <img src="assets/plugins/neutron-transient-shaper.jpg" alt="Neutron 4 Transient Shaper">
-        </div>
-        <div>
-          <div class="plugin-meta">
-            <span class="plugin-pill">Transient Shaper</span>
-            <span class="plugin-pill">Digital</span>
-            <span class="plugin-pill">Mix</span>
-          </div>
-          <h3>Neutron 4 Transient Shaper</h3>
-          <p>
-            This is how I push something forward or soften it without reaching for EQ first.
-            If a drum needs more front edge, or a synth stab feels too pokey, this is one of
-            the fastest ways to fix the feel. It is more about contour than tone. I like it
-            because it can change the emotional posture of a sound in a really immediate way.
-          </p>
-          <div class="plugin-notes">Included as a dedicated module in Neutron 4. :contentReference[oaicite:6]{index=6}</div>
-        </div>
-      </article>
-
-      <article class="plugin-card">
-        <div class="plugin-shot">
-          <img src="assets/plugins/neutron-exciter.jpg" alt="Neutron 4 Exciter">
-        </div>
-        <div>
-          <div class="plugin-meta">
-            <span class="plugin-pill">Exciter</span>
-            <span class="plugin-pill">Harmonic</span>
-            <span class="plugin-pill">Mix / Bus</span>
-          </div>
-          <h3>Neutron 4 Exciter</h3>
-          <p>
-            I use this to wake things up. When a part feels too flat, too sterile, or too
-            “inside the speakers,” the exciter helps it glow a little more. Sometimes it is
-            warmth, sometimes top-end energy, sometimes just attitude. It is one of the tools
-            that helps digital sounds feel less dead to me.
-          </p>
-          <div class="plugin-notes">Neutron’s Exciter is one of its core harmonic-processing modules. :contentReference[oaicite:7]{index=7}</div>
-        </div>
-      </article>
-
-      <article class="plugin-card">
-        <div class="plugin-shot">
-          <img src="assets/plugins/neutron-sculptor.jpg" alt="Neutron 4 Sculptor">
-        </div>
-        <div>
-          <div class="plugin-meta">
-            <span class="plugin-pill">Spectral Shaper</span>
-            <span class="plugin-pill">AI-Assisted</span>
-            <span class="plugin-pill">Mix</span>
-          </div>
-          <h3>Neutron 4 Sculptor</h3>
-          <p>
-            Sculptor is more of a finishing brush for me. I use it gently when I want a part
-            to sit more naturally in the mix without over-EQing it. It can smooth edges and
-            rebalance the tonal energy in a way that feels subtle but helpful. This is the
-            kind of tool that works best when it is doing just enough that you miss it after
-            you bypass it.
-          </p>
-          <div class="plugin-notes">Sculptor remains one of the defining Neutron modules. :contentReference[oaicite:8]{index=8}</div>
-        </div>
-      </article>
-
-      <article class="plugin-card">
-        <div class="plugin-shot">
-          <img src="assets/plugins/neutron-gate.jpg" alt="Neutron 4 Gate">
-        </div>
-        <div>
-          <div class="plugin-meta">
-            <span class="plugin-pill">Gate</span>
-            <span class="plugin-pill">Dynamics</span>
-            <span class="plugin-pill">Cleanup</span>
-          </div>
-          <h3>Neutron 4 Gate</h3>
-          <p>
-            Not the flashiest tool here, but useful when I need to control noise, room spill,
-            or tails that are stepping on the groove. I like having it inside the same suite
-            because it keeps cleanup and tone shaping in one workflow. It is mostly a control
-            move for me, especially on raw or busy material.
-          </p>
-          <div class="plugin-notes">Neutron 4 ships with a dedicated Gate module. :contentReference[oaicite:9]{index=9}</div>
         </div>
       </article>
 
@@ -1220,289 +1297,17 @@
           <div class="plugin-meta">
             <span class="plugin-pill">Multiband Compressor</span>
             <span class="plugin-pill">OTT Style</span>
-            <span class="plugin-pill">Sound Design</span>
-          </div>
-          <h3>Slate Digital MO-TT</h3>
-          <p>
-            This one is for exaggerated lift, edge, density, and modern movement. I do not
-            always use it subtly, and that is kind of the point. It can make synths brighter,
-            widen details, and push textures toward that hyper-defined modern feel. When a
-            sound needs to leap out of the mix or feel more unreal, this is one of my go-tos.
-          </p>
-          <div class="plugin-notes">Slate describes MO-TT as an OTT-style multiband compressor with expanded control. :contentReference[oaicite:10]{index=10}</div>
-        </div>
-      </article>
-
-      <article class="plugin-card">
-        <div class="plugin-shot">
-          <img src="assets/plugins/vbc-fg-red.jpg" alt="Slate Digital VBC FG-Red">
-        </div>
-        <div>
-          <div class="plugin-meta">
-            <span class="plugin-pill">Bus Compressor</span>
-            <span class="plugin-pill">VCA Style</span>
-            <span class="plugin-pill">Bus / Master</span>
-          </div>
-          <h3>VBC FG-Red</h3>
-          <p>
-            This is one of my glue tools. It helps make things feel more finished, more held
-            together, more like a record instead of a stack of tracks. I especially like it
-            when I want punch and cohesion at the same time. It can get aggressive in a nice
-            way, which fits a lot of my mixes.
-          </p>
-          <div class="plugin-notes">Slate’s FG-Red is part of the Virtual Buss Compressors line and is described as a red-faced bus compressor with punch and aggression. :contentReference[oaicite:11]{index=11}</div>
-        </div>
-      </article>
-
-      <article class="plugin-card">
-        <div class="plugin-shot">
-          <img src="assets/plugins/infinity-eq-2.jpg" alt="Slate Digital Infinity EQ 2">
-        </div>
-        <div>
-          <div class="plugin-meta">
-            <span class="plugin-pill">Parametric EQ</span>
-            <span class="plugin-pill">Dynamic Filters</span>
-            <span class="plugin-pill">Mix / Master</span>
-          </div>
-          <h3>Infinity EQ 2</h3>
-          <p>
-            One of my favorite visual EQs to work in. It feels fast, clear, and really easy
-            to read when I am making tonal decisions. I use it for both problem-solving and
-            broader shaping, especially when I want to be precise without feeling boxed into a
-            sterile workflow. It is one of those plugins that makes me want to keep mixing.
-          </p>
-          <div class="plugin-notes">Slate positions it as a flexible parametric EQ with dynamic filters and additional filter types. :contentReference[oaicite:12]{index=12}</div>
-        </div>
-      </article>
-
-      <article class="plugin-card">
-        <div class="plugin-shot">
-          <img src="assets/plugins/aireq.jpg" alt="Eiosis AirEQ">
-        </div>
-        <div>
-          <div class="plugin-meta">
-            <span class="plugin-pill">EQ</span>
-            <span class="plugin-pill">Tonal Shaping</span>
-            <span class="plugin-pill">Mix / Master</span>
-          </div>
-          <h3>Eiosis AirEQ</h3>
-          <p>
-            This is a more musical, tone-first EQ for me. I am usually not reaching for it to
-            perform surgery. I use it when I want to make something feel more expensive, more
-            open, or more elegant. It is especially nice when brightness needs to feel smooth
-            instead of brittle.
-          </p>
-          <div class="plugin-notes">Slate describes AirEQ as a versatile EQ for mixing and mastering, with tonal shaping features like Air and Earth. :contentReference[oaicite:13]{index=13}</div>
-        </div>
-      </article>
-
-      <article class="plugin-card">
-        <div class="plugin-shot">
-          <img src="assets/plugins/fresh-air.jpg" alt="Slate Digital Fresh Air">
-        </div>
-        <div>
-          <div class="plugin-meta">
-            <span class="plugin-pill">Top-End Enhancer</span>
-            <span class="plugin-pill">Dynamic</span>
-            <span class="plugin-pill">Mix / Bus</span>
-          </div>
-          <h3>Fresh Air</h3>
-          <p>
-            This is one of those instant-feel plugins. When something needs that lifted,
-            illuminated, open top-end, Fresh Air gets there fast. I use it carefully because
-            it can change the emotional brightness of a sound really quickly. On the right
-            source, though, it feels like turning on a light behind the track.
-          </p>
-          <div class="plugin-notes">Slate describes Fresh Air as a dynamic high-frequency processor for smooth, crisp top end. :contentReference[oaicite:14]{index=14}</div>
-        </div>
-      </article>
-
-      <article class="plugin-card">
-        <div class="plugin-shot">
-          <img src="assets/plugins/virtual-mix-rack.jpg" alt="Slate Digital Virtual Mix Rack">
-        </div>
-        <div>
-          <div class="plugin-meta">
-            <span class="plugin-pill">Channel Strip</span>
-            <span class="plugin-pill">Analog Modeled</span>
-            <span class="plugin-pill">Mix</span>
-          </div>
-          <h3>Virtual Mix Rack</h3>
-          <p>
-            This is where I like building analog-style chains without losing workflow speed.
-            I can stack tone, compression, shaping, and utility moves in a way that feels more
-            like a physical desk mindset. It helps me work in “signal path” mode instead of
-            just throwing plugins around randomly.
-          </p>
-          <div class="plugin-notes">VMR is Slate’s modular mixing environment for building custom chains from modules. :contentReference[oaicite:15]{index=15}</div>
-        </div>
-      </article>
-
-      <article class="plugin-card">
-        <div class="plugin-shot">
-          <img src="assets/plugins/submerge.jpg" alt="Slate Digital Submerge">
-        </div>
-        <div>
-          <div class="plugin-meta">
-            <span class="plugin-pill">Sidechain FX</span>
-            <span class="plugin-pill">Pumping</span>
             <span class="plugin-pill">Creative</span>
           </div>
-          <h3>Submerge</h3>
+          <h3>MO-TT</h3>
           <p>
-            This is more of a movement tool than a corrective one. I use it for ducking,
-            breathing, pulse, and rhythmic motion when I want a part to feel alive around the
-            kick or the groove. It is useful when the production needs that modern inhale /
-            exhale energy instead of static balance.
+            A more aggressive texture and energy tool for modern lift, density, and presence.
+            Great when something needs to jump forward or feel more exaggerated and unreal.
           </p>
-          <div class="plugin-notes">Slate describes Submerge as an automatic sidechain plugin for ducking and pumping effects, with multiple trigger modes and effect types. :contentReference[oaicite:16]{index=16}</div>
-        </div>
-      </article>
-
-      <article class="plugin-card">
-        <div class="plugin-shot">
-          <img src="assets/plugins/lustrous-plates.jpg" alt="Slate Digital Lustrous Plates">
-        </div>
-        <div>
-          <div class="plugin-meta">
-            <span class="plugin-pill">Plate Reverb</span>
-            <span class="plugin-pill">Spatial</span>
-            <span class="plugin-pill">Mix</span>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://docs.slatedigital.com/MO-TT/MO-TT.html" target="_blank" rel="noopener noreferrer">Link</a>
+            <a class="plugin-link" href="https://slatedigital.com/all-access-pass/" target="_blank" rel="noopener noreferrer">Bundle Link</a>
           </div>
-          <h3>Lustrous Plates</h3>
-          <p>
-            This is one of the reverbs I’d use when I want beauty more than realism. It has
-            that lush plate character that sits really well on synths, vocals, and emotional
-            melodic parts. It does not feel cold. It feels reflective, glamorous, and a little
-            cinematic, which fits the Chroma Glow world really well.
-          </p>
-          <div class="plugin-notes">Slate says Lustrous Plates recreates seven classic plate reverbs using LiquidSonics TASM technology. :contentReference[oaicite:17]{index=17}</div>
-        </div>
-      </article>
-
-      <article class="plugin-card">
-        <div class="plugin-shot">
-          <img src="assets/plugins/infinity-bass.jpg" alt="Slate Digital Infinity Bass">
-        </div>
-        <div>
-          <div class="plugin-meta">
-            <span class="plugin-pill">Bass Enhancer</span>
-            <span class="plugin-pill">Subharmonic</span>
-            <span class="plugin-pill">Mix / Master</span>
-          </div>
-          <h3>Infinity Bass</h3>
-          <p>
-            I use this when the low end feels present but not persuasive. It helps add weight,
-            focus, and extension without just smashing the sub louder. That makes it really
-            useful on basses, kicks, and sometimes even fuller material when a track needs a
-            little more gravity underneath everything else.
-          </p>
-          <div class="plugin-notes">Slate describes Infinity Bass as a bass-shaping tool that enhances low end and can generate missing low-end content. :contentReference[oaicite:18]{index=18}</div>
-        </div>
-      </article>
-
-      <article class="plugin-card">
-        <div class="plugin-shot">
-          <img src="assets/plugins/limiter.jpg" alt="Cubase Limiter">
-        </div>
-        <div>
-          <div class="plugin-meta">
-            <span class="plugin-pill">Limiter</span>
-            <span class="plugin-pill">Dynamics</span>
-            <span class="plugin-pill">Bus / Utility</span>
-          </div>
-          <h3>Cubase Limiter</h3>
-          <p>
-            A dependable utility limiter when I need simple level control and clean peak
-            handling. It is not really a “vibe” plugin for me. It is more the kind of thing I
-            use because it is there, fast, and does the job without drama. Sometimes that is
-            exactly what you want.
-          </p>
-          <div class="plugin-notes">Steinberg describes Limiter as preventing the output from exceeding a set level and offering automatic or manual release behavior. :contentReference[oaicite:19]{index=19}</div>
-        </div>
-      </article>
-
-      <article class="plugin-card">
-        <div class="plugin-shot">
-          <img src="assets/plugins/maximizer.jpg" alt="Cubase Maximizer">
-        </div>
-        <div>
-          <div class="plugin-meta">
-            <span class="plugin-pill">Maximizer</span>
-            <span class="plugin-pill">Loudness</span>
-            <span class="plugin-pill">Master</span>
-          </div>
-          <h3>Cubase Maximizer</h3>
-          <p>
-            This is more of a loudness-finishing tool for me. If I want a quick way to bring
-            level up without clipping, this is a simple option. It is useful when I want to
-            hear the mix in a more “released” state before deciding whether I need something
-            more specialized later.
-          </p>
-          <div class="plugin-notes">Steinberg says Maximizer raises loudness without clipping and offers Classic and Modern modes. :contentReference[oaicite:20]{index=20}</div>
-        </div>
-      </article>
-
-      <article class="plugin-card">
-        <div class="plugin-shot">
-          <img src="assets/plugins/supervision.jpg" alt="Cubase SuperVision">
-        </div>
-        <div>
-          <div class="plugin-meta">
-            <span class="plugin-pill">Analysis</span>
-            <span class="plugin-pill">Metering</span>
-            <span class="plugin-pill">Mix / Master</span>
-          </div>
-          <h3>Cubase SuperVision</h3>
-          <p>
-            This is more of a seeing tool than a sound tool, but it matters a lot. I use it
-            to check spectrum, phase, level, and overall behavior when I want to confirm that
-            what I am hearing lines up with what the track is doing. It keeps me honest,
-            especially in denser mixes.
-          </p>
-          <div class="plugin-notes">Steinberg describes SuperVision as a monitoring and analysis suite with multiple modules and custom layouts. :contentReference[oaicite:21]{index=21}</div>
-        </div>
-      </article>
-
-      <article class="plugin-card">
-        <div class="plugin-shot">
-          <img src="assets/plugins/roomworks.jpg" alt="Cubase RoomWorks">
-        </div>
-        <div>
-          <div class="plugin-meta">
-            <span class="plugin-pill">Reverb</span>
-            <span class="plugin-pill">Room / Ambience</span>
-            <span class="plugin-pill">Mix</span>
-          </div>
-          <h3>Cubase RoomWorks</h3>
-          <p>
-            A solid stock reverb when I want space without turning it into a whole production
-            statement. It is useful for room feel, depth, and support, especially when I do
-            not need an especially stylized reverb sound. It can stay in the background and
-            help the mix feel dimensional.
-          </p>
-          <div class="plugin-notes">Steinberg describes RoomWorks as an adjustable reverb for realistic room ambience and larger reverberation. :contentReference[oaicite:22]{index=22}</div>
-        </div>
-      </article>
-
-      <article class="plugin-card">
-        <div class="plugin-shot">
-          <img src="assets/plugins/monodelay.jpg" alt="Cubase MonoDelay">
-        </div>
-        <div>
-          <div class="plugin-meta">
-            <span class="plugin-pill">Delay</span>
-            <span class="plugin-pill">Mono</span>
-            <span class="plugin-pill">Creative / Utility</span>
-          </div>
-          <h3>Cubase MonoDelay</h3>
-          <p>
-            Good for simple repeats, rhythmic space, and little moments that need depth
-            without taking over the stereo field. I like mono delays because they can make a
-            part feel farther back or more atmospheric without instantly widening the whole
-            picture. Sometimes that restraint is exactly right.
-          </p>
-          <div class="plugin-notes">Steinberg documents MonoDelay as a delay with sidechain support that can silence repeats when triggered. :contentReference[oaicite:23]{index=23}</div>
         </div>
       </article>
 
@@ -1518,58 +1323,23 @@
           </div>
           <h3>Kilohearts Chorus</h3>
           <p>
-            This is a width and shimmer tool for me. It helps make parts feel more dreamlike,
-            more doubled, more alive around the edges. On the right synth or guitar layer, it
-            can add that slightly blurred emotional motion that fits nostalgic material really
-            well.
+            A width and shimmer tool that helps synths, guitars, and textures feel more dreamy,
+            doubled, and alive around the edges.
           </p>
-          <div class="plugin-notes">Kilohearts describes Chorus as enhancing stereo effect and presence by mixing in delayed versions of the signal. :contentReference[oaicite:24]{index=24}</div>
-        </div>
-      </article>
-
-      <article class="plugin-card">
-        <div class="plugin-shot">
-          <img src="assets/plugins/kilohearts-formant-filter.jpg" alt="Kilohearts Formant Filter">
-        </div>
-        <div>
-          <div class="plugin-meta">
-            <span class="plugin-pill">Filter</span>
-            <span class="plugin-pill">Formant</span>
-            <span class="plugin-pill">Sound Design</span>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://kilohearts.com/products/chorus" target="_blank" rel="noopener noreferrer">Link</a>
+            <a class="plugin-link" href="https://kilohearts.com/products/kilohearts_essentials" target="_blank" rel="noopener noreferrer">Bundle Link</a>
           </div>
-          <h3>Kilohearts Formant Filter</h3>
-          <p>
-            This is more of a color and personality move. It can make a sound feel more vocal,
-            more synthetic, more alien, or just more interesting. I like it when something
-            needs identity instead of polish. It is a really fun plugin for taking a simple
-            tone and giving it a strange emotional accent.
-          </p>
-          <div class="plugin-notes">Kilohearts says it shapes sound like the vocal tract to create vowel-like tones. :contentReference[oaicite:25]{index=25}</div>
         </div>
       </article>
 
-      <article class="plugin-card">
-        <div class="plugin-shot">
-          <img src="assets/plugins/chow-tape-model.jpg" alt="Chow Tape Model">
-        </div>
-        <div>
-          <div class="plugin-meta">
-            <span class="plugin-pill">Tape Saturation</span>
-            <span class="plugin-pill">Lo-Fi Character</span>
-            <span class="plugin-pill">Mix</span>
-          </div>
-          <h3>Chow Tape Model</h3>
-          <p>
-            I use tape plugins when I want things to feel less perfectly digital. This is more
-            about texture, softness, and slight instability than obvious distortion. It can
-            help a track feel older, warmer, or more haunted in a good way, which fits the
-            memory-soaked side of the project really well.
-          </p>
-          <div class="plugin-notes">Best used here as your texture / age / glue card.</div>
-        </div>
-      </article>
+      <!-- keep adding your horizontal cards here -->
 
-      <article class="plugin-card">
+    </div>
+
+    <div class="plugin-grid-bottom">
+
+      <article class="plugin-card plugin-card--vertical">
         <div class="plugin-shot">
           <img src="assets/plugins/valhalla-supermassive.jpg" alt="Valhalla Supermassive">
         </div>
@@ -1581,16 +1351,16 @@
           </div>
           <h3>Valhalla Supermassive</h3>
           <p>
-            This one is basically atmosphere in plugin form. Huge tails, unreal echoes, cosmic
-            bloom, and a kind of dreamy scale that can completely change the emotional size of
-            a part. It is one of the most Chroma Glow tools in the whole list because it lets
-            space become part of the melody.
+            Huge tails, dreamy bloom, and cosmic scale. This is one of the most Chroma Glow
+            plugins in the whole set because it lets atmosphere become part of the melody.
           </p>
-          <div class="plugin-notes">Valhalla describes Supermassive as built for massive reverbs, harmonic echoes, and space sounds. :contentReference[oaicite:26]{index=26}</div>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://valhalladsp.com/shop/reverb/valhalla-supermassive/" target="_blank" rel="noopener noreferrer">Link</a>
+          </div>
         </div>
       </article>
 
-      <article class="plugin-card">
+      <article class="plugin-card plugin-card--vertical">
         <div class="plugin-shot">
           <img src="assets/plugins/freeclip-2.jpg" alt="FreeClip 2">
         </div>
@@ -1598,16 +1368,16 @@
           <div class="plugin-meta">
             <span class="plugin-pill">Clipper</span>
             <span class="plugin-pill">Loudness</span>
-            <span class="plugin-pill">Bus / Master</span>
+            <span class="plugin-pill">Master</span>
           </div>
           <h3>FreeClip 2</h3>
           <p>
-            This is a control and loudness tool more than a vibe tool. I use clippers when I
-            want to catch peaks in a harder, more deliberate way before or during limiting.
-            It is one of those practical pieces that can make the whole master chain feel more
-            stable and intentional.
+            More utility than vibe, but really useful for peak control and master-chain
+            stability before or during limiting.
           </p>
-          <div class="plugin-notes">Best framed on the page as a loudness/peak-control tool.</div>
+          <div class="plugin-links">
+            <a class="plugin-link" href="#" target="_blank" rel="noopener noreferrer">Link</a>
+          </div>
         </div>
       </article>
 
