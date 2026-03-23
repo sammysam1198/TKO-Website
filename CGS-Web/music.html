@@ -569,154 +569,6 @@
       color: var(--soft);
     }
 
-    .plugins-showcase {
-  margin-top: 28px;
-  display: grid;
-  gap: 22px;
-}
-
-.plugins-intro-card {
-  position: relative;
-  padding: 28px;
-  border-radius: 28px;
-  border: 1px solid var(--border);
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)),
-    linear-gradient(135deg, rgba(34, 18, 48, 0.42), rgba(12, 15, 28, 0.34)),
-    var(--panel);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow: 0 14px 42px rgba(0,0,0,0.22);
-  overflow: hidden;
-}
-
-.plugins-intro-card::before,
-.plugin-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at top left, rgba(255, 99, 199, 0.12), transparent 28%),
-    radial-gradient(circle at bottom right, rgba(95, 130, 255, 0.12), transparent 32%),
-    linear-gradient(135deg, rgba(141, 99, 255, 0.06), transparent 46%);
-  opacity: 0.95;
-}
-
-.plugins-intro-card > *,
-.plugin-card > * {
-  position: relative;
-  z-index: 1;
-}
-
-.plugins-intro-card p {
-  margin: 12px 0 0;
-  color: var(--muted);
-  line-height: 1.8;
-  max-width: 880px;
-}
-
-.plugin-category {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 14px;
-  padding: 9px 14px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,0.04);
-  color: var(--soft);
-  font-size: 0.82rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-}
-
-.plugin-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
-}
-
-.plugin-card {
-  position: relative;
-  display: grid;
-  grid-template-columns: 240px 1fr;
-  gap: 18px;
-  padding: 18px;
-  border-radius: 26px;
-  border: 1px solid var(--border);
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015)),
-    linear-gradient(135deg, rgba(34, 18, 48, 0.40), rgba(12, 15, 28, 0.32)),
-    var(--panel-2);
-  box-shadow: 0 14px 42px rgba(0,0,0,0.20);
-  overflow: hidden;
-  transition: transform var(--ease), border-color var(--ease), box-shadow var(--ease);
-}
-
-.plugin-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--border-strong);
-  box-shadow: 0 20px 56px rgba(0,0,0,0.28);
-}
-
-.plugin-shot {
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.08);
-  background:
-    linear-gradient(135deg, rgba(255, 99, 199, 0.15), rgba(95, 130, 255, 0.15)),
-    rgba(0,0,0,0.28);
-  min-height: 185px;
-}
-
-.plugin-shot img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.plugin-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-
-.plugin-pill {
-  display: inline-flex;
-  align-items: center;
-  padding: 8px 12px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: rgba(255,255,255,0.04);
-  color: var(--soft);
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.plugin-card h3 {
-  margin: 0;
-  font-size: 1.28rem;
-  line-height: 1.15;
-}
-
-.plugin-card p {
-  margin: 12px 0 0;
-  color: var(--muted);
-  line-height: 1.72;
-  font-size: 0.96rem;
-}
-
-.plugin-notes {
-  margin-top: 12px;
-  color: var(--soft);
-  font-size: 0.9rem;
-  line-height: 1.65;
-}
-
 .plugins-showcase {
   margin-top: 28px;
   display: grid;
@@ -757,13 +609,6 @@
   z-index: 1;
 }
 
-.plugins-intro-card p {
-  margin: 12px 0 0;
-  color: var(--muted);
-  line-height: 1.8;
-  max-width: 880px;
-}
-
 .plugin-category {
   display: inline-flex;
   align-items: center;
@@ -781,24 +626,22 @@
 
 .plugin-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 22px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
 }
 
 .plugin-card {
   position: relative;
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 18px;
-  padding: 18px;
-  border-radius: 26px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 28px;
   border: 1px solid var(--border);
+  overflow: hidden;
   background:
     linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015)),
     linear-gradient(135deg, rgba(34, 18, 48, 0.40), rgba(12, 15, 28, 0.32)),
     var(--panel-2);
   box-shadow: 0 14px 42px rgba(0,0,0,0.20);
-  overflow: hidden;
   transition: transform var(--ease), border-color var(--ease), box-shadow var(--ease);
 }
 
@@ -810,60 +653,58 @@
 
 .plugin-shot {
   position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.08);
-  background:
-    linear-gradient(135deg, rgba(255, 99, 199, 0.15), rgba(95, 130, 255, 0.15)),
-    rgba(0,0,0,0.28);
+  width: 100%;
   aspect-ratio: 16 / 9;
-  min-height: 180px;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255, 99, 199, 0.16), rgba(95, 130, 255, 0.16)),
+    rgba(0,0,0,0.3);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
 .plugin-shot img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
+}
+
+.plugin-body {
+  padding: 20px 20px 22px;
 }
 
 .plugin-meta {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .plugin-pill {
   display: inline-flex;
   align-items: center;
-  padding: 8px 12px;
+  padding: 7px 12px;
   border-radius: 999px;
   border: 1px solid var(--border);
   background: rgba(255,255,255,0.04);
   color: var(--soft);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .plugin-card h3 {
-  margin: 0;
-  font-size: 1.28rem;
-  line-height: 1.15;
+  margin: 0 0 10px;
+  font-size: 1.3rem;
+  line-height: 1.1;
+  color: var(--text);
 }
 
 .plugin-card p {
-  margin: 12px 0 0;
+  margin: 0;
   color: var(--muted);
   line-height: 1.72;
   font-size: 0.96rem;
-}
-
-.plugin-notes {
-  margin-top: 12px;
-  color: var(--soft);
-  font-size: 0.9rem;
-  line-height: 1.65;
 }
 
 .plugin-links {
@@ -880,9 +721,10 @@
   padding: 10px 14px;
   border-radius: 999px;
   border: 1px solid var(--border);
-  background: rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.05);
   color: var(--text);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
+  text-decoration: none;
   transition: transform var(--ease), border-color var(--ease), background var(--ease);
 }
 
@@ -892,53 +734,12 @@
   background: rgba(255,255,255,0.08);
 }
 
-.plugin-grid-bottom {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
-}
-
-.plugin-card--vertical {
-  grid-template-columns: 1fr;
-}
-
-.plugin-card--vertical .plugin-shot {
-  aspect-ratio: 4 / 5;
-  min-height: 340px;
-}
-
-@media (max-width: 900px) {
-  .plugin-card {
-    grid-template-columns: 1fr;
-  }
-
-  .plugin-grid-bottom {
-    grid-template-columns: 1fr;
-  }
-
-  .plugin-card--vertical .plugin-shot {
-    aspect-ratio: 16 / 9;
-    min-height: 220px;
-  }
-}
-
-    
-
-@media (max-width: 1080px) {
+@media (max-width: 980px) {
   .plugin-grid {
     grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 720px) {
-  .plugin-card {
-    grid-template-columns: 1fr;
-  }
-
-  .plugin-shot {
-    min-height: 200px;
-  }
-}
 
     @media (max-width: 1080px) {
       .hero,
@@ -1240,15 +1041,15 @@
       </div>
     </section>
 
-<section class="section" id="plugins">
+
+    <section class="section" id="plugins">
   <div class="section-head">
     <div>
       <p class="eyebrow">Tools & Sound</p>
       <h2 class="section-title">Plugins I Use</h2>
       <p class="section-copy">
-        The sound of Chroma Glow lives somewhere between clean control and emotional blur.
-        These are the tools I keep coming back to for glow, weight, width, motion, and that
-        soft neon ache that sits behind everything.
+        Some of these are precision tools. Some of them are pure color.
+        Most of them live somewhere in between.
       </p>
     </div>
   </div>
@@ -1258,32 +1059,34 @@
       <div class="plugin-category">Production Palette</div>
       <h3>A late-night toolkit</h3>
       <p>
-        Less a gear list, more a map of how the atmosphere gets built. Some of these are
-        precision tools. Some of them are pure color. Most of them live somewhere in between.
+        Less a gear list and more a map of how the atmosphere gets built.
+        These are the tools behind the glow, blur, depth, movement, and weight.
       </p>
     </article>
 
     <div class="plugin-grid">
 
-      <!-- horizontal cards go here -->
+      <!-- one of these per plugin -->
       <article class="plugin-card">
         <div class="plugin-shot">
-          <img src="assets/plugins/neutron-4-suite.jpg" alt="Neutron 4 Suite">
+          <img src="static/plugins/neutron-eq.jpg" alt="Neutron 4 EQ">
         </div>
-        <div>
+        <div class="plugin-body">
           <div class="plugin-meta">
-            <span class="plugin-pill">Mixing Suite</span>
-            <span class="plugin-pill">Digital</span>
-            <span class="plugin-pill">Mix</span>
+            <span class="plugin-pill">Parametric EQ</span>
+            <span class="plugin-pill">Dynamic</span>
+            <span class="plugin-pill">EQ</span>
           </div>
-          <h3>Neutron 4 Suite</h3>
+          <h3>Neutron 4 EQ</h3>
           <p>
-            My main all-in-one mixing environment. I use it for shaping, cleanup, separation,
-            and general control when I want a sound to stay emotional but sit correctly in the
-            mix. It lets me move fast without feeling boxed into something sterile.
+            This was my first third-party EQ and it’s still one of my go-to tools. 
+            I use it a lot to compare frequency content between instruments when things 
+            start competing in a mix. Being able to see what’s happening visually makes 
+            it way easier to carve space without guessing. It’s especially useful when 
+            I’m trying to get two sounds to coexist instead of fight each other.
           </p>
           <div class="plugin-links">
-            <a class="plugin-link" href="https://www.izotope.com/en/products/neutron.html" target="_blank" rel="noopener noreferrer">Link</a>
+            <a class="plugin-link" href="https://www.izotope.com/en/products/neutron/features/equalizer" target="_blank" rel="noopener noreferrer">Link</a>
             <a class="plugin-link" href="https://www.izotope.com/en/products/music-production-suite" target="_blank" rel="noopener noreferrer">Bundle Link</a>
           </div>
         </div>
@@ -1291,68 +1094,518 @@
 
       <article class="plugin-card">
         <div class="plugin-shot">
-          <img src="assets/plugins/mo-tt.jpg" alt="Slate Digital MO-TT">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
         </div>
-        <div>
+        <div class="plugin-body">
           <div class="plugin-meta">
-            <span class="plugin-pill">Multiband Compressor</span>
-            <span class="plugin-pill">OTT Style</span>
-            <span class="plugin-pill">Creative</span>
+            <span class="plugin-pill">Multiband</span>
+            <span class="plugin-pill">Visual</span>
+            <span class="plugin-pill">Compressor</span>
           </div>
-          <h3>MO-TT</h3>
+          <h3>Neutron 4 Multiband Compressor</h3>
           <p>
-            A more aggressive texture and energy tool for modern lift, density, and presence.
-            Great when something needs to jump forward or feel more exaggerated and unreal.
+            This is my main channel compressor and I use it on almost everything. 
+            Whether it’s multiband or single band, it gives me super clean control over dynamics. 
+            I especially love it on guitars where different frequency ranges need different treatment.
+            The visual feedback is huge for me. 
+            Being able to see what’s being compressed makes mixing much more intuitive.
           </p>
           <div class="plugin-links">
-            <a class="plugin-link" href="https://docs.slatedigital.com/MO-TT/MO-TT.html" target="_blank" rel="noopener noreferrer">Link</a>
+            <a class="plugin-link" href="https://www.izotope.com/en/products/neutron/features/compressor" rel="noopener noreferrer">Link</a>
+            <a class="plugin-link" href="https://www.izotope.com/en/products/music-production-suite" target="_blank" rel="noopener noreferrer">Bundle Link</a>
+          </div>
+        </div>
+      </article>
+
+       <article class="plugin-card">
+        <div class="plugin-shot">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
+        </div>
+        <div class="plugin-body">
+          <div class="plugin-meta">
+            <span class="plugin-pill">Dynamics</span>
+            <span class="plugin-pill">Visual</span>
+            <span class="plugin-pill">Transient Shaper</span>
+          </div>
+          <h3>Neutron 4 Transient Shaper</h3>
+          <p>
+           This is the only transient shaper I use. 
+            It’s insanely useful for shaping attack and sustain, especially on drums and percussive synths.
+            The fact that it’s multiband and fully visual makes it perfect for dialing things in quickly.
+            For visual learners, this plugin is honestly a game-changer.
+          </p>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://www.izotope.com/en/products/neutron/features/transient-shaper">Link</a>
+            <a class="plugin-link" href="https://www.izotope.com/en/products/music-production-suite" target="_blank" rel="noopener noreferrer">Bundle Link</a>
+          </div>
+        </div>
+      </article>
+
+       <article class="plugin-card">
+        <div class="plugin-shot">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
+        </div>
+        <div class="plugin-body">
+          <div class="plugin-meta">
+            <span class="plugin-pill">Dynamics</span>
+            <span class="plugin-pill">Visual</span>
+            <span class="plugin-pill">Gate</span>
+          </div>
+          <h3>Neutron 4 Gate</h3>
+          <p>
+           I always use this before my guitars. 
+            The visual interface makes it really easy to dial in the threshold and clean
+            things up without overdoing it. It’s simple, effective,
+            and super helpful for tightening up noisy recordings.
+          </p>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://www.izotope.com/en/products/neutron/features/gate" target="_blank" rel="noopener noreferrer">Link</a>
+            <a class="plugin-link" href="https://www.izotope.com/en/products/music-production-suite" target="_blank" rel="noopener noreferrer">Bundle Link</a>
+          </div>
+        </div>
+      </article>
+
+       <article class="plugin-card">
+        <div class="plugin-shot">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
+        </div>
+        <div class="plugin-body">
+          <div class="plugin-meta">
+            <span class="plugin-pill">Dynamics</span>
+            <span class="plugin-pill">Visual</span>
+            <span class="plugin-pill">Exciter</span>
+          </div>
+          <h3>Neutron 4 Exciter</h3>
+          <p>
+            This is my go-to for adding character and brightness.
+            I mainly use it on cymbals, FX, and sometimes snares to
+            get more sizzle and presence. There are multiple modes to choose from, 
+            which makes it really versatile depending on the sound. 
+            It’s a great way to bring life back into dull or flat elements.
+          </p>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://www.izotope.com/en/products/neutron/features/exciter" target="_blank" rel="noopener noreferrer">Link</a>
+            <a class="plugin-link" href="https://www.izotope.com/en/products/music-production-suite" target="_blank" rel="noopener noreferrer">Bundle Link</a>
+          </div>
+        </div>
+      </article>
+
+       <article class="plugin-card">
+        <div class="plugin-shot">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
+        </div>
+        <div class="plugin-body">
+          <div class="plugin-meta">
+            <span class="plugin-pill">EQ</span>
+            <span class="plugin-pill">AI Assisted</span>
+            <span class="plugin-pill">Visual</span>
+          </div>
+          <h3>Neutron 4 Sculptor</h3>
+          <p>
+            I use Sculptor early in my master chain to establish 
+            a solid tonal baseline. It helps smooth things out and gives the mix
+            a more balanced starting point before I get into detailed processing. 
+            It’s subtle but really effective, especially on buses and the master.
+          </p>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://www.izotope.com/en/products/neutron/features/sculptor" target="_blank" rel="noopener noreferrer">Link</a>
+            <a class="plugin-link" href="https://www.izotope.com/en/products/music-production-suite" target="_blank" rel="noopener noreferrer">Bundle Link</a>
+          </div>
+        </div>
+      </article>
+
+       <article class="plugin-card">
+        <div class="plugin-shot">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
+        </div>
+        <div class="plugin-body">
+          <div class="plugin-meta">
+            <span class="plugin-pill">vvvvvv</span>
+            <span class="plugin-pill">Up/Down Compressor</span>
+            <span class="plugin-pill">Master</span>
+          </div>
+          <h3>MO-TT (Up/Down Compressor)</h3>
+          <p>
+            This compressor is a beast. 
+            It’s amazing for shaping dynamics and bringing energy forward in a mix. 
+            I especially like it on the master when I want things to feel more alive 
+            and controlled at the same time. Definitely a must-have for modern production.
+          </p>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://slatedigital.com/mo-tt-ott-plugin-multiband-compressor/" target="_blank" rel="noopener noreferrer">Link</a>
             <a class="plugin-link" href="https://slatedigital.com/all-access-pass/" target="_blank" rel="noopener noreferrer">Bundle Link</a>
+          </div>
+        </div>
+      </article>
+
+       <article class="plugin-card">
+        <div class="plugin-shot">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
+        </div>
+        <div class="plugin-body">
+          <div class="plugin-meta">
+            <span class="plugin-pill">Parametric EQ</span>
+            <span class="plugin-pill">Dynamic Filters</span>
+            <span class="plugin-pill">Mix / Master</span>
+          </div>
+          <h3>VBC-FG Red</h3>
+          <p>
+            This is the best glue compressor I’ve ever used.
+            It pulls everything together in a really musical way without killing the energy. 
+            The attack and release controls are a little unusual at first, 
+            but once you get used to them it becomes incredibly powerful. 
+            I use this on my master chain around 85–95% mix and it just locks everything in place.
+            Secret: use Drive for extra punch.
+          </p>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://slatedigital.com/virtual-buss-compressors/" target="_blank" rel="noopener noreferrer">Link</a>
+            <a class="plugin-link" href="https://slatedigital.com/all-access-pass/" target="_blank" rel="noopener noreferrer">Bundle Link</a>
+          </div>
+        </div>
+      </article>
+
+       <article class="plugin-card">
+        <div class="plugin-shot">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
+        </div>
+        <div class="plugin-body">
+          <div class="plugin-meta">
+            <span class="plugin-pill">Parametric EQ</span>
+            <span class="plugin-pill">Dynamic Filters</span>
+            <span class="plugin-pill">Mix / Master</span>
+          </div>
+          <h3>Infinity EQ 2</h3>
+          <p>
+            This is my favorite EQ ever. You can have unlimited bands,
+            go super wide or extremely narrow, and shape literally anything. 
+            It supports dynamic EQ, sidechaining, mid-side, left-right processing, basically everything. 
+            If there’s something you want to do with an EQ, this can do it. 
+            I use it constantly, and I can’t recommend it enough.
+          </p>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://slatedigital.com/infinity-eq/" target="_blank" rel="noopener noreferrer">Link</a>
+            <a class="plugin-link" href="https://slatedigital.com/all-access-pass/" target="_blank" rel="noopener noreferrer">Bundle Link</a>
+          </div>
+        </div>
+      </article>
+
+       <article class="plugin-card">
+        <div class="plugin-shot">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
+        </div>
+        <div class="plugin-body">
+          <div class="plugin-meta">
+            <span class="plugin-pill">Parametric EQ</span>
+            <span class="plugin-pill">Dynamic Filters</span>
+            <span class="plugin-pill">Mix / Master</span>
+          </div>
+          <h3>Air EQ</h3>
+          <p>
+            This is my go-to when I want a more analog-style EQ workflow. 
+            It’s very musical and detailed, and it feels great to use if you 
+            prefer knobs over surgical visual control. It’s second only to 
+            Infinity EQ for me, but it has its own vibe that I really like.
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://slatedigital.com/eiosis-air-and-earth-eq/" target="_blank" rel="noopener noreferrer">Link</a>
+            <a class="plugin-link" href="https://slatedigital.com/all-access-pass/" target="_blank" rel="noopener noreferrer">Bundle Link</a>
+          </div>
+        </div>
+      </article>
+
+       <article class="plugin-card">
+        <div class="plugin-shot">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
+        </div>
+        <div class="plugin-body">
+          <div class="plugin-meta">
+            <span class="plugin-pill">Parametric EQ</span>
+            <span class="plugin-pill">Dynamic Filters</span>
+            <span class="plugin-pill">Mix / Master</span>
+          </div>
+          <h3>Fresh Air</h3>
+          <p>
+            I use this to bring back high-end clarity and sparkle. 
+            It’s great on vocals, synths, and anything that needs a
+            bit more shimmer. It can really open up a 
+            sound without making it harsh.
+          </p>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://slatedigital.com/fresh-air-2/" target="_blank" rel="noopener noreferrer">Link</a>
+            <a class="plugin-link" href="https://slatedigital.com/all-access-pass/" target="_blank" rel="noopener noreferrer">Bundle Link</a>
+          </div>
+        </div>
+      </article>
+
+       <article class="plugin-card">
+        <div class="plugin-shot">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
+        </div>
+        <div class="plugin-body">
+          <div class="plugin-meta">
+            <span class="plugin-pill">Parametric EQ</span>
+            <span class="plugin-pill">Dynamic Filters</span>
+            <span class="plugin-pill">Mix / Master</span>
+          </div>
+          <h3>Virtual Mix Rack</h3>
+          <p>
+            This plugin is amazing on drums. 
+            It really brings out the body and punch of kicks and snares.
+            The included modules and presets are incredibly good, and
+            it makes building analog-style chains really easy.
+          </p>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://slatedigital.com/vmr-3/" target="_blank" rel="noopener noreferrer">Link</a>
+            <a class="plugin-link" href="https://slatedigital.com/all-access-pass/" target="_blank" rel="noopener noreferrer">Bundle Link</a>
+          </div>
+        </div>
+      </article>
+
+       <article class="plugin-card">
+        <div class="plugin-shot">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
+        </div>
+        <div class="plugin-body">
+          <div class="plugin-meta">
+            <span class="plugin-pill">Parametric EQ</span>
+            <span class="plugin-pill">Dynamic Filters</span>
+            <span class="plugin-pill">Mix / Master</span>
+          </div>
+          <h3>Submerge</h3>
+          <p>
+            This is one of the only ducking plugins I actually like. 
+            It’s super customizable and can go from really subtle movement to heavy pumping effects. 
+            It’s great for adding rhythm and space without overcomplicating things.
+          </p>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://slatedigital.com/submerge-sidechain-compressor-plugin/" target="_blank" rel="noopener noreferrer">Link</a>
+            <a class="plugin-link" href="https://slatedigital.com/all-access-pass/" target="_blank" rel="noopener noreferrer">Bundle Link</a>
+          </div>
+        </div>
+      </article>
+
+       <article class="plugin-card">
+        <div class="plugin-shot">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
+        </div>
+        <div class="plugin-body">
+          <div class="plugin-meta">
+            <span class="plugin-pill">Parametric EQ</span>
+            <span class="plugin-pill">Dynamic Filters</span>
+            <span class="plugin-pill">Mix / Master</span>
+          </div>
+          <h3>Lustrous Plates</h3>
+          <p>
+            This is a really powerful reverb for vocals and drums.
+            It’s super detailed and customizable, with tons of plate options to choose from.
+            There’s even a trigger section for shaping how the reverb reacts dynamically. 
+            It also has built-in EQ and a ton of control over the reverb character.
+          </p>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://slatedigital.com/lustrous-plates/" target="_blank" rel="noopener noreferrer">Link</a>
+            <a class="plugin-link" href="https://slatedigital.com/all-access-pass/" target="_blank" rel="noopener noreferrer">Bundle Link</a>
+          </div>
+        </div>
+      </article>
+
+       <article class="plugin-card">
+        <div class="plugin-shot">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity Bass">
+        </div>
+        <div class="plugin-body">
+          <div class="plugin-meta">
+            <span class="plugin-pill">Parametric EQ</span>
+            <span class="plugin-pill">Dynamic Filters</span>
+            <span class="plugin-pill">Mix / Master</span>
+          </div>
+          <h3>Infinity Bass</h3>
+          <p>
+            This plugin hits hard. I use it on basses and kicks all the time. 
+            It adds weight and low-end presence in a really clean way, 
+            and the different modes give you flexibility depending on the track. 
+            Honestly, a must-have for getting a strong low end.
+          </p>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://slatedigital.com/infinity-bass-plugin/" target="_blank" rel="noopener noreferrer">Link</a>
+            <a class="plugin-link" href="https://slatedigital.com/all-access-pass/" target="_blank" rel="noopener noreferrer">Bundle Link</a>
+          </div>
+        </div>
+      </article>
+
+       <article class="plugin-card">
+        <div class="plugin-shot">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
+        </div>
+        <div class="plugin-body">
+          <div class="plugin-meta">
+            <span class="plugin-pill">Simple</span>
+            <span class="plugin-pill">Distortion</span>
+            <span class="plugin-pill">Saturator</span>
+          </div>
+          <h3>Heatwave</h3>
+          <p>
+            This saturator is incredible. It's just subtle enough not to make
+            a mess, but it's beefy enough to add body and fullness to any instruement 
+            or mix. Highly recommend, especially for snares.
+          </p>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://slatedigital.com/heatwave/" target="_blank" rel="noopener noreferrer">Link</a>
+            <a class="plugin-link" href="https://slatedigital.com/all-access-pass/" target="_blank" rel="noopener noreferrer">Bundle Link</a>
+          </div>
+        </div>
+      </article>
+
+       <article class="plugin-card">
+        <div class="plugin-shot">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
+        </div>
+        <div class="plugin-body">
+          <div class="plugin-meta">
+            <span class="plugin-pill">Parametric EQ</span>
+            <span class="plugin-pill">Dynamic Filters</span>
+            <span class="plugin-pill">Mix / Master</span>
+          </div>
+          <h3>SuperVision</h3>
+          <p>
+            I use this to monitor loudness and make sure my tracks are hitting
+            the level I want without clipping or losing dynamics. 
+            It’s essential for getting competitive volume while still keeping the mix clean.
+          </p>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://www.steinberg.net/cubase/new-features/" target="_blank" rel="noopener noreferrer">Link</a>
+          </div>
+        </div>
+      </article>
+
+       <article class="plugin-card">
+        <div class="plugin-shot">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
+        </div>
+        <div class="plugin-body">
+          <div class="plugin-meta">
+            <span class="plugin-pill">Parametric EQ</span>
+            <span class="plugin-pill">Dynamic Filters</span>
+            <span class="plugin-pill">Mix / Master</span>
+          </div>
+          <h3>RoomWorks</h3>
+          <p>
+            This is my go-to reverb for general use. 
+            It’s really versatile and works great on an FX bus. 
+            Whether I need subtle room ambience or something bigger, 
+            it gets the job done.
+          </p>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://www.steinberg.net/cubase/new-features/" target="_blank" rel="noopener noreferrer">Link</a>
+          </div>
+        </div>
+      </article>
+
+       <article class="plugin-card">
+        <div class="plugin-shot">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
+        </div>
+        <div class="plugin-body">
+          <div class="plugin-meta">
+            <span class="plugin-pill">Parametric EQ</span>
+            <span class="plugin-pill">Dynamic Filters</span>
+            <span class="plugin-pill">Mix / Master</span>
+          </div>
+          <h3>MonoDelay</h3>
+          <p>
+            I like this because it’s simple and direct.
+            A lot of delay plugins get complicated, 
+            but this one gives me exactly what I need without extra clutter. 
+            Full control, no nonsense.
+          </p>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://www.steinberg.net/cubase/new-features/" target="_blank" rel="noopener noreferrer">Link</a>
+          </div>
+        </div>
+      </article>
+
+       <article class="plugin-card">
+        <div class="plugin-shot">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
+        </div>
+        <div class="plugin-body">
+          <div class="plugin-meta">
+            <span class="plugin-pill">Parametric EQ</span>
+            <span class="plugin-pill">Dynamic Filters</span>
+            <span class="plugin-pill">FREE</span>
+          </div>
+          <h3>Kilohearts Chorus</h3>
+          <p>
+            This gives a really full, rich chorus sound, similar to a guitar pedal. 
+            It can get subtle or really intense depending on how you use it. 
+            Great for adding width and movement. This plugin is also completely free.
+          </p>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://kilohearts.com/products/chorus" target="_blank" rel="noopener noreferrer">Link</a>
+            <a class="plugin-link" href="https://slatedigital.com/kilohearts-bundle/" target="_blank" rel="noopener noreferrer">Bundle Link</a>
           </div>
         </div>
       </article>
 
       <article class="plugin-card">
         <div class="plugin-shot">
-          <img src="assets/plugins/kilohearts-chorus.jpg" alt="Kilohearts Chorus">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
         </div>
-        <div>
+        <div class="plugin-body">
           <div class="plugin-meta">
-            <span class="plugin-pill">Chorus</span>
-            <span class="plugin-pill">Modulation</span>
-            <span class="plugin-pill">Creative</span>
+            <span class="plugin-pill">Parametric EQ</span>
+            <span class="plugin-pill">Dynamic Filters</span>
+            <span class="plugin-pill">FREE</span>
           </div>
-          <h3>Kilohearts Chorus</h3>
+          <h3>Kilohearts Formant Filter</h3>
           <p>
-            A width and shimmer tool that helps synths, guitars, and textures feel more dreamy,
-            doubled, and alive around the edges.
+            I use this for movement and character. 
+            With automation, you can make instruments feel like they’re 
+            “speaking” to each other, which adds a really cool 
+            dynamic element to a track. This plugin is completely free.
           </p>
           <div class="plugin-links">
-            <a class="plugin-link" href="https://kilohearts.com/products/chorus" target="_blank" rel="noopener noreferrer">Link</a>
-            <a class="plugin-link" href="https://kilohearts.com/products/kilohearts_essentials" target="_blank" rel="noopener noreferrer">Bundle Link</a>
+            <a class="plugin-link" href="https://kilohearts.com/products/formant_filter" target="_blank" rel="noopener noreferrer">Link</a>
+            <a class="plugin-link" href="https://slatedigital.com/kilohearts-bundle/" target="_blank" rel="noopener noreferrer">Bundle Link</a>
           </div>
         </div>
       </article>
 
-      <!-- keep adding your horizontal cards here -->
-
-    </div>
-
-    <div class="plugin-grid-bottom">
-
-      <article class="plugin-card plugin-card--vertical">
+      <article class="plugin-card">
         <div class="plugin-shot">
-          <img src="assets/plugins/valhalla-supermassive.jpg" alt="Valhalla Supermassive">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
         </div>
-        <div>
+        <div class="plugin-body">
           <div class="plugin-meta">
-            <span class="plugin-pill">Reverb / Delay</span>
-            <span class="plugin-pill">Ambient</span>
-            <span class="plugin-pill">Creative</span>
+            <span class="plugin-pill">Parametric EQ</span>
+            <span class="plugin-pill">Dynamic Filters</span>
+            <span class="plugin-pill">Mix / Master</span>
+          </div>
+          <h3>Chow Tape Model</h3>
+          <p>
+            I use this on almost everything except sub bass, drums, and FX. 
+            It adds warmth, saturation, and a vintage feel that brings a lot of character to my synths. 
+            It’s a huge part of my sound.
+          </p>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://chowdsp.com/products.html" target="_blank" rel="noopener noreferrer">Link</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="plugin-card">
+        <div class="plugin-shot">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
+        </div>
+        <div class="plugin-body">
+          <div class="plugin-meta">
+            <span class="plugin-pill">Parametric EQ</span>
+            <span class="plugin-pill">Dynamic Filters</span>
+            <span class="plugin-pill">Mix / Master</span>
           </div>
           <h3>Valhalla Supermassive</h3>
           <p>
-            Huge tails, dreamy bloom, and cosmic scale. This is one of the most Chroma Glow
-            plugins in the whole set because it lets atmosphere become part of the melody.
+            This plugin is massive in every sense. 
+            It feels like playing in a huge space, like a hall that just keeps going.
+            I use it alongside RoomWorks on a separate FX bus for long, lingering atmospheres.
           </p>
           <div class="plugin-links">
             <a class="plugin-link" href="https://valhalladsp.com/shop/reverb/valhalla-supermassive/" target="_blank" rel="noopener noreferrer">Link</a>
@@ -1360,27 +1613,52 @@
         </div>
       </article>
 
-      <article class="plugin-card plugin-card--vertical">
+      <article class="plugin-card">
         <div class="plugin-shot">
-          <img src="assets/plugins/freeclip-2.jpg" alt="FreeClip 2">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
         </div>
-        <div>
+        <div class="plugin-body">
           <div class="plugin-meta">
-            <span class="plugin-pill">Clipper</span>
-            <span class="plugin-pill">Loudness</span>
-            <span class="plugin-pill">Master</span>
+            <span class="plugin-pill">Parametric EQ</span>
+            <span class="plugin-pill">Dynamic Filters</span>
+            <span class="plugin-pill">Mix / Master</span>
           </div>
-          <h3>FreeClip 2</h3>
+          <h3>Free Clip 2</h3>
           <p>
-            More utility than vibe, but really useful for peak control and master-chain
-            stability before or during limiting.
+            This is essential for getting competitive loudness. 
+            I use it to trim peaks and smooth things out across tracks, 
+            and also on my master to push RMS levels higher without clipping. 
+            Super important for final polish.
           </p>
           <div class="plugin-links">
-            <a class="plugin-link" href="#" target="_blank" rel="noopener noreferrer">Link</a>
+            <a class="plugin-link" href="https://slatedigital.com/infinity-eq/" target="_blank" rel="noopener noreferrer">Link</a>
           </div>
         </div>
       </article>
 
+      <article class="plugin-card">
+        <div class="plugin-shot">
+          <img src="static/plugins/infinity-eq-2.jpg" alt="Infinity EQ 2">
+        </div>
+        <div class="plugin-body">
+          <div class="plugin-meta">
+            <span class="plugin-pill">Parametric EQ</span>
+            <span class="plugin-pill">Dynamic Filters</span>
+            <span class="plugin-pill">Mix / Master</span>
+          </div>
+          <h3>OTT Compressor</h3>
+          <p>
+            OTT is an essential plugin that I use to give a competitive punch and click 
+            to my bass and to lift my reverb buss. I highly recommend it to anyone who 
+            wants to make Electronic music of any kind, as it is a very simple model of a 
+            Multiband Up/Down compressor
+          </p>
+          <div class="plugin-links">
+            <a class="plugin-link" href="https://xferrecords.com/freeware" target="_blank" rel="noopener noreferrer">Link</a>
+          </div>
+        </div>
+      </article>
+      
     </div>
   </div>
 </section>
