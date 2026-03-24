@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Master Chain | Chroma Glow</title>
+  <style>
+    :root {
+      --bg: #07070b;
+      --bg-2: #0b0d16;
+      --panel: rgba(16, 16, 24, 0.72);
+      --panel-2: rgba(12, 13, 22, 0.82);
+      --border: rgba(255, 255, 255, 0.12);
+      --border-strong: rgba(255, 255, 255, 0.20);
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, 0.74);
+      --soft: rgba(255, 255, 255, 0.58);
+      --pink: #ff63c7;
+      --purple: #8d63ff;
+      --blue: #5f82ff;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --max-width: 1240px;
+      --ease: 240ms ease;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 14% 12%, rgba(255, 99, 199, 0.16), transparent 24%),
+        radial-gradient(circle at 86% 18%, rgba(141, 99, 255, 0.16), transparent 24%),
+        radial-gradient(circle at 50% 84%, rgba(95, 130, 255, 0.16), transparent 30%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 52%, var(--bg) 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255, 99, 199, 0.09), transparent 28%),
+        radial-gradient(circle at 76% 22%, rgba(141, 99, 255, 0.08), transparent 28%),
+        radial-gradient(circle at 46% 76%, rgba(95, 130, 255, 0.10), transparent 34%);
+      filter: blur(24px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .site-shell {
+      position: relative;
+      z-index: 1;
+      width: min(var(--max-width), calc(100% - 40px));
+      margin: 0 auto;
+      padding: 24px 0 80px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 22px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(12, 12, 19, 0.52);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
+      position: sticky;
+      top: 18px;
+      z-index: 20;
+    }
+
+    .brand {
+      font-size: 0.95rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.86);
+      white-space: nowrap;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .nav a {
+      color: var(--soft);
+      font-size: 0.95rem;
+      transition: color var(--ease), opacity var(--ease);
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 52px 0 28px;
+    }
+
+    .hero-panel,
+    .master-step,
+    .info-panel {
+      position: relative;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)),
+        linear-gradient(135deg, rgba(45, 20, 56, 0.40), rgba(14, 20, 40, 0.34)),
+        var(--panel);
+      backdrop-filter: blur(18px) saturate(130%);
+      -webkit-backdrop-filter: blur(18px) saturate(130%);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-panel::before,
+    .master-step::before,
+    .info-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at top left, rgba(255, 99, 199, 0.14), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(95, 130, 255, 0.14), transparent 32%),
+        linear-gradient(135deg, rgba(141, 99, 255, 0.06), transparent 46%);
+      opacity: 0.9;
+    }
+
+    .hero-panel > *,
+    .master-step > *,
+    .info-panel > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-panel {
+      padding: 44px;
+    }
+
+    .eyebrow {
+      margin: 0 0 16px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      color: rgba(255,255,255,0.62);
+    }
+
+    .eyebrow::after {
+      content: "";
+      display: block;
+      width: 74px;
+      height: 1px;
+      margin-top: 14px;
+      background: linear-gradient(90deg, var(--pink), var(--purple), rgba(95, 130, 255, 0));
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      line-height: 0.94;
+      letter-spacing: -0.05em;
+    }
+
+    .hero-subtitle {
+      margin: 20px 0 0;
+      max-width: 760px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.04rem;
+    }
+
+    .hero-actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 150px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      font-weight: 600;
+      transition: transform var(--ease), border-color var(--ease), background var(--ease);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-strong);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .button.primary {
+      border: none;
+      color: #09080d;
+      background: linear-gradient(135deg, var(--pink), var(--purple), var(--blue));
+    }
+
+    .section {
+      padding: 28px 0;
+    }
+
+    .section-head {
+      margin-bottom: 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+    }
+
+    .section-copy {
+      margin: 10px 0 0;
+      max-width: 760px;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    .info-panel {
+      padding: 24px 26px;
+      margin-bottom: 24px;
+    }
+
+    .chain-list {
+      display: grid;
+      gap: 22px;
+    }
+
+    .master-step {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 22px;
+      padding: 20px;
+      transition: transform var(--ease), border-color var(--ease), box-shadow var(--ease);
+    }
+
+    .master-step:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+      box-shadow: 0 20px 56px rgba(0,0,0,0.30);
+    }
+
+    .master-shot {
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 16 / 9;
+      border: 1px solid rgba(255,255,255,0.08);
+      background:
+        linear-gradient(135deg, rgba(255, 99, 199, 0.18), rgba(95, 130, 255, 0.18)),
+        rgba(0,0,0,0.38);
+      min-height: 190px;
+      display: grid;
+      place-items: center;
+    }
+
+    .master-shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .master-shot--empty {
+      padding: 24px;
+      text-align: center;
+      color: var(--soft);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .master-body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .master-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .master-number,
+    .master-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--soft);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .master-body h3 {
+      margin: 0;
+      font-size: clamp(1.4rem, 2.6vw, 2rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .master-sub {
+      margin: 10px 0 0;
+      color: var(--soft);
+      font-size: 0.92rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .master-copy {
+      margin: 16px 0 0;
+      color: var(--muted);
+      line-height: 1.82;
+      font-size: 0.98rem;
+    }
+
+    .master-copy.placeholder {
+      color: rgba(255,255,255,0.52);
+      font-style: italic;
+    }
+
+    .footer {
+      margin-top: 44px;
+      padding: 24px 0 0;
+      border-top: 1px solid rgba(255,255,255,0.10);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      color: var(--soft);
+    }
+
+    @media (max-width: 960px) {
+      .master-step {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .site-shell {
+        width: min(var(--max-width), calc(100% - 24px));
+      }
+
+      .topbar {
+        border-radius: 28px;
+        padding: 16px;
+      }
+
+      .hero-panel,
+      .info-panel,
+      .master-step {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="site-shell">
+    <header class="topbar">
+      <div class="brand">Chroma Glow</div>
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/music" class="active">Music</a>
+        <a href="/coming_soon">Memory Room</a>
+        <a href="/coming_soon">Change Log</a>
+      </nav>
+    </header>
+
+    <section class="hero" id="top">
+      <article class="hero-panel">
+        <p class="eyebrow">Signal Path</p>
+        <h1>Master Chain</h1>
+        <p class="hero-subtitle">
+          The final stage of a Chroma Glow track. This page follows the chain in order, from early peak control
+          and tonal shaping to compression, clipping, and final loudness analysis.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#chain">View Chain</a>
+          <a class="button" href="/music">Back to Music</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="section" id="chain">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">One Row Per Stage</p>
+          <h2 class="section-title">Chain Breakdown</h2>
+          <p class="section-copy">
+            Each stage below is laid out in sequence so you can paste in your full writeups directly.
+            The structure is already set up to match the current site aesthetic.
+          </p>
+        </div>
+      </div>
+
+      <article class="info-panel">
+        <p class="section-copy" style="margin-top:0; max-width:none;">
+          Replace each placeholder paragraph with the full text from your chain notes. Images are already assigned
+          to the filenames you provided under <strong>/static/plugins/</strong>.
+        </p>
+      </article>
+
+      <div class="chain-list">
+        <article class="master-step">
+          <div class="master-shot">
+            <img src="/static/plugins/freeclip.png" alt="FreeClip 2">
+          </div>
+          <div class="master-body">
+            <div class="master-meta">
+              <span class="master-number">01</span>
+              <span class="master-pill">Clipper</span>
+              <span class="master-pill">Input Control</span>
+            </div>
+            <h3>FreeClip 2</h3>
+            <p class="master-sub">Initial peak taming</p>
+            <p class="master-copy placeholder">Paste paragraph here.</p>
+          </div>
+        </article>
+
+        <article class="master-step">
+          <div class="master-shot">
+            <img src="/static/plugins/n4scul.png" alt="Neutron 4 Sculptor">
+          </div>
+          <div class="master-body">
+            <div class="master-meta">
+              <span class="master-number">02</span>
+              <span class="master-pill">Tonal Shaping</span>
+              <span class="master-pill">AI Assist</span>
+            </div>
+            <h3>Neutron 4 Sculptor</h3>
+            <p class="master-sub">Add fullness</p>
+            <p class="master-copy placeholder">Paste paragraph here.</p>
+          </div>
+        </article>
+
+        <article class="master-step">
+          <div class="master-shot">
+            <img src="/static/plugins/infeq.png" alt="Infinity EQ 2 Master EQ">
+          </div>
+          <div class="master-body">
+            <div class="master-meta">
+              <span class="master-number">03</span>
+              <span class="master-pill">Master EQ</span>
+              <span class="master-pill">Tone Control</span>
+            </div>
+            <h3>Infinity EQ 2</h3>
+            <p class="master-sub">Master EQ</p>
+            <p class="master-copy placeholder">Paste paragraph here.</p>
+          </div>
+        </article>
+
+        <article class="master-step">
+          <div class="master-shot">
+            <img src="/static/plugins/infeq.png" alt="Infinity EQ 2 Mid-Side EQ">
+          </div>
+          <div class="master-body">
+            <div class="master-meta">
+              <span class="master-number">04</span>
+              <span class="master-pill">Mid-Side</span>
+              <span class="master-pill">Width</span>
+            </div>
+            <h3>Infinity EQ 2</h3>
+            <p class="master-sub">Mid-Side EQ</p>
+            <p class="master-copy placeholder">Paste paragraph here.</p>
+          </div>
+        </article>
+
+        <article class="master-step">
+          <div class="master-shot">
+            <img src="/static/plugins/vbcfg.png" alt="VBC FG-Red">
+          </div>
+          <div class="master-body">
+            <div class="master-meta">
+              <span class="master-number">05</span>
+              <span class="master-pill">Glue</span>
+              <span class="master-pill">Compression</span>
+            </div>
+            <h3>VBC FG-Red</h3>
+            <p class="master-sub">Initial glue</p>
+            <p class="master-copy placeholder">Paste paragraph here.</p>
+          </div>
+        </article>
+
+        <article class="master-step">
+          <div class="master-shot">
+            <img src="/static/plugins/mott.png" alt="MO-TT">
+          </div>
+          <div class="master-body">
+            <div class="master-meta">
+              <span class="master-number">06</span>
+              <span class="master-pill">Dynamics</span>
+              <span class="master-pill">Multiband</span>
+            </div>
+            <h3>MO-TT</h3>
+            <p class="master-sub">Dynamic control / volume control</p>
+            <p class="master-copy placeholder">Paste paragraph here.</p>
+          </div>
+        </article>
+
+        <article class="master-step">
+          <div class="master-shot">
+            <img src="/static/plugins/n4comp.png" alt="Neutron 4 Multiband Compressor">
+          </div>
+          <div class="master-body">
+            <div class="master-meta">
+              <span class="master-number">07</span>
+              <span class="master-pill">Parallel</span>
+              <span class="master-pill">Compression</span>
+            </div>
+            <h3>Neutron 4 Multiband Compressor</h3>
+            <p class="master-sub">Parallel compression</p>
+            <p class="master-copy placeholder">Paste paragraph here.</p>
+          </div>
+        </article>
+
+        <article class="master-step">
+          <div class="master-shot">
+            <img src="/static/plugins/freeclip.png" alt="FreeClip 2 Final Clipping and Boost">
+          </div>
+          <div class="master-body">
+            <div class="master-meta">
+              <span class="master-number">08</span>
+              <span class="master-pill">Clipper</span>
+              <span class="master-pill">Gain Return</span>
+            </div>
+            <h3>FreeClip 2</h3>
+            <p class="master-sub">Final clipping and boost</p>
+            <p class="master-copy placeholder">Paste paragraph here.</p>
+          </div>
+        </article>
+
+        <article class="master-step">
+          <div class="master-shot master-shot--empty">
+            <div>Optional Stage<br>Maximizer</div>
+          </div>
+          <div class="master-body">
+            <div class="master-meta">
+              <span class="master-number">09</span>
+              <span class="master-pill">Optional</span>
+              <span class="master-pill">Loudness</span>
+            </div>
+            <h3>Maximizer</h3>
+            <p class="master-sub">Increase RMS</p>
+            <p class="master-copy placeholder">Paste paragraph here.</p>
+          </div>
+        </article>
+
+        <article class="master-step">
+          <div class="master-shot master-shot--empty">
+            <div>Safety Stage<br>Limiter</div>
+          </div>
+          <div class="master-body">
+            <div class="master-meta">
+              <span class="master-number">10</span>
+              <span class="master-pill">Limiter</span>
+              <span class="master-pill">Safety Ceiling</span>
+            </div>
+            <h3>Limiter</h3>
+            <p class="master-sub">Single limiter preventative</p>
+            <p class="master-copy placeholder">Paste paragraph here.</p>
+          </div>
+        </article>
+
+        <article class="master-step">
+          <div class="master-shot">
+            <img src="/static/plugins/sprvsn.png" alt="SuperVision">
+          </div>
+          <div class="master-body">
+            <div class="master-meta">
+              <span class="master-number">11</span>
+              <span class="master-pill">Analyzer</span>
+              <span class="master-pill">LUFS</span>
+            </div>
+            <h3>SuperVision</h3>
+            <p class="master-sub">Loudness analysis</p>
+            <p class="master-copy placeholder">Paste paragraph here.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>Chroma Glow — Master Chain</span>
+      <span>Built for glow, width, weight, and control.</span>
+    </footer>
+  </main>
+</body>
+</html>
