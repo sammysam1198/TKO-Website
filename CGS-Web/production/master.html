@@ -372,6 +372,18 @@
       color: var(--soft);
     }
 
+    .master-bullets {
+      margin-top: 10px;
+      padding-left: 20px;
+      color: #d8d8e0; 
+    }
+
+    .master-bullets li {
+      margin-bottom: 6px;
+      line-height: 1.6;
+    }
+    
+
     @media (max-width: 960px) {
       .master-step {
         grid-template-columns: 1fr;
@@ -638,28 +650,29 @@
 
               After clipping, I add gain back. This is one of the key loudness steps in the chain.
 
-              Example:
-
-                - If a track peaks at -4 dB
-                - and the RMS sits at -9 dB
-                - Then raising gain normally by 3.8 dB would bring the peak to -0.2 dB, but the RMS would still only be -5.2 dB
-
-              If instead I clip 3.5 dB off the peak first:
-
-                - The new peak becomes -7.5 dB
-                - The RMS stays at -9 dB
-                - Then I can add back 7.3 dB
-                - Now the peak lands at -0.2 dB
-                - and the RMS rises to -2.7 dB
-
+              <strong>Example:</strong>
+              <ul class="master-bullets">
+                <li>If a track peaks at -4 dB</li>
+                <li>and the RMS sits at -9 dB</li>
+                <li>Then raising gain normally by 3.8 dB would bring the peak to -0.2 dB, 
+                  but the RMS would still only be -5.2 dB</li>
+              </ul>
+              <strong>If instead I clip 3.5 dB off the peak first:</strong>
+              <ul class="master-bullets">
+                <li>The new peak becomes -7.5 dB</li>
+                <li>The RMS stays at -9 dB</li>
+                <li>Then I can add back 7.3 dB</li>
+                <li>Now the peak lands at -0.2 dB</li>
+                <li>and the RMS rises to -2.7 dB</li>
+              </ul>
               That is why clipping can get a master louder without simply smashing the whole waveform flat.
 
-              Quick formula for gain return:
-
-                - Take your ceiling value and make it positive
-                - Subtract your final target peak, usually 0.2 or 0.3
-                - Add that amount back as output gain
-
+              <strong>Quick formula for gain return:</strong>
+              <ul class="master-bullets">
+                <li>Take your ceiling value and make it positive</li>
+                <li>Subtract your final target peak, usually 0.2 or 0.3</li>
+                <li>Add that amount back as output gain</li>
+              </ul>
               So if your ceiling is -6.3 dB and your target peak is -0.3 dB, you would add back 6.0 dB.
             </p>
           </div>
@@ -743,16 +756,16 @@
               the clipper or maximizer stage. When adjusting a clipper, I reduce the added gain 
               and the ceiling amount together so the peak relationship stays correct.
 
-              Example:
-
-                - ceiling at -6.3 dB
-                - added gain at +6.0 dB
-
+              <strong>Example:</strong>
+              <ul class="master-bullets">
+                <li>ceiling at -6.3 dB</li>
+                <li>added gain at +6.0 dB</li>
+              </ul>
               If I want a quieter, more dynamic version, I might change that to:
-
-                - ceiling at -5.3 dB
-                - added gain at +5.0 dB
-
+              <ul class="master-bullets">
+                <li>ceiling at -5.3 dB</li>
+                <li>added gain at +5.0 dB</li>
+              </ul>
               That keeps the final peak roughly 0.3 dB below full scale while preserving more dynamic range.
             </p>
           </div>
