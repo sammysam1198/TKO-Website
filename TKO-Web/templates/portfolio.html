@@ -6,31 +6,52 @@
   <title>Portfolio | Sammi Fishbein</title>
   <style>
     :root {
-      --bg: #111111;
-      --panel: rgba(255, 255, 255, 0.08);
-      --panel-border: rgba(255, 255, 255, 0.14);
+      --bg-deep: #03040a;
+      --bg-mid: #0a0c18;
+      --panel: rgba(12, 14, 28, 0.72);
+      --panel-strong: rgba(8, 10, 20, 0.86);
+      --panel-border: rgba(255, 255, 255, 0.12);
+
       --text: #ffffff;
-      --muted: rgba(255, 255, 255, 0.72);
-      --peach: #ff9652;
-      --coral: #ff6a7c;
-      --pink: #ff38b6;
-      --hotpink: #ff5ea1;
-      --radius-xl: 32px;
-      --radius-lg: 24px;
-      --shadow: 0 18px 60px rgba(0, 0, 0, 0.3);
-      --max-width: 1100px;
+      --text-soft: rgba(255, 255, 255, 0.82);
+      --text-faint: rgba(255, 255, 255, 0.56);
+
+      --pink: #ff4fd8;
+      --hot-pink: #ff2cc3;
+      --violet: #8d68ff;
+      --blue: #39d6ff;
+      --cyan: #77ecff;
+      --sunset: #ff8f5a;
+
+      --shadow-xl: 0 24px 90px rgba(0, 0, 0, 0.42);
+      --shadow-lg: 0 18px 60px rgba(0, 0, 0, 0.30);
+      --glow-pink: 0 0 42px rgba(255, 79, 216, 0.24);
+      --glow-blue: 0 0 42px rgba(57, 214, 255, 0.20);
+
+      --radius-xl: 34px;
+      --radius-lg: 26px;
+      --radius-md: 18px;
+
+      --max-width: 1240px;
+      --ease: 320ms cubic-bezier(.2,.8,.2,1);
+      --nav-height: 86px;
     }
 
-    * {
-      box-sizing: border-box;
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg-deep);
     }
 
     body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+      line-height: 1.65;
     }
 
     a {
@@ -38,358 +59,981 @@
       text-decoration: none;
     }
 
-    .display-title {
+    .display {
       font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
       letter-spacing: 0.04em;
       text-transform: uppercase;
     }
 
-    .portfolio-topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 28px;
-      padding-top: 0;
+    .site-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 20% 18%, rgba(255, 79, 216, 0.16), transparent 26%),
+        radial-gradient(circle at 80% 16%, rgba(57, 214, 255, 0.14), transparent 22%),
+        radial-gradient(circle at 50% 80%, rgba(141, 104, 255, 0.12), transparent 32%),
+        linear-gradient(180deg, #050711 0%, #070a16 42%, #03040a 100%);
     }
 
-    .portfolio-topbar-left,
-    .portfolio-topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    .site-bg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(3, 4, 10, 0.48), rgba(3, 4, 10, 0.78)),
+        url("/static/RC_orig.png") center center / cover no-repeat;
+      filter: blur(12px) saturate(1.08);
+      transform: scale(1.04);
+      opacity: 0.34;
     }
 
-    .portfolio-topbar-btn {
-      display: inline-block;
-      border-radius: 999px;
-      padding: 14px 22px;
-      font-size: 0.84rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      transition: transform 0.2s ease, background 0.2s ease;
-      background: linear-gradient(135deg, var(--peach), var(--hotpink));
-      color: black;
-      border: 1px solid rgba(255,255,255,0.14);
-    }
-
-    .portfolio-topbar-btn:hover {
-      transform: translateY(-1px);
-      background: rgba(255,255,255,0.08);
+    .site-shell {
+      position: relative;
+      z-index: 2;
     }
 
     .container {
-      width: min(calc(100% - 48px), var(--max-width));
+      width: min(calc(100% - 44px), var(--max-width));
       margin: 0 auto;
     }
 
-    .panel {
-      background: var(--panel);
-      border: 1px solid var(--panel-border);
-      border-radius: var(--radius-xl);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      height: var(--nav-height);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(5, 6, 14, 0.84), rgba(5, 6, 14, 0.56));
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .site-header .container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-orb {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(255,44,195,0.9), rgba(57,214,255,0.85));
+      box-shadow: var(--glow-pink), var(--glow-blue);
+      flex: 0 0 auto;
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.96);
+    }
+
+    .brand-subtitle {
+      margin: 0;
+      font-size: 0.72rem;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav a {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.9);
+      transition: transform var(--ease), border-color var(--ease), background var(--ease), box-shadow var(--ease);
+    }
+
+    .nav a:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.18);
+      box-shadow: 0 0 18px rgba(57,214,255,0.10);
     }
 
     .hero {
-      padding: 24px 0 40px;
-      background:
-        linear-gradient(180deg, rgba(255,150,82,0.10), rgba(255,56,182,0.05)),
-        #111111;
+      position: relative;
+      padding: 76px 0 48px;
+      overflow: hidden;
     }
 
-    .hero h1 {
-      margin: 0;
-      font-size: clamp(3rem, 8vw, 5.5rem);
-      line-height: 0.9;
+    .hero-glow {
+      position: absolute;
+      inset: auto auto 8% 50%;
+      transform: translateX(-50%);
+      width: min(86vw, 1100px);
+      height: 420px;
+      background:
+        radial-gradient(circle, rgba(141, 104, 255, 0.26) 0%, rgba(255, 79, 216, 0.10) 28%, rgba(57, 214, 255, 0.08) 52%, transparent 72%);
+      filter: blur(16px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .panel {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255,255,255,0.12);
+      background:
+        linear-gradient(180deg, rgba(14,16,30,0.66), rgba(8,10,20,0.84)),
+        rgba(10,12,24,0.72);
+      box-shadow: var(--shadow-xl);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(255, 79, 216, 0.10), transparent 36%),
+        linear-gradient(300deg, rgba(57, 214, 255, 0.10), transparent 32%);
+      pointer-events: none;
+    }
+
+    .panel > * { position: relative; z-index: 1; }
+
+    .hero-panel {
+      padding: 34px;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .eyebrow {
       margin: 0 0 14px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.34em;
       text-transform: uppercase;
-      letter-spacing: 0.35em;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.64);
     }
 
-    .subtitle {
-      margin: 16px 0 0;
-      font-size: 1.2rem;
-      color: #ffb18f;
-    }
-
-    .subtitle-pink {
-      margin: 16px 0 0;
-      font-size: 1.2rem;
-      color: #ff38b6;
-    }
-    .project-heading-pink {
-      margin: 18px 0 0;
-      font-size: 1.23rem;
-      color: #ff38b6;
-    }
-
-    .project-heading-peach {
-      margin: 18px 0 0;
-      font-size: 1.23rem;
-      color: #ff9652;
-    }
-    
-    .hero-copy {
+    .hero-title {
+      margin: 0;
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 0.92;
       max-width: 760px;
-      margin-top: 22px;
-      font-size: 1.05rem;
-      color: rgba(255,255,255,0.82);
+      text-shadow: 0 0 28px rgba(255, 79, 216, 0.12);
     }
 
-    .button-row {
+    .hero-subtitle {
+      margin: 18px 0 0;
+      font-size: 1.12rem;
+      color: var(--cyan);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero-copy {
+      margin: 18px 0 0;
+      max-width: 680px;
+      font-size: 1.04rem;
+      line-height: 1.82;
+      color: var(--text-soft);
+    }
+
+    .hero-actions {
+      margin-top: 28px;
       display: flex;
       flex-wrap: wrap;
       gap: 14px;
-      margin-top: 28px;
     }
 
-    .button {
-      display: inline-block;
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
       border-radius: 999px;
-      padding: 14px 22px;
-      font-size: 0.84rem;
-      font-weight: 700;
+      border: 1px solid transparent;
+      font-size: 0.88rem;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      letter-spacing: 0.18em;
-      transition: transform 0.2s ease;
+      transition: transform var(--ease), background var(--ease), border-color var(--ease), box-shadow var(--ease);
     }
 
-    .button:hover {
-      transform: translateY(-1px);
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(135deg, rgba(255,44,195,0.9), rgba(57,214,255,0.85));
+      box-shadow: var(--glow-pink), var(--glow-blue);
     }
 
-    .button-dark {
-      background: black;
-      color: white;
+    .btn-secondary {
+      color: #fff;
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
     }
 
-    .button-light {
-      background: linear-gradient(135deg, var(--peach), var(--hotpink));
-      color: black;
+    .hero-side {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      justify-content: center;
+    }
+
+    .status-card,
+    .quick-links,
+    .code-preview {
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      padding: 20px;
+    }
+
+    .status-card h3,
+    .quick-links h3,
+    .code-preview h3,
+    .section-title,
+    .project-title,
+    .contact-title {
+      margin: 0;
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .status-row:last-child { border-bottom: 0; padding-bottom: 0; }
+    .status-label { color: var(--text-faint); font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .status-value { color: var(--text); font-weight: 700; text-align: right; }
+
+    .quick-link-list {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .quick-link {
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.03);
+      transition: transform var(--ease), background var(--ease), border-color var(--ease);
+    }
+
+    .quick-link:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.16);
+    }
+
+    .quick-link strong {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+
+    .quick-link span {
+      display: block;
+      color: var(--text-faint);
+      font-size: 0.86rem;
+      line-height: 1.55;
+    }
+
+    .code-preview pre {
+      margin: 14px 0 0;
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(6, 8, 18, 0.92);
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow: auto;
+      color: #d9ecff;
+      font-size: 0.86rem;
+      line-height: 1.65;
     }
 
     main {
-      padding: 30px 0 70px;
+      position: relative;
+      z-index: 2;
+      padding: 12px 0 72px;
     }
 
-    .section {
-      margin-bottom: 28px;
+    .section-block {
+      margin-top: 28px;
     }
 
-    .section-inner {
-      padding: 30px;
+    .section-panel {
+      padding: 34px;
+    }
+
+    .section-label {
+      margin: 0 0 10px;
+      font-size: 0.8rem;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.62);
     }
 
     .section-title {
-      margin: 0 0 18px;
-      font-size: 2.2rem;
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 0.95;
     }
 
-    .projects-grid {
+    .section-copy {
+      margin: 18px 0 0;
+      max-width: 900px;
+      font-size: 1.03rem;
+      line-height: 1.82;
+      color: var(--text-soft);
+    }
+
+    .project-grid {
+      margin-top: 28px;
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
+      gap: 22px;
     }
 
     .project-card {
-      padding: 24px;
-      border-radius: var(--radius-lg);
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 26px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      box-shadow: var(--shadow-lg);
+      transition: transform var(--ease), border-color var(--ease), box-shadow var(--ease);
     }
 
-    .project-card h3 {
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.18);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.34);
+    }
+
+    .project-type {
       margin: 0;
-      font-size: 1.5rem;
+      font-size: 0.74rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.58);
     }
 
-    .project-label {
-      margin: 0 0 10px;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.24em;
-      color: rgba(255,255,255,0.48);
+    .project-title {
+      margin-top: 12px;
+      font-size: 1.8rem;
+      line-height: 1.02;
     }
+
+    .project-title.pink { color: var(--pink); }
+    .project-title.sunset { color: var(--sunset); }
+    .project-title.blue { color: var(--blue); }
 
     .project-copy {
-      color: rgba(255,255,255,0.78);
+      margin-top: 14px;
+      color: var(--text-soft);
+      font-size: 0.98rem;
+      line-height: 1.74;
     }
 
-    .project-links {
+    .tag-row {
+      margin-top: 18px;
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 20px;
+      gap: 10px;
     }
 
-    .project-links a {
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 999px;
-      padding: 10px 14px;
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-    }
-
-    .link-button {
-      background: linear-gradient(135deg, var(--peach), var(--hotpink));
-      color: black;
-    }
-
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .skill {
+    .tag {
       padding: 10px 14px;
       border-radius: 999px;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.10);
-      color: rgba(255,255,255,0.86);
-      font-size: 0.9rem;
+      color: rgba(255,255,255,0.88);
+      font-size: 0.84rem;
     }
 
-    .back-link {
-      margin-top: 10px;
-      display: inline-block;
-      color: rgba(255,255,255,0.5);
-      font-size: 0.9rem;
+    .project-links {
+      margin-top: auto;
+      padding-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
-    .back-link:hover {
-      color: rgba(255,255,255,0.75);
+    .project-link {
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      transition: transform var(--ease), background var(--ease), border-color var(--ease);
     }
 
-    @media (max-width: 900px) {
-      .projects-grid {
+    .project-link:hover { transform: translateY(-2px); }
+    .project-link.primary {
+      background: linear-gradient(135deg, rgba(255,44,195,0.9), rgba(57,214,255,0.85));
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .skills-grid {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .skill-card {
+      padding: 20px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .skill-card h3 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .contact-grid {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .contact-card {
+      padding: 26px;
+      border-radius: 26px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .contact-title {
+      font-size: 1.4rem;
+      color: var(--cyan);
+    }
+
+    .contact-copy {
+      margin: 14px 0 0;
+      color: var(--text-soft);
+      line-height: 1.8;
+    }
+
+    .contact-actions {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(7, 9, 18, 0.88);
+      color: #fff;
+      padding: 14px 16px;
+      font: inherit;
+    }
+
+    .contact-form textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .contact-note {
+      margin-top: 12px;
+      font-size: 0.88rem;
+      color: var(--text-faint);
+    }
+
+    .footer {
+      padding: 0 0 42px;
+    }
+
+    .footer-panel {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 20px 22px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(8,10,20,0.56);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .footer-title {
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .footer-copy {
+      margin: 6px 0 0;
+      font-size: 0.92rem;
+      color: var(--text-faint);
+      line-height: 1.7;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .footer-links a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.88);
+      transition: transform var(--ease), background var(--ease);
+    }
+
+    .footer-links a:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 700ms cubic-bezier(.2,.8,.2,1), transform 700ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .contact-grid,
+      .skills-grid {
         grid-template-columns: 1fr;
       }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-link-list {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
-    @media (max-width: 720px) {
-      .container {
-        width: min(calc(100% - 28px), var(--max-width));
-      }
+    @media (max-width: 860px) {
+      .nav { display: none; }
+      .hero { padding: 44px 0 24px; }
+      .hero-panel,
+      .section-panel { padding: 24px; }
+      .quick-link-list { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
 
-      .button-row {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .button {
-        text-align: center;
-      }
-
-      .section-inner {
-        padding: 24px;
-      }
-
-      .portfolio-topbar {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .portfolio-topbar-left,
-      .portfolio-topbar-right {
-        justify-content: center;
-        flex-wrap: wrap;
-      }
+    @media (max-width: 560px) {
+      .container { width: min(calc(100% - 24px), var(--max-width)); }
+      .hero-title { font-size: clamp(2.4rem, 11vw, 4.2rem); }
+      .section-title { font-size: clamp(1.8rem, 9vw, 3rem); }
+      .hero-actions,
+      .contact-actions,
+      .project-links,
+      .footer-links { flex-direction: column; align-items: stretch; }
+      .btn,
+      .project-link { width: 100%; text-align: center; justify-content: center; }
     }
   </style>
 </head>
 <body>
-<section class="hero">
-  <div class="container">
-    <div class="portfolio-topbar">
-      <div class="portfolio-topbar-left">
-        <a href="/" class="portfolio-topbar-btn">Back</a>
+  <div class="site-bg"></div>
+
+  <div class="site-shell">
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="/">
+          <span class="brand-orb" aria-hidden="true"></span>
+          <div class="brand-copy">
+            <p class="display brand-title">Sammi Fishbein</p>
+            <p class="brand-subtitle">Backend engineer inside the Chroma Glow world</p>
+          </div>
+        </a>
+
+        <nav class="nav">
+          <a href="#top">Home</a>
+          <a href="#projects">Projects</a>
+          <a href="#stack">Stack</a>
+          <a href="#contact">Contact</a>
+          <a href="https://github.com/sammysam1198" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </nav>
       </div>
+    </header>
 
-      <div class="portfolio-topbar-right">
-        <a href="https://github.com/sammysam1198" class="portfolio-topbar-btn" target="_blank">GitHub</a>
-        <a href="/assets/resume.pdf" class="portfolio-topbar-btn" target="_blank">Resume</a>
-      </div>
-    </div>
-    <div class="container">
-      <p class="eyebrow">Hidden Signal</p>
-      <h1 class="display-title">Sammi<br />Fishbein</h1>
-      <p class="subtitle">Backend Software Engineer | Python • Flask • PostgreSQL</p>
-      <p class="hero-copy">I design and deploy production systems with authentication, 
-        relational data models, and cloud infrastructure.
-      </p>
-      <p class="hero-copy">I’m currently seeking a Backend Software Engineering role and can relocate within 2–3 weeks.</p>
-      <p class="subtitle-pink">Below are live systems I've built and deployed. </p>
-    </div>
-  </section>
+    <section class="hero" id="top">
+      <div class="hero-glow"></div>
+      <div class="container">
+        <div class="hero-grid reveal">
+          <section class="panel hero-panel">
+            <p class="eyebrow">Portfolio</p>
+            <h1 class="display hero-title">I build software systems that actually do things.</h1>
+            <p class="hero-subtitle">Backend Software Engineer | Python · Flask · PostgreSQL</p>
+            <p class="hero-copy">
+              I design and ship production-minded software with authentication, relational data models,
+              REST APIs, cloud deployment, and real workflow logic. My focus is backend engineering,
+              but I also build polished frontend experiences when the product needs it.
+            </p>
+            <p class="hero-copy">
+              This page keeps the visual identity of Chroma Glow, but reframes the work in a way that is clearer,
+              more technical, and much closer to what a recruiter or engineer expects to see.
+            </p>
 
-  <main>
-    <div class="container">
-      <section class="section">
-        <div class="panel section-inner">
-          <h2 class="display-title section-title">Projects</h2>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#projects">View projects</a>
+              <a class="btn btn-secondary" href="/assets/resume.pdf" target="_blank" rel="noopener noreferrer">View resume</a>
+              <a class="btn btn-secondary" href="https://github.com/sammysam1198" target="_blank" rel="noopener noreferrer">Open GitHub</a>
+            </div>
+          </section>
 
-          <div class="projects-grid">
-            <div class="project-card">
-              <p class="project-label">Cloud Issue Tracking Platform</p>
-              <h3 class="project-heading-peach">ASTRA</h3>
-              <p class="project-copy">
-                Modular issue tracking platform built with Python, Flask, and PostgreSQL,
-                featuring secure authentication, RBAC, API-driven workflows, reporting,
-                and cloud deployment.
-              </p>
-              <div class="project-links">
-                <a href="https://github.com/sammysam1198/ASTRA-Issue-Tracker-Python-Cloud-" target="_blank" rel="noopener noreferrer" class="link-button">GitHub</a>
+          <aside class="panel hero-side">
+            <div class="status-card">
+              <h3>Quick snapshot</h3>
+              <div class="status-row">
+                <span class="status-label">Focus</span>
+                <span class="status-value">Backend + full-stack product work</span>
+              </div>
+              <div class="status-row">
+                <span class="status-label">Strengths</span>
+                <span class="status-value">APIs, auth, data models, deployment</span>
+              </div>
+              <div class="status-row">
+                <span class="status-label">Location</span>
+                <span class="status-value">Open to relocation</span>
+              </div>
+              <div class="status-row">
+                <span class="status-label">Current goal</span>
+                <span class="status-value">Backend software engineering role</span>
               </div>
             </div>
 
-            <div class="project-card">
-              <p class="project-label">Narrative Rhythm Game Web Platform</p>
-              <h3 class="project-heading-pink">T.K.O!</h3>
-              <p class="project-copy"><strong>Architecture:</strong>Frontend: HTML, CSS, JavaScript · Backend: Flask REST API · Database: PostgreSQL (Render)</p>
+            <div class="quick-links">
+              <h3>Explore</h3>
+              <div class="quick-link-list">
+                <a class="quick-link" href="#projects">
+                  <strong>Flagship projects</strong>
+                  <span>ASTRA, T.K.O., and Chroma Glow with clearer engineering framing.</span>
+                </a>
+                <a class="quick-link" href="#stack">
+                  <strong>Tech stack</strong>
+                  <span>Core backend tools, frontend layers, deployment, and architecture patterns.</span>
+                </a>
+                <a class="quick-link" href="#contact">
+                  <strong>Contact me</strong>
+                  <span>Add a recruiter-friendly section with direct links and a message form.</span>
+                </a>
+                <a class="quick-link" href="https://github.com/sammysam1198" target="_blank" rel="noopener noreferrer">
+                  <strong>Code</strong>
+                  <span>Send people directly to your repos instead of making them hunt.</span>
+                </a>
+              </div>
+            </div>
 
-              <p class="project-copy"><strong>Key Features:</strong>User authentication system (bcrypt, sessions) · RESTful API endpoints for content + user data · Modular backend structure (routes, services, repositories) · Cloud deployment with environment-based config</p>
-                
-              <p class="project-copy"><strong>Role:</strong>Designed and built full system architecture, backend API, database schema, and frontend integration.</p>
-              <div class="project-links">
-                <a href="https://tkofficial.onrender.com" target="_blank" rel="noopener noreferrer" class="link-button">Live Site</a>
-                <a href="https://github.com/sammysam1198/TKO-Website" target="_blank" rel="noopener noreferrer" class="link-button">GitHub</a>
+            <div class="code-preview">
+              <h3>Code preview block</h3>
+              <pre><code>def create_issue(issue_payload: dict) -> dict:
+    validate_issue_payload(issue_payload)
+    issue_id = issue_repo.insert_issue(issue_payload)
+    return issue_repo.fetch_issue_by_id(issue_id)</code></pre>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <main>
+      <div class="container">
+        <section class="section-block reveal" id="projects">
+          <div class="panel section-panel">
+            <p class="section-label">Selected work</p>
+            <h2 class="display section-title">Projects that show how I think</h2>
+            <p class="section-copy">
+              Your current portfolio already has the right foundations. What it needs is stronger presentation,
+              more depth, and better sectioning. This layout gives each project room for outcome, stack, architecture,
+              and code links so the work feels like software engineering instead of just a stylish landing page.
+            </p>
+
+            <div class="project-grid">
+              <article class="project-card">
+                <p class="project-type">Cloud issue tracking platform</p>
+                <h3 class="project-title sunset">ASTRA</h3>
+                <p class="project-copy">
+                  Production-style internal platform built with Python, Flask, and PostgreSQL.
+                  Designed for issue workflows, authentication, role-aware permissions, reporting,
+                  and cloud deployment. This should be the portfolio centerpiece because it reads like real business software.
+                </p>
+                <div class="tag-row">
+                  <span class="tag">Python</span>
+                  <span class="tag">Flask</span>
+                  <span class="tag">PostgreSQL</span>
+                  <span class="tag">REST API</span>
+                  <span class="tag">RBAC</span>
+                  <span class="tag">Render</span>
+                </div>
+                <div class="project-links">
+                  <a class="project-link primary" href="https://github.com/sammysam1198/ASTRA-Issue-Tracker-Python-Cloud-" target="_blank" rel="noopener noreferrer">View code</a>
+                  <a class="project-link" href="#contact">Ask about architecture</a>
+                </div>
+              </article>
+
+              <article class="project-card">
+                <p class="project-type">Music platform / brand site</p>
+                <h3 class="project-title pink">Chroma Glow</h3>
+                <p class="project-copy">
+                  A much stronger frontend showcase than the older T.K.O. work. This is where you can prove
+                  you are not just technical, but also capable of building polished product-facing experiences,
+                  strong visual systems, and multi-page site architecture with a consistent identity.
+                </p>
+                <div class="tag-row">
+                  <span class="tag">HTML</span>
+                  <span class="tag">CSS</span>
+                  <span class="tag">JavaScript</span>
+                  <span class="tag">Interaction design</span>
+                  <span class="tag">Responsive layout</span>
+                </div>
+                <div class="project-links">
+                  <a class="project-link primary" href="https://chromaglowsynths.com" target="_blank" rel="noopener noreferrer">Live site</a>
+                  <a class="project-link" href="#contact">Feature this better</a>
+                </div>
+              </article>
+
+              <article class="project-card">
+                <p class="project-type">Narrative rhythm game web platform</p>
+                <h3 class="project-title blue">T.K.O.</h3>
+                <p class="project-copy">
+                  Still worth keeping, but lower on the page. Use it as a supporting project rather than the main one.
+                  Emphasize the modular backend structure, authentication, database schema, and cloud deployment rather than the concept alone.
+                </p>
+                <div class="tag-row">
+                  <span class="tag">Flask API</span>
+                  <span class="tag">PostgreSQL</span>
+                  <span class="tag">Auth</span>
+                  <span class="tag">Render</span>
+                </div>
+                <div class="project-links">
+                  <a class="project-link primary" href="https://tkofficial.onrender.com" target="_blank" rel="noopener noreferrer">Live site</a>
+                  <a class="project-link" href="https://github.com/sammysam1198/TKO-Website" target="_blank" rel="noopener noreferrer">View code</a>
+                </div>
+              </article>
+
+              <article class="project-card">
+                <p class="project-type">Optional case study panel</p>
+                <h3 class="project-title">Deep dive page</h3>
+                <p class="project-copy">
+                  This slot can become a dedicated architecture case study. Instead of only showing live sites,
+                  you can add a page with diagrams, endpoint examples, database decisions, and screenshots of admin tooling.
+                </p>
+                <div class="tag-row">
+                  <span class="tag">System design</span>
+                  <span class="tag">Writeup</span>
+                  <span class="tag">Screenshots</span>
+                  <span class="tag">API examples</span>
+                </div>
+                <div class="project-links">
+                  <a class="project-link" href="#contact">Use this for ASTRA</a>
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-block reveal" id="stack">
+          <div class="panel section-panel">
+            <p class="section-label">Core tooling</p>
+            <h2 class="display section-title">Stack and engineering focus</h2>
+            <p class="section-copy">
+              Your old portfolio already listed the right technologies. The upgrade here is grouping them more clearly,
+              which makes the page easier to scan and more credible to hiring people.
+            </p>
+
+            <div class="skills-grid">
+              <div class="skill-card">
+                <h3>Backend</h3>
+                <div class="skill-list">
+                  <span class="tag">Python</span>
+                  <span class="tag">Flask</span>
+                  <span class="tag">REST APIs</span>
+                  <span class="tag">Auth</span>
+                  <span class="tag">RBAC</span>
+                </div>
+              </div>
+
+              <div class="skill-card">
+                <h3>Data</h3>
+                <div class="skill-list">
+                  <span class="tag">PostgreSQL</span>
+                  <span class="tag">SQL</span>
+                  <span class="tag">Schema design</span>
+                  <span class="tag">Migrations</span>
+                </div>
+              </div>
+
+              <div class="skill-card">
+                <h3>Frontend</h3>
+                <div class="skill-list">
+                  <span class="tag">HTML</span>
+                  <span class="tag">CSS</span>
+                  <span class="tag">JavaScript</span>
+                  <span class="tag">Responsive UI</span>
+                </div>
+              </div>
+
+              <div class="skill-card">
+                <h3>Delivery</h3>
+                <div class="skill-list">
+                  <span class="tag">Render</span>
+                  <span class="tag">GitHub</span>
+                  <span class="tag">Deployment</span>
+                  <span class="tag">Modular architecture</span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="section">
-        <div class="panel section-inner">
-          <h2 class="display-title section-title">Stack</h2>
-          <div class="skills">
-            <span class="skill">Python</span>
-            <span class="skill">Flask</span>
-            <span class="skill">PostgreSQL</span>
-            <span class="skill">REST APIs</span>
-            <span class="skill">Authentication</span>
-            <span class="skill">RBAC</span>
-            <span class="skill">SQL</span>
-            <span class="skill">Render</span>
-            <span class="skill">JavaScript</span>
-            <span class="skill">HTML/CSS</span>
-            <span class="skill">GitHub</span>
-            <span class="skill">Modular Architecture</span>
+        <section class="section-block reveal" id="contact">
+          <div class="panel section-panel">
+            <p class="section-label">Contact</p>
+            <h2 class="display section-title">Let people reach you without friction</h2>
+            <p class="section-copy">
+              This is the part your current portfolio is missing. A recruiter or engineer should never have to guess how to follow up.
+              You can use direct links only, or wire this form to Formspree, Getform, or a lightweight Flask endpoint later.
+            </p>
+
+            <div class="contact-grid">
+              <div class="contact-card">
+                <h3 class="contact-title">Direct links</h3>
+                <p class="contact-copy">
+                  Add your preferred email, GitHub, LinkedIn, and resume in one clean area. This is also a great place for a short sentence about what roles you want.
+                </p>
+                <div class="contact-actions">
+                  <a class="btn btn-primary" href="mailto:you@example.com">Email me</a>
+                  <a class="btn btn-secondary" href="https://github.com/sammysam1198" target="_blank" rel="noopener noreferrer">GitHub</a>
+                  <a class="btn btn-secondary" href="#">LinkedIn</a>
+                </div>
+                <p class="contact-note">Replace placeholders with your real contact info before pushing live.</p>
+              </div>
+
+              <div class="contact-card">
+                <h3 class="contact-title">Message form</h3>
+                <form class="contact-form">
+                  <input type="text" placeholder="Your name" />
+                  <input type="email" placeholder="Your email" />
+                  <textarea placeholder="Tell me about the role, project, or opportunity."></textarea>
+                  <button class="btn btn-primary" type="submit">Send message</button>
+                </form>
+                <p class="contact-note">This is a styled frontend form. Hook it to a service or backend endpoint when you are ready.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-panel">
+          <div>
+            <p class="display footer-title">Sammi Fishbein</p>
+            <p class="footer-copy">
+              Backend engineer, product builder, and technical creative working in a stronger Chroma Glow visual system.
+            </p>
           </div>
 
-          <a class="back-link" href="index.html">← Return to main site</a>
+          <div class="footer-links">
+            <a href="#projects">Projects</a>
+            <a href="#stack">Stack</a>
+            <a href="#contact">Contact</a>
+            <a href="/">Back to site</a>
+          </div>
         </div>
-      </section>
-    </div>
-  </main>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const revealEls = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.16,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealEls.forEach((el) => revealObserver.observe(el));
+  </script>
 </body>
 </html>
