@@ -1849,7 +1849,8 @@ body.colorblind {
 <script>
   const API_BASE = "https://tko-api-server.onrender.com";
 
-  const authControls = document.getElementById("authControls");
+  const openSigninBtn = document.getElementById("openSigninBtn");
+  const openSignupBtn = document.getElementById("openSignupBtn");
 
   const newsletterFirstName = document.getElementById("newsletterFirstName");
   const newsletterEmail = document.getElementById("newsletterEmail");
@@ -1900,7 +1901,11 @@ body.colorblind {
   const sendDevLogBtn = document.getElementById("sendDevLog");
 
   const toggleBtn = document.getElementById("accountMenuToggle");
-const dropdown = document.getElementById("accountDropdown");
+  const dropdown = document.getElementById("accountDropdown");
+
+
+  openSigninBtn.addEventListener("click", () => openAuthModal("signin"));
+  openSignupBtn.addEventListener("click", () => openAuthModal("signup"));
 
 toggleBtn.addEventListener("click", () => {
   dropdown.classList.toggle("hidden");
@@ -1938,75 +1943,6 @@ document.addEventListener("click", (e) => {
     authMessage.textContent = "";
   }
 
-  function attachLoggedOutButtonEvents() {
-    const signUpBtn = document.getElementById("openSignUp");
-    const signInBtn = document.getElementById("openSignIn");
-
-    if (signUpBtn) {
-      signUpBtn.addEventListener("click", () => openAuthModal("signup"));
-    }
-
-    if (signInBtn) {
-      signInBtn.addEventListener("click", () => openAuthModal("signin"));
-    }
-  }
-
-  function renderLoggedOutState() {
-    authControls.innerHTML = `
-      <button id="openSignUp" class="auth-btn signup" type="button">Sign Up</button>
-      <button id="openSignIn" class="auth-btn signin" type="button">Sign In</button>
-    `;
-
-    attachLoggedOutButtonEvents();
-  }
-
-  function renderLoggedInState(user) {
-    authControls.innerHTML = `
-      <div class="profile-bubble">
-        <span class="profile-name">👤 ${user.username}</span>
-        <button id="logoutBtn" class="logout-btn" type="button">Log Out</button>
-      </div>
-    `;
-
-    const logoutBtn = document.getElementById("logoutBtn");
-    logoutBtn.addEventListener("click", () => {
-      localStorage.removeItem("tko_token");
-      renderLoggedOutState();
-    });
-  }
-
-  async function loadCurrentUser() {
-    const token = localStorage.getItem("tko_token");
-
-    if (!token) {
-      renderLoggedOutState();
-      return;
-    }
-
-    try {
-      const response = await fetch(`${API_BASE}/api/tko/auth/me`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        localStorage.removeItem("tko_token");
-        renderLoggedOutState();
-        return;
-      }
-
-      const user = data.user || data;
-      renderLoggedInState(user);
-    } catch (error) {
-      console.error(error);
-      localStorage.removeItem("tko_token");
-      renderLoggedOutState();
-    }
-  }
 
   function showSignUpTab() {
     signUpForm.classList.remove("hidden");
@@ -2383,8 +2319,6 @@ async function postDevLog(messageText) {
 
     popup.document.close();
   }
-
-   attachLoggedOutButtonEvents();
   setupDevDragging();
   loadDevMessages();
   loadDevIssues();
@@ -2638,7 +2572,7 @@ sendDevLogBtn.addEventListener("click", async () => {
     return;
   }
 
-  const res = await fetch("/api/tko/auth/me", {
+  const res = await fetch(`${API_BASE}/api/tko/auth/me`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -2689,7 +2623,7 @@ function applyColorblind(enabled) {
 async function updatePreferences(prefs) {
   const token = localStorage.getItem("tko_token");
 
-  await fetch("/api/tko/users/preferences", {
+  await fetch(`${API_BASE}/api/tko/users/preferences`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -2704,7 +2638,8 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
   location.reload();
 });
 
-  loadCurrentUser();
+loadUser();
+
 </script>
 </body>
 </html>
