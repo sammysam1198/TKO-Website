@@ -9,6 +9,9 @@ from utils.auth_utils import (
     hash_password,
     verify_password,
     create_auth_token,
+    decode_auth_token,
+    generate_secure_token,
+    hash_token,
 )
 from utils.serialization import row_with_iso_dates
 
@@ -73,7 +76,11 @@ def signup():
                 first_name, last_name, email, username, password_hash, agreed_to_terms
             )
             VALUES (%s, %s, %s, %s, %s, %s)
-            RETURNING id, first_name, last_name, email, username, agreed_to_terms, profile_image_url, created_at, updated_at;
+            RETURNING id, first_name, last_name, email, username,
+            role, agreed_to_terms, profile_image_url,
+             theme_preference, colorblind_mode,
+             two_factor_enabled, two_factor_method,
+             created_at, updated_at;
             """,
             (first_name, last_name, email, username, password_hash, agreed_to_terms)
         )
@@ -131,6 +138,16 @@ def signin():
         if not verify_password(password, user["password_hash"]):
             return jsonify({"ok": False, "error": "Invalid credentials"}), 401
 
+        cur.execute(
+            """
+            UPDATE tko_users
+            SET last_login_at = CURRENT_TIMESTAMP
+            WHERE id = %s;
+            """,
+            (user["id"],)
+        )
+        conn.commit()
+
         token = create_auth_token(user)
 
         safe_user = dict(user)
@@ -172,7 +189,11 @@ def me():
         cur.execute(
             """
             SELECT id, first_name, last_name, email, username,
-                   agreed_to_terms, profile_image_url, created_at, updated_at
+                   role, agreed_to_terms, profile_image_url,
+                   theme_preference, colorblind_mode,
+                   two_factor_enabled, two_factor_method,
+                   phone_number, phone_verified, email_verified,
+                   last_login_at, created_at, updated_at
             FROM tko_users
             WHERE id = %s
             LIMIT 1;
