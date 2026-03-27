@@ -133,16 +133,16 @@ def init_db():
             ON CONFLICT (slug) DO NOTHING;
      
             ALTER TABLE tko_users
-                ADD COLUMN role VARCHAR(30) NOT NULL DEFAULT 'user',
-                ADD COLUMN theme_preference VARCHAR(20) NOT NULL DEFAULT 'dark',
-                ADD COLUMN colorblind_mode BOOLEAN NOT NULL DEFAULT FALSE,
-                ADD COLUMN two_factor_enabled BOOLEAN NOT NULL DEFAULT FALSE,
-                ADD COLUMN two_factor_method VARCHAR(20),
-                ADD COLUMN two_factor_secret TEXT,
-                ADD COLUMN phone_number VARCHAR(30),
-                ADD COLUMN phone_verified BOOLEAN NOT NULL DEFAULT FALSE,
-                ADD COLUMN email_verified BOOLEAN NOT NULL DEFAULT FALSE,
-                ADD COLUMN last_login_at TIMESTAMP;
+                ADD COLUMN IF NOT EXISTS role VARCHAR(30) NOT NULL DEFAULT 'user',
+                ADD COLUMN IF NOT EXISTS theme_preference VARCHAR(20) NOT NULL DEFAULT 'dark',
+                ADD COLUMN IF NOT EXISTS colorblind_mode BOOLEAN NOT NULL DEFAULT FALSE,
+                ADD COLUMN IF NOT EXISTS two_factor_enabled BOOLEAN NOT NULL DEFAULT FALSE,
+                ADD COLUMN IF NOT EXISTS two_factor_method VARCHAR(20),
+                ADD COLUMN IF NOT EXISTS two_factor_secret TEXT,
+                ADD COLUMN IF NOT EXISTS phone_number VARCHAR(30),
+                ADD COLUMN IF NOT EXISTS phone_verified BOOLEAN NOT NULL DEFAULT FALSE,
+                ADD COLUMN IF NOT EXISTS email_verified BOOLEAN NOT NULL DEFAULT FALSE,
+                ADD COLUMN IF NOT EXISTS last_login_at TIMESTAMP;
      
             CREATE TABLE IF NOT EXISTS tko_password_reset_tokens (
                 id SERIAL PRIMARY KEY,
