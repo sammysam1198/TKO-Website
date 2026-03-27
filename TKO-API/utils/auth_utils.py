@@ -8,19 +8,6 @@ import jwt
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 from threading import Lock
-from datetime import datetime, timedelta, timezone
-from utils.auth_utils import (
-    is_valid_email,
-    is_valid_username,
-    validate_password,
-    hash_password,
-    verify_password,
-    create_auth_token,
-    decode_auth_token,
-    generate_secure_token,
-    hash_token,
-)
-
 
 EMAIL_REGEX = re.compile(r"^[^@\s]+@[^@\s]+\.(com|net|org|edu|gov|me)$", re.IGNORECASE)
 USERNAME_REGEX = re.compile(r"^[A-Za-z0-9_.-]{3,50}$")
