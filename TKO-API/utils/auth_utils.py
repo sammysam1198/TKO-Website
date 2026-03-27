@@ -67,6 +67,7 @@ def create_auth_token(user: dict) -> str:
         "sub": str(user["id"]),
         "username": user["username"],
         "email": user["email"],
+        "role": user.get("role", "user"),
         "exp": datetime.now(timezone.utc) + timedelta(days=7),
     }
     return jwt.encode(payload, secret, algorithm="HS256")
