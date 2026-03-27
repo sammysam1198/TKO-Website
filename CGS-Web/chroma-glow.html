@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Chroma Glow | Official Artist Website</title>
+  <meta
+    name="description"
+    content="Chroma Glow is a chillsynth and electronic music artist creating atmospheric, nostalgic soundscapes. Explore music, releases, and visuals."
+  />
+  <link rel="canonical" href="https://www.chromaglowsynths.com/chroma-glow" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    "@id": "https://www.chromaglowsynths.com/chroma-glow#artist",
+    "name": "Chroma Glow",
+    "url": "https://www.chromaglowsynths.com/chroma-glow",
+    "description": "Chroma Glow is a chillsynth and electronic music artist based in Harvard, Massachusetts. Their work blends synthwave textures, ambient sound design, and emotional melodic composition, creating immersive sonic environments inspired by nostalgia, memory, and atmosphere.",
+    "genre": [
+      "Chillsynth",
+      "Synthwave",
+      "Ambient Electronic"
+    ],
+    "sameAs": [
+      "https://open.spotify.com/artist/6urtYaQRK6hdJzJ9XrpWXs",
+      "https://www.youtube.com/@Chroma_Glow_Synths",
+      "https://www.instagram.com/chroma_glow_synths",
+      "https://chromaglow.bandcamp.com",
+      "https://www.threads.com/@chroma_glow_synths",
+      "https://soundcloud.com/chromaglow",
+      "https://music.apple.com/in/artist/chroma-glow/1787981160"
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg-deep: #03040a;
+      --bg-mid: #0a0c18;
+      --panel: rgba(12, 14, 28, 0.72);
+      --panel-strong: rgba(8, 10, 20, 0.86);
+      --panel-border: rgba(255, 255, 255, 0.12);
+
+      --text: #ffffff;
+      --text-soft: rgba(255, 255, 255, 0.82);
+      --text-faint: rgba(255, 255, 255, 0.56);
+
+      --pink: #ff4fd8;
+      --hot-pink: #ff2cc3;
+      --violet: #8d68ff;
+      --blue: #39d6ff;
+      --cyan: #77ecff;
+      --sunset: #ff8f5a;
+
+      --shadow-xl: 0 24px 90px rgba(0, 0, 0, 0.42);
+      --shadow-lg: 0 18px 60px rgba(0, 0, 0, 0.30);
+      --glow-pink: 0 0 42px rgba(255, 79, 216, 0.24);
+      --glow-blue: 0 0 42px rgba(57, 214, 255, 0.20);
+
+      --radius-xl: 34px;
+      --radius-lg: 26px;
+      --radius-md: 18px;
+
+      --max-width: 1240px;
+      --ease: 320ms cubic-bezier(.2,.8,.2,1);
+      --nav-height: 86px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg-deep);
+    }
+
+    body {
+      position: relative;
+      overflow-x: hidden;
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      border: 0;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .display {
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .site-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 20% 18%, rgba(255, 79, 216, 0.16), transparent 26%),
+        radial-gradient(circle at 80% 16%, rgba(57, 214, 255, 0.14), transparent 22%),
+        radial-gradient(circle at 50% 80%, rgba(141, 104, 255, 0.12), transparent 32%),
+        linear-gradient(180deg, #050711 0%, #070a16 42%, #03040a 100%);
+    }
+
+    .site-bg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(3, 4, 10, 0.52), rgba(3, 4, 10, 0.82)),
+        url("/static/RC_orig.png") center center / cover no-repeat;
+      filter: blur(12px) saturate(1.08);
+      transform: scale(1.04);
+      opacity: 0.28;
+    }
+
+    .site-shell {
+      position: relative;
+      z-index: 2;
+    }
+
+    .container {
+      width: min(calc(100% - 44px), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      height: var(--nav-height);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(5, 6, 14, 0.84), rgba(5, 6, 14, 0.56));
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .site-header .container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-orb {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-image: url("/static/logos/chromaglowclear.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      box-shadow: var(--glow-pink), var(--glow-blue);
+      flex: 0 0 auto;
+      background-color: rgba(255,255,255,0.06);
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.96);
+    }
+
+    .brand-subtitle {
+      margin: 0;
+      font-size: 0.72rem;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav a {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.9);
+      transition: transform var(--ease), border-color var(--ease), background var(--ease), box-shadow var(--ease);
+    }
+
+    .nav a:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.18);
+      box-shadow: 0 0 18px rgba(57,214,255,0.10);
+    }
+
+    .hero {
+      position: relative;
+      padding: 76px 0 32px;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      inset: auto auto 8% 50%;
+      transform: translateX(-50%);
+      width: min(86vw, 1100px);
+      height: 420px;
+      background:
+        radial-gradient(circle, rgba(141, 104, 255, 0.26) 0%, rgba(255, 79, 216, 0.10) 28%, rgba(57, 214, 255, 0.08) 52%, transparent 72%);
+      filter: blur(16px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .panel {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255,255,255,0.12);
+      background:
+        linear-gradient(180deg, rgba(14,16,30,0.66), rgba(8,10,20,0.84)),
+        rgba(10,12,24,0.72);
+      box-shadow: var(--shadow-xl);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(255, 79, 216, 0.10), transparent 36%),
+        linear-gradient(300deg, rgba(57, 214, 255, 0.10), transparent 32%);
+      pointer-events: none;
+    }
+
+    .panel > * { position: relative; z-index: 1; }
+
+    .hero-panel {
+      padding: 34px;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-side {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      justify-content: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      font-size: 0.78rem;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.64);
+    }
+
+    .hero-title {
+      margin: 0;
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 0.92;
+      max-width: 760px;
+      text-shadow: 0 0 28px rgba(255, 79, 216, 0.12);
+    }
+
+    .hero-subtitle {
+      margin: 18px 0 0;
+      font-size: 1.12rem;
+      color: var(--cyan);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero-copy {
+      margin: 18px 0 0;
+      max-width: 680px;
+      font-size: 1.04rem;
+      line-height: 1.82;
+      color: var(--text-soft);
+    }
+
+    .hero-actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.88rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: transform var(--ease), background var(--ease), border-color var(--ease), box-shadow var(--ease);
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(135deg, rgba(255,44,195,0.9), rgba(57,214,255,0.85));
+      box-shadow: var(--glow-pink), var(--glow-blue);
+    }
+
+    .btn-secondary {
+      color: #fff;
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .status-card,
+    .embed-card,
+    .visual-card,
+    .platform-card,
+    .bio-card {
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      padding: 20px;
+    }
+
+    .status-card h3,
+    .embed-card h3,
+    .visual-card h3,
+    .platform-card h3,
+    .bio-card h3,
+    .section-title {
+      margin: 0;
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .status-row:last-child { border-bottom: 0; padding-bottom: 0; }
+    .status-label {
+      color: var(--text-faint);
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .status-value {
+      color: var(--text);
+      font-weight: 700;
+      text-align: right;
+    }
+
+    main {
+      position: relative;
+      z-index: 2;
+      padding: 12px 0 72px;
+    }
+
+    .section-block {
+      margin-top: 28px;
+    }
+
+    .section-panel {
+      padding: 34px;
+    }
+
+    .section-label {
+      margin: 0 0 10px;
+      font-size: 0.8rem;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.62);
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 0.95;
+    }
+
+    .section-copy {
+      margin: 18px 0 0;
+      max-width: 900px;
+      font-size: 1.03rem;
+      line-height: 1.82;
+      color: var(--text-soft);
+    }
+
+    .tag-row {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.88);
+      font-size: 0.84rem;
+    }
+
+    .visual-wrap {
+      margin-top: 24px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .artist-logo {
+      width: min(100%, 320px);
+      filter: drop-shadow(0 0 32px rgba(255, 79, 216, 0.22)) drop-shadow(0 0 24px rgba(57, 214, 255, 0.16));
+    }
+
+    .embed-stack {
+      display: grid;
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .embed-card iframe {
+      margin-top: 14px;
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    .bio-card p,
+    .embed-card p,
+    .platform-card p,
+    .visual-card p {
+      color: var(--text-soft);
+      margin: 14px 0 0;
+      line-height: 1.8;
+    }
+
+    details {
+      margin-top: 20px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.03);
+      padding: 16px 18px;
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--cyan);
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details[open] summary {
+      margin-bottom: 12px;
+    }
+
+    .platform-actions {
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer {
+      padding: 0 0 42px;
+    }
+
+    .footer-panel {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 20px 22px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(8,10,20,0.56);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .footer-title {
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .footer-copy {
+      margin: 6px 0 0;
+      font-size: 0.92rem;
+      color: var(--text-faint);
+      line-height: 1.7;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .footer-links a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.88);
+      transition: transform var(--ease), background var(--ease);
+    }
+
+    .footer-links a:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 700ms cubic-bezier(.2,.8,.2,1), transform 700ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .nav { display: none; }
+      .hero { padding: 44px 0 24px; }
+      .hero-panel,
+      .section-panel { padding: 24px; }
+    }
+
+    @media (max-width: 560px) {
+      .container { width: min(calc(100% - 24px), var(--max-width)); }
+      .hero-title { font-size: clamp(2.4rem, 11vw, 4.2rem); }
+      .section-title { font-size: clamp(1.8rem, 9vw, 3rem); }
+      .hero-actions,
+      .platform-actions,
+      .footer-links {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-bg"></div>
+
+  <div class="site-shell">
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="/">
+          <span class="brand-orb" aria-hidden="true"></span>
+          <div class="brand-copy">
+            <p class="display brand-title">Chroma Glow</p>
+            <p class="brand-subtitle">Official Artist Website</p>
+          </div>
+        </a>
+
+        <nav class="nav">
+          <a href="/">Home</a>
+          <a href="/chroma-glow">Chroma Glow</a>
+          <a href="/music">Music</a>
+          <a href="/about">About</a>
+          <a href="/memory_room">Memory Room</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-glow"></div>
+      <div class="container">
+        <div class="hero-grid reveal">
+          <section class="panel hero-panel">
+            <p class="eyebrow">Official Artist Page</p>
+            <h1 class="display hero-title">Chroma Glow</h1>
+            <p class="hero-subtitle">Chillsynth • Synthwave • Ambient Electronic</p>
+            <p class="hero-copy">
+              Chroma Glow is a chillsynth and electronic music artist based in Harvard, Massachusetts. Their work blends synthwave textures, ambient sound design, and emotional melodic composition, creating immersive sonic environments inspired by nostalgia, memory, and atmosphere.
+            </p>
+
+            <div class="tag-row">
+              <span class="tag">chillsynth</span>
+              <span class="tag">synthwave</span>
+              <span class="tag">vaporwave</span>
+            </div>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="https://open.spotify.com/artist/6urtYaQRK6hdJzJ9XrpWXs" target="_blank" rel="noopener noreferrer">Spotify</a>
+              <a class="btn btn-secondary" href="https://www.youtube.com/@Chroma_Glow_Synths" target="_blank" rel="noopener noreferrer">YouTube</a>
+              <a class="btn btn-secondary" href="#bio">Read Bio</a>
+            </div>
+          </section>
+
+          <aside class="panel hero-side">
+            <div class="status-card">
+              <h3>Artist Snapshot</h3>
+              <div class="status-row">
+                <span class="status-label">Project</span>
+                <span class="status-value">Chroma Glow</span>
+              </div>
+              <div class="status-row">
+                <span class="status-label">Based In</span>
+                <span class="status-value">Harvard, Massachusetts</span>
+              </div>
+              <div class="status-row">
+                <span class="status-label">Style</span>
+                <span class="status-value">Nostalgic electronic atmospheres</span>
+              </div>
+              <div class="status-row">
+                <span class="status-label">Core Themes</span>
+                <span class="status-value">Memory, atmosphere, emotion</span>
+              </div>
+            </div>
+
+            <div class="visual-card">
+              <h3>Visual World</h3>
+              <p>
+                Chroma Glow lives in neon afterimage, reflective color, and the feeling of remembering something just as it starts to fade.
+              </p>
+              <div class="visual-wrap">
+                <img class="artist-logo" src="/static/logos/chromaglowclear.png" alt="Chroma Glow logo" />
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <main>
+      <div class="container">
+        <section class="section-block reveal" id="bio">
+          <div class="panel section-panel">
+            <p class="section-label">Artist Bio</p>
+            <h2 class="display section-title">The meaning behind Chroma Glow</h2>
+
+            <div class="bio-card">
+              <p>
+                Chroma Glow is the music project of Sammi F, built around atmosphere, memory, neon afterimage, and emotionally immersive electronic composition.
+              </p>
+
+              <details>
+                <summary>Read More</summary>
+                <p class="section-copy">
+                  Ever since I was a child, I have always loved music. Creating it, listening to it, playing it. I learned guitar at a young age, and I started making music more seriously in 2020.
+                </p>
+                <p class="section-copy">
+                  Then, in November of 2024, after listening to chillsynth and vaporwave for nearly a decade, I decided to try making it myself.
+                </p>
+                <p class="section-copy">
+                  At first, I had a few names in mind. They were all pretty bad. Espionaj. Quantum Red. None of them felt right. Then, while setting up themes on Discord Nitro, I came across one called Chroma Glow. I remember thinking, that’s actually a really cool name. And it stuck.
+                </p>
+                <p class="section-copy">
+                  My first couple of releases, I had no idea what I was doing.
+                </p>
+                <p class="section-copy">
+                  I was experimenting with Serum, I didn’t have proper drum samples, and I ended up using the built-in TR-808 sounds from Halion Sonic. The drums honestly sounded terrible. Every playlister I asked for feedback told me the same thing.
+                </p>
+                <p class="section-copy">
+                  By my third release, Return, things started to shift. A friend sent me better drum samples, and for the first time, I felt like I had something that actually sounded right.
+                </p>
+                <p class="section-copy">
+                  By the time I reached my fifth release, Airstream ’91, I started getting more playlist placements. Things were beginning to connect.
+                </p>
+                <p class="section-copy">
+                  Then 2026 happened.
+                </p>
+                <p class="section-copy">
+                  The first few months of that year were rough for me. And out of that came the Memories That Last a Lifetime EP. That project gave Chroma Glow a much deeper meaning.
+                </p>
+                <p class="section-copy">
+                  To me, Chroma Glow isn’t just music.
+                </p>
+                <p class="section-copy">
+                  It’s a bridge.
+                </p>
+                <p class="section-copy">
+                  A bridge to places in my mind that I can’t physically return to anymore. Paths back to moments that are gone, but not forgotten.
+                </p>
+                <p class="section-copy">
+                  When I listen to Remember California, I feel this quiet burning in my chest. A gentle sadness. Because I remember. I remember what I did, who I saw, what those months felt like.
+                </p>
+                <p class="section-copy">
+                  Those memories hurt sometimes. But they also taught me a lot about myself. They changed me. They gave me perspective.
+                </p>
+                <p class="section-copy">
+                  And that’s what this project is really about.
+                </p>
+                <p class="section-copy">
+                  I hope that when people listen to Chroma Glow, they feel something similar. Nostalgia. Emotion. Reflection.
+                </p>
+                <p class="section-copy">
+                  At the very least, I hope the music does something for you.
+                </p>
+                <p class="section-copy">
+                  Makes you smile. Becomes the soundtrack to your summer.
+                </p>
+                <p class="section-copy">
+                  Or takes you somewhere you didn’t expect to go.
+                </p>
+              </details>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-block reveal" id="listen">
+          <div class="panel section-panel">
+            <p class="section-label">Listen</p>
+            <h2 class="display section-title">Music and video</h2>
+
+            <div class="embed-stack">
+              <div class="embed-card">
+                <h3>Spotify</h3>
+                <p>Listen to Chroma Glow directly on Spotify.</p>
+                <iframe
+                  style="border-radius:12px"
+                  src="https://open.spotify.com/embed/artist/6urtYaQRK6hdJzJ9XrpWXs"
+                  height="352"
+                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  loading="lazy">
+                </iframe>
+              </div>
+
+              <div class="embed-card">
+                <h3>Featured Video</h3>
+                <p>Featured Chroma Glow content on YouTube.</p>
+                <iframe
+                  height="450"
+                  src="https://www.youtube.com/embed/NE0bdOZpBFw"
+                  title="Featured Chroma Glow video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen>
+                </iframe>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-block reveal" id="platforms">
+          <div class="panel section-panel">
+            <p class="section-label">Platforms</p>
+            <h2 class="display section-title">Find Chroma Glow everywhere</h2>
+
+            <div class="platform-card">
+              <p>
+                Follow Chroma Glow across streaming, social, and artist platforms. Keeping these profiles unified helps reinforce one clear artist identity everywhere.
+              </p>
+
+              <div class="platform-actions">
+                <a class="btn btn-primary" href="https://open.spotify.com/artist/6urtYaQRK6hdJzJ9XrpWXs" target="_blank" rel="noopener noreferrer">Spotify</a>
+                <a class="btn btn-secondary" href="https://www.youtube.com/@Chroma_Glow_Synths" target="_blank" rel="noopener noreferrer">YouTube</a>
+                <a class="btn btn-secondary" href="https://www.instagram.com/chroma_glow_synths" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a class="btn btn-secondary" href="https://chromaglow.bandcamp.com" target="_blank" rel="noopener noreferrer">Bandcamp</a>
+                <a class="btn btn-secondary" href="https://www.threads.com/@chroma_glow_synths" target="_blank" rel="noopener noreferrer">Threads</a>
+                <a class="btn btn-secondary" href="https://soundcloud.com/chromaglow" target="_blank" rel="noopener noreferrer">SoundCloud</a>
+                <a class="btn btn-secondary" href="https://music.apple.com/in/artist/chroma-glow/1787981160" target="_blank" rel="noopener noreferrer">Apple Music</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-panel">
+          <div>
+            <p class="display footer-title">Chroma Glow</p>
+            <p class="footer-copy">
+              Chillsynth and electronic music rooted in nostalgia, atmosphere, and memory.
+            </p>
+          </div>
+
+          <div class="footer-links">
+            <a href="/">Home</a>
+            <a href="/music">Music</a>
+            <a href="/about">About</a>
+            <a href="/memory_room">Memory Room</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const revealEls = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.16,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealEls.forEach((el) => revealObserver.observe(el));
+  </script>
+</body>
+</html>
