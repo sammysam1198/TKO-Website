@@ -580,6 +580,139 @@
       transform: translateY(0);
     }
 
+    <!--this is for combining /home and /chroma-glow -->
+
+     .portal-grid {
+    margin-top: 28px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+  }
+
+  .portal-card {
+    position: relative;
+    overflow: hidden;
+    min-height: 280px;
+    display: flex;
+    align-items: flex-end;
+    padding: 24px;
+    border-radius: 28px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.04);
+    box-shadow: var(--shadow-lg);
+    isolation: isolate;
+    transition:
+      transform var(--ease),
+      border-color var(--ease),
+      box-shadow var(--ease);
+  }
+
+  .portal-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255,255,255,0.18);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.34);
+  }
+
+  .portal-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transform: scale(1.04);
+    filter: saturate(1.08);
+  }
+
+  .portal-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(to top, rgba(3,4,10,0.92) 12%, rgba(3,4,10,0.28) 60%),
+      linear-gradient(135deg, rgba(255,44,195,0.12), rgba(57,214,255,0.08));
+  }
+
+  .portal-card.about::before {
+    background-image: url("/static/covers/quattro.png");
+  }
+
+  .portal-card.music::before {
+    background-image: url("/static/covers/perennial.png");
+  }
+
+  .portal-card.merch::before {
+    background-image: url("/static/covers/square (no title).png");
+  }
+
+  .portal-card.contact::before {
+    background-image: url("/static/covers/Airstream91.png");
+  }
+
+  .portal-card.lore::before {
+    background-image: url("/static/covers/Skyline_upscale.png");
+  }
+
+  .portal-card.memory::before {
+    background-image: url("/static/covers/memories_glow.png");
+  }
+
+  .portal-card-content {
+    width: 100%;
+  }
+
+  .portal-label {
+    margin: 0;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.62);
+  }
+
+  .portal-title {
+    margin: 12px 0 0;
+    font-size: 1.55rem;
+    line-height: 1.06;
+  }
+
+  .portal-copy {
+    margin: 14px 0 0;
+    font-size: 0.95rem;
+    line-height: 1.72;
+    color: rgba(255,255,255,0.8);
+    max-width: 95%;
+  }
+
+  .portal-link {
+    margin-top: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.84rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.88);
+  }
+
+  .portal-link::after {
+    content: "↗";
+    font-size: 1rem;
+  }
+
+  @media (max-width: 1100px) {
+    .portal-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 700px) {
+    .portal-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
     @media (max-width: 1100px) {
       .hero-grid {
         grid-template-columns: 1fr;
@@ -627,9 +760,9 @@
 
         <nav class="nav">
           <a href="/">Home</a>
-          <a href="/chroma-glow">Chroma Glow</a>
-          <a href="/music">Music</a>
           <a href="/about">About</a>
+          <a href="/music">Music</a>
+          <a href="/coming_soon">Links</a>
           <a href="/memory_room">Memory Room</a>
         </nav>
       </div>
@@ -694,6 +827,84 @@
         </div>
       </div>
     </section>
+
+    <section class="section-block reveal" id="explore">
+  <div class="panel section-panel">
+    <p class="section-label">Explore</p>
+    <h2 class="display section-title">Rooms inside the glow</h2>
+    <p class="section-copy">
+      Chroma Glow is more than a profile. It is a world of music, memory, visual atmosphere, and emotional fragments that connect across the site.
+    </p>
+
+    <div class="portal-grid">
+      <a class="portal-card about" href="/about">
+        <div class="portal-card-content">
+          <p class="portal-label">Origin</p>
+          <h3 class="portal-title">About</h3>
+          <p class="portal-copy">
+            The story behind the artist, the project, and the emotional center of Chroma Glow.
+          </p>
+          <span class="portal-link">Enter</span>
+        </div>
+      </a>
+
+      <a class="portal-card music" href="/music">
+        <div class="portal-card-content">
+          <p class="portal-label">Sound</p>
+          <h3 class="portal-title">Music</h3>
+          <p class="portal-copy">
+            Releases, embedded listening, and the soundtrack core of the project.
+          </p>
+          <span class="portal-link">Listen</span>
+        </div>
+      </a>
+
+      <a class="portal-card merch" href="/coming_soon">
+        <div class="portal-card-content">
+          <p class="portal-label">Objects</p>
+          <h3 class="portal-title">Merch</h3>
+          <p class="portal-copy">
+            Wearable and collectible fragments from the Chroma Glow world.
+          </p>
+          <span class="portal-link">View</span>
+        </div>
+      </a>
+
+      <a class="portal-card contact" href="mailto:samfishbein1198@gmail.com">
+        <div class="portal-card-content">
+          <p class="portal-label">Reach Out</p>
+          <h3 class="portal-title">Contact</h3>
+          <p class="portal-copy">
+            For collaborations, questions, placements, or anything else that finds its way here.
+          </p>
+          <span class="portal-link">Open</span>
+        </div>
+      </a>
+
+      <a class="portal-card lore" href="/chroma-glow#bio">
+        <div class="portal-card-content">
+          <p class="portal-label">Meaning</p>
+          <h3 class="portal-title">Lore</h3>
+          <p class="portal-copy">
+            The emotional thesis, the memories, and the bridge between sound and story.
+          </p>
+          <span class="portal-link">Read</span>
+        </div>
+      </a>
+
+      <a class="portal-card memory" href="/memory_room">
+        <div class="portal-card-content">
+          <p class="portal-label">Archive</p>
+          <h3 class="portal-title">Memory Room</h3>
+          <p class="portal-copy">
+            A preserved space of images, fragments, and moments you can step into.
+          </p>
+          <span class="portal-link">Explore</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
 
     <main>
       <div class="container">
