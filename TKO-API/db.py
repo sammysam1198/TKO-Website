@@ -30,11 +30,7 @@ def init_db():
                 interest TEXT,
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
-            """
-        )
 
-        cur.execute(
-            """
             CREATE TABLE IF NOT EXISTS tko_guestbook_posts (
                 id SERIAL PRIMARY KEY,
                 display_name VARCHAR(120) NOT NULL,
@@ -44,11 +40,7 @@ def init_db():
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
-            """
-        )
 
-        cur.execute(
-            """
             CREATE TABLE IF NOT EXISTS tko_users (
                 id SERIAL PRIMARY KEY,
                 first_name VARCHAR(100) NOT NULL,
@@ -61,10 +53,7 @@ def init_db():
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
-            """
-        )
-        cur.execute(
-            """
+      
             CREATE TABLE IF NOT EXISTS newsletter_subscribers (
                 id SERIAL PRIMARY KEY,
                 first_name VARCHAR(100),
@@ -72,11 +61,7 @@ def init_db():
                 message TEXT,
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
-            """
-        )
-
-        cur.execute(
-            """
+       
             CREATE TABLE IF NOT EXISTS dev_messages (
                 id SERIAL PRIMARY KEY,
                 user_id INTEGER REFERENCES tko_users(id) ON DELETE SET NULL,
@@ -84,11 +69,7 @@ def init_db():
                 message TEXT NOT NULL,
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
-            """
-        )
-
-        cur.execute(
-            """
+        
             CREATE TABLE IF NOT EXISTS dev_issues (
                 id SERIAL PRIMARY KEY,
                 title TEXT NOT NULL,
@@ -97,22 +78,14 @@ def init_db():
                 created_by VARCHAR(50),
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
-            """
-        )
-
-        cur.execute(
-            """
+       
             CREATE TABLE IF NOT EXISTS dev_logs (
                 id SERIAL PRIMARY KEY,
                 message TEXT NOT NULL,
                 level VARCHAR(20) DEFAULT 'info',
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
-            """
-        )
-        # Forum tables
-        cur.execute(
-            """
+       
             CREATE TABLE IF NOT EXISTS tko_forum_categories (
                 id SERIAL PRIMARY KEY,
                 slug VARCHAR(50) NOT NULL UNIQUE,
@@ -121,11 +94,7 @@ def init_db():
                 display_order INTEGER NOT NULL DEFAULT 0,
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
-            """
-        )
-
-        cur.execute(
-            """
+        
             CREATE TABLE IF NOT EXISTS tko_forum_posts (
                 id SERIAL PRIMARY KEY,
                 category_id INTEGER NOT NULL REFERENCES tko_forum_categories(id),
@@ -141,11 +110,7 @@ def init_db():
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
-            """
-        )
-
-        cur.execute(
-            """
+     
             CREATE TABLE IF NOT EXISTS tko_forum_votes (
                 id SERIAL PRIMARY KEY,
                 post_id INTEGER NOT NULL REFERENCES tko_forum_posts(id) ON DELETE CASCADE,
@@ -154,28 +119,71 @@ def init_db():
                 vote_type SMALLINT NOT NULL CHECK (vote_type IN (-1, 1)),
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
             );
-            """
-        )
-
-        cur.execute(
-            """
+      
             CREATE INDEX IF NOT EXISTS idx_forum_posts_category ON tko_forum_posts(category_id);
             CREATE INDEX IF NOT EXISTS idx_forum_posts_parent ON tko_forum_posts(parent_id);
             CREATE INDEX IF NOT EXISTS idx_forum_posts_created ON tko_forum_posts(created_at DESC);
             CREATE INDEX IF NOT EXISTS idx_forum_votes_post ON tko_forum_votes(post_id);
-            """
-        )
-
-        cur.execute(
-            """
+  
             INSERT INTO tko_forum_categories (slug, name, description, display_order)
             VALUES
                 ('general', 'General', 'General discussion about TKO', 1),
                 ('music', 'Music', 'Music releases, artists, and soundtrack discussion', 2),
                 ('announcements', 'Announcements', 'Official project updates and news', 3)
             ON CONFLICT (slug) DO NOTHING;
+     
+            ALTER TABLE tko_users
+                ADD COLUMN role VARCHAR(30) NOT NULL DEFAULT 'user',
+                ADD COLUMN theme_preference VARCHAR(20) NOT NULL DEFAULT 'dark',
+                ADD COLUMN colorblind_mode BOOLEAN NOT NULL DEFAULT FALSE,
+                ADD COLUMN two_factor_enabled BOOLEAN NOT NULL DEFAULT FALSE,
+                ADD COLUMN two_factor_method VARCHAR(20),
+                ADD COLUMN two_factor_secret TEXT,
+                ADD COLUMN phone_number VARCHAR(30),
+                ADD COLUMN phone_verified BOOLEAN NOT NULL DEFAULT FALSE,
+                ADD COLUMN email_verified BOOLEAN NOT NULL DEFAULT FALSE,
+                ADD COLUMN last_login_at TIMESTAMP;
+     
+            CREATE TABLE IF NOT EXISTS tko_password_reset_tokens (
+                id SERIAL PRIMARY KEY,
+                user_id INTEGER NOT NULL REFERENCES tko_users(id) ON DELETE CASCADE,
+                token_hash TEXT NOT NULL,
+                expires_at TIMESTAMP NOT NULL,
+                used_at TIMESTAMP,
+                created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );
+
+            CREATE TABLE IF NOT EXISTS tko_two_factor_backup_codes (
+                id SERIAL PRIMARY KEY,
+                user_id INTEGER NOT NULL REFERENCES tko_users(id) ON DELETE CASCADE,
+                code_hash TEXT NOT NULL,
+                used_at TIMESTAMP,
+                created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+            );
+
+            CREATE TABLE IF NOT EXISTS tko_email_campaigns (
+                id SERIAL PRIMARY KEY,
+                subject TEXT NOT NULL,
+                body_html TEXT,
+                body_text TEXT,
+                created_by INTEGER REFERENCES tko_users(id) ON DELETE SET NULL,
+                status VARCHAR(20) NOT NULL DEFAULT 'draft',
+                created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                sent_at TIMESTAMP
+            );
+
+            CREATE TABLE IF NOT EXISTS tko_email_campaign_recipients (
+                id SERIAL PRIMARY KEY,
+                campaign_id INTEGER NOT NULL REFERENCES tko_email_campaigns(id) ON DELETE CASCADE,
+                email VARCHAR(255) NOT NULL,
+                delivery_status VARCHAR(20) NOT NULL DEFAULT 'pending',
+                error_message TEXT,
+                sent_at TIMESTAMP
+            );
             """
         )
+
+        
 
         conn.commit()
     finally:
