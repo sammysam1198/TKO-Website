@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | Sammi Fishbein</title>
+  <style>
+    :root {
+      --bg-deep: #03040a;
+      --bg-mid: #0a0c18;
+      --panel: rgba(12, 14, 28, 0.72);
+      --panel-strong: rgba(8, 10, 20, 0.86);
+      --panel-border: rgba(255, 255, 255, 0.12);
+
+      --text: #ffffff;
+      --text-soft: rgba(255, 255, 255, 0.82);
+      --text-faint: rgba(255, 255, 255, 0.56);
+
+      --pink: #ff4fd8;
+      --hot-pink: #ff2cc3;
+      --violet: #8d68ff;
+      --blue: #39d6ff;
+      --cyan: #77ecff;
+      --sunset: #ff8f5a;
+
+      --shadow-xl: 0 24px 90px rgba(0, 0, 0, 0.42);
+      --shadow-lg: 0 18px 60px rgba(0, 0, 0, 0.30);
+      --glow-pink: 0 0 42px rgba(255, 79, 216, 0.24);
+      --glow-blue: 0 0 42px rgba(57, 214, 255, 0.20);
+
+      --radius-xl: 34px;
+      --radius-lg: 26px;
+      --radius-md: 18px;
+
+      --max-width: 1240px;
+      --ease: 320ms cubic-bezier(.2,.8,.2,1);
+      --nav-height: 86px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--bg-deep);
+    }
+
+    body {
+      position: relative;
+      overflow-x: hidden;
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .display {
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .site-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background:
+        radial-gradient(circle at 20% 18%, rgba(255, 79, 216, 0.16), transparent 26%),
+        radial-gradient(circle at 80% 16%, rgba(57, 214, 255, 0.14), transparent 22%),
+        radial-gradient(circle at 50% 80%, rgba(141, 104, 255, 0.12), transparent 32%),
+        linear-gradient(180deg, #050711 0%, #070a16 42%, #03040a 100%);
+    }
+
+    .site-bg::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(3, 4, 10, 0.48), rgba(3, 4, 10, 0.78)),
+        url("/static/RC_orig.png") center center / cover no-repeat;
+      filter: blur(12px) saturate(1.08);
+      transform: scale(1.04);
+      opacity: 0.34;
+    }
+
+    .site-shell {
+      position: relative;
+      z-index: 2;
+    }
+
+    .container {
+      width: min(calc(100% - 44px), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      height: var(--nav-height);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(5, 6, 14, 0.84), rgba(5, 6, 14, 0.56));
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .site-header .container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-orb {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-image: url("/TKO-Web/static/tko/docs/sammi.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      box-shadow: var(--glow-pink), var(--glow-blue);
+      flex: 0 0 auto;
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.96);
+    }
+
+    .brand-subtitle {
+      margin: 0;
+      font-size: 0.72rem;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--text-faint);
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav a {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.9);
+      transition: transform var(--ease), border-color var(--ease), background var(--ease), box-shadow var(--ease);
+    }
+
+    .nav a:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.18);
+      box-shadow: 0 0 18px rgba(57,214,255,0.10);
+    }
+
+    .hero {
+      position: relative;
+      padding: 76px 0 48px;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      inset: auto auto 8% 50%;
+      transform: translateX(-50%);
+      width: min(86vw, 1100px);
+      height: 420px;
+      background:
+        radial-gradient(circle, rgba(141, 104, 255, 0.26) 0%, rgba(255, 79, 216, 0.10) 28%, rgba(57, 214, 255, 0.08) 52%, transparent 72%);
+      filter: blur(16px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .panel {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255,255,255,0.12);
+      background:
+        linear-gradient(180deg, rgba(14,16,30,0.66), rgba(8,10,20,0.84)),
+        rgba(10,12,24,0.72);
+      box-shadow: var(--shadow-xl);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(120deg, rgba(255, 79, 216, 0.10), transparent 36%),
+        linear-gradient(300deg, rgba(57, 214, 255, 0.10), transparent 32%);
+      pointer-events: none;
+    }
+
+    .panel > * { position: relative; z-index: 1; }
+
+    .hero-panel {
+      padding: 34px;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      font-size: 0.78rem;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.64);
+    }
+
+    .hero-title {
+      margin: 0;
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 0.92;
+      max-width: 760px;
+      text-shadow: 0 0 28px rgba(255, 79, 216, 0.12);
+    }
+
+    .hero-subtitle {
+      margin: 18px 0 0;
+      font-size: 1.12rem;
+      color: var(--cyan);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero-copy {
+      margin: 18px 0 0;
+      max-width: 680px;
+      font-size: 1.04rem;
+      line-height: 1.82;
+      color: var(--text-soft);
+    }
+
+    .hero-actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.88rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: transform var(--ease), background var(--ease), border-color var(--ease), box-shadow var(--ease);
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(135deg, rgba(255,44,195,0.9), rgba(57,214,255,0.85));
+      box-shadow: var(--glow-pink), var(--glow-blue);
+    }
+
+    .btn-secondary {
+      color: #fff;
+      border-color: rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .hero-side {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      justify-content: center;
+    }
+
+    .status-card,
+    .quick-links,
+    .code-preview {
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      padding: 20px;
+    }
+
+    .status-card h3,
+    .quick-links h3,
+    .code-preview h3,
+    .section-title,
+    .project-title,
+    .contact-title {
+      margin: 0;
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .status-row:last-child { border-bottom: 0; padding-bottom: 0; }
+    .status-label { color: var(--text-faint); font-size: 0.88rem; letter-spacing: 0.08em; text-transform: uppercase; }
+    .status-value { color: var(--text); font-weight: 700; text-align: right; }
+
+    .quick-link-list {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .quick-link {
+      padding: 14px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.03);
+      transition: transform var(--ease), background var(--ease), border-color var(--ease);
+    }
+
+    .quick-link:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.16);
+    }
+
+    .quick-link strong {
+      display: block;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+
+    .quick-link span {
+      display: block;
+      color: var(--text-faint);
+      font-size: 0.86rem;
+      line-height: 1.55;
+    }
+
+    .code-preview pre {
+      margin: 14px 0 0;
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(6, 8, 18, 0.92);
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow: auto;
+      color: #d9ecff;
+      font-size: 0.86rem;
+      line-height: 1.65;
+    }
+
+    main {
+      position: relative;
+      z-index: 2;
+      padding: 12px 0 72px;
+    }
+
+    .section-block {
+      margin-top: 28px;
+    }
+
+    .section-panel {
+      padding: 34px;
+    }
+
+    .section-label {
+      margin: 0 0 10px;
+      font-size: 0.8rem;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.62);
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 0.95;
+    }
+
+    .section-copy {
+      margin: 18px 0 0;
+      max-width: 900px;
+      font-size: 1.03rem;
+      line-height: 1.82;
+      color: var(--text-soft);
+    }
+
+    .project-grid {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .project-card {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 26px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      box-shadow: var(--shadow-lg);
+      transition: transform var(--ease), border-color var(--ease), box-shadow var(--ease);
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,255,255,0.18);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.34);
+    }
+
+    .project-type {
+      margin: 0;
+      font-size: 0.74rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.58);
+    }
+
+    .project-title {
+      margin-top: 12px;
+      font-size: 1.8rem;
+      line-height: 1.02;
+    }
+
+    .project-title.pink { color: var(--pink); }
+    .project-title.sunset { color: var(--sunset); }
+    .project-title.blue { color: var(--blue); }
+
+    .project-copy {
+      margin-top: 14px;
+      color: var(--text-soft);
+      font-size: 0.98rem;
+      line-height: 1.74;
+    }
+
+    .tag-row {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tag {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.88);
+      font-size: 0.84rem;
+    }
+
+    .project-links {
+      margin-top: auto;
+      padding-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .project-link {
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      transition: transform var(--ease), background var(--ease), border-color var(--ease);
+    }
+
+    .project-link:hover { transform: translateY(-2px); }
+    .project-link.primary {
+      background: linear-gradient(135deg, rgba(255,44,195,0.9), rgba(57,214,255,0.85));
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .skills-grid {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .skill-card {
+      padding: 20px;
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .skill-card h3 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .contact-grid {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .contact-card {
+      padding: 26px;
+      border-radius: 26px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .contact-title {
+      font-size: 1.4rem;
+      color: var(--cyan);
+    }
+
+    .contact-copy {
+      margin: 14px 0 0;
+      color: var(--text-soft);
+      line-height: 1.8;
+    }
+
+    .contact-actions {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(7, 9, 18, 0.88);
+      color: #fff;
+      padding: 14px 16px;
+      font: inherit;
+    }
+
+    .contact-form textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .contact-note {
+      margin-top: 12px;
+      font-size: 0.88rem;
+      color: var(--text-faint);
+    }
+
+    .footer {
+      padding: 0 0 42px;
+    }
+
+    .footer-panel {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 20px 22px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(8,10,20,0.56);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .footer-title {
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.92);
+    }
+
+    .footer-copy {
+      margin: 6px 0 0;
+      font-size: 0.92rem;
+      color: var(--text-faint);
+      line-height: 1.7;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .footer-links a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.88);
+      transition: transform var(--ease), background var(--ease);
+    }
+
+    .footer-links a:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 700ms cubic-bezier(.2,.8,.2,1), transform 700ms cubic-bezier(.2,.8,.2,1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .contact-grid,
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-link-list {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .nav { display: none; }
+      .hero { padding: 44px 0 24px; }
+      .hero-panel,
+      .section-panel { padding: 24px; }
+      .quick-link-list { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .container { width: min(calc(100% - 24px), var(--max-width)); }
+      .hero-title { font-size: clamp(2.4rem, 11vw, 4.2rem); }
+      .section-title { font-size: clamp(1.8rem, 9vw, 3rem); }
+      .hero-actions,
+      .contact-actions,
+      .project-links,
+      .footer-links { flex-direction: column; align-items: stretch; }
+      .btn,
+      .project-link { width: 100%; text-align: center; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site-bg"></div>
+
+  <div class="site-shell">
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="/">
+          <span class="brand-orb" aria-hidden="true"></span>
+          <div class="brand-copy">
+            <p class="display brand-title">Sammi Fishbein</p>
+            <p class="brand-subtitle">Backend engineer</p>
+          </div>
+        </a>
+
+        <nav class="nav">
+          <a href="#top">Home</a>
+          <a href="#projects">Projects</a>
+          <a href="#stack">Stack</a>
+          <a href="#contact">Contact</a>
+          <a href="https://github.com/sammysam1198" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="hero" id="top">
+      <div class="hero-glow"></div>
+      <div class="container">
+        <div class="hero-grid reveal">
+          <section class="panel hero-panel">
+            <p class="eyebrow">Portfolio</p>
+            <h1 class="display hero-title">Backend software engineer</h1>
+            <p class="hero-subtitle"> | Python | Flask | PostgreSQL | APIs</p>
+            <p class="hero-copy">
+              I build backend and full-stack software with Python, Flask, PostgreSQL, authentication systems,
+              cloud deployment, and frontend experiences that feel intentional. My best work lives at the point
+              where technical structure and artistic creativity meet.
+            </p>
+            <p class="hero-copy">
+              Visual style based on my website www.chromaglowsynths.com
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#projects">View projects</a>
+              <a class="btn btn-secondary" href="/assets/resume.pdf" target="_blank" rel="noopener noreferrer">View resume</a>
+              <a class="btn btn-secondary" href="https://github.com/sammysam1198" target="_blank" rel="noopener noreferrer">Open GitHub</a>
+            </div>
+          </section>
+
+          <aside class="panel hero-side">
+            <div class="status-card">
+              <h3>Quick snapshot</h3>
+              <div class="status-row">
+                <span class="status-label">Focus</span>
+                <span class="status-value">Backend + full-stack product work</span>
+              </div>
+              <div class="status-row">
+                <span class="status-label">Strengths</span>
+                <span class="status-value">APIs, auth, data models, deployment</span>
+              </div>
+              <div class="status-row">
+                <span class="status-label">Location</span>
+                <span class="status-value">Open to relocation</span>
+              </div>
+              <div class="status-row">
+                <span class="status-label">Current goal</span>
+                <span class="status-value">Backend software engineering role</span>
+              </div>
+            </div>
+
+            <div class="quick-links">
+              <h3>Explore</h3>
+              <div class="quick-link-list">
+                <a class="quick-link" href="#projects">
+                  <strong>Flagship projects</strong>
+                  <span>ASTRA, T.K.O., and Chroma Glow website.</span>
+                </a>
+                <a class="quick-link" href="#stack">
+                  <strong>Tech stack</strong>
+                  <span>See my stack and learn how I create and transform.</span>
+                </a>
+                <a class="quick-link" href="#contact">
+                  <strong>Contact me</strong>
+                  <span>Click here to contact me for your next project.</span>
+                </a>
+                <a class="quick-link" href="https://github.com/sammysam1198" target="_blank" rel="noopener noreferrer">
+                  <strong>Code</strong>
+                  <span>Right to the repo without the search!</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="code-preview">
+              <h3>Code preview block</h3>
+              <pre><code>def create_issue(issue_payload: dict) -> dict:
+    validate_issue_payload(issue_payload)
+    issue_id = issue_repo.insert_issue(issue_payload)
+    return issue_repo.fetch_issue_by_id(issue_id)</code></pre>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <main>
+      <div class="container">
+        <section class="section-block reveal" id="projects">
+          <div class="panel section-panel">
+            <p class="section-label">Selected work</p>
+            <h2 class="display section-title">Projects that show how I think</h2>
+            
+            <div class="project-grid">
+              <article class="project-card">
+                <p class="project-type">Cloud issue tracking platform</p>
+                
+                  ASTRA is an internal software platform I built for issue tracking, workflow support, and operational tooling.
+                  It uses a Flask REST API, PostgreSQL, authentication, and role-aware permissions to support real business processes.
+                  It highlights backend engineering, data modeling, API design, and cloud deployment in a single system.
+                
+                <div class="tag-row">
+                  <span class="tag">Python</span>
+                  <span class="tag">Flask</span>
+                  <span class="tag">PostgreSQL</span>
+                  <span class="tag">REST API</span>
+                  <span class="tag">RBAC</span>
+                  <span class="tag">Render</span>
+                </div>
+                <div class="project-links">
+                  <a class="project-link primary" href="https://github.com/sammysam1198/ASTRA-Issue-Tracker-Python-Cloud-" target="_blank" rel="noopener noreferrer">View code</a>
+                  <a class="project-link" href="#contact">Ask about architecture</a>
+                </div>
+              </article>
+
+              <article class="project-card">
+                <p class="project-type">Music platform / brand site</p>
+                
+                  Chroma Glow is my artist website and a larger design-forward web build with a much stronger visual identity than my earlier work.
+                  It is where I combine layout, interaction, branding, and frontend structure into something that feels like a complete product rather than a plain portfolio page.
+                  It shows my ability to build polished user-facing experiences alongside technical systems.
+                
+                <div class="tag-row">
+                  <span class="tag">HTML</span>
+                  <span class="tag">CSS</span>
+                  <span class="tag">JavaScript</span>
+                  <span class="tag">Interaction design</span>
+                  <span class="tag">Responsive layout</span>
+                </div>
+                <div class="project-links">
+                  <a class="project-link primary" href="https://chromaglowsynths.com" target="_blank" rel="noopener noreferrer">Live site</a>
+                </div>
+              </article>
+
+              <article class="project-card">
+                <p class="project-type">Narrative rhythm game web platform</p>
+                
+                  T.K.O. is a web platform built around a larger game and media concept. The most important part technically is the backend direction:
+                  modular Flask structure, authentication flows, PostgreSQL integration, and deployment on Render.
+                  It demonstrates product thinking, full-stack coordination, and iterative development over time.
+                
+                <div class="tag-row">
+                  <span class="tag">Flask API</span>
+                  <span class="tag">PostgreSQL</span>
+                  <span class="tag">Auth</span>
+                  <span class="tag">HTML</span>
+                  <span class="tag">Python</span>
+                  <span class="tag">Javascript</span>
+                </div>
+                <div class="project-links">
+                  <a class="project-link primary" href="https://tkofficial.onrender.com" target="_blank" rel="noopener noreferrer">Live site</a>
+                  <a class="project-link" href="https://github.com/sammysam1198/TKO-Website" target="_blank" rel="noopener noreferrer">View code</a>
+                </div>
+              </article>
+
+              <article class="project-card">
+                <p class="project-type">Coming soon</p>
+                
+                  coming soon.
+                
+                <div class="tag-row">
+                 
+                </div>
+                <div class="project-links">
+                </div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-block reveal" id="stack">
+          <div class="panel section-panel">
+            <p class="section-label">Core tooling</p>
+            <h2 class="display section-title">Stack and engineering focus</h2>
+        
+
+            <div class="skills-grid">
+              <div class="skill-card">
+                <h3>Backend</h3>
+                <div class="skill-list">
+                  <span class="tag">Python</span>
+                  <span class="tag">Flask</span>
+                  <span class="tag">REST APIs</span>
+                  <span class="tag">Auth</span>
+                  <span class="tag">RBAC</span>
+                </div>
+              </div>
+
+              <div class="skill-card">
+                <h3>Data</h3>
+                <div class="skill-list">
+                  <span class="tag">PostgreSQL</span>
+                  <span class="tag">SQL</span>
+                  <span class="tag">Schema design</span>
+                  <span class="tag">Migrations</span>
+                </div>
+              </div>
+
+              <div class="skill-card">
+                <h3>Frontend</h3>
+                <div class="skill-list">
+                  <span class="tag">HTML</span>
+                  <span class="tag">CSS</span>
+                  <span class="tag">JavaScript</span>
+                  <span class="tag">Responsive UI</span>
+                </div>
+              </div>
+
+              <div class="skill-card">
+                <h3>Delivery</h3>
+                <div class="skill-list">
+                  <span class="tag">Render</span>
+                  <span class="tag">GitHub</span>
+                  <span class="tag">Deployment</span>
+                  <span class="tag">Modular architecture</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-block reveal" id="contact">
+          <div class="panel section-panel">
+            <p class="section-label">Contact</p>
+            <h2 class="display section-title">Let people reach you without friction</h2>
+           
+            <div class="contact-grid">
+              <div class="contact-card">
+                <h3 class="contact-title">Direct links</h3>
+                <p class="contact-copy">
+                  Contact me directly for opportunities, collaborations, or technical discussions. All relevant links are provided here.
+                </p>
+                <div class="contact-actions">
+                  <a class="btn btn-primary" href="mailto:samfishbein1198@gmail.com">Email me</a>
+                  <a class="btn btn-secondary" href="https://github.com/sammysam1198" target="_blank" rel="noopener noreferrer">GitHub</a>
+                  <a class="btn btn-secondary" href="https://www.linkedin.com/in/chromaglowsynths">LinkedIn</a>
+                </div>
+                <p class="contact-note"></p>
+              </div>
+
+              <div class="contact-card">
+                <h3 class="contact-title">Message form</h3>
+                <form class="contact-form">
+                  <input type="text" placeholder="Your name" />
+                  <input type="email" placeholder="Your email" />
+                  <textarea placeholder="Tell me about the role, project, or opportunity."></textarea>
+                  <button class="btn btn-primary" type="submit">Send message</button>
+                </form>
+                <p class="contact-note"></p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-panel">
+          <div>
+            <p class="display footer-title">Sammi Fishbein</p>
+            <p class="footer-copy">
+              Backend engineer, product builder, and technical creative.
+            </p>
+          </div>
+
+          <div class="footer-links">
+            <a href="#projects">Projects</a>
+            <a href="#stack">Stack</a>
+            <a href="#contact">Contact</a>
+            <a href="/">Back to site</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const revealEls = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.16,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealEls.forEach((el) => revealObserver.observe(el));
+  </script>
+</body>
+</html>
