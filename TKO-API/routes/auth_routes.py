@@ -173,8 +173,6 @@ def me():
 
     token = auth_header.split(" ", 1)[1]
 
-    from utils.auth_utils import decode_auth_token
-
     try:
         payload = decode_auth_token(token)
     except Exception:
