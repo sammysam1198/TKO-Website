@@ -458,6 +458,40 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .account-menu {
+  position: relative;
+}
+
+.account-dropdown {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 10px;
+  min-width: 200px;
+  z-index: 999;
+}
+
+.account-dropdown button {
+  width: 100%;
+  background: none;
+  border: none;
+  color: white;
+  text-align: left;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.account-dropdown button:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.hidden {
+  display: none;
+}
+
     .hero-grid {
       grid-template-columns: 1.1fr 0.9fr;
       align-items: center;
@@ -1796,6 +1830,21 @@
 
   const devLogInput = document.getElementById("devLogInput");
   const sendDevLogBtn = document.getElementById("sendDevLog");
+
+  const toggleBtn = document.getElementById("accountMenuToggle");
+const dropdown = document.getElementById("accountDropdown");
+
+toggleBtn.addEventListener("click", () => {
+  dropdown.classList.toggle("hidden");
+});
+
+// click outside to close
+document.addEventListener("click", (e) => {
+  if (!toggleBtn.contains(e.target) && !dropdown.contains(e.target)) {
+    dropdown.classList.add("hidden");
+  }
+});
+
 
   let devConsoleUnlocked = false;
   let devChatMessages = [];
