@@ -147,6 +147,15 @@
       gap: 20px;
     }
 
+body[data-theme="light"] {
+  background: white;
+  color: black;
+}
+
+body.colorblind {
+  filter: contrast(1.2) saturate(0.8);
+}
+
     .info-card {
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.08);
