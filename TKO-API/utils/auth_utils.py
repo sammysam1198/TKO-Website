@@ -1,12 +1,25 @@
 import os
 import re
 import time
+import hashlib
+import secrets
+import bcrypt
+import jwt
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 from threading import Lock
-
-import bcrypt
-import jwt
+from datetime import datetime, timedelta, timezone
+from utils.auth_utils import (
+    is_valid_email,
+    is_valid_username,
+    validate_password,
+    hash_password,
+    verify_password,
+    create_auth_token,
+    decode_auth_token,
+    generate_secure_token,
+    hash_token,
+)
 
 
 EMAIL_REGEX = re.compile(r"^[^@\s]+@[^@\s]+\.(com|net|org|edu|gov|me)$", re.IGNORECASE)
@@ -76,3 +89,13 @@ def create_auth_token(user: dict) -> str:
 def decode_auth_token(token: str):
     secret = os.getenv("JWT_SECRET", "dev-secret-change-me")
     return jwt.decode(token, secret, algorithms=["HS256"])
+
+
+def generate_secure_token(length: int = 32) -> str:
+    return secrets.token_urlsafe(length)
+
+
+def hash_token(raw_token: str) -> str:
+    return hashlib.sha256(raw_token.encode("utf-8")).hexdigest()
+
+
