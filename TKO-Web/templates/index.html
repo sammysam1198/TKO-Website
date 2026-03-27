@@ -1505,6 +1505,64 @@ body.colorblind {
   overflow-x: hidden;
 }
 
+
+@media (max-width: 768px) {
+  .site-header .container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .brand {
+    text-align: center;
+  }
+
+  .header-right {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .nav {
+    justify-content: center;
+  }
+
+  .auth-buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .auth-btn {
+    width: 100%;
+  }
+
+  .profile-bubble {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .logout-btn {
+    width: 100%;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 44px 0 56px;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 14vw, 4rem);
+  }
+}
+
       
     }
   </style>
