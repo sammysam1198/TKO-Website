@@ -1484,13 +1484,35 @@
           <a href="/news">News</a>
         </nav>
              
-        <div id="authControls" class="auth-buttons">
-          <button id="openSignUp" class="auth-btn signup" type="button">Sign Up</button>
-          <button id="openSignIn" class="auth-btn signin" type="button">Sign In</button>
-        </div>
+        <div id="authSection">
+  <!-- Logged OUT -->
+  <div id="loggedOutView">
+    <button id="openSigninBtn">Sign In</button>
+    <button id="openSignupBtn">Sign Up</button>
+  </div>
+
+  <!-- Logged IN -->
+  <div id="loggedInView" class="hidden">
+    <div class="account-menu">
+      <button id="accountMenuToggle" class="profile-bubble">
+        <span id="profileName">👤 User</span>
+      </button>
+
+      <div id="accountDropdown" class="account-dropdown hidden">
+        <button id="openSettingsBtn">Account Settings</button>
+        <button id="openAppearanceBtn">Appearance</button>
+        <button id="openAccessibilityBtn">Accessibility</button>
+        <button id="openChangePasswordBtn">Change Password</button>
+
+        <button id="openAdminPanelBtn" class="hidden">Admin Panel</button>
+
+        <hr />
+
+        <button id="logoutBtn">Log Out</button>
       </div>
     </div>
-  </header>
+  </div>
+</div>
 
   <section id="home" class="hero hero-texture">
     <div class="container hero-grid">
