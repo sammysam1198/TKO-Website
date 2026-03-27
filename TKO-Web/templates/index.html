@@ -2562,6 +2562,80 @@ sendDevLogBtn.addEventListener("click", async () => {
     });
   }
 
+  async function loadUser() {
+  const token = localStorage.getItem("tko_token");
+
+  if (!token) {
+    showLoggedOut();
+    return;
+  }
+
+  const res = await fetch("/api/tko/auth/me", {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+
+  if (!res.ok) {
+    showLoggedOut();
+    return;
+  }
+
+  const data = await res.json();
+  const user = data.user;
+
+  showLoggedIn(user);
+}
+
+
+function showLoggedIn(user) {
+  document.getElementById("loggedOutView").classList.add("hidden");
+  document.getElementById("loggedInView").classList.remove("hidden");
+
+  document.getElementById("profileName").textContent = `👤 ${user.username}`;
+
+  // Admin check
+  if (user.role === "admin") {
+    document.getElementById("openAdminPanelBtn").classList.remove("hidden");
+  }
+
+  // Apply preferences
+  applyTheme(user.theme_preference);
+  applyColorblind(user.colorblind_mode);
+}
+
+function showLoggedOut() {
+  document.getElementById("loggedOutView").classList.remove("hidden");
+  document.getElementById("loggedInView").classList.add("hidden");
+}
+
+
+function applyTheme(theme) {
+  document.body.dataset.theme = theme || "dark";
+}
+
+function applyColorblind(enabled) {
+  document.body.classList.toggle("colorblind", enabled);
+}
+
+async function updatePreferences(prefs) {
+  const token = localStorage.getItem("tko_token");
+
+  await fetch("/api/tko/users/preferences", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify(prefs)
+  });
+}
+
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  localStorage.removeItem("tko_token");
+  location.reload();
+});
+
   loadCurrentUser();
 </script>
 </body>
