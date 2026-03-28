@@ -9,7 +9,7 @@ def create_contact_message(name: str, email: str, subject: str, message: str):
             with conn.cursor(cursor_factory=RealDictCursor) as cur:
                 cur.execute(
                     """
-                    INSERT INTO contact_messages (name, email, subject, message)
+                    INSERT INTO CG_contact_messages (name, email, subject, message)
                     VALUES (%s, %s, %s, %s)
                     RETURNING id, name, email, subject, message, created_at, is_read;
                     """,
@@ -27,7 +27,7 @@ def get_contact_messages(limit: int = 100):
             cur.execute(
                 """
                 SELECT id, name, email, subject, message, created_at, is_read
-                FROM contact_messages
+                FROM CG_contact_messages
                 ORDER BY created_at DESC
                 LIMIT %s;
                 """,
@@ -45,7 +45,7 @@ def mark_contact_message_read(message_id: int, is_read: bool = True):
             with conn.cursor(cursor_factory=RealDictCursor) as cur:
                 cur.execute(
                     """
-                    UPDATE contact_messages
+                    UPDATE CG_contact_messages
                     SET is_read = %s
                     WHERE id = %s
                     RETURNING id, is_read;
