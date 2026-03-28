@@ -1,1 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Chroma Glow</title>
+  <style>
+    :root {
+      --bg-1: #06070d;
+      --bg-2: #0d1020;
+      --panel: rgba(255, 255, 255, 0.06);
+      --panel-strong: rgba(255, 255, 255, 0.1);
+      --border: rgba(255, 255, 255, 0.14);
+      --text: #f7f4ff;
+      --muted: rgba(247, 244, 255, 0.74);
+      --pink: #ff4fd8;
+      --violet: #8b5cff;
+      --blue: #61b8ff;
+      --success: #8dffb3;
+      --error: #ff8d9e;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+      --radius-xl: 32px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --max-width: 1220px;
+      --ease: 240ms cubic-bezier(.2,.8,.2,1);
+    }
 
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top, rgba(139, 92, 255, 0.16), transparent 30%),
+        radial-gradient(circle at 80% 20%, rgba(255, 79, 216, 0.12), transparent 22%),
+        linear-gradient(180deg, var(--bg-2), var(--bg-1));
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(97,184,255,0.08), transparent 25%),
+        radial-gradient(circle at 70% 15%, rgba(255,79,216,0.08), transparent 24%);
+      filter: blur(24px);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(calc(100% - 36px), var(--max-width));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(5, 7, 14, 0.54);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .site-header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 18px 0;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 1.3rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .brand-subtitle {
+      margin: 0;
+      font-size: 0.78rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .nav {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.03);
+      color: rgba(255,255,255,0.9);
+      transition: transform var(--ease), background var(--ease), border-color var(--ease);
+    }
+
+    .nav a:hover,
+    .nav a.active {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.18);
+    }
+
+    .page-shell {
+      padding: 72px 0 54px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .contact-panel {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03)),
+        rgba(255,255,255,0.04);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: 34px;
+      min-height: 100%;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      font-size: 0.8rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: #d8b7ff;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.6rem, 6vw, 5rem);
+      line-height: 0.94;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-copy p {
+      margin: 20px 0 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.04rem;
+      line-height: 1.85;
+    }
+
+    .hero-note {
+      margin-top: 26px;
+      padding: 18px 20px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.88);
+    }
+
+    .contact-panel {
+      padding: 28px;
+    }
+
+    .panel-title {
+      margin: 0 0 18px;
+      font-size: 1.25rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .field-group {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field-label {
+      font-size: 0.82rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .field-input,
+    .field-textarea {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-md);
+      background: rgba(10, 12, 24, 0.7);
+      color: var(--text);
+      padding: 14px 16px;
+      outline: none;
+      transition: border-color var(--ease), box-shadow var(--ease), transform var(--ease);
+    }
+
+    .field-input:focus,
+    .field-textarea:focus {
+      border-color: rgba(139, 92, 255, 0.8);
+      box-shadow: 0 0 0 4px rgba(139, 92, 255, 0.12);
+    }
+
+    .field-textarea {
+      min-height: 180px;
+      resize: vertical;
+      line-height: 1.7;
+    }
+
+    .field-error {
+      min-height: 1em;
+      font-size: 0.88rem;
+      color: var(--error);
+    }
+
+    .submit-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .submit-btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: white;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--pink), var(--violet));
+      box-shadow: 0 18px 40px rgba(139, 92, 255, 0.28);
+      transition: transform var(--ease), filter var(--ease), opacity var(--ease);
+    }
+
+    .submit-btn:hover { transform: translateY(-1px); filter: brightness(1.06); }
+    .submit-btn:disabled { opacity: 0.6; cursor: wait; }
+
+    .status-message {
+      min-height: 24px;
+      font-size: 0.95rem;
+    }
+
+    .status-message.success { color: var(--success); }
+    .status-message.error { color: var(--error); }
+
+    .footer {
+      padding: 28px 0 42px;
+      color: rgba(255,255,255,0.48);
+      text-align: center;
+    }
+
+    @media (max-width: 940px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .nav { display: none; }
+      .hero-copy,
+      .contact-panel { padding: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="brand">
+        <h2 class="brand-title">Chroma Glow</h2>
+        <p class="brand-subtitle">Contact / Messages / Echoes</p>
+      </div>
+
+      <nav class="nav">
+        <a href="home.html">Home</a>
+        <a href="music.html">Music</a>
+        <a href="about.html">About</a>
+        <a href="links.html">Links</a>
+        <a href="contact.html" class="active">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <div class="container">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Contact Chroma Glow</p>
+          <h1>Say hello into the glow.</h1>
+          <p>
+            This page is built as a real site contact point, not just a mailto link.
+            Messages submit to the backend and save to the database so they can later
+            appear in an admin messages panel.
+          </p>
+          <div class="hero-note">
+            For now this stores messages in the database. Email sending can be layered in later
+            for replies, autoresponders, newsletters, and password reset flows.
+          </div>
+        </div>
+
+        <section class="contact-panel" aria-labelledby="contactFormTitle">
+          <h2 class="panel-title" id="contactFormTitle">Send a message</h2>
+
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="field-group">
+              <label class="field-label" for="name">Name</label>
+              <input class="field-input" id="name" name="name" type="text" maxlength="120" />
+              <div class="field-error" id="nameError"></div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="email">Email</label>
+              <input class="field-input" id="email" name="email" type="email" maxlength="255" />
+              <div class="field-error" id="emailError"></div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="subject">Subject</label>
+              <input class="field-input" id="subject" name="subject" type="text" maxlength="255" />
+              <div class="field-error" id="subjectError"></div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="message">Message</label>
+              <textarea class="field-textarea" id="message" name="message"></textarea>
+              <div class="field-error" id="messageError"></div>
+            </div>
+
+            <div class="submit-row">
+              <button class="submit-btn" id="submitBtn" type="submit">Send Message</button>
+              <div class="status-message" id="statusMessage" aria-live="polite"></div>
+            </div>
+          </form>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    Contact messages are currently stored in the backend for later admin review.
+  </footer>
+
+  <script>
+    const API_BASE = "https://your-api-domain.com/api/chromaglow/contact";
+
+    const form = document.getElementById("contactForm");
+    const submitBtn = document.getElementById("submitBtn");
+    const statusMessage = document.getElementById("statusMessage");
+
+    const fields = {
+      name: document.getElementById("name"),
+      email: document.getElementById("email"),
+      subject: document.getElementById("subject"),
+      message: document.getElementById("message"),
+    };
+
+    const errors = {
+      name: document.getElementById("nameError"),
+      email: document.getElementById("emailError"),
+      subject: document.getElementById("subjectError"),
+      message: document.getElementById("messageError"),
+    };
+
+    function clearErrors() {
+      Object.values(errors).forEach((el) => el.textContent = "");
+      statusMessage.textContent = "";
+      statusMessage.className = "status-message";
+    }
+
+    function validateForm(data) {
+      const nextErrors = {};
+
+      if (!data.name.trim()) nextErrors.name = "Name is required.";
+      if (!data.email.trim()) {
+        nextErrors.email = "Email is required.";
+      } else if (!data.email.includes("@")) {
+        nextErrors.email = "Enter a valid email.";
+      }
+
+      if (!data.subject.trim()) nextErrors.subject = "Subject is required.";
+
+      if (!data.message.trim()) {
+        nextErrors.message = "Message is required.";
+      } else if (data.message.trim().length < 10) {
+        nextErrors.message = "Message must be at least 10 characters.";
+      }
+
+      return nextErrors;
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      clearErrors();
+
+      const payload = {
+        name: fields.name.value,
+        email: fields.email.value,
+        subject: fields.subject.value,
+        message: fields.message.value,
+      };
+
+      const validationErrors = validateForm(payload);
+
+      if (Object.keys(validationErrors).length > 0) {
+        for (const [key, value] of Object.entries(validationErrors)) {
+          errors[key].textContent = value;
+        }
+        statusMessage.textContent = "Please fix the highlighted fields.";
+        statusMessage.classList.add("error");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending...";
+
+      try {
+        const response = await fetch(API_BASE, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          if (result.errors) {
+            for (const [key, value] of Object.entries(result.errors)) {
+              if (errors[key]) errors[key].textContent = value;
+            }
+          }
+
+          throw new Error(result.error || result.message || "Something went wrong.");
+        }
+
+        form.reset();
+        statusMessage.textContent = "Message sent and saved successfully.";
+        statusMessage.classList.add("success");
+      } catch (error) {
+        statusMessage.textContent = error.message || "Unable to send message right now.";
+        statusMessage.classList.add("error");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Send Message";
+      }
+    });
+  </script>
+</body>
+</html>
