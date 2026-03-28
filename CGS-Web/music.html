@@ -38,6 +38,11 @@
       --radius-md: 18px;
       --max-width: 1240px;
       --ease: 240ms ease;
+      --max-width: 1240px;
+      --ease: 320ms cubic-bezier(.2,.8,.2,1);
+      --nav-height: 86px;
+      --glow-pink: 0 0 42px rgba(255, 79, 216, 0.24);
+      --glow-blue: 0 0 42px rgba(57, 214, 255, 0.20);
     }
 
     * {
@@ -92,47 +97,97 @@
       padding: 24px 0 80px;
     }
 
-    .topbar {
+    .container {
+      width: min(calc(100% - 44px), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      height: var(--nav-height);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(5, 6, 14, 0.84), rgba(5, 6, 14, 0.56));
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .site-header .container {
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      padding: 18px 22px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: rgba(12, 12, 19, 0.52);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.22);
-      position: sticky;
-      top: 18px;
-      z-index: 20;
+      gap: 20px;
     }
 
     .brand {
-      font-size: 0.95rem;
-      letter-spacing: 0.22em;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-orb {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-image: url("/static/logos/chromaglowclear.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      box-shadow: var(--glow-pink), var(--glow-blue);
+      flex: 0 0 auto;
+      background-color: rgba(255,255,255,0.06);
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.86);
-      white-space: nowrap;
+      color: rgba(255,255,255,0.96);
+    }
+
+    .brand-subtitle {
+      margin: 0;
+      font-size: 0.72rem;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.56);
     }
 
     .nav {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
-      gap: 14px;
+      gap: 10px;
     }
 
     .nav a {
-      color: var(--soft);
-      font-size: 0.95rem;
-      transition: color var(--ease), opacity var(--ease);
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.9);
+      transition: transform var(--ease), border-color var(--ease), background var(--ease), box-shadow var(--ease);
     }
 
-    .nav a:hover,
+    .nav a:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.18);
+      box-shadow: 0 0 18px rgba(57,214,255,0.10);
+    }
+
     .nav a.active {
-      color: var(--text);
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.20);
+      color: #ffffff;
     }
 
     .hero {
@@ -770,20 +825,32 @@
   background: rgba(255,255,255,0.08);
 }
 
+    @media (max-width: 860px) {
+      .nav {
+        display: none;
+      }
+    }
 
-@media (max-width: 1080px) {
+    @media (max-width: 640px) {
+      .container {
+        width: min(calc(100% - 24px), var(--max-width));
+      }
+    }
+
+
+  @media (max-width: 1080px) {
   .hidden-music {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 720px) {
+  @media (max-width: 720px) {
   .hidden-music {
     grid-template-columns: 1fr;
   }
 }
 
-@media (max-width: 980px) {
+  @media (max-width: 980px) {
   .plugin-grid {
     grid-template-columns: 1fr;
   }
@@ -837,16 +904,25 @@
 </head>
 <body>
   <main class="site-shell">
-    <header class="topbar">
-      <div class="brand">Chroma Glow</div>
-      <nav class="nav" aria-label="Main navigation">
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/music" class="active">Music</a>
-        <a href="/merch">Merch</a>
-        <a href="/memory_room">Memory Room</a>
-        <a href="/contact">Contact</a>
-      </nav>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="/">
+          <span class="brand-orb" aria-hidden="true"></span>
+          <div class="brand-copy">
+            <p class="display brand-title">Chroma Glow</p>
+            <p class="brand-subtitle">Official Artist Website</p>
+          </div>
+        </a>
+
+        <nav class="nav" aria-label="Main navigation">
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/music" class="active">Music</a>
+          <a href="/coming_soon">Merch</a>
+          <a href="/memory_room">Memory Room</a>
+          <a href="/contact">Contact</a>
+        </nav>
+      </div>
     </header>
 
     <section class="hero" id="top">
