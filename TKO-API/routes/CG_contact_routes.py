@@ -12,7 +12,7 @@ def _clean(value):
     return (value or "").strip()
 
 
-@contact_bp.post("")
+@CG_contact_bp.post("")
 def submit_contact_message():
     data = request.get_json(silent=True) or {}
 
@@ -53,13 +53,13 @@ def submit_contact_message():
     }), 201
 
 
-@contact_bp.get("")
+@CG_contact_bp.get("")
 def list_contact_messages():
     messages = get_contact_messages()
     return jsonify({"ok": True, "data": messages}), 200
 
 
-@contact_bp.patch("/<int:message_id>/read")
+@CG_contact_bp.patch("/<int:message_id>/read")
 def set_contact_message_read(message_id: int):
     data = request.get_json(silent=True) or {}
     is_read = bool(data.get("is_read", True))
