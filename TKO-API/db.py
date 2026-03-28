@@ -180,6 +180,16 @@ def init_db():
                 error_message TEXT,
                 sent_at TIMESTAMP
             );
+
+            CREATE TABLE IF NOT EXISTS CG_contact_messages (
+                id SERIAL PRIMARY KEY,
+                name VARCHAR(120) NOT NULL,
+                email VARCHAR(255) NOT NULL,
+                subject VARVHAR(255) NOT NULL,
+                message TEXT NOT NULL,
+                created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                is_read BOOLEAN NOT NULL DEFAULT FALSE
+            );
             """
         )
 
