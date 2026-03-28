@@ -1,11 +1,11 @@
 from flask import Blueprint, jsonify, request
-from repos.contact_repo import (
+from repos.CG_contact_repo import (
     create_contact_message,
     get_contact_messages,
     mark_contact_message_read,
 )
 
-contact_bp = Blueprint("contact_bp", __name__, url_prefix="/api/chromaglow/contact")
+CG_contact_bp = Blueprint("CG_contact_bp", __name__, url_prefix="/api/chromaglow/contact")
 
 
 def _clean(value):
