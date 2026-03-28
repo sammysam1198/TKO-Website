@@ -714,6 +714,20 @@
   margin-top: 18px;
 }
 
+.hidden-music {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.6s ease;
+  opacity: 0;
+}
+
+.hidden-music.show {
+  max-height: 2000px;
+  margin-top: 20px;
+  opacity: 1;
+}
+
+
 .plugin-link {
   display: inline-flex;
   align-items: center;
@@ -1018,6 +1032,7 @@
           </div>
         </article>
       </div>
+
       </div>
       <div class="see-more-wrapper">
         <button id="see-more" class="button primary">See more</button>
@@ -1875,7 +1890,7 @@
         <article class="timeline-item">
           <div class="timeline-date">02/27/26</div>
           <div>
-            <p class="timeline-title">B I R C H</p>
+            <p class="timeline-title">b i r c h</p>
             <p class="timeline-note">Single placeholder.</p>
           </div>
         </article>
@@ -1896,6 +1911,24 @@
       </div>
     </footer>
   </main>
+<script>
+  const btn = document.getElementById("see-more-btn");
+  const extra = document.getElementById("extra-music");
+
+  let expanded = false;
+
+  btn.addEventListener("click", () => {
+    expanded = !expanded;
+
+    if (expanded) {
+      extra.classList.add("show");
+      btn.textContent = "Show less";
+    } else {
+      extra.classList.remove("show");
+      btn.textContent = "See more";
+    }
+  });
+</script>
 </body>
 </html>
 
