@@ -1,1 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alex Boychuk | Chroma Glow</title>
 
+  <style>
+    :root {
+      --bg: #07070b;
+      --bg-2: #0b0d16;
+      --panel: rgba(16, 16, 24, 0.72);
+      --panel-2: rgba(12, 13, 22, 0.82);
+      --border: rgba(255, 255, 255, 0.12);
+      --border-strong: rgba(255, 255, 255, 0.20);
+      --text: #ffffff;
+      --muted: rgba(255, 255, 255, 0.74);
+      --soft: rgba(255, 255, 255, 0.58);
+      --pink: #ff63c7;
+      --purple: #8d63ff;
+      --blue: #5f82ff;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --max-width: 1240px;
+      --ease: 320ms cubic-bezier(.2,.8,.2,1);
+      --nav-height: 86px;
+      --glow-pink: 0 0 42px rgba(255, 79, 216, 0.24);
+      --glow-blue: 0 0 42px rgba(57, 214, 255, 0.20);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 14% 12%, rgba(255, 99, 199, 0.16), transparent 24%),
+        radial-gradient(circle at 86% 18%, rgba(141, 99, 255, 0.16), transparent 24%),
+        radial-gradient(circle at 50% 84%, rgba(95, 130, 255, 0.16), transparent 30%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 52%, var(--bg) 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255, 99, 199, 0.09), transparent 28%),
+        radial-gradient(circle at 76% 22%, rgba(141, 99, 255, 0.08), transparent 28%),
+        radial-gradient(circle at 46% 76%, rgba(95, 130, 255, 0.10), transparent 34%);
+      filter: blur(24px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(calc(100% - 44px), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      height: var(--nav-height);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(5, 6, 14, 0.84), rgba(5, 6, 14, 0.56));
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .site-header .container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-orb {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-image: url("/static/logos/chromaglowclear.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      box-shadow: var(--glow-pink), var(--glow-blue);
+      flex: 0 0 auto;
+      background-color: rgba(255,255,255,0.06);
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.96);
+    }
+
+    .brand-subtitle {
+      margin: 0;
+      font-size: 0.72rem;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.56);
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav a {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.9);
+      transition: transform var(--ease), border-color var(--ease), background var(--ease), box-shadow var(--ease);
+    }
+
+    .nav a:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.18);
+      box-shadow: 0 0 18px rgba(57,214,255,0.10);
+    }
+
+    .nav a.active {
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.20);
+      color: #ffffff;
+    }
+
+    .page-shell {
+      position: relative;
+      z-index: 1;
+      width: min(var(--max-width), calc(100% - 40px));
+      margin: 0 auto;
+      padding: 42px 0 90px;
+    }
+
+    .hero {
+      min-height: 76vh;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 28px;
+      align-items: center;
+      padding: 26px 0 20px;
+    }
+
+    .hero-copy,
+    .hero-art {
+      position: relative;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)),
+        linear-gradient(135deg, rgba(45, 20, 56, 0.40), rgba(14, 20, 40, 0.34)),
+        var(--panel);
+      backdrop-filter: blur(18px) saturate(130%);
+      -webkit-backdrop-filter: blur(18px) saturate(130%);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-copy {
+      padding: 52px 44px;
+    }
+
+    .hero-copy::before,
+    .hero-art::before,
+    .info-panel::before,
+    .release-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at top left, rgba(255, 99, 199, 0.14), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(95, 130, 255, 0.14), transparent 32%),
+        linear-gradient(135deg, rgba(141, 99, 255, 0.06), transparent 46%);
+      opacity: 0.9;
+    }
+
+    .eyebrow {
+      margin: 0 0 16px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      color: rgba(255,255,255,0.62);
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow::after {
+      content: "";
+      display: block;
+      width: 74px;
+      height: 1px;
+      margin-top: 14px;
+      background: linear-gradient(90deg, var(--pink), var(--purple), rgba(95, 130, 255, 0));
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-subtitle {
+      margin: 20px 0 0;
+      max-width: 640px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.08rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-meta {
+      margin-top: 26px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .meta-pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--soft);
+      font-size: 0.86rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-art {
+      padding: 22px;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+
+    .hero-image-shell {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 4 / 5;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: linear-gradient(135deg, rgba(255, 99, 199, 0.18), rgba(95, 130, 255, 0.18));
+      display: grid;
+      place-items: center;
+      color: rgba(255,255,255,0.82);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.95rem;
+    }
+
+    .hero-image-shell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .section {
+      padding: 34px 0;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+    }
+
+    .section-copy {
+      margin: 12px 0 0;
+      max-width: 760px;
+      line-height: 1.78;
+      color: var(--muted);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      margin-top: 22px;
+    }
+
+    .info-panel,
+    .release-panel {
+      position: relative;
+      padding: 28px;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
+        linear-gradient(135deg, rgba(34, 18, 48, 0.42), rgba(12, 15, 28, 0.34)),
+        var(--panel);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 14px 42px rgba(0,0,0,0.22);
+      overflow: hidden;
+    }
+
+    .info-panel > *,
+    .release-panel > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .info-panel h2,
+    .release-panel h2 {
+      margin: 0 0 16px;
+      font-size: 1.5rem;
+    }
+
+    .info-panel p,
+    .release-panel p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .stats {
+      display: grid;
+      gap: 14px;
+    }
+
+    .stat-card {
+      padding: 16px 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .stat-label {
+      margin: 0 0 8px;
+      color: var(--soft);
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .stat-value {
+      margin: 0;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .bottom-links {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 150px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      font-weight: 600;
+      transition: transform var(--ease), border-color var(--ease), background var(--ease);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      border-color: var(--border-strong);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .button.primary {
+      border: none;
+      color: #09080d;
+      background: linear-gradient(135deg, var(--pink), var(--purple), var(--blue));
+    }
+
+    @media (max-width: 1080px) {
+      .hero,
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 860px) {
+      .nav {
+        display: none;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page-shell {
+        width: min(var(--max-width), calc(100% - 24px));
+      }
+
+      .hero-copy,
+      .hero-art,
+      .info-panel,
+      .release-panel {
+        padding: 22px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(calc(100% - 24px), var(--max-width));
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/">
+        <span class="brand-orb" aria-hidden="true"></span>
+        <div class="brand-copy">
+          <p class="brand-title">Chroma Glow</p>
+          <p class="brand-subtitle">Official Artist Website</p>
+        </div>
+      </a>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/music" class="active">Music</a>
+        <a href="/coming_soon">Merch</a>
+        <a href="/memory_room">Memory Room</a>
+        <a href="/contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Artist Feature</p>
+        <h1>Alex Boychuk</h1>
+        <p class="hero-subtitle">
+          Placeholder artist intro. This can be a short editorial bio at the top, written in the same style as the featured artist cards on the music page, just expanded into a full-page spotlight.
+        </p>
+
+        <div class="hero-meta">
+          <span class="meta-pill">Synthwave</span>
+          <span class="meta-pill">Featured Artist</span>
+          <span class="meta-pill">Placeholder</span>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <div class="hero-image-shell">
+          ARTIST IMAGE
+          <!-- <img src="/static/artists/alex-boychuk.jpg" alt="Alex Boychuk portrait"> -->
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">About the artist</h2>
+      <p class="section-copy">
+        Placeholder intro copy. Add his full background, releases, sound, achievements, scene presence, or whatever you want people to immediately know.
+      </p>
+
+      <div class="info-grid">
+        <article class="info-panel">
+          <h2>Bio</h2>
+          <p>
+            Placeholder bio text for Alex Boychuk.
+            <br><br>
+            Add the full artist story here. This can be one or two strong paragraphs explaining who he is, what kind of music he makes, what makes his sound special, and why he is being featured on the Chroma Glow site.
+          </p>
+        </article>
+
+        <aside class="release-panel">
+          <h2>Quick info</h2>
+
+          <div class="stats">
+            <div class="stat-card">
+              <p class="stat-label">Location</p>
+              <p class="stat-value">Placeholder</p>
+            </div>
+
+            <div class="stat-card">
+              <p class="stat-label">Style</p>
+              <p class="stat-value">Placeholder</p>
+            </div>
+
+            <div class="stat-card">
+              <p class="stat-label">Notable release</p>
+              <p class="stat-value">Placeholder</p>
+            </div>
+
+            <div class="stat-card">
+              <p class="stat-label">Scene / feature</p>
+              <p class="stat-value">Placeholder</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <article class="release-panel">
+        <h2>Featured release / spotlight</h2>
+        <p>
+          Placeholder section for a featured song, album, release note, embed, recommendation, or short write-up.
+        </p>
+
+        <div class="bottom-links">
+          <a class="button primary" href="#">Spotify</a>
+          <a class="button" href="#">Apple Music</a>
+          <a class="button" href="#">YouTube</a>
+          <a class="button" href="#">Bandcamp</a>
+          <a class="button" href="#">Instagram</a>
+        </div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
