@@ -24,6 +24,9 @@
       --radius-md: 16px;
       --max-width: 1220px;
       --ease: 240ms cubic-bezier(.2,.8,.2,1);
+      --nav-height: 86px;
+      --glow-pink: 0 0 42px rgba(255, 79, 216, 0.24);
+      --glow-blue: 0 0 42px rgba(57, 214, 255, 0.20);
     }
 
     * { box-sizing: border-box; }
@@ -54,7 +57,7 @@
     a { color: inherit; text-decoration: none; }
 
     .container {
-      width: min(calc(100% - 36px), var(--max-width));
+      width: min(calc(100% - 44px), var(--max-width));
       margin: 0 auto;
       position: relative;
       z-index: 1;
@@ -63,21 +66,47 @@
     .site-header {
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 40;
+      height: var(--nav-height);
       backdrop-filter: blur(14px);
-      background: rgba(5, 7, 14, 0.54);
+      -webkit-backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(5, 6, 14, 0.84), rgba(5, 6, 14, 0.56));
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
+    .page-shell {
+      padding: 40px 0 54px;
+    }
+
     .site-header .container {
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 20px;
-      padding: 18px 0;
+      padding: 0;
     }
 
     .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-orb {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-image: url("/static/logos/chromaglowclear.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      box-shadow: var(--glow-pink), var(--glow-blue);
+      flex: 0 0 auto;
+      background-color: rgba(255,255,255,0.06);
+    }
+
+    .brand-copy {
       display: flex;
       flex-direction: column;
       gap: 4px;
@@ -85,39 +114,46 @@
 
     .brand-title {
       margin: 0;
-      font-size: 1.3rem;
-      letter-spacing: 0.1em;
+      font-size: 1rem;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
+      color: rgba(255,255,255,0.96);
     }
 
     .brand-subtitle {
       margin: 0;
-      font-size: 0.78rem;
-      letter-spacing: 0.26em;
+      font-size: 0.72rem;
+      letter-spacing: 0.20em;
       text-transform: uppercase;
-      color: var(--muted);
+      color: rgba(255,255,255,0.56);
     }
 
     .nav {
       display: flex;
-      gap: 12px;
       flex-wrap: wrap;
+      gap: 10px;
     }
 
     .nav a {
-      padding: 10px 14px;
+      padding: 10px 16px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
       color: rgba(255,255,255,0.9);
-      transition: transform var(--ease), background var(--ease), border-color var(--ease);
+      transition: transform var(--ease), border-color var(--ease), background var(--ease), box-shadow var(--ease);
     }
 
-    .nav a:hover,
-    .nav a.active {
-      transform: translateY(-1px);
+    .nav a:hover {
+      transform: translateY(-2px);
       background: rgba(255,255,255,0.08);
       border-color: rgba(255,255,255,0.18);
+      box-shadow: 0 0 18px rgba(57,214,255,0.10);
+    }
+
+    .nav a.active {
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.20);
+      color: #ffffff;
     }
 
     .page-shell {
@@ -283,30 +319,44 @@
     }
 
     @media (max-width: 720px) {
-      .nav { display: none; }
       .hero-copy,
       .contact-panel { padding: 22px; }
+    }
+
+    @media (max-width: 860px) {
+      .nav {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(calc(100% - 24px), var(--max-width));
+      }
     }
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <div class="brand">
-        <h2 class="brand-title">Chroma Glow</h2>
-        <p class="brand-subtitle">Collaborations / Questions / Suggestions</p>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/">
+      <span class="brand-orb" aria-hidden="true"></span>
+      <div class="brand-copy">
+        <p class="display brand-title">Chroma Glow</p>
+        <p class="brand-subtitle">Official Artist Website</p>
       </div>
+    </a>
 
-      <nav class="nav">
-        <a href="home.html">Home</a>
-        <a href="/about">About</a>
-        <a href="/music">Music</a>
-        <a href="/merch">Merch</a>
-        <a href="/memory_room">Memory Room</a>
-        <a href="/contact" class="active">Contact</a>
-      </nav>
-    </div>
-  </header>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/music">Music</a>
+      <a href="/coming_soon">Merch</a>
+      <a href="/memory_room">Memory Room</a>
+      <a href="/contact" class="active">Contact</a>
+    </nav>
+  </div>
+</header>
 
   <main class="page-shell">
     <div class="container">

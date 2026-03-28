@@ -22,6 +22,13 @@
       --transition: 240ms ease;
       --room-width: min(1400px, calc(100vw - 32px));
       --font-stack: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --max-width: 1240px;
+      --ease: 320ms cubic-bezier(.2,.8,.2,1);
+      --nav-height: 86px;
+
+      --text: #ffffff;
+      --glow-pink: 0 0 42px rgba(255, 79, 216, 0.24);
+      --glow-blue: 0 0 42px rgba(57, 214, 255, 0.20);
     }
 
     * {
@@ -44,14 +51,122 @@
       overflow-x: hidden;
     }
 
+
+    .container {
+      width: min(calc(100% - 44px), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      height: var(--nav-height);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: linear-gradient(to bottom, rgba(5, 6, 14, 0.84), rgba(5, 6, 14, 0.56));
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .site-header .container {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-orb {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-image: url("/static/logos/chromaglowclear.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      box-shadow: var(--glow-pink), var(--glow-blue);
+      flex: 0 0 auto;
+      background-color: rgba(255,255,255,0.06);
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-size: 1rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.96);
+    }
+
+    .brand-subtitle {
+      margin: 0;
+      font-size: 0.72rem;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.56);
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .nav a {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: rgba(255,255,255,0.9);
+      transition: transform var(--ease), border-color var(--ease), background var(--ease), box-shadow var(--ease);
+    }
+
+    .nav a:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.18);
+      box-shadow: 0 0 18px rgba(57,214,255,0.10);
+    }
+
+    .nav a.active {
+      background: rgba(255,255,255,0.10);
+      border-color: rgba(255,255,255,0.20);
+      color: #ffffff;
+    }
+
+    @media (max-width: 860px) {
+      .nav {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(calc(100% - 24px), var(--max-width));
+      }
+    }
+
+
     a {
       color: inherit;
       text-decoration: none;
     }
 
+
     .memory-page {
       position: relative;
-      padding: 72px 16px 96px;
+      padding: 40px 16px 96px;
       isolation: isolate;
     }
 
@@ -463,16 +578,28 @@
   </style>
 </head>
 <body>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/">
+      <span class="brand-orb" aria-hidden="true"></span>
+      <div class="brand-copy">
+        <p class="display brand-title">Chroma Glow</p>
+        <p class="brand-subtitle">Official Artist Website</p>
+      </div>
+    </a>
+
+    <nav class="nav" aria-label="Main navigation">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/music">Music</a>
+      <a href="/contact">Contact</a>
+      <a href="/memory_room" class="active">Memory Room</a>
+      <a href="/coming_soon">Links</a>
+    </nav>
+  </div>
+</header>
   <main class="memory-page">
     <div class="memory-shell">
-      <header class="memory-header">
-        <p class="memory-kicker">Chroma Glow</p>
-        <h1 class="memory-title">Memory Room</h1>
-        <p class="memory-intro">
-          Each frame is a portal. Hover to reveal the name. Click to open the memory.
-        </p>
-      </header>
-
       <section class="memory-stage" aria-label="Interactive memory room">
         <div class="memory-room-media">
           <img
