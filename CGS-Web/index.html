@@ -516,6 +516,117 @@
       gap: 12px;
     }
 
+    .music-platform-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.music-tile,
+.music-tile-small {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.music-tile {
+  min-height: 140px;
+  padding: 19px;
+}
+
+.music-tile-small {
+  min-height: 70px;
+  padding: 8px 12px;
+}
+
+.music-tile:hover,
+.music-tile-small:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+}
+
+.music-logo {
+  max-width: 90%;
+  max-height: 100px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+
+.tile-top {
+  grid-column: span 2;
+  aspect-ratio: 1 / 1;
+}
+
+.tile-small {
+  grid-column: span 3;
+}
+
+/* platform hover states */
+.youtube-tile:hover,
+.ytmusic-tile:hover {
+  background: #ff0033;
+}
+
+.spotify-tile:hover {
+  background: #1ed760;
+}
+
+.apple-tile:hover {
+  background: #fa586a;
+}
+
+.bandcamp-tile:hover {
+  background: #0cacd7;
+}
+
+.soundcloud-tile:hover {
+  background: linear-gradient(135deg, #ff4300 0%, #ff8902 100%);
+}
+
+.instagram-tile:hover {
+  background: linear-gradient(135deg, #d300c5 0%, #ff2d43 55%, #ffc500 100%);
+}
+
+.tiktok-tile:hover {
+  background: linear-gradient(135deg, #2cf4ef 0%, #fe335a 100%);
+}
+
+.threads-tile:hover {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+    #000;
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.tidal-tile:hover {
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+    #000;
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255,255,255,0.05) inset;
+}
+
+
+
     .footer {
       padding: 0 0 42px;
     }
@@ -700,6 +811,31 @@
     content: "↗";
     font-size: 1rem;
   }
+
+  @media (max-width: 980px) {
+  .music-platform-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .music-platform-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tile-top,
+  .tile-small {
+    grid-column: span 1;
+  }
+
+  .music-tile {
+    min-height: 110px;
+  }
+
+  .music-tile-small {
+    min-height: 90px;
+  }
+}
 
   @media (max-width: 1100px) {
     .portal-grid {
@@ -959,28 +1095,55 @@
           </div>
         </section>
 
-        <section class="section-block reveal" id="platforms">
-          <div class="panel section-panel">
-            <p class="section-label">Platforms</p>
-            <h2 class="display section-title">Find Chroma Glow everywhere</h2>
+        <section class="section" id="platforms">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">Streaming & Socials</p>
+      <h2 class="section-title">Find Chroma Glow Everywhere</h2>
+      <p class="section-copy">
+        Follow Chroma Glow across streaming, video, and social platforms.
+      </p>
+    </div>
+  </div>
 
-            <div class="platform-card">
-              <p>
-                Follow Chroma Glow across streaming, social, and artist platforms. Keeping these profiles unified helps reinforce one clear artist identity everywhere.
-              </p>
+  <div class="music-platform-grid">
+    <a class="music-tile tile-top spotify-tile" href="https://open.spotify.com/artist/6urtYaQRK6hdJzJ9XrpWXs" target="_blank" rel="noopener noreferrer">
+      <img src="/static/socials/spotify.png" alt="Spotify" class="music-logo">
+    </a>
 
-              <div class="platform-actions">
-                <a class="btn btn-primary" href="https://open.spotify.com/artist/6urtYaQRK6hdJzJ9XrpWXs" target="_blank" rel="noopener noreferrer">Spotify</a>
-                <a class="btn btn-secondary" href="https://www.youtube.com/@Chroma_Glow_Synths" target="_blank" rel="noopener noreferrer">YouTube</a>
-                <a class="btn btn-secondary" href="https://www.instagram.com/chroma_glow_synths" target="_blank" rel="noopener noreferrer">Instagram</a>
-                <a class="btn btn-secondary" href="https://chromaglow.bandcamp.com" target="_blank" rel="noopener noreferrer">Bandcamp</a>
-                <a class="btn btn-secondary" href="https://www.threads.com/@chroma_glow_synths" target="_blank" rel="noopener noreferrer">Threads</a>
-                <a class="btn btn-secondary" href="https://soundcloud.com/chromaglow" target="_blank" rel="noopener noreferrer">SoundCloud</a>
-                <a class="btn btn-secondary" href="https://music.apple.com/in/artist/chroma-glow/1787981160" target="_blank" rel="noopener noreferrer">Apple Music</a>
-              </div>
-            </div>
-          </div>
-        </section>
+    <a class="music-tile tile-top youtube-tile" href="https://www.youtube.com/@Chroma_Glow_Synths" target="_blank" rel="noopener noreferrer">
+      <img src="/static/socials/youtube full.png" alt="YouTube" class="music-logo">
+    </a>
+
+    <a class="music-tile tile-top instagram-tile" href="https://www.instagram.com/chroma_glow_synths/" target="_blank" rel="noopener noreferrer">
+      <img src="/static/socials/instagram.png" alt="Instagram" class="music-logo">
+    </a>
+
+    <a class="music-tile-small tile-small soundcloud-tile" href="https://soundcloud.com/chromaglow" target="_blank" rel="noopener noreferrer">
+      <img src="/static/socials/soundcloud.png" alt="SoundCloud" class="music-logo">
+    </a>
+
+    <a class="music-tile-small tile-small bandcamp-tile" href="https://chromaglow.bandcamp.com/" target="_blank" rel="noopener noreferrer">
+      <img src="/static/socials/bandcamp.png" alt="Bandcamp" class="music-logo">
+    </a>
+
+    <a class="music-tile-small tile-small ytmusic-tile" href="https://music.youtube.com/channel/UCOd3HzINSQkyXpCtzBxy3fw" target="_blank" rel="noopener noreferrer">
+      <img src="/static/socials/ytmusic.png" alt="YouTube Music" class="music-logo">
+    </a>
+
+    <a class="music-tile-small tile-small threads-tile" href="https://www.threads.com/@chroma_glow_synths" target="_blank" rel="noopener noreferrer">
+      <img src="/static/socials/threads.png" alt="Threads" class="music-logo">
+    </a>
+
+    <a class="music-tile-small tile-small tidal-tile" href="https://tidal.com/artist/52836123" target="_blank" rel="noopener noreferrer">
+      <img src="/static/socials/tidal.png" alt="TIDAL" class="music-logo">
+    </a>
+
+    <a class="music-tile-small tile-small apple-tile" href="https://music.apple.com/in/artist/chroma-glow/1787981160" target="_blank" rel="noopener noreferrer">
+      <img src="/static/socials/apple.png" alt="Apple Music" class="music-logo">
+    </a>
+  </div>
+</section>
       </div>
     </main>
 
