@@ -1,0 +1,132 @@
+.music-platform-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 18px;
+    margin-top: 28px;
+}
+
+.music-tile,
+.music-tile-small {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    overflow: hidden;
+    text-decoration: none;
+    transition:
+            background 0.2s ease,
+            border-color 0.2s ease,
+            box-shadow 0.2s ease,
+            transform 0.2s ease;
+}
+
+.music-tile {
+    min-height: 140px;
+    padding: 19px;
+}
+
+.music-tile-small {
+    min-height: 70px;
+    padding: 8px 12px;
+}
+
+.music-tile:hover,
+.music-tile-small:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.16);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+}
+
+.music-logo {
+    max-width: 90%;
+    max-height: 100px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    position: relative;
+    z-index: 2;
+}
+
+.tile-top {
+    grid-column: span 2;
+    aspect-ratio: 1 / 1;
+}
+
+.tile-small {
+    grid-column: span 3;
+}
+
+.youtube-tile:hover,
+.ytmusic-tile:hover {
+    background: #ff0033;
+}
+
+.spotify-tile:hover {
+    background: #1ed760;
+}
+
+.apple-tile:hover {
+    background: #fa586a;
+}
+
+.bandcamp-tile:hover {
+    background: #0cacd7;
+}
+
+.soundcloud-tile:hover {
+    background: linear-gradient(135deg, #ff4300 0%, #ff8902 100%);
+}
+
+.instagram-tile:hover {
+    background: linear-gradient(135deg, #d300c5 0%, #ff2d43 55%, #ffc500 100%);
+}
+
+.tiktok-tile:hover {
+    background: linear-gradient(135deg, #2cf4ef 0%, #fe335a 100%);
+}
+
+.threads-tile:hover {
+    background:
+            linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+            #000;
+    border-color: rgba(255, 255, 255, 0.22);
+}
+
+.tidal-tile:hover {
+    background:
+            linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+            #000;
+    border-color: rgba(255, 255, 255, 0.22);
+    box-shadow:
+            0 14px 30px rgba(0, 0, 0, 0.35),
+            0 0 0 1px rgba(255,255,255,0.05) inset;
+}
+
+@media (max-width: 980px) {
+    .music-platform-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 720px) {
+    .music-platform-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tile-top,
+    .tile-small {
+        grid-column: span 1;
+    }
+
+    .music-tile {
+        min-height: 110px;
+    }
+
+    .music-tile-small {
+        min-height: 90px;
+    }
+}

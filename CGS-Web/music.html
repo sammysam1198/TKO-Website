@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="/static/css/cg_header.css">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Music | Chroma Glow</title>
@@ -95,99 +96,6 @@
       width: min(var(--max-width), calc(100% - 40px));
       margin: 0 auto;
       padding: 42px 0 80px;
-    }
-
-    .container {
-      width: min(calc(100% - 44px), var(--max-width));
-      margin: 0 auto;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      height: var(--nav-height);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      background: linear-gradient(to bottom, rgba(5, 6, 14, 0.84), rgba(5, 6, 14, 0.56));
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .site-header .container {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .brand-orb {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background-image: url("/static/logos/chromaglowclear.png");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      box-shadow: var(--glow-pink), var(--glow-blue);
-      flex: 0 0 auto;
-      background-color: rgba(255,255,255,0.06);
-    }
-
-    .brand-copy {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .brand-title {
-      margin: 0;
-      font-size: 1rem;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.96);
-    }
-
-    .brand-subtitle {
-      margin: 0;
-      font-size: 0.72rem;
-      letter-spacing: 0.20em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.56);
-    }
-
-    .nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .nav a {
-      padding: 10px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.04);
-      color: rgba(255,255,255,0.9);
-      transition: transform var(--ease), border-color var(--ease), background var(--ease), box-shadow var(--ease);
-    }
-
-    .nav a:hover {
-      transform: translateY(-2px);
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.18);
-      box-shadow: 0 0 18px rgba(57,214,255,0.10);
-    }
-
-    .nav a.active {
-      background: rgba(255,255,255,0.10);
-      border-color: rgba(255,255,255,0.20);
-      color: #ffffff;
     }
 
     .hero {
@@ -903,26 +811,26 @@
   </style>
 </head>
 <body>
-    <header class="site-header">
-      <div class="container">
-        <a class="brand" href="/">
-          <span class="brand-orb" aria-hidden="true"></span>
-          <div class="brand-copy">
-            <p class="display brand-title">Chroma Glow</p>
-            <p class="brand-subtitle">Official Artist Website</p>
-          </div>
-        </a>
-
-        <nav class="nav" aria-label="Main navigation">
-          <a href="/">Home</a>
-          <a href="/about">About</a>
-          <a href="/music" class="active">Music</a>
-          <a href="/coming_soon">Merch</a>
-          <a href="/memory_room">Memory Room</a>
-          <a href="/contact">Contact</a>
-        </nav>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/">
+      <span class="brand-orb" aria-hidden="true"></span>
+      <div class="brand-copy">
+        <p class="display brand-title">Chroma Glow</p>
+        <p class="brand-subtitle">Official Artist Website</p>
       </div>
-    </header>
+    </a>
+
+    <nav class="nav" aria-label="Main navigation">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/music">Music</a>
+      <a href="/coming_soon">Merch</a>
+      <a href="/memory_room">Memory Room</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </div>
+</header>
 
     <main class="site-shell">
     <section class="hero" id="top">
@@ -1888,7 +1796,7 @@
 </section>
 
     <footer class="footer">
-      <div>©Copyright 2026 Sammi Fishbeing for Chroma Glow Synths. All music is owned by SpacedOut Studios Entertainment unless otherwise noted.</div>
+      <div>©Copyright 2026 Sammi Fishbein for Chroma Glow Synths. All music is owned by SpacedOut Studios Entertainment unless otherwise noted.</div>
       <div>
         <a href="/">Home</a>
          <a href="/about">About</a>

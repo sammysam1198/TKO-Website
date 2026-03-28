@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="/static/css/cg_header.css">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Memory Room | Chroma Glow</title>
@@ -49,112 +50,6 @@
         radial-gradient(circle at bottom left, rgba(125, 196, 255, 0.09), transparent 32%),
         linear-gradient(180deg, var(--bg-2), var(--bg-1));
       overflow-x: hidden;
-    }
-
-
-    .container {
-      width: min(calc(100% - 44px), var(--max-width));
-      margin: 0 auto;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      height: var(--nav-height);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      background: linear-gradient(to bottom, rgba(5, 6, 14, 0.84), rgba(5, 6, 14, 0.56));
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .site-header .container {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .brand-orb {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background-image: url("/static/logos/chromaglowclear.png");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      box-shadow: var(--glow-pink), var(--glow-blue);
-      flex: 0 0 auto;
-      background-color: rgba(255,255,255,0.06);
-    }
-
-    .brand-copy {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .brand-title {
-      margin: 0;
-      font-size: 1rem;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.96);
-    }
-
-    .brand-subtitle {
-      margin: 0;
-      font-size: 0.72rem;
-      letter-spacing: 0.20em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.56);
-    }
-
-    .nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .nav a {
-      padding: 10px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.04);
-      color: rgba(255,255,255,0.9);
-      transition: transform var(--ease), border-color var(--ease), background var(--ease), box-shadow var(--ease);
-    }
-
-    .nav a:hover {
-      transform: translateY(-2px);
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.18);
-      box-shadow: 0 0 18px rgba(57,214,255,0.10);
-    }
-
-    .nav a.active {
-      background: rgba(255,255,255,0.10);
-      border-color: rgba(255,255,255,0.20);
-      color: #ffffff;
-    }
-
-    @media (max-width: 860px) {
-      .nav {
-        display: none;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .container {
-        width: min(calc(100% - 24px), var(--max-width));
-      }
     }
 
 
@@ -592,9 +487,9 @@
       <a href="/">Home</a>
       <a href="/about">About</a>
       <a href="/music">Music</a>
+      <a href="/coming_soon">Merch</a>
+      <a href="/memory_room">Memory Room</a>
       <a href="/contact">Contact</a>
-      <a href="/memory_room" class="active">Memory Room</a>
-      <a href="/coming_soon">Links</a>
     </nav>
   </div>
 </header>

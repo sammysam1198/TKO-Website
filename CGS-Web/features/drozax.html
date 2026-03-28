@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="/static/css/cg_header.css">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Drozax | Chroma Glow</title>
@@ -72,99 +73,6 @@
     img {
       max-width: 100%;
       display: block;
-    }
-
-    .container {
-      width: min(calc(100% - 44px), var(--max-width));
-      margin: 0 auto;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 40;
-      height: var(--nav-height);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      background: linear-gradient(to bottom, rgba(5, 6, 14, 0.84), rgba(5, 6, 14, 0.56));
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .site-header .container {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .brand-orb {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background-image: url("/static/logos/chromaglowclear.png");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      box-shadow: var(--glow-pink), var(--glow-blue);
-      flex: 0 0 auto;
-      background-color: rgba(255,255,255,0.06);
-    }
-
-    .brand-copy {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .brand-title {
-      margin: 0;
-      font-size: 1rem;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.96);
-    }
-
-    .brand-subtitle {
-      margin: 0;
-      font-size: 0.72rem;
-      letter-spacing: 0.20em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.56);
-    }
-
-    .nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .nav a {
-      padding: 10px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.04);
-      color: rgba(255,255,255,0.9);
-      transition: transform var(--ease), border-color var(--ease), background var(--ease), box-shadow var(--ease);
-    }
-
-    .nav a:hover {
-      transform: translateY(-2px);
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.18);
-      box-shadow: 0 0 18px rgba(57,214,255,0.10);
-    }
-
-    .nav a.active {
-      background: rgba(255,255,255,0.10);
-      border-color: rgba(255,255,255,0.20);
-      color: #ffffff;
     }
 
     .page-shell {
@@ -459,26 +367,26 @@
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <a class="brand" href="/">
-        <span class="brand-orb" aria-hidden="true"></span>
-        <div class="brand-copy">
-          <p class="brand-title">Chroma Glow</p>
-          <p class="brand-subtitle">Official Artist Website</p>
-        </div>
-      </a>
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/">
+      <span class="brand-orb" aria-hidden="true"></span>
+      <div class="brand-copy">
+        <p class="display brand-title">Chroma Glow</p>
+        <p class="brand-subtitle">Official Artist Website</p>
+      </div>
+    </a>
 
-      <nav class="nav" aria-label="Main navigation">
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/music" class="active">Music</a>
-        <a href="/coming_soon">Merch</a>
-        <a href="/memory_room">Memory Room</a>
-        <a href="/contact">Contact</a>
-      </nav>
-    </div>
-  </header>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/music">Music</a>
+      <a href="/coming_soon">Merch</a>
+      <a href="/memory_room">Memory Room</a>
+      <a href="/contact">Contact</a>
+    </nav>
+  </div>
+</header>
 
   <main class="page-shell">
     <section class="hero">
@@ -547,6 +455,57 @@
         </aside>
       </div>
     </section>
+
+    <section class="section" id="platforms">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Streaming & Socials</p>
+          <h2 class="section-title">Find Drozax Everywhere</h2>
+          <p class="section-copy">
+            Follow Drozax wherever you stream, watch or post.
+          </p>
+        </div>
+      </div>
+
+      <div class="music-platform-grid">
+        <a class="music-tile tile-top spotify-tile" href="https://open.spotify.com/artist/6urtYaQRK6hdJzJ9XrpWXs" target="_blank" rel="noopener noreferrer">
+          <img src="/static/socials/spotify.png" alt="Spotify" class="music-logo">
+        </a>
+
+        <a class="music-tile tile-top youtube-tile" href="https://www.youtube.com/@Chroma_Glow_Synths" target="_blank" rel="noopener noreferrer">
+          <img src="/static/socials/youtube full.png" alt="YouTube" class="music-logo">
+        </a>
+
+        <a class="music-tile tile-top instagram-tile" href="https://www.instagram.com/chroma_glow_synths/" target="_blank" rel="noopener noreferrer">
+          <img src="/static/socials/instagram.png" alt="Instagram" class="music-logo">
+        </a>
+
+        <a class="music-tile-small tile-small soundcloud-tile" href="https://soundcloud.com/chromaglow" target="_blank" rel="noopener noreferrer">
+          <img src="/static/socials/soundcloud.png" alt="SoundCloud" class="music-logo">
+        </a>
+
+        <a class="music-tile-small tile-small bandcamp-tile" href="https://chromaglow.bandcamp.com/" target="_blank" rel="noopener noreferrer">
+          <img src="/static/socials/bandcamp.png" alt="Bandcamp" class="music-logo">
+        </a>
+
+        <a class="music-tile-small tile-small ytmusic-tile" href="https://music.youtube.com/channel/UCOd3HzINSQkyXpCtzBxy3fw" target="_blank" rel="noopener noreferrer">
+          <img src="/static/socials/ytmusic.png" alt="YouTube Music" class="music-logo">
+        </a>
+
+        <a class="music-tile-small tile-small threads-tile" href="https://www.threads.com/@chroma_glow_synths" target="_blank" rel="noopener noreferrer">
+          <img src="/static/socials/threads.png" alt="Threads" class="music-logo">
+        </a>
+
+        <a class="music-tile-small tile-small tidal-tile" href="https://tidal.com/artist/52836123" target="_blank" rel="noopener noreferrer">
+          <img src="/static/socials/tidal.png" alt="TIDAL" class="music-logo">
+        </a>
+
+        <a class="music-tile-small tile-small apple-tile" href="https://music.apple.com/in/artist/chroma-glow/1787981160" target="_blank" rel="noopener noreferrer">
+          <img src="/static/socials/apple.png" alt="Apple Music" class="music-logo">
+        </a>
+      </div>
+    </section>
+
 
     <section class="section">
       <article class="release-panel">
