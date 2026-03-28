@@ -1,5 +1,5 @@
 from psycopg2.extras import RealDictCursor
-from config.db import get_db_conn
+from db import get_db_conn
 
 
 def create_contact_message(name: str, email: str, subject: str, message: str):
