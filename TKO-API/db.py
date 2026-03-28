@@ -185,7 +185,7 @@ def init_db():
                 id SERIAL PRIMARY KEY,
                 name VARCHAR(120) NOT NULL,
                 email VARCHAR(255) NOT NULL,
-                subject VARVHAR(255) NOT NULL,
+                subject VARCHAR(255) NOT NULL,
                 message TEXT NOT NULL,
                 created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 is_read BOOLEAN NOT NULL DEFAULT FALSE
