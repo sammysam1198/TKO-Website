@@ -10,6 +10,7 @@ from routes.post_routes import post_bp
 from routes.auth_routes import auth_bp
 from routes.dev_console_routes import dev_console_bp
 from routes.forum_routes import forum_bp
+from routes.CG_contact_routes import CG_contact_bp
 
 
 app = Flask( __name__)
@@ -33,6 +34,7 @@ app.register_blueprint(post_bp)
 app.register_blueprint(auth_bp)
 app.register_blueprint(dev_console_bp)
 app.register_blueprint(forum_bp)
+app.register_blueprint(CG_contact_bp)
 
 # Run table creation when the app starts on Render too
 init_db()
