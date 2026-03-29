@@ -854,6 +854,30 @@
             </div>
           </div>
 
+          <div class="gift-row reveal">
+            <div class="gift-card">
+              <div class="gift-label">Gift Five</div>
+              <h3 class="gift-title">Something good to eat</h3>
+              <p class="gift-desc">
+                Dinner anywhere you would like!
+              </p>
+              <button class="gift-btn" data-gift="dinner">Open this gift</button>
+            </div>
+            <div class="path-node" aria-hidden="true"></div>
+          </div>
+
+          <div class="gift-row reveal">
+            <div class="gift-card">
+              <div class="gift-label">Gift Six</div>
+              <h3 class="gift-title">Sci-fi shit</h3>
+              <p class="gift-desc">
+                We gonna go see that movie &lt;3 whenever you want you pick the time!
+              </p>
+              <button class="gift-btn" data-gift="movie">Open this gift</button>
+            </div>
+            <div class="path-node" aria-hidden="true"></div>
+          </div>
+
 
           <div class="photo-section reveal">
   <div class="section-head">
@@ -899,7 +923,18 @@
 </div>
 
 
-
+          <div style="margin: 24px 0;">
+            <iframe data-testid="embed-iframe"
+                    style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/7y6ukAzIm2HA3eA0NV6qli?utm_source=generator"
+                    width="100%"
+                    height="352"
+                    frameborder="0"
+                    allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy">
+            </iframe>
+          </div>
           
           <div class="card-section reveal">
             <div class="section-head">
@@ -928,6 +963,7 @@ Sammi</div>
           </div>
         </div>
       </section>
+
 
       <div class="footer-note">
         Made with love, petals, and at least one legally questionable coupon.
@@ -1050,6 +1086,40 @@ Sammi</div>
               </div>
               <p class="tiny-note">
                 Terms and conditions: Sammi may sigh dramatically, but must still honor the card.
+              </p>
+            </div>
+          </div>
+        `
+      },
+      dinner: {
+        tag: "Gift Five",
+        title: "Something good to eat",
+        copy: `
+          Dinner anywhere you would like!
+        `,
+        html: `
+          <div class="modal-media">
+            <div class="coupon-panel">
+              <h3>Dinner date</h3>
+              <p>
+                You pick the place, you pick the vibe, and we go get something good to eat together.
+              </p>
+            </div>
+          </div>
+        `
+      },
+      movie: {
+        tag: "Gift Six",
+        title: "Sci-fi shit",
+        copy: `
+          We gonna go see that movie <3 whenever you want you pick the time!
+        `,
+        html: `
+          <div class="modal-media">
+            <div class="coupon-panel">
+              <h3>Movie date</h3>
+              <p>
+                We are absolutely going to see that movie. You pick the day, you pick the time, and we make it happen.
               </p>
             </div>
           </div>
