@@ -16,31 +16,35 @@
       --purple: #8a5cff;
       --blue: #5a78ff;
       --shadow: 0 24px 80px rgba(0,0,0,0.38);
+      --max-width: 1240px;
+      --ease: 320ms cubic-bezier(.2,.8,.2,1);
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html,
     body {
       margin: 0;
-      min-height: 100vh;
+      min-height: 100%;
       font-family: Arial, Helvetica, sans-serif;
       color: var(--text);
+    }
+
+    body {
       background:
-        radial-gradient(circle at 18% 22%, rgba(255, 92, 200, 0.16), transparent 24%),
-        radial-gradient(circle at 78% 20%, rgba(138, 92, 255, 0.15), transparent 24%),
-        radial-gradient(circle at 52% 82%, rgba(90, 120, 255, 0.16), transparent 28%),
-        linear-gradient(180deg, #07070b 0%, #090b14 55%, #06070b 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 32px;
-      overflow: hidden;
+              radial-gradient(circle at 18% 22%, rgba(255, 92, 200, 0.16), transparent 24%),
+              radial-gradient(circle at 78% 20%, rgba(138, 92, 255, 0.15), transparent 24%),
+              radial-gradient(circle at 52% 82%, rgba(90, 120, 255, 0.16), transparent 28%),
+              linear-gradient(180deg, #07070b 0%, #090b14 55%, #06070b 100%);
+      overflow-x: hidden;
     }
 
     .page-shell {
-      width: min(860px, 100%);
+      width: min(860px, calc(100% - 24px));
+      margin: 0 auto;
+      padding: 72px 0 80px;
       position: relative;
     }
 
@@ -49,9 +53,9 @@
       position: absolute;
       inset: -30px;
       background:
-        radial-gradient(circle at 22% 20%, rgba(255, 92, 200, 0.18), transparent 22%),
-        radial-gradient(circle at 80% 18%, rgba(138, 92, 255, 0.18), transparent 24%),
-        radial-gradient(circle at 54% 88%, rgba(90, 120, 255, 0.18), transparent 28%);
+              radial-gradient(circle at 22% 20%, rgba(255, 92, 200, 0.18), transparent 22%),
+              radial-gradient(circle at 80% 18%, rgba(138, 92, 255, 0.18), transparent 24%),
+              radial-gradient(circle at 54% 88%, rgba(90, 120, 255, 0.18), transparent 28%);
       filter: blur(42px);
       z-index: 0;
       pointer-events: none;
@@ -64,9 +68,9 @@
       border-radius: 30px;
       padding: 48px 40px;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)),
-        linear-gradient(135deg, rgba(40, 18, 56, 0.42), rgba(14, 20, 48, 0.32)),
-        var(--panel);
+              linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)),
+              linear-gradient(135deg, rgba(40, 18, 56, 0.42), rgba(14, 20, 48, 0.32)),
+              var(--panel);
       backdrop-filter: blur(18px) saturate(130%);
       -webkit-backdrop-filter: blur(18px) saturate(130%);
       box-shadow: var(--shadow);
@@ -88,10 +92,10 @@
       height: 1px;
       margin: 14px auto 0;
       background: linear-gradient(
-        90deg,
-        rgba(255, 92, 200, 1),
-        rgba(138, 92, 255, 0.8),
-        rgba(90, 120, 255, 0)
+              90deg,
+              rgba(255, 92, 200, 1),
+              rgba(138, 92, 255, 0.8),
+              rgba(90, 120, 255, 0)
       );
     }
 
@@ -167,7 +171,7 @@
       <a href="/">Home</a>
       <a href="/about">About</a>
       <a href="/music">Music</a>
-      <a href="/coming_soon">Merch</a>
+      <a href="/coming_soon" class="active">Merch</a>
       <a href="/memory_room">Memory Room</a>
       <a href="/contact">Contact</a>
     </nav>
