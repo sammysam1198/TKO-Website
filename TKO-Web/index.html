@@ -1,0 +1,2541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/static/css/tko-base.css">
+  <link rel="stylesheet" href="/static/css/tko-header.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TKO Official Site</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    section {
+      scroll-margin-top: 110px;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .panel {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(12px);
+    }
+
+    .noisy-border {
+      position: relative;
+    }
+
+    .noisy-border::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255, 164, 108, 0.9), rgba(255, 70, 169, 0.9));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      opacity: 0.85;
+    }
+
+    .theme-gradient {
+      background: linear-gradient(180deg, #ff9652 0%, #ff6a7c 45%, #ff38b6 100%);
+    }
+
+    .theme-gradient-soft {
+      background: linear-gradient(135deg, rgba(255,150,82,0.95) 0%, rgba(255,86,137,0.92) 55%, rgba(255,56,182,0.9) 100%);
+    }
+
+    .halftone-overlay,
+    .ink-sweep {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .halftone-overlay::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.22;
+      background-image:
+              radial-gradient(circle at 20% 10%, rgba(0,0,0,0.95) 0 2px, transparent 2.5px),
+              radial-gradient(circle at 80% 20%, rgba(0,0,0,0.95) 0 1.8px, transparent 2.2px),
+              radial-gradient(circle at 40% 70%, rgba(0,0,0,0.85) 0 1.6px, transparent 2px),
+              radial-gradient(circle at 70% 85%, rgba(0,0,0,0.9) 0 2.2px, transparent 2.6px);
+      background-size: 18px 18px, 22px 22px, 16px 16px, 24px 24px;
+      mix-blend-mode: multiply;
+    }
+
+    .ink-sweep::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      background:
+              radial-gradient(1200px 320px at -5% 18%, rgba(0,0,0,0.95) 0, rgba(0,0,0,0.9) 8%, transparent 35%),
+              radial-gradient(1000px 220px at 102% 10%, rgba(0,0,0,0.95) 0, transparent 28%),
+              radial-gradient(900px 180px at 95% 78%, rgba(0,0,0,0.95) 0, transparent 24%);
+      mix-blend-mode: multiply;
+    }
+
+    .content-section {
+      padding: 90px 0;
+    }
+
+    .content-section h2 {
+      margin-bottom: 22px;
+      font-size: 2rem;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    body[data-theme="light"] {
+      background: white;
+      color: black;
+    }
+
+    body.colorblind {
+      filter: contrast(1.2) saturate(0.8);
+    }
+
+    .info-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 24px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.18);
+    }
+
+    .info-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.15rem;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.6;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .profile-bubble {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: white;
+      font-weight: 700;
+    }
+
+    .profile-name {
+      white-space: nowrap;
+    }
+
+    .logout-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 8px 12px;
+      background: #ff9652;
+      color: black;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .auth-buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .auth-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .auth-btn:hover {
+      transform: translateY(-1px);
+      opacity: 0.95;
+    }
+
+    .auth-btn.signup {
+      background: #ff5ea1;
+      color: black;
+      box-shadow: 0 8px 24px rgba(255, 94, 161, 0.28);
+    }
+
+    .auth-btn.signin {
+      background: #ff9652;
+      color: black;
+      box-shadow: 0 8px 24px rgba(255, 150, 82, 0.24);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .auth-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .auth-modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(6px);
+    }
+
+    .auth-modal-content {
+      position: relative;
+      width: min(100%, 480px);
+      max-height: 85vh;
+      overflow-y: auto;
+      background: linear-gradient(180deg, rgba(18,18,28,0.96), rgba(10,10,18,0.98));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+      z-index: 1;
+    }
+
+    .auth-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    .auth-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .auth-tab {
+      flex: 1;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 16px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      background: rgba(255,255,255,0.08);
+      color: white;
+    }
+
+    .auth-tab.active {
+      background: linear-gradient(90deg, #ff5ea1, #ff9652);
+      color: black;
+    }
+
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .auth-form h2 {
+      margin: 0 0 8px;
+      font-size: 1.35rem;
+    }
+
+    .auth-form label {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.88);
+    }
+
+    .auth-form input {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.06);
+      color: white;
+      font-size: 0.98rem;
+      outline: none;
+    }
+
+    .auth-form input:focus {
+      border-color: #ff5ea1;
+      box-shadow: 0 0 0 3px rgba(255, 94, 161, 0.16);
+    }
+
+    .auth-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .auth-checkbox input {
+      width: auto;
+    }
+
+    .auth-submit {
+      margin-top: 10px;
+      border: none;
+      border-radius: 999px;
+      padding: 13px 18px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+    }
+
+    .signup-submit {
+      background: #ff5ea1;
+      color: black;
+    }
+
+    .signin-submit {
+      background: #ff9652;
+      color: black;
+    }
+
+    .auth-message {
+      min-height: 24px;
+      margin-bottom: 14px;
+      font-size: 0.9rem;
+      color: #ff9652;
+    }
+
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      padding: 72px 0;
+    }
+
+    .hero-grid,
+    .about-grid,
+    .guestbook-grid,
+    .newsletter-grid,
+    .release-grid,
+    .about-cards,
+    .guestbook-form-row,
+    .footer-row {
+      display: grid;
+      gap: 24px;
+    }
+
+    .about-grid {
+      grid-template-columns: 2fr 1fr;
+      align-items: start;
+    }
+
+    .about-cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .account-menu {
+      position: relative;
+    }
+
+    .account-dropdown {
+      position: absolute;
+      top: 110%;
+      right: 0;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 10px;
+      min-width: 200px;
+      z-index: 999;
+    }
+
+    .account-dropdown button {
+      width: 100%;
+      background: none;
+      border: none;
+      color: white;
+      text-align: left;
+      padding: 8px;
+      cursor: pointer;
+    }
+
+    .account-dropdown button:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .hero-grid {
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.45em;
+    }
+
+    .hero .eyebrow {
+      color: rgba(255, 255, 255, 0.95);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+    }
+
+    .gradient-card .eyebrow,
+    .newsletter-copy .eyebrow,
+    .guestbook-copy .eyebrow {
+      color: rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-eyebrow {
+      font-size: 13px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #ffffff;
+      opacity: 0.9;
+    }
+
+    .hero-subtext {
+      margin-top: 12px;
+      font-size: 15px;
+      color: #ffffff;
+      opacity: 0.9;
+    }
+
+    .section-eyebrow {
+      margin: 0 0 10px;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.35em;
+      color: #ff8f81;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(3.5rem, 9vw, 7rem);
+      line-height: 0.88;
+      color: black;
+    }
+
+    .hero-copy {
+      max-width: 640px;
+      margin-top: 22px;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #ffffff;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.55);
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, border 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button-dark {
+      background: black;
+      color: white;
+    }
+
+    .button-light {
+      border: 1px solid rgba(0, 0, 0, 0.22);
+      background: rgba(255,255,255,0.2);
+      color: black;
+    }
+
+    .hero-texture {
+      position: relative;
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      padding: 72px 0;
+      overflow: hidden;
+      background-image: url("/static/tko/textures/texture_web1_2.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .hero-card {
+      border-radius: 32px;
+      overflow: hidden;
+      padding: 24px;
+    }
+
+    .hero-card-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .mini-card,
+    .release-card,
+    .guestbook-post,
+    .about-card,
+    .notice-box {
+      border-radius: 24px;
+    }
+
+    .mini-card {
+      padding: 24px;
+    }
+
+    .mini-card.dark {
+      background: black;
+      color: white;
+    }
+
+    .mini-card.light {
+      border: 1px solid rgba(0,0,0,0.1);
+      background: rgba(255,255,255,0.35);
+      color: black;
+    }
+
+    .mini-card p,
+    .about-card p,
+    .release-card p,
+    .guestbook-post p,
+    .notice-box p {
+      margin: 0;
+    }
+
+    .label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      opacity: 0.55;
+    }
+
+    .mini-card .big-text {
+      margin-top: 10px;
+      font-size: 1.9rem;
+    }
+
+    .mini-card .small-copy,
+    .about-card .small-copy,
+    .release-card .small-copy,
+    .guestbook-post .small-copy,
+    .notice-box .small-copy {
+      margin-top: 14px;
+      font-size: 0.96rem;
+      line-height: 1.8;
+      opacity: 0.76;
+    }
+
+    .notice-box {
+      margin-top: 16px;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.8);
+      color: rgba(255,255,255,0.76);
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    main {
+      padding: 36px 0 48px;
+    }
+
+    .section {
+      margin-bottom: 28px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 0.95;
+    }
+
+    .about-grid {
+      grid-template-columns: 1.15fr 0.85fr;
+    }
+
+    .about-panel,
+    .gradient-card,
+    .newsletter-form,
+    .guestbook-column {
+      padding: 32px;
+    }
+
+    .about-panel,
+    .newsletter-wrap,
+    .release-card,
+    .guestbook-post,
+    .guestbook-form {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-body,
+    .gradient-copy,
+    .newsletter-copy p,
+    .guestbook-copy p {
+      margin-top: 18px;
+      font-size: 1rem;
+      line-height: 1.9;
+    }
+
+    .about-body {
+      max-width: 760px;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .about-side-stack {
+      display: grid;
+      gap: 24px;
+      align-content: start;
+    }
+
+    .about-cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+      margin-top: 28px;
+    }
+
+    .about-card {
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      min-height: 180px;
+    }
+
+    .gradient-card {
+      position: relative;
+      border-radius: 32px;
+      color: black;
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .gradient-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.25;
+      background-image: radial-gradient(circle, rgba(0,0,0,0.9) 1.5px, transparent 1.7px);
+      background-size: 14px 14px;
+    }
+
+    .gradient-card > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .gradient-copy {
+      color: rgba(0,0,0,0.75);
+    }
+
+    .newsletter-wrap {
+      border-radius: 32px;
+    }
+
+    .newsletter-grid {
+      grid-template-columns: 0.95fr 1.05fr;
+    }
+
+    .newsletter-copy {
+      padding: 38px;
+      color: black;
+    }
+
+    .newsletter-copy p {
+      color: rgba(0,0,0,0.75);
+      max-width: 540px;
+    }
+
+    .newsletter-form {
+      padding: 38px;
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .input,
+    .textarea {
+      width: 100%;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.05);
+      color: white;
+      padding: 16px 18px;
+      font: inherit;
+      outline: none;
+    }
+
+    .input::placeholder,
+    .textarea::placeholder {
+      color: rgba(255,255,255,0.35);
+    }
+
+    .input:focus,
+    .textarea:focus {
+      border-color: #ff6a95;
+    }
+
+    .textarea {
+      min-height: 120px;
+      resize: vertical;
+      margin-top: 16px;
+    }
+
+    .button-white,
+    .button-pink,
+    .button-outline {
+      margin-top: 16px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .button-white {
+      background: white;
+      color: black;
+    }
+
+    .button-pink {
+      background: #ff5ea1;
+      color: black;
+    }
+
+    .button-outline {
+      display: inline-block;
+      background: transparent;
+      color: rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 11px 16px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+    }
+
+    .release-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 22px;
+    }
+
+    .release-card {
+      padding: 24px;
+      transition: transform 0.2s ease;
+    }
+
+    .release-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .guestbook-grid {
+      grid-template-columns: 0.95fr 1.05fr;
+    }
+
+    .guestbook-copy {
+      position: relative;
+      border-radius: 32px;
+      padding: 32px;
+      color: black;
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+
+    .guestbook-copy::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.2;
+      background-image: radial-gradient(circle, rgba(0,0,0,1) 1.3px, transparent 1.6px);
+      background-size: 15px 15px;
+    }
+
+    .guestbook-copy > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .guestbook-copy p {
+      color: rgba(0,0,0,0.75);
+      max-width: 540px;
+    }
+
+    .guestbook-column {
+      padding: 0;
+    }
+
+    .guestbook-stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .guestbook-post,
+    .guestbook-form {
+      padding: 24px;
+    }
+
+    .guestbook-form-row {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 16px;
+    }
+
+    .site-footer {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 32px 0;
+    }
+
+    .footer-row {
+      grid-template-columns: 1fr auto;
+      align-items: center;
+    }
+
+    .footer-copy {
+      color: rgba(255,255,255,0.45);
+      font-size: 0.95rem;
+    }
+
+    .secret-footer-link,
+    .secret-footer-link:visited,
+    .secret-footer-link:hover,
+    .secret-footer-link:focus,
+    .secret-footer-link:active {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .secret-footer-link:focus {
+      outline: none;
+    }
+
+    .secret-footer-link {
+      cursor: default;
+      transition: none;
+    }
+
+    .dev-console-trigger {
+      display: inline-block;
+      position: relative;
+      color: rgba(255,255,255,0.45);
+      cursor: pointer;
+      transition: color 0.22s ease, text-shadow 0.22s ease, transform 0.22s ease;
+    }
+
+    .dev-console-trigger:hover {
+      color: #ff9a73;
+      text-shadow: 0 0 12px rgba(255, 106, 124, 0.38);
+      transform: translateY(-1px);
+    }
+
+    .dev-console-trigger::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -2px;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255,150,82,0), rgba(255,150,82,0.8), rgba(255,56,182,0));
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.22s ease;
+    }
+
+    .dev-console-trigger:hover::after {
+      transform: scaleX(1);
+    }
+
+    .dev-auth-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .dev-auth-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(8px);
+    }
+
+    .dev-auth-box {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 420px);
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(5, 5, 8, 0.96);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+      padding: 22px;
+    }
+
+    .dev-auth-box form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .dev-auth-input {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 14px;
+      background: #000;
+      color: #fff;
+      padding: 14px 16px;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 0.98rem;
+      outline: none;
+    }
+
+    .dev-auth-input:focus {
+      border-color: #ff5ea1;
+      box-shadow: 0 0 0 3px rgba(255, 94, 161, 0.14);
+    }
+
+    .dev-auth-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .dev-auth-btn {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .dev-auth-btn.cancel {
+      background: rgba(255,255,255,0.08);
+      color: white;
+    }
+
+    .dev-auth-btn.submit {
+      background: linear-gradient(90deg, #ff5ea1, #ff9652);
+      color: black;
+    }
+
+    .dev-auth-status {
+      min-height: 20px;
+      font-size: 0.88rem;
+      color: #ffb18c;
+    }
+
+    .dev-console {
+      position: fixed;
+      top: 120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(92vw, 980px);
+      height: 78vh;
+      min-width: 700px;
+      min-height: 460px;
+      max-width: 96vw;
+      max-height: 88vh;
+      resize: both;
+      z-index: 3200;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      background:
+              linear-gradient(180deg, rgba(255,150,82,0.08), rgba(255,56,182,0.03)),
+              rgba(8, 8, 12, 0.97);
+      box-shadow: 0 28px 90px rgba(0,0,0,0.55);
+      backdrop-filter: blur(14px);
+    }
+
+    .dev-console.hidden {
+      display: none !important;
+    }
+
+    .dev-console-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 18px;
+      background: linear-gradient(90deg, rgba(255,150,82,0.16), rgba(255,56,182,0.13));
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      cursor: grab;
+      user-select: none;
+    }
+
+    .dev-console-header:active {
+      cursor: grabbing;
+    }
+
+    .dev-console-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .dev-console-title {
+      margin: 0;
+      font-size: 0.98rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .dev-console-subtitle {
+      margin: 0;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.54);
+    }
+
+    .dev-console-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .dev-console-icon-btn {
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.08);
+      color: white;
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .dev-console-icon-btn:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.24);
+      transform: translateY(-1px);
+    }
+
+    .dev-console-tabs {
+      display: flex;
+      gap: 10px;
+      padding: 14px 18px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .dev-console-tab {
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,0.62);
+      padding: 12px 4px 14px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .dev-console-tab.active {
+      color: white;
+    }
+
+    .dev-console-tab.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -1px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #ff9652, #ff5ea1);
+    }
+
+    .dev-console-body {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      height: calc(100% - 110px);
+      min-height: 0;
+    }
+
+    .dev-console-sidebar {
+      padding: 18px;
+      border-right: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      overflow-y: auto;
+      min-height: 0;
+    }
+
+    .dev-console-main {
+      padding: 18px;
+      min-height: 0;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dev-meta-block {
+      border-radius: 18px;
+      padding: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 14px;
+    }
+
+    .dev-meta-label {
+      margin: 0 0 8px;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.48);
+    }
+
+    .dev-meta-value {
+      margin: 0;
+      font-size: 0.96rem;
+      color: rgba(255,255,255,0.88);
+    }
+
+    .dev-pane {
+      display: none;
+      height: 100%;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .dev-pane.active {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex: 1;
+      min-height: 0;
+    }
+
+    .dev-feed {
+      display: grid;
+      gap: 14px;
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+
+    .dev-entry {
+      border-radius: 18px;
+      padding: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .dev-entry-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .dev-entry-author {
+      margin: 0;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: white;
+    }
+
+    .dev-entry-time {
+      margin: 0;
+      font-size: 0.76rem;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .dev-entry-body {
+      margin: 0;
+      color: rgba(255,255,255,0.78);
+      white-space: pre-wrap;
+      line-height: 1.7;
+    }
+
+    .dev-entry-code {
+      margin-top: 12px;
+      border-radius: 14px;
+      padding: 14px;
+      background: #050505;
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow-x: auto;
+      color: #ffd3ea;
+      font-family: Consolas, Monaco, monospace;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .dev-issue-badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .dev-issue-badge.functional {
+      background: rgba(255, 210, 79, 0.16);
+      color: #ffd24f;
+      border: 1px solid rgba(255, 210, 79, 0.28);
+    }
+
+    .dev-issue-badge.critical {
+      background: rgba(255, 73, 73, 0.15);
+      color: #ff5858;
+      border: 1px solid rgba(255, 88, 88, 0.3);
+    }
+
+    .dev-composer {
+      margin-top: 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 16px;
+      flex-shrink: 0;
+    }
+
+    .dev-composer textarea {
+      width: 100%;
+      min-height: 100px;
+      resize: vertical;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: white;
+      padding: 14px;
+      font: inherit;
+      outline: none;
+    }
+
+    .dev-composer textarea:focus {
+      border-color: #ff5ea1;
+    }
+
+    .dev-composer-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 12px;
+    }
+
+    .dev-empty-note {
+      margin: 0;
+      color: rgba(255,255,255,0.48);
+    }
+
+    @media (max-width: 900px) {
+      .dev-console {
+        width: 95vw;
+        left: 2.5vw;
+        top: 86px;
+        transform: none;
+      }
+
+      .dev-console-body {
+        grid-template-columns: 1fr;
+      }
+
+      .dev-console-sidebar {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .about-grid,
+      .newsletter-grid,
+      .guestbook-grid,
+      .footer-row,
+      .release-grid,
+      .about-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .header-right {
+        width: 100%;
+        justify-content: flex-end;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .hero {
+        padding: 48px 0;
+      }
+
+      .hero-card-grid,
+      .form-grid-2,
+      .guestbook-form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .about-panel,
+      .gradient-card,
+      .newsletter-copy,
+      .newsletter-form,
+      .guestbook-copy,
+      .guestbook-post,
+      .guestbook-form {
+        padding: 24px;
+      }
+
+      .button-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .button {
+        text-align: center;
+      }
+
+      .header-right {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .auth-buttons {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      .auth-btn {
+        width: 100%;
+      }
+
+      .console {
+        max-height: 300px;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .site-header .container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+      }
+
+      .brand {
+        text-align: center;
+      }
+
+      .header-right {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+
+      .auth-buttons {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .auth-btn {
+        width: 100%;
+      }
+
+      .profile-bubble {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+
+      .logout-btn {
+        width: 100%;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 44px 0 56px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.4rem, 14vw, 4rem);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="brand">
+        <h1 class="display-title brand-title">T.K.O! The Knockouts</h1>
+        <p class="brand-subtitle">A game by Clover Creative</p>
+      </div>
+
+           <div class="header-right">
+        <nav class="nav">
+          <a href="/">Home</a>
+          <a href="/about">About</a>
+          <a href="/music">Music</a>
+          <a href="/community">Community</a>
+          <a href="/news">News</a>
+        </nav>
+
+       <div id="authSection">
+  <!-- Logged OUT -->
+  <div id="loggedOutView">
+    <button id="openSigninBtn" class="auth-btn signin">Sign In</button>
+    <button id="openSignupBtn" class="auth-btn signup">Sign Up</button>
+  </div>
+
+  <!-- Logged IN -->
+  <div id="loggedInView" class="hidden">
+    <div class="account-menu">
+      <button id="accountMenuToggle" class="profile-bubble" type="button">
+        <span id="profileName">👤 User</span>
+      </button>
+
+      <div id="accountDropdown" class="account-dropdown hidden">
+        <button id="openSettingsBtn">Account Settings</button>
+        <button id="openAppearanceBtn">Appearance</button>
+        <button id="openAccessibilityBtn">Accessibility</button>
+        <button id="openChangePasswordBtn">Change Password</button>
+        <button id="openAdminPanelBtn" class="hidden">Admin Panel</button>
+        <hr />
+        <button id="logoutBtn">Log Out</button>
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
+    </div>
+  </header>
+
+  <section id="home" class="hero hero-texture">      
+      
+    <div class="container hero-grid">
+      <div>
+        <p class="eyebrow">When you do it...</p>
+        <h1 class="display-title">Do.<br />It.<br />Loud.</h1>
+        <p class="hero-copy">
+          It's the only way to live, I think.
+        </p>
+
+        <div class="button-row">
+          <a class="button button-dark" href="/templates/music.html">Music Releases</a>
+          <a class="button button-light" href="#">Kickstarter</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<main>
+  <div class="container">
+    <section class="section">
+      <div class="panel noisy-border about-panel">
+        <p class="section-eyebrow">ok but</p>
+        <h2 class="display-title section-title">What is T.K.O!?</h2>
+        <p class="about-body">
+          T.K.O! (The Knockouts) is a narrative rhythm game where
+          you punch people to the beat of the music. 
+          The music that your band made with the singer who left to pursue fighting… 
+          and the only way to get her back is to climb the ranks 
+          and knock some sense into her. (literally.)
+        </p>
+
+        <div class="about-cards">
+          <div class="about-card">
+            <p class="label">WE ARE T.K.O!</p>
+            <p class="small-copy">
+              Who and what is T.K.O! exactly? 
+              The answer may be closer than you think… unless you think it’s this button because it is.
+            </p>
+            <a class="button-outline" href="/about">Go to About</a>
+          </div>
+
+          <div class="about-card">
+            <p class="label">Your song is in my ears...</p>
+            <p class="small-copy">
+              All music releases can be found here as they come out.
+            </p>
+            <a class="button-outline" href="/music">Go to Music</a>
+          </div>
+
+          <div class="about-card">
+            <p class="label">If I get to know you, I'll know you well.</p>
+            <p class="small-copy">
+              Join the official Discord server or post in the guest book here!
+            </p>
+            <a class="button-outline" href="/community">Go to Community</a>
+          </div>
+
+          <div class="about-card">
+            <p class="label">We all just wanna be the one who knew...</p>
+            <p class="small-copy">
+              Any news or updates we share can be found here! 
+              You can even sign up for the newsletter if you love 
+              receiving automated emails for some reason.
+            </p>
+            <a class="button-outline" href="/news">Go to News</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <div>
+        <h2 class="display-title brand-title" style="margin: 0; font-size: 1.9rem;">T.K.O! The Knockouts</h2>
+        <p style="margin: 6px 0 0; color: rgba(255,255,255,0.5);">A game by Clover Creative</p>
+      </div>
+     <p class="footer-copy">© Copyright 2026. Built by <a href="https://www.chromaglowsynths.com/portfolio" class="secret-footer-link">Sammi Fishbein</a> and Dominique Smith for T.K.O!™ with HTML/CSS. All rights <span id="openDevConsolePrompt" class="dev-console-trigger">reserved</span>.</p>
+    </div>
+  </footer>
+    <div id="authModal" class="auth-modal hidden">
+    <div class="auth-modal-backdrop"></div>
+
+    <div class="auth-modal-content">
+      <button id="closeAuthModal" class="auth-close-btn" type="button" aria-label="Close modal">×</button>
+
+      <div class="auth-tabs">
+        <button id="showSignUpTab" class="auth-tab active" type="button">Sign Up</button>
+        <button id="showSignInTab" class="auth-tab" type="button">Sign In</button>
+      </div>
+
+      <div id="authMessage" class="auth-message"></div>
+
+      <form id="signUpForm" class="auth-form">
+        <h2>Create Account</h2>
+
+        <label for="signupFirstName">First Name</label>
+        <input id="signupFirstName" name="first_name" type="text" required />
+
+        <label for="signupLastName">Last Name</label>
+        <input id="signupLastName" name="last_name" type="text" required />
+
+        <label for="signupEmail">Email</label>
+        <input id="signupEmail" name="email" type="email" required />
+
+        <label for="signupUsername">Username</label>
+        <input id="signupUsername" name="username" type="text" required />
+
+        <label for="signupPassword">Password</label>
+        <input id="signupPassword" name="password" type="password" required />
+
+        <label class="auth-checkbox">
+          <input id="signupTerms" name="agreed_to_terms" type="checkbox" required />
+          <span>I agree to the terms</span>
+        </label>
+
+        <button class="auth-submit signup-submit" type="submit">Create Account</button>
+      </form>
+
+      <form id="signInForm" class="auth-form hidden">
+        <h2>Welcome Back</h2>
+
+        <label for="signinLogin">Username or Email</label>
+        <input id="signinLogin" name="login" type="text" required />
+
+        <label for="signinPassword">Password</label>
+        <input id="signinPassword" name="password" type="password" required />
+
+        <button class="auth-submit signin-submit" type="submit">Sign In</button>
+      </form>
+    </div>
+  </div>
+   <div id="devAuthModal" class="dev-auth-modal hidden">
+    <div id="devAuthBackdrop" class="dev-auth-backdrop"></div>
+
+    <div class="dev-auth-box">
+      <form id="devAuthForm">
+        <div id="devAuthStatus" class="dev-auth-status"></div>
+        <input
+          id="devPasswordInput"
+          class="dev-auth-input"
+          type="password"
+          autocomplete="off"
+          spellcheck="false"
+          aria-label="Developer console password"
+        />
+        <div class="dev-auth-actions">
+          <button id="cancelDevAuth" class="dev-auth-btn cancel" type="button">Cancel</button>
+          <button class="dev-auth-btn submit" type="submit">Enter</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="devConsole" class="dev-console hidden">
+    <div id="devConsoleHeader" class="dev-console-header">
+      <div class="dev-console-title-wrap">
+        <p class="dev-console-title">TKO Developer Console</p>
+        <p class="dev-console-subtitle">Internal tools / hidden shell / frontend pass</p>
+      </div>
+
+      <div class="dev-console-actions">
+        <button id="popoutDevConsole" class="dev-console-icon-btn" type="button">Pop Out</button>
+        <button id="closeDevConsole" class="dev-console-icon-btn" type="button">Close</button>
+      </div>
+    </div>
+
+    <div class="dev-console-tabs">
+      <button class="dev-console-tab active" type="button" data-dev-tab="chat">Active Chat</button>
+      <button class="dev-console-tab" type="button" data-dev-tab="issues">Issues</button>
+      <button class="dev-console-tab" type="button" data-dev-tab="log">Dev Log</button>
+    </div>
+
+    <div class="dev-console-body">
+      <aside class="dev-console-sidebar">
+        <div class="dev-meta-block">
+          <p class="dev-meta-label">Access</p>
+          <p class="dev-meta-value">Authorized developer session</p>
+        </div>
+
+        <div class="dev-meta-block">
+          <p class="dev-meta-label">Project</p>
+          <p class="dev-meta-value">TKO Website / narrative rhythm game hub</p>
+        </div>
+
+        <div class="dev-meta-block">
+          <p class="dev-meta-label">Mode</p>
+          <p class="dev-meta-value">Frontend shell with live unlock route</p>
+        </div>
+      </aside>
+
+     <section class="dev-console-main">
+        <div id="devPaneChat" class="dev-pane active">
+          <div id="devChatFeed" class="dev-feed"></div>
+
+          <div class="dev-composer">
+            <textarea id="devChatInput" placeholder="Internal developer note..."></textarea>
+            <div class="dev-composer-actions">
+              <button id="sendDevChat" class="dev-console-icon-btn" type="button">Post Note</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="devPaneIssues" class="dev-pane">
+          <div id="devIssuesFeed" class="dev-feed"></div>
+
+          <div class="dev-composer">
+            <textarea id="devIssuesInput" placeholder="Log a development issue..."></textarea>
+            <div class="dev-composer-actions">
+              <button id="sendDevIssue" class="dev-console-icon-btn" type="button">Post Issue</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="devPaneLog" class="dev-pane">
+          <div id="devLogFeed" class="dev-feed"></div>
+
+          <div class="dev-composer">
+            <textarea id="devLogInput" placeholder="Add a dev log entry..."></textarea>
+            <div class="dev-composer-actions">
+              <button id="sendDevLog" class="dev-console-icon-btn" type="button">Post Log</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  
+<script>
+  const API_BASE = "https://tko-api-server.onrender.com";
+
+  const openSigninBtn = document.getElementById("openSigninBtn");
+  const openSignupBtn = document.getElementById("openSignupBtn");
+
+  const authModal = document.getElementById("authModal");
+  const closeAuthModalBtn = document.getElementById("closeAuthModal");
+  const authBackdrop = document.querySelector(".auth-modal-backdrop");
+
+  const showSignUpTabBtn = document.getElementById("showSignUpTab");
+  const showSignInTabBtn = document.getElementById("showSignInTab");
+
+  const signUpForm = document.getElementById("signUpForm");
+  const signInForm = document.getElementById("signInForm");
+  const authMessage = document.getElementById("authMessage");
+
+  const devAuthModal = document.getElementById("devAuthModal");
+  const devAuthBackdrop = document.getElementById("devAuthBackdrop");
+  const devAuthForm = document.getElementById("devAuthForm");
+  const devAuthStatus = document.getElementById("devAuthStatus");
+  const devPasswordInput = document.getElementById("devPasswordInput");
+  const cancelDevAuthBtn = document.getElementById("cancelDevAuth");
+  const openDevConsolePrompt = document.getElementById("openDevConsolePrompt");
+
+  const devConsole = document.getElementById("devConsole");
+  const devConsoleHeader = document.getElementById("devConsoleHeader");
+  const closeDevConsoleBtn = document.getElementById("closeDevConsole");
+  const popoutDevConsoleBtn = document.getElementById("popoutDevConsole");
+  const devTabButtons = document.querySelectorAll(".dev-console-tab");
+
+  const devPaneChat = document.getElementById("devPaneChat");
+  const devPaneIssues = document.getElementById("devPaneIssues");
+  const devPaneLog = document.getElementById("devPaneLog");
+
+  const devChatFeed = document.getElementById("devChatFeed");
+  const devIssuesFeed = document.getElementById("devIssuesFeed");
+  const devLogFeed = document.getElementById("devLogFeed");
+
+  const devChatInput = document.getElementById("devChatInput");
+  const sendDevChatBtn = document.getElementById("sendDevChat");
+
+  const devIssuesInput = document.getElementById("devIssuesInput");
+  const sendDevIssueBtn = document.getElementById("sendDevIssue");
+
+  const devLogInput = document.getElementById("devLogInput");
+  const sendDevLogBtn = document.getElementById("sendDevLog");
+
+  const toggleBtn = document.getElementById("accountMenuToggle");
+  const dropdown = document.getElementById("accountDropdown");
+
+
+  openSigninBtn.addEventListener("click", () => openAuthModal("signin"));
+  openSignupBtn.addEventListener("click", () => openAuthModal("signup"));
+
+if (toggleBtn && dropdown) {
+  toggleBtn.addEventListener("click", () => {
+    dropdown.classList.toggle("hidden");
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!toggleBtn.contains(e.target) && !dropdown.contains(e.target)) {
+      dropdown.classList.add("hidden");
+    }
+  });
+}
+
+// click outside to close
+document.addEventListener("click", (e) => {
+  if (!toggleBtn.contains(e.target) && !dropdown.contains(e.target)) {
+    dropdown.classList.add("hidden");
+  }
+});
+
+
+  let devConsoleUnlocked = false;
+  let devChatMessages = [];
+  let devIssues = [];
+  let devLogEntries = [];
+
+  function openAuthModal(mode = "signup") {
+    authModal.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+
+    if (mode === "signup") {
+      showSignUpTab();
+    } else {
+      showSignInTab();
+    }
+
+    authMessage.textContent = "";
+  }
+
+  function closeAuthModal() {
+    authModal.classList.add("hidden");
+    document.body.style.overflow = "";
+    authMessage.textContent = "";
+  }
+
+
+  function showSignUpTab() {
+    signUpForm.classList.remove("hidden");
+    signInForm.classList.add("hidden");
+
+    showSignUpTabBtn.classList.add("active");
+    showSignInTabBtn.classList.remove("active");
+
+    authMessage.textContent = "";
+  }
+
+  function showSignInTab() {
+    signInForm.classList.remove("hidden");
+    signUpForm.classList.add("hidden");
+
+    showSignInTabBtn.classList.add("active");
+    showSignUpTabBtn.classList.remove("active");
+
+    authMessage.textContent = "";
+  }
+
+  function openDevAuthModal() {
+    devAuthModal.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+    devAuthStatus.textContent = "";
+    devPasswordInput.value = "";
+    setTimeout(() => devPasswordInput.focus(), 40);
+  }
+
+  function closeDevAuthModal() {
+    devAuthModal.classList.add("hidden");
+    document.body.style.overflow = devConsole.classList.contains("hidden") ? "" : "hidden";
+    devAuthStatus.textContent = "";
+    devPasswordInput.value = "";
+  }
+
+  function openDevConsole() {
+    devConsole.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeDevConsole() {
+    devConsole.classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+
+  function formatCodeBlock(code) {
+    return `<pre class="dev-entry-code">${escapeHtml(code)}</pre>`;
+  }
+
+  function escapeHtml(value) {
+    return value
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  function renderDevChat() {
+    if (!devChatMessages.length) {
+      devChatFeed.innerHTML = `<p class="dev-empty-note">No messages yet.</p>`;
+      return;
+    }
+
+    devChatFeed.innerHTML = devChatMessages.map((entry) => `
+      <article class="dev-entry">
+        <div class="dev-entry-top">
+          <p class="dev-entry-author">${escapeHtml(entry.author)}</p>
+          <p class="dev-entry-time">${escapeHtml(entry.time)}</p>
+        </div>
+        <p class="dev-entry-body">${escapeHtml(entry.body)}</p>
+        ${entry.code ? formatCodeBlock(entry.code) : ""}
+      </article>
+    `).join("");
+  }
+
+  function renderDevIssues() {
+    if (!devIssues.length) {
+      devIssuesFeed.innerHTML = `<p class="dev-empty-note">No issues logged.</p>`;
+      return;
+    }
+
+    devIssuesFeed.innerHTML = devIssues.map((issue) => `
+      <article class="dev-entry">
+        <div class="dev-entry-top">
+          <p class="dev-entry-author">${escapeHtml(issue.title)}</p>
+          <p class="dev-entry-time">${escapeHtml(issue.time)}</p>
+        </div>
+        <div style="margin-bottom: 10px;">
+          <span class="dev-issue-badge ${escapeHtml(issue.severity)}">${escapeHtml(issue.severity)}</span>
+        </div>
+        <p class="dev-entry-body">${escapeHtml(issue.body)}</p>
+        <p class="dev-entry-time" style="margin-top: 10px;">Logged by ${escapeHtml(issue.author)}</p>
+      </article>
+    `).join("");
+  }
+
+  function renderDevLog() {
+    if (!devLogEntries.length) {
+      devLogFeed.innerHTML = `<p class="dev-empty-note">No log entries yet.</p>`;
+      return;
+    }
+
+    devLogFeed.innerHTML = devLogEntries.map((entry) => `
+      <article class="dev-entry">
+        <div class="dev-entry-top">
+          <p class="dev-entry-author">${escapeHtml(entry.title)}</p>
+          <p class="dev-entry-time">${escapeHtml(entry.time)}</p>
+        </div>
+        <p class="dev-entry-body">${escapeHtml(entry.body)}</p>
+        <p class="dev-entry-time" style="margin-top: 10px;">Logged by ${escapeHtml(entry.author)}</p>
+      </article>
+    `).join("");
+  }
+
+  function activateDevTab(tabName) {
+    devTabButtons.forEach((button) => {
+      button.classList.toggle("active", button.dataset.devTab === tabName);
+    });
+
+    devPaneChat.classList.toggle("active", tabName === "chat");
+    devPaneIssues.classList.toggle("active", tabName === "issues");
+    devPaneLog.classList.toggle("active", tabName === "log");
+  }
+
+  async function unlockDevConsole(password) {
+    const response = await fetch(`${API_BASE}/api/tko/dev-console/unlock`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ password })
+    });
+
+    const data = await response.json();
+    return { response, data };
+  }
+
+     async function loadDevMessages() {
+    const response = await fetch(`${API_BASE}/api/tko/dev-console/messages`);
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error("Failed to load dev messages", data);
+      return;
+    }
+
+    devChatMessages = (data.messages || []).map((entry) => ({
+      author: entry.username || "dev",
+      time: entry.created_at || "just now",
+      body: entry.message || ""
+     }));
+
+    renderDevChat();
+   }
+
+  async function postDevMessage(messageText) {
+  const response = await fetch(`${API_BASE}/api/tko/dev-console/messages`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      username: "sammi",
+      message: messageText
+    })
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || "Failed to post dev message");
+  }
+
+  return data;
+}
+
+async function loadDevIssues() {
+  const response = await fetch(`${API_BASE}/api/tko/dev-console/issues`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    console.error("Failed to load dev issues", data);
+    return;
+  }
+
+  devIssues = (data.issues || []).map((issue) => ({
+    title: issue.title || "Untitled issue",
+    severity: issue.severity || "normal",
+    author: issue.created_by || "dev",
+    time: issue.created_at || "just now",
+    body: issue.description || ""
+  }));
+
+  renderDevIssues();
+}
+
+async function postDevIssue(titleText) {
+  const response = await fetch(`${API_BASE}/api/tko/dev-console/issues`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      title: titleText,
+      description: titleText,
+      severity: "normal",
+      created_by: "sammi"
+    })
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || "Failed to post dev issue");
+  }
+
+  return data;
+}
+
+async function loadDevLogs() {
+  const response = await fetch(`${API_BASE}/api/tko/dev-console/logs`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    console.error("Failed to load dev logs", data);
+    return;
+  }
+
+  devLogEntries = (data.logs || []).map((entry) => ({
+    title: entry.message || "Log entry",
+    author: "system",
+    time: entry.created_at || "just now",
+    body: entry.message || ""
+  }));
+
+  renderDevLog();
+}
+
+async function postDevLog(messageText) {
+  const response = await fetch(`${API_BASE}/api/tko/dev-console/logs`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      message: messageText,
+      level: "info"
+    })
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || "Failed to post dev log");
+  }
+
+  return data;
+}
+
+  function setupDevDragging() {
+    let isDragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    devConsoleHeader.addEventListener("mousedown", (event) => {
+      if (event.target.closest("button")) {
+        return;
+      }
+
+      const rect = devConsole.getBoundingClientRect();
+
+      isDragging = true;
+      offsetX = event.clientX - rect.left;
+      offsetY = event.clientY - rect.top;
+
+      devConsole.style.left = `${rect.left}px`;
+      devConsole.style.top = `${rect.top}px`;
+      devConsole.style.transform = "none";
+    });
+
+    document.addEventListener("mousemove", (event) => {
+      if (!isDragging) {
+        return;
+      }
+
+      const nextLeft = Math.max(8, Math.min(window.innerWidth - devConsole.offsetWidth - 8, event.clientX - offsetX));
+      const nextTop = Math.max(8, Math.min(window.innerHeight - 80, event.clientY - offsetY));
+
+      devConsole.style.left = `${nextLeft}px`;
+      devConsole.style.top = `${nextTop}px`;
+    });
+
+    document.addEventListener("mouseup", () => {
+      isDragging = false;
+    });
+  }
+
+  function popoutDevConsole() {
+    const popup = window.open("", "tko_dev_console", "width=1100,height=780,resizable=yes,scrollbars=yes");
+
+    if (!popup) {
+      return;
+    }
+
+    popup.document.write(`
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+        <meta charset="UTF-8" />
+        <title>TKO Developer Console</title>
+        <style>
+          body {
+            margin: 0;
+            padding: 22px;
+            background: #09090d;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+          }
+          .wrap {
+            max-width: 1000px;
+            margin: 0 auto;
+          }
+          .title {
+            margin: 0 0 8px;
+            font-size: 1.2rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+          }
+          .subtitle {
+            margin: 0 0 22px;
+            color: rgba(255,255,255,0.55);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-size: 0.8rem;
+          }
+          .entry {
+            border-radius: 18px;
+            padding: 16px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            margin-bottom: 14px;
+          }
+          .code {
+            margin-top: 12px;
+            border-radius: 14px;
+            padding: 14px;
+            background: #050505;
+            border: 1px solid rgba(255,255,255,0.08);
+            overflow-x: auto;
+            color: #ffd3ea;
+            white-space: pre-wrap;
+            font-family: Consolas, Monaco, monospace;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="wrap">
+          <h1 class="title">TKO Developer Console</h1>
+          <p class="subtitle">Pop-out view</p>
+          ${devChatMessages.map((entry) => `
+            <div class="entry">
+              <strong>${escapeHtml(entry.author)}</strong>
+              <div style="opacity:.55; font-size:.82rem; margin-top:4px;">${escapeHtml(entry.time)}</div>
+              <p style="white-space: pre-wrap; line-height:1.7;">${escapeHtml(entry.body)}</p>
+              ${entry.code ? `<div class="code">${escapeHtml(entry.code)}</div>` : ""}
+            </div>
+          `).join("")}
+        </div>
+      </body>
+      </html>
+    `);
+
+    popup.document.close();
+  }
+  setupDevDragging();
+  loadDevMessages();
+  loadDevIssues();
+  loadDevLogs();
+
+  closeAuthModalBtn.addEventListener("click", closeAuthModal);
+  authBackdrop.addEventListener("click", closeAuthModal);
+
+  showSignUpTabBtn.addEventListener("click", showSignUpTab);
+  showSignInTabBtn.addEventListener("click", showSignInTab);
+
+  openDevConsolePrompt.addEventListener("click", openDevAuthModal);
+  cancelDevAuthBtn.addEventListener("click", closeDevAuthModal);
+  devAuthBackdrop.addEventListener("click", closeDevAuthModal);
+  closeDevConsoleBtn.addEventListener("click", closeDevConsole);
+  popoutDevConsoleBtn.addEventListener("click", popoutDevConsole);
+
+  devTabButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      activateDevTab(button.dataset.devTab);
+    });
+  });
+
+  devAuthForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const password = devPasswordInput.value;
+    devAuthStatus.textContent = "Checking access...";
+
+    try {
+      const { response, data } = await unlockDevConsole(password);
+
+      if (!response.ok) {
+        devAuthStatus.textContent = data.error || "Access denied.";
+        return;
+      }
+
+      devConsoleUnlocked = true;
+      devAuthStatus.textContent = "Access granted.";
+      closeDevAuthModal();
+      openDevConsole();
+    } catch (error) {
+      console.error(error);
+      devAuthStatus.textContent = "Network error during verification.";
+    }
+  });
+
+  sendDevChatBtn.addEventListener("click", async () => {
+  const body = devChatInput.value.trim();
+  if (!body) {
+    return;
+  }
+
+  try {
+    await postDevMessage(body);
+    devChatInput.value = "";
+    await loadDevMessages();
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+sendDevIssueBtn.addEventListener("click", async () => {
+  const body = devIssuesInput.value.trim();
+  if (!body) {
+    return;
+  }
+
+  try {
+    await postDevIssue(body);
+    devIssuesInput.value = "";
+    await loadDevIssues();
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+sendDevLogBtn.addEventListener("click", async () => {
+  const body = devLogInput.value.trim();
+  if (!body) {
+    return;
+  }
+
+  try {
+    await postDevLog(body);
+    devLogInput.value = "";
+    await loadDevLogs();
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !authModal.classList.contains("hidden")) {
+      closeAuthModal();
+    }
+
+    if (event.key === "Escape" && !devAuthModal.classList.contains("hidden")) {
+      closeDevAuthModal();
+    }
+
+    if (event.key === "Escape" && !devConsole.classList.contains("hidden")) {
+      closeDevConsole();
+    }
+  });
+
+  signUpForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const first_name = document.getElementById("signupFirstName").value.trim();
+    const last_name = document.getElementById("signupLastName").value.trim();
+    const email = document.getElementById("signupEmail").value.trim();
+    const username = document.getElementById("signupUsername").value.trim();
+    const password = document.getElementById("signupPassword").value;
+    const agreed_to_terms = document.getElementById("signupTerms").checked;
+
+    authMessage.textContent = "Creating account...";
+
+    try {
+      const response = await fetch(`${API_BASE}/api/tko/auth/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          first_name,
+          last_name,
+          email,
+          username,
+          password,
+          agreed_to_terms
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        authMessage.textContent = data.error || data.message || "Sign up failed.";
+        return;
+      }
+
+      authMessage.textContent = "Account created successfully. You can sign in now.";
+      signUpForm.reset();
+      showSignInTab();
+    } catch (error) {
+      authMessage.textContent = "Network error during sign up.";
+      console.error(error);
+    }
+  });
+
+  signInForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const login = document.getElementById("signinLogin").value.trim();
+    const password = document.getElementById("signinPassword").value;
+
+    authMessage.textContent = "Signing in...";
+
+    try {
+      const response = await fetch(`${API_BASE}/api/tko/auth/signin`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username_or_email: login,
+          password
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        authMessage.textContent = data.error || data.message || "Sign in failed.";
+        return;
+      }
+
+      localStorage.setItem("tko_token", data.token);
+      await loadUser();
+
+      authMessage.textContent = "Signed in successfully.";
+      signInForm.reset();
+
+      setTimeout(() => {
+        closeAuthModal();
+      }, 600);
+    } catch (error) {
+      authMessage.textContent = "Network error during sign in.";
+      console.error(error);
+    }
+  });
+
+  if (
+    newsletterSubscribeBtn &&
+    newsletterFirstName &&
+    newsletterEmail &&
+    newsletterMessage &&
+    newsletterStatus
+  ) {
+    newsletterSubscribeBtn.addEventListener("click", async () => {
+      const first_name = newsletterFirstName.value.trim();
+      const email = newsletterEmail.value.trim();
+      const message = newsletterMessage.value.trim();
+
+      newsletterStatus.textContent = "";
+
+      if (!email) {
+        newsletterStatus.textContent = "Please enter your email address.";
+        return;
+      }
+
+      newsletterStatus.textContent = "Subscribing...";
+
+      try {
+        const response = await fetch(`${API_BASE}/api/tko/newsletter/subscribe`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            first_name,
+            email,
+            message
+          })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          newsletterStatus.textContent =
+            data.error || data.message || "Subscription failed.";
+          return;
+        }
+
+        newsletterStatus.textContent = "Subscribed successfully!";
+        newsletterFirstName.value = "";
+        newsletterEmail.value = "";
+        newsletterMessage.value = "";
+      } catch (error) {
+        console.error(error);
+        newsletterStatus.textContent = "Network error during subscription.";
+      }
+    });
+  }
+
+  async function loadUser() {
+  const token = localStorage.getItem("tko_token");
+
+  if (!token) {
+    showLoggedOut();
+    return;
+  }
+
+  const res = await fetch(`${API_BASE}/api/tko/auth/me`, {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+
+  if (!res.ok) {
+    showLoggedOut();
+    return;
+  }
+
+  const data = await res.json();
+  const user = data.user;
+
+  showLoggedIn(user);
+}
+
+
+function showLoggedIn(user) {
+  document.getElementById("loggedOutView").classList.add("hidden");
+  document.getElementById("loggedInView").classList.remove("hidden");
+
+  document.getElementById("profileName").textContent = `👤 ${user.username}`;
+
+  // Admin check
+  if (user.role === "admin") {
+    document.getElementById("openAdminPanelBtn").classList.remove("hidden");
+
+  const adminBtn = document.getElementById("openAdminPanelBtn");
+  adminBtn.classList.toggle("hidden", user.role !== "admin");
+  }
+
+  // Apply preferences
+  applyTheme(user.theme_preference);
+  applyColorblind(user.colorblind_mode);
+}
+
+function showLoggedOut() {
+  document.getElementById("loggedOutView").classList.remove("hidden");
+  document.getElementById("loggedInView").classList.add("hidden");
+  document.getElementById("openAdminPanelBtn").classList.add("hidden");
+}
+
+
+function applyTheme(theme) {
+  document.body.dataset.theme = theme || "dark";
+}
+
+function applyColorblind(enabled) {
+  document.body.classList.toggle("colorblind", enabled);
+}
+
+async function updatePreferences(prefs) {
+  const token = localStorage.getItem("tko_token");
+
+  await fetch(`${API_BASE}/api/tko/users/preferences`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify(prefs)
+  });
+}
+
+document.getElementById("logoutBtn").addEventListener("click", () => {
+  localStorage.removeItem("tko_token");
+  location.reload();
+});
+
+loadUser();
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
