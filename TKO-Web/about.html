@@ -233,6 +233,126 @@
       border-color: rgba(255,255,255,0.28);
       transform: scale(1.04);
     }
+    .character-row {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 28px;
+      align-items: center;
+      margin-top: 40px;
+    }
+
+    .character-row.reverse {
+      grid-template-columns: 260px 1fr;
+    }
+
+    .character-text h3 {
+      margin: 0 0 12px;
+      font-size: 1.6rem;
+    }
+
+    .character-text p {
+      margin: 0 0 14px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .character-image img {
+      width: 100%;
+      border-radius: 18px;
+      object-fit: cover;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+    }
+
+    .expanded-source {
+      display: none;
+    }
+
+    .expanded-label-secondary {
+      margin-top: 34px;
+    }
+
+    .expanded-card {
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+
+    .expanded-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding-top: 18px;
+      padding-bottom: 10px;
+    }
+
+    .character-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 250px;
+      gap: 28px;
+      align-items: start;
+      margin-top: 38px;
+    }
+
+    .character-row.reverse {
+      grid-template-columns: 250px minmax(0, 1fr);
+    }
+
+    .character-row.reverse .character-text {
+      order: 2;
+    }
+
+    .character-row.reverse .character-frame {
+      order: 1;
+    }
+
+    .character-text h3 {
+      margin: 0 0 14px;
+      font-size: 1.55rem;
+      line-height: 1.1;
+      color: #ffffff;
+    }
+
+    .character-text p {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .character-frame {
+      min-height: 320px;
+      border-radius: 22px;
+      border: 1px dashed rgba(255,255,255,0.22);
+      background:
+              linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
+              rgba(255,255,255,0.03);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+    }
+
+    .character-frame span {
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.42);
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .character-row,
+      .character-row.reverse {
+        grid-template-columns: 1fr;
+      }
+
+      .character-row.reverse .character-text,
+      .character-row.reverse .character-frame {
+        order: initial;
+      }
+
+      .character-frame {
+        min-height: 220px;
+      }
+    }
 
     .expanded-label {
       margin: 18px 0 0;
@@ -348,130 +468,232 @@
 </header>
 
   <main class="page-shell">
-    <div class="container">
-      <section class="about-panel">
-        <div class="panel-inner">
-          <p class="section-eyebrow">About TKO</p>
-          <h2 class="display-title section-title">World, Vision, Identity</h2>
-          <p class="hero-copy">
-            TKO is more than just a game page. It is a stylized project space for the world,
-            music, imagery, and emotional atmosphere surrounding the universe you’re building.
-            Click any card below to expand it.
-          </p>
+  <div class="container">
+    <section class="about-panel">
+      <div class="panel-inner">
+        <p class="section-eyebrow">About TKO</p>
+        <h2 class="display-title section-title">World, Vision, Identity</h2>
+        <p class="hero-copy">
+          TKO is more than just a game page. It is a stylized project space for the world,
+          music, imagery, and emotional atmosphere surrounding the universe you’re building.
+          Click any card below to expand it.
+        </p>
 
-          <div class="about-stage" id="aboutStage">
-            <div class="about-grid" id="aboutGrid">
-              <article
-                class="about-card"
-                data-key="game"
-                data-label="About the Game"
-                data-title="WE ARE T.K.O!"
-                data-copy="T.K.O! The Knockouts is a two button narrative rhythm
-                 game inspired by both rhythm and fighting games.
-                 The Knockouts are an indie band making noise rock despite all
-                 the signs saying they shouldn’t. Or, they were, until the
-                 keyboardist / vocalist Hazel left the band to pursue a more stable career in fighting.
-                 With Hazel having risen to the top of the fighting world,
-                 the only idea Kit has to get her back in the band is to rise through the ranks herself.">
+        <div class="about-stage" id="aboutStage">
+          <div class="about-grid" id="aboutGrid">
 
-                <p class="card-label">About the Game</p>
-                <h3 class="display-title card-title">WE ARE T.K.O!</h3>
-                <p class="card-copy">
-                  A bit about the game.
+            <article class="about-card" data-key="game">
+              <p class="card-label">About the Game</p>
+              <h3 class="display-title card-title">WE ARE T.K.O!</h3>
+              <p class="card-copy">
+                A bit about the game itself, the premise, and what everything is built around.
+              </p>
+              <span class="card-hint">Expand</span>
+            </article>
+
+            <article class="about-card" data-key="story">
+              <p class="card-label">Story Mode</p>
+              <h3 class="display-title card-title">Do It Loud</h3>
+              <p class="card-copy">
+                Learn about Story Mode, Arcade Mode, and how the rhythm-fighting structure works.
+              </p>
+              <span class="card-hint">Expand</span>
+            </article>
+
+            <article class="about-card" data-key="characters">
+              <p class="card-label">Characters</p>
+              <h3 class="display-title card-title">The Knockouts</h3>
+              <p class="card-copy">
+                Who exactly are The Knockouts? Well, let’s introduce them.
+              </p>
+              <span class="card-hint">Expand</span>
+            </article>
+
+            <article class="about-card" data-key="creators">
+              <p class="card-label">Creators</p>
+              <h3 class="display-title card-title">The Creators</h3>
+              <p class="card-copy">
+                The people behind T.K.O! and the ones actually building all of this.
+              </p>
+              <span class="card-hint">Expand</span>
+            </article>
+
+          </div>
+
+          <div class="expanded-card" id="expandedCard">
+            <button class="close-bubble" id="closeExpanded" aria-label="Close expanded card">✕</button>
+            <div class="expanded-inner" id="expandedContent"></div>
+          </div>
+
+          <!-- EXPANDED SOURCES -->
+
+          <div class="expanded-source hidden" data-key="game">
+            <p class="expanded-label">About the Game</p>
+            <h2 class="expanded-title">WE ARE T.K.O!</h2>
+
+            <p class="expanded-copy">
+              T.K.O! The Knockouts is a two-button narrative rhythm game inspired by both rhythm games and fighting games.
+            </p>
+
+            <p class="expanded-subcopy">
+              The Knockouts are an indie band making noise rock despite all the signs saying they shouldn’t. Or, they were, until the keyboardist / vocalist Hazel left the band to pursue a more stable career in fighting.
+            </p>
+
+            <p class="expanded-subcopy">
+              With Hazel having risen to the top of the fighting world, the only idea Kit has to get her back in the band is to rise through the ranks herself.
+            </p>
+          </div>
+
+          <div class="expanded-source hidden" data-key="story">
+            <p class="expanded-label">Story Mode</p>
+            <h2 class="expanded-title">Do It Loud</h2>
+
+            <p class="expanded-copy">
+              The story mode is split into two segments - fighting people in tournaments to the beat of T.K.O!’s unreleased album tracks, and spending time with the people you fight outside of the ring and getting to know them better.
+            </p>
+
+            <p class="expanded-subcopy">
+              The story is an emotionally charged, character / dialogue driven narrative about passion. The hand-drawn cutscenes and animations are inspired by comics and anime, while still aiming to be uniquely personal to us and the story.
+            </p>
+
+            <p class="expanded-subcopy">
+              The fights are straightforward. Press F to punch, press D to dodge. The bars on the right side of the screen are for punching, bars on the left for dodging.
+            </p>
+
+            <p class="expanded-subcopy">
+              Sounds simple, right? Well, it is, on the easier difficulties. But this music is FAST, and if you have what it takes to play on the hardest difficulties, you’ll have to be fast too.
+            </p>
+
+            <p class="expanded-subcopy">
+              In the time leading up to these tournament events,
+              you can spend your days in the city talking to and learning
+              more about the people you’ve fought. You can learn about their
+              passions and struggles, help them through their problems,
+              and unlock new songs for the arcade mode by finishing their stories.
+            </p>
+
+            <p class="expanded-subcopy">
+              Some of these character events will even have unique rhythm
+              minigames for you to play! Or you could just sleep 24 hours a
+              day until the next bracket starts, I guess.
+            </p>
+
+            <p class="expanded-subcopy">
+              As you progress through the game and win the tournaments,
+              you may discover that not everyone wants you to go through with
+              this and get Hazel back…
+            </p>
+
+            <p class="expanded-label expanded-label-secondary">Arcade Mode</p>
+
+            <p class="expanded-subcopy">
+              If you just want to get right into the rhythm game action,
+              Arcade Mode is the place for you. Pick any song you’ve unlocked
+              and fight any of the fighters you’ve beaten in the story.
+            </p>
+
+            <p class="expanded-subcopy">
+              You can also use the unlock-all feature to have everything
+              available to you without playing in the story if you hate my writing that bad.
+            </p>
+
+            <p class="expanded-subcopy">
+              The fighting gameplay is the same as the story, though some tracks’
+              charts will be adjusted to be more streamlined in this mode, as there won’t
+              be cutscenes or story beats present in these versions.
+            </p>
+          </div>
+
+          <div class="expanded-source hidden" data-key="characters">
+            <p class="expanded-label">Characters</p>
+            <h2 class="expanded-title">The Knockouts</h2>
+
+            <p class="expanded-copy">
+              Who exactly are The Knockouts? Well, let’s introduce them.
+            </p>
+
+            <div class="character-row">
+              <div class="character-text">
+                <h3>Kit</h3>
+                <p>
+                  Kit is the guitarist for T.K.O!, as well as the character you play as.
+                  She’s blunt and has a hard time putting up with some of the more..
+                  eccentric people she meets, but she’s always determined to understand
+                  people and be there for them. She’s also an incredible fighter, having
+                  trained in a fighting club in high school, although her form has never
+                  been very professional.
                 </p>
-                <span class="card-hint">Expand</span>
-              </article>
-
-              <article
-                class="about-card"
-                data-key="creators"
-                data-label="Story Mode:"
-                data-title="Do It Loud"
-                data-copy="The story mode is split into two segments - Fighting people in tournaments
-                to the beat of T.K.O!’s unreleased album tracks, and spending time with the people you
-                fight outside of the ring and getting to know them better. The story is an emotionally
-                charged, character / dialogue driven narrative about passion. The hand drawn cutscenes
-                and animations are inspired by comics and anime, while still aiming to be uniquely personal
-                to us and the story.
-                The fights are straightforward. Press F to punch, press D to dodge. The bars on the right
-                side of the screen are for punching, bars on the left for dodging. Sounds simple, right?
-                Well, it is, on the easier difficulties. But this music is FAST, and if you have what it
-                takes to play on the hardest difficulties, you’ll have to be fast too.
-                In the time leading up to these tournament events, you can spend your days in the city
-                talking to and learning more about the people you’ve fought. You can learn about
-                their passions and struggles, help them through their problems, and unlock new songs
-                for the arcade mode by finishing their stories. Some of these character events will even have
-                unique rhythm minigames for you to play! or you could just sleep 24 hours a day until
-                the next bracket starts i guess.
-                As you progress through the game and win the tournaments, you may
-                 discover that not everyone wants you to go through with this and get Hazel back…"
-                data-subcopy="Arcade Mode:
-                If you just want to get right into the rhythm game action,
-                Arcade Mode is the place for you. Pick any song you’ve unlocked and fight
-                any of the fighters you’ve beaten in the story. You can also use the unlock
-                all feature to have everything available to you without playing in the story
-                if you hate my writing that bad.
-                The fighting gameplay is the same as the story, though some tracks’
-                charts will be adjusted to be more streamlined in this mode,
-                as there won’t be cutscenes or story beats present in these versions.">
-
-                <p class="card-label">Story Mode:</p>
-                <h3 class="display-title card-title">Do It Loud</h3>
-                <p class="card-copy">
-                  Learn about the story mode. Do It Loud.
-                </p>
-                <span class="card-hint">Expand</span>
-              </article>
-
-              <article
-                class="about-card"
-                data-key="website"
-                data-label="The Website"
-                data-title="The Website"
-                data-copy="The TKO website is the main public-facing hub for the project. It is where visitors can learn about the game, follow development, discover music releases, join the newsletter, and participate in community spaces."
-                data-subcopy="Instead of feeling like a generic product site, it should feel like a real extension of the world itself — stylish, immersive, and clearly tied to the identity of the project."
-              >
-                <p class="card-label">The Website</p>
-                <h3 class="display-title card-title">The Hub</h3>
-                <p class="card-copy">
-                  Explain that the website is the hub for updates, releases, newsletters, downloads, and community.
-                </p>
-                <span class="card-hint">Expand</span>
-              </article>
-
-              <article
-                class="about-card"
-                data-key="vision"
-                data-label="Our Vision"
-                data-title="Our Vision"
-                data-copy=""
-                data-subcopy="">
-
-
-                <p class="card-label">Our Vision</p>
-                <h3 class="display-title card-title">Where It’s Going</h3>
-                <p class="card-copy">
-                  Share the long-term dream for TKO and the kind of experience you want people to feel.
-                </p>
-                <span class="card-hint">Expand</span>
-              </article>
+              </div>
+              <div class="character-frame" aria-label="Placeholder frame for Kit image">
+                <span>Kit Image</span>
+              </div>
             </div>
 
-            <div class="expanded-card" id="expandedCard">
-              <button class="close-bubble" id="closeExpanded" aria-label="Close expanded card">✕</button>
+            <div class="character-row reverse">
+              <div class="character-text">
+                <h3>Hazel</h3>
+                <p>
+                  Hazel was the keyboardist / vocalist for T.K.O!
+                  before she left the band to pursue fighting. She has always excelled
+                  in fighting, having been in the same club as Kit and being the only
+                  one who could beat her. They formed a band after high school, but
+                  despite being so close, Hazel suddenly left to find a career in fighting.
+                  She said it was because they weren’t making a livable amount of money,
+                  but it might not be that simple…
+                </p>
+              </div>
+              <div class="character-frame" aria-label="Placeholder frame for Hazel image">
+                <span>Hazel Image</span>
+              </div>
+            </div>
 
-              <div class="expanded-inner">
-                <p class="expanded-label" id="expandedLabel"></p>
-                <h3 class="display-title expanded-title" id="expandedTitle"></h3>
-                <p class="expanded-copy" id="expandedCopy"></p>
-                <p class="expanded-subcopy" id="expandedSubcopy"></p>
+            <div class="character-row">
+              <div class="character-text">
+                <h3>Bassist (Name TBD)</h3>
+                <p>
+                  [The bassist] is the underspoken, but considerate bassist for T.K.O!.
+                  She doesn’t gather the same attention as the other bandmates,
+                  mostly because she doesn’t want to. But don’t mistake that for a lack
+                  of caring, she’s just as passionate about their music as everyone else.
+                </p>
+              </div>
+              <div class="character-frame" aria-label="Placeholder frame for bassist image">
+                <span>Bassist Image</span>
+              </div>
+            </div>
+
+            <div class="character-row reverse">
+              <div class="character-text">
+                <h3>Drummer (Name TBD)</h3>
+                <p>
+                  [The drummer] is the token straight guy of the group.
+                  Also he plays the drums for The Knockouts. But yeah, he’s like,
+                  painfully straight. And generally kind of annoying.
+                  But he’s REALLY good at the drums, and he’s great at meeting and
+                  talking to people. A lot more outgoing than the rest of the band,
+                  even if that gets on their nerves sometimes.
+                </p>
+              </div>
+              <div class="character-frame" aria-label="Placeholder frame for drummer image">
+                <span>Drummer Image</span>
               </div>
             </div>
           </div>
+
+          <div class="expanded-source hidden" data-key="creators">
+            <p class="expanded-label">Creators</p>
+            <h2 class="expanded-title">The Creators</h2>
+
+            <p class="expanded-copy">
+              Creators copy goes here once you send me the exact approved paragraph.
+            </p>
+          </div>
+
         </div>
-      </section>
-    </div>
-  </main>
+      </div>
+    </section>
+  </div>
+</main>
 
   <footer class="site-footer">
     <div class="container">
@@ -480,41 +702,44 @@
     </div>
   </footer>
 
-  <script>
-    const aboutStage = document.getElementById("aboutStage");
-    const aboutGrid = document.getElementById("aboutGrid");
-    const cards = document.querySelectorAll(".about-card");
+<script>
+  const aboutStage = document.getElementById("aboutStage");
+  const aboutGrid = document.getElementById("aboutGrid");
+  const cards = document.querySelectorAll(".about-card");
 
-    const expandedCard = document.getElementById("expandedCard");
-    const closeExpanded = document.getElementById("closeExpanded");
-    const expandedLabel = document.getElementById("expandedLabel");
-    const expandedTitle = document.getElementById("expandedTitle");
-    const expandedCopy = document.getElementById("expandedCopy");
-    const expandedSubcopy = document.getElementById("expandedSubcopy");
+  const expandedCard = document.getElementById("expandedCard");
+  const closeExpanded = document.getElementById("closeExpanded");
+  const expandedContent = document.getElementById("expandedContent");
 
-    function openCard(card) {
-      expandedLabel.textContent = card.dataset.label || "";
-      expandedTitle.textContent = card.dataset.title || "";
-      expandedCopy.textContent = card.dataset.copy || "";
-      expandedSubcopy.textContent = card.dataset.subcopy || "";
+  function openCard(card) {
+    const key = card.dataset.key;
+    const source = document.querySelector(`.expanded-source[data-key="${key}"]`);
 
-      aboutStage.classList.add("grid-hidden");
-      expandedCard.classList.add("active");
-    }
+    if (!source) return;
 
-    function closeCard() {
-      expandedCard.classList.remove("active");
-      aboutStage.classList.remove("grid-hidden");
-    }
+    expandedContent.innerHTML = source.innerHTML;
+    expandedCard.scrollTop = 0;
 
-    cards.forEach((card) => {
-      card.addEventListener("click", () => openCard(card));
-    });
+    aboutStage.classList.add("grid-hidden");
+    expandedCard.classList.add("active");
 
-    closeExpanded.addEventListener("click", (e) => {
-      e.stopPropagation();
-      closeCard();
-    });
-  </script>
+    expandedCard.scrollIntoView();
+  }
+
+  function closeCard() {
+    expandedCard.classList.remove("active");
+    aboutStage.classList.remove("grid-hidden");
+    expandedContent.innerHTML = "";
+  }
+
+  cards.forEach((card) => {
+    card.addEventListener("click", () => openCard(card));
+  });
+
+  closeExpanded.addEventListener("click", (e) => {
+    e.stopPropagation();
+    closeCard();
+  });
+</script>
 </body>
 </html>
