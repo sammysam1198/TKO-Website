@@ -256,11 +256,26 @@
       color: rgba(255,255,255,0.82);
     }
 
-    .character-image img {
+    .character-img {
+      width: 400px;
+      height: 400px;
+      overflow: hidden;
+      border-radius: 20px;
+    }
+
+    .character-img img {
       width: 100%;
-      border-radius: 18px;
+      height: 100%;
       object-fit: cover;
-      box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+    }
+
+    .character-img {
+      width: 400px;
+      height: 400px;
+      overflow: hidden;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.4);
     }
 
     .expanded-source {
@@ -624,7 +639,7 @@
                   been very professional.
                 </p>
               </div>
-              <div class="character-frame" aria-label="Placeholder frame for Kit image">
+              <div class="character-img">
                 <img src="/static/tko/char/kit.png" alt="Kit Image" />
               </div>
             </div>
