@@ -1,138 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="/static/css/tko-base.css">
+  <link rel="stylesheet" href="/static/css/tko-header.css">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About | TKO Official Site</title>
 
   <style>
-    :root {
-      --bg: #090909;
-      --panel: rgba(18, 18, 18, 0.74);
-      --panel-strong: rgba(10, 10, 10, 0.82);
-      --panel-border: rgba(255, 255, 255, 0.12);
-      --text: #ffffff;
-      --muted: rgba(255, 255, 255, 0.78);
-      --soft: rgba(255, 255, 255, 0.56);
-
-      --peach: #ff8a3d;
-      --orange: #ff5f00;
-      --pink: #ff00b8;
-      --magenta: #ff3dc8;
-      --purple: #9b3dff;
-
-      --radius-xl: 34px;
-      --radius-lg: 26px;
-      --radius-md: 18px;
-
-      --shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
-      --max-width: 1240px;
-      --ease: 280ms cubic-bezier(.2,.8,.2,1);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      min-height: 100%;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--text);
-      background:
-        linear-gradient(rgba(0,0,0,0.52), rgba(0,0,0,0.66)),
-        url("assets/texture_web1_3.png") center center / cover no-repeat fixed;
-    }
-
-    body {
-      position: relative;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(circle at 18% 20%, rgba(255,95,0,0.18), transparent 28%),
-        radial-gradient(circle at 82% 22%, rgba(255,0,184,0.15), transparent 25%),
-        radial-gradient(circle at 50% 85%, rgba(155,61,255,0.10), transparent 32%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .display-title {
-      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 0.045em;
-    }
-
-    .container {
-      width: min(calc(100% - 48px), var(--max-width));
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(18px);
-      background: rgba(10, 10, 10, 0.55);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .site-header .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      padding: 18px 0;
-    }
-
-    .brand-title {
-      margin: 0;
-      font-size: 1.8rem;
-      line-height: 1;
-      color: #ff8a7a;
-      text-shadow: 0 0 20px rgba(255, 90, 130, 0.16);
-    }
-
-    .brand-subtitle {
-      margin: 4px 0 0;
-      font-size: 0.72rem;
-      letter-spacing: 0.34em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.58);
-    }
-
-    .nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .nav a {
-      padding: 10px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.04);
-      color: rgba(255,255,255,0.88);
-      transition: background var(--ease), border-color var(--ease), transform var(--ease);
-    }
-
-    .nav a:hover {
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.2);
-      transform: translateY(-1px);
-    }
-
     .page-shell {
       padding: 70px 0 56px;
     }
@@ -143,8 +18,8 @@
       border-radius: var(--radius-xl);
       padding: 34px;
       background:
-        linear-gradient(180deg, rgba(20,20,20,0.70), rgba(10,10,10,0.84)),
-        rgba(12, 12, 12, 0.74);
+              linear-gradient(180deg, rgba(20,20,20,0.70), rgba(10,10,10,0.84)),
+              rgba(12, 12, 12, 0.74);
       border: 1px solid rgba(255,255,255,0.12);
       box-shadow: var(--shadow);
       backdrop-filter: blur(12px);
@@ -155,8 +30,8 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(120deg, rgba(255,95,0,0.08), transparent 32%),
-        linear-gradient(300deg, rgba(255,0,184,0.08), transparent 30%);
+              linear-gradient(120deg, rgba(255,95,0,0.08), transparent 32%),
+              linear-gradient(300deg, rgba(255,0,184,0.08), transparent 30%);
       pointer-events: none;
     }
 
@@ -208,18 +83,18 @@
       border-radius: 28px;
       border: 1px solid rgba(255,255,255,0.12);
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03)),
-        rgba(255,255,255,0.03);
+              linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.03)),
+              rgba(255,255,255,0.03);
       box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.05),
-        0 14px 36px rgba(0,0,0,0.18);
+              inset 0 1px 0 rgba(255,255,255,0.05),
+              0 14px 36px rgba(0,0,0,0.18);
       cursor: pointer;
       transition:
-        transform var(--ease),
-        border-color var(--ease),
-        background var(--ease),
-        box-shadow var(--ease),
-        opacity var(--ease);
+              transform var(--ease),
+              border-color var(--ease),
+              background var(--ease),
+              box-shadow var(--ease),
+              opacity var(--ease);
       overflow: hidden;
     }
 
@@ -230,8 +105,8 @@
       opacity: 0;
       transition: opacity var(--ease);
       background:
-        radial-gradient(circle at top left, rgba(255,95,0,0.16), transparent 34%),
-        radial-gradient(circle at bottom right, rgba(255,0,184,0.14), transparent 34%);
+              radial-gradient(circle at top left, rgba(255,95,0,0.16), transparent 34%),
+              radial-gradient(circle at bottom right, rgba(255,0,184,0.14), transparent 34%);
       pointer-events: none;
     }
 
@@ -239,8 +114,8 @@
       transform: translateY(-4px);
       border-color: rgba(255,255,255,0.2);
       box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.06),
-        0 20px 48px rgba(0,0,0,0.26);
+              inset 0 1px 0 rgba(255,255,255,0.06),
+              0 20px 48px rgba(0,0,0,0.26);
     }
 
     .about-card:hover::before {
@@ -292,8 +167,8 @@
       border-radius: 30px;
       overflow: hidden;
       background:
-        linear-gradient(180deg, rgba(15,15,15,0.78), rgba(8,8,8,0.90)),
-        rgba(0,0,0,0.5);
+              linear-gradient(180deg, rgba(15,15,15,0.78), rgba(8,8,8,0.90)),
+              rgba(0,0,0,0.5);
       border: 1px solid rgba(255,255,255,0.14);
       box-shadow: 0 26px 80px rgba(0,0,0,0.35);
       padding: 34px 34px 38px;
@@ -304,9 +179,9 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 0% 0%, rgba(255,95,0,0.18), transparent 30%),
-        radial-gradient(circle at 100% 0%, rgba(255,0,184,0.16), transparent 30%),
-        linear-gradient(135deg, rgba(255,255,255,0.03), transparent 40%);
+              radial-gradient(circle at 0% 0%, rgba(255,95,0,0.18), transparent 30%),
+              radial-gradient(circle at 100% 0%, rgba(255,0,184,0.16), transparent 30%),
+              linear-gradient(135deg, rgba(255,255,255,0.03), transparent 40%);
       pointer-events: none;
     }
 
@@ -417,17 +292,9 @@
       .about-stage {
         min-height: 980px;
       }
-
-      .nav {
-        display: none;
-      }
     }
 
     @media (max-width: 700px) {
-      .container {
-        width: min(calc(100% - 28px), var(--max-width));
-      }
-
       .about-panel {
         padding: 22px;
       }
@@ -459,22 +326,26 @@
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container">
-      <div class="brand">
-        <h1 class="display-title brand-title">T.K.O!™ Official Site</h1>
-        <p class="brand-subtitle">Visual world / rhythm narrative</p>
-      </div>
-
-      <nav class="nav">
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/music">Music</a>
-        <a href="/community">Community</a>
-        <a href="/news">Newsletter</a>
-      </nav>
+<header class="site-header">
+  <div class="container">
+    <div class="brand">
+      <h1 class="display-title brand-title">T.K.O!™ Official Site</h1>
+      <p class="brand-subtitle">Visual world / rhythm narrative</p>
     </div>
-  </header>
+
+    <nav class="nav">
+      <a href="/" class="active">Home</a>
+      <a href="/about">About</a>
+      <a href="/music">Music</a>
+      <a href="/community">Community</a>
+      <a href="/news">Newsletter</a>
+    </nav>
+
+    <div id="authNavArea">
+      <button class="auth-btn">Sign In</button>
+    </div>
+  </div>
+</header>
 
   <main class="page-shell">
     <div class="container">

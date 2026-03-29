@@ -1,49 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="/static/css/tko-base.css">
+  <link rel="stylesheet" href="/static/css/tko-header.css">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TKO | Music</title>
+
   <style>
-    :root {
-      --tko-pink: #ff4fa3;
-      --tko-pink-soft: #ff7dbd;
-      --tko-orange: #ff9b54;
-      --tko-peach: #ffb37a;
-      --tko-cream: #fff2ea;
-      --tko-white: #ffffff;
-      --tko-black: #120b12;
-      --tko-black-soft: #20121b;
-      --tko-panel: rgba(22, 12, 20, 0.78);
-      --tko-panel-strong: rgba(16, 8, 14, 0.9);
-      --tko-border: rgba(255, 173, 122, 0.28);
-      --tko-shadow: 0 20px 45px rgba(0, 0, 0, 0.38);
-      --tko-gradient: linear-gradient(135deg, var(--tko-pink) 0%, var(--tko-orange) 100%);
-      --tko-gradient-soft: linear-gradient(135deg, rgba(255, 79, 163, 0.18), rgba(255, 155, 84, 0.18));
-      --max-width: 1240px;
-      --transition-slow: 700ms cubic-bezier(0.22, 1, 0.36, 1);
-      --transition-med: 480ms cubic-bezier(0.22, 1, 0.36, 1);
-      --transition-fast: 240ms ease;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
     html {
       scroll-behavior: smooth;
     }
 
     body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--tko-white);
-      background:
-        radial-gradient(circle at top left, rgba(255, 79, 163, 0.18), transparent 28%),
-        radial-gradient(circle at 85% 15%, rgba(255, 155, 84, 0.18), transparent 24%),
-        linear-gradient(180deg, #1a0d17 0%, #0e0810 55%, #09060a 100%);
       overflow-x: hidden;
       position: relative;
+      background:
+              radial-gradient(circle at top left, rgba(255, 79, 163, 0.18), transparent 28%),
+              radial-gradient(circle at 85% 15%, rgba(255, 155, 84, 0.18), transparent 24%),
+              linear-gradient(180deg, #1a0d17 0%, #0e0810 55%, #09060a 100%);
     }
 
     body::before {
@@ -52,8 +27,7 @@
       inset: 0;
       pointer-events: none;
       opacity: 0.12;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-image: linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
       background-size: 100% 4px;
       mix-blend-mode: soft-light;
       z-index: 2;
@@ -65,8 +39,7 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      background:
-        radial-gradient(circle at center, transparent 55%, rgba(0,0,0,0.32) 100%);
+      background: radial-gradient(circle at center, transparent 55%, rgba(0,0,0,0.32) 100%);
       opacity: 0.95;
       z-index: 1;
     }
@@ -97,92 +70,10 @@
       50% { transform: translateY(-4px); }
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
     .page-shell {
       position: relative;
       z-index: 3;
       min-height: 100vh;
-    }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(14px);
-      background: rgba(10, 6, 10, 0.6);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .topbar-inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      padding: 16px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      min-width: 0;
-    }
-
-    .brand img {
-      width: 58px;
-      height: 58px;
-      object-fit: contain;
-      filter: drop-shadow(0 8px 18px rgba(255, 79, 163, 0.16));
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .brand-kicker {
-      font-size: 0.74rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: rgba(255, 226, 212, 0.76);
-    }
-
-    .brand-title {
-      font-size: 1rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--tko-white);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .nav-links a {
-      padding: 10px 14px;
-      border-radius: 999px;
-      color: rgba(255,255,255,0.86);
-      font-size: 0.95rem;
-      transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active {
-      background: rgba(255,255,255,0.08);
-      color: var(--tko-white);
-      transform: translateY(-1px);
     }
 
     .hero {
@@ -196,7 +87,7 @@
     }
 
     .hero-copy-wrap {
-      animation: ghostResolve var(--transition-slow) 70ms both;
+      animation: ghostResolve 700ms cubic-bezier(0.22, 1, 0.36, 1) 70ms both;
     }
 
     .hero-eyebrow {
@@ -224,7 +115,7 @@
 
     .hero h1 .accent {
       display: block;
-      background: var(--tko-gradient);
+      background: linear-gradient(135deg, #ff4fa3 0%, #ff9b54 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -240,7 +131,7 @@
     }
 
     .hero-side {
-      animation: ghostResolve var(--transition-slow) 180ms both;
+      animation: ghostResolve 700ms cubic-bezier(0.22, 1, 0.36, 1) 180ms both;
     }
 
     .hero-card {
@@ -248,10 +139,10 @@
       border-radius: 26px;
       padding: 26px;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
-        var(--tko-panel);
+              linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
+              rgba(22, 12, 20, 0.78);
       border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: var(--tko-shadow);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.38);
       overflow: hidden;
     }
 
@@ -260,8 +151,8 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 20% 15%, rgba(255, 79, 163, 0.22), transparent 26%),
-        radial-gradient(circle at 84% 80%, rgba(255, 155, 84, 0.18), transparent 26%);
+              radial-gradient(circle at 20% 15%, rgba(255, 79, 163, 0.22), transparent 26%),
+              radial-gradient(circle at 84% 80%, rgba(255, 155, 84, 0.18), transparent 26%);
       pointer-events: none;
     }
 
@@ -269,8 +160,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-image:
-        radial-gradient(rgba(255,255,255,0.06) 0.6px, transparent 0.6px);
+      background-image: radial-gradient(rgba(255,255,255,0.06) 0.6px, transparent 0.6px);
       background-size: 12px 12px;
       opacity: 0.15;
       pointer-events: none;
@@ -341,12 +231,12 @@
       grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1.1fr);
       gap: 28px;
       background:
-        linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018)),
-        var(--tko-panel-strong);
-      border: 1px solid var(--tko-border);
+              linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018)),
+              rgba(16, 8, 14, 0.9);
+      border: 1px solid rgba(255, 173, 122, 0.28);
       border-radius: 30px;
       padding: 28px;
-      box-shadow: var(--tko-shadow);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.38);
       overflow: hidden;
     }
 
@@ -355,8 +245,8 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(120deg, rgba(255,79,163,0.07), transparent 40%),
-        linear-gradient(300deg, rgba(255,155,84,0.06), transparent 35%);
+              linear-gradient(120deg, rgba(255,79,163,0.07), transparent 40%),
+              linear-gradient(300deg, rgba(255,155,84,0.06), transparent 35%);
       pointer-events: none;
     }
 
@@ -438,10 +328,10 @@
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0.09);
       background: rgba(255,255,255,0.05);
-      color: var(--tko-white);
+      color: #fff;
       font-weight: 600;
       font-size: 0.95rem;
-      transition: transform var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast);
+      transition: transform 240ms ease, background 240ms ease, border-color 240ms ease;
     }
 
     .pill-btn:hover {
@@ -451,7 +341,7 @@
     }
 
     .pill-btn.primary {
-      background: var(--tko-gradient);
+      background: linear-gradient(135deg, #ff4fa3 0%, #ff9b54 100%);
       color: #160c14;
       border-color: transparent;
       box-shadow: 0 12px 24px rgba(255, 121, 117, 0.22);
@@ -484,8 +374,8 @@
       padding: 10px;
       border-radius: 18px;
       background:
-        linear-gradient(135deg, rgba(255,79,163,0.18), rgba(255,155,84,0.18)),
-        rgba(8, 6, 10, 0.9);
+              linear-gradient(135deg, rgba(255,79,163,0.18), rgba(255,155,84,0.18)),
+              rgba(8, 6, 10, 0.9);
       border: 1px solid rgba(255,255,255,0.08);
       overflow: hidden;
     }
@@ -494,8 +384,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px);
+      background: linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px);
       background-size: 100% 3px;
       opacity: 0.14;
       pointer-events: none;
@@ -519,7 +408,7 @@
       border: 1px solid rgba(255,255,255,0.06);
     }
 
-   .music-platform-grid {
+    .music-platform-grid {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       gap: 18px;
@@ -538,10 +427,10 @@
       overflow: hidden;
       text-decoration: none;
       transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        transform 0.2s ease;
+              background 0.2s ease,
+              border-color 0.2s ease,
+              box-shadow 0.2s ease,
+              transform 0.2s ease;
     }
 
     .music-tile {
@@ -581,8 +470,6 @@
       grid-column: span 3;
     }
 
-    /* platform hover states */
-
     .youtube-tile:hover,
     .ytmusic-tile:hover {
       background: #ff0033;
@@ -605,7 +492,7 @@
     }
 
     .instagram-tile:hover {
-      background: linear-gradient(135deg, #d300c5 0%, #ff2d43  55%, #ffc500 100%);
+      background: linear-gradient(135deg, #d300c5 0%, #ff2d43 55%, #ffc500 100%);
     }
 
     .tiktok-tile:hover {
@@ -617,15 +504,14 @@
       min-height: unset;
     }
 
-    /* tidal is special since black -> black would be invisible */
     .tidal-tile:hover {
       background:
-        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
-        #000;
+              linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+              #000;
       border-color: rgba(255, 255, 255, 0.22);
       box-shadow:
-        0 14px 30px rgba(0, 0, 0, 0.35),
-        0 0 0 1px rgba(255,255,255,0.05) inset;
+              0 14px 30px rgba(0, 0, 0, 0.35),
+              0 0 0 1px rgba(255,255,255,0.05) inset;
     }
 
     .placeholder-note {
@@ -646,9 +532,9 @@
       transform: translateY(32px);
       filter: blur(8px);
       transition:
-        opacity var(--transition-slow),
-        transform var(--transition-slow),
-        filter var(--transition-slow);
+              opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 700ms cubic-bezier(0.22, 1, 0.36, 1),
+              filter 700ms cubic-bezier(0.22, 1, 0.36, 1);
       will-change: opacity, transform, filter;
     }
 
@@ -674,15 +560,6 @@
     }
 
     @media (max-width: 720px) {
-      .topbar-inner {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .nav-links {
-        justify-content: flex-start;
-      }
-
       .hero h1 {
         font-size: clamp(2.4rem, 14vw, 4rem);
       }
@@ -694,7 +571,6 @@
 
       .section,
       .hero,
-      .topbar-inner,
       .footer {
         padding-left: 18px;
         padding-right: 18px;
@@ -703,28 +579,28 @@
   </style>
 </head>
 <body>
-  <div class="page-shell">
-    <header class="topbar">
-      <div class="topbar-inner">
-        <a href="/" class="brand" aria-label="TKO Home">
-          <img src="/static/tko/logos/tkologo.png" alt="TKO logo" />
-          <div class="brand-text">
-            <span class="brand-kicker">Narrative Rhythm World</span>
-            <span class="brand-title">TKO</span>
-          </div>
-        </a>
+    <header class="site-header">
+      <div class="container">
+        <div class="brand">
+          <h1 class="display-title brand-title">T.K.O!™ Official Site</h1>
+          <p class="brand-subtitle">Visual world / rhythm narrative</p>
+        </div>
 
-        <nav class="nav-links" aria-label="Main navigation">
-          <a href="/">Home</a>
+        <nav class="nav">
+          <a href="/" class="active">Home</a>
           <a href="/about">About</a>
-          <a href="/music.html" class="active">Music</a>
+          <a href="/music">Music</a>
           <a href="/community">Community</a>
-          <a href="/news">News</a>
+          <a href="/news">Newsletter</a>
         </nav>
+
+        <div id="authNavArea">
+          <button class="auth-btn">Sign In</button>
+        </div>
       </div>
     </header>
 
-    <main>
+    <main class="page-shell">
       <section class="hero">
         <div class="hero-copy-wrap">
           <span class="hero-eyebrow">Soundtrack / Artists / Memory Fragments</span>

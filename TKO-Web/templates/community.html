@@ -1,144 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="/static/css/tko-base.css">
+  <link rel="stylesheet" href="/static/css/tko-header.css">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Community | TKO Official Site</title>
 
   <style>
-    :root {
-      --bg: #090909;
-      --panel: rgba(18, 18, 18, 0.74);
-      --panel-strong: rgba(10, 10, 10, 0.82);
-      --panel-border: rgba(255, 255, 255, 0.12);
-      --text: #ffffff;
-      --muted: rgba(255, 255, 255, 0.78);
-      --soft: rgba(255, 255, 255, 0.56);
-
-      --peach: #ff8a3d;
-      --orange: #ff5f00;
-      --pink: #ff00b8;
-      --magenta: #ff3dc8;
-      --purple: #9b3dff;
-
-      --radius-xl: 34px;
-      --radius-lg: 26px;
-      --radius-md: 18px;
-
-      --shadow: 0 24px 80px rgba(0, 0, 0, 0.42);
-      --max-width: 1240px;
-      --ease: 280ms cubic-bezier(.2,.8,.2,1);
-    }
-
-    * { box-sizing: border-box; }
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      min-height: 100%;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--text);
-      background:
-        linear-gradient(rgba(0,0,0,0.52), rgba(0,0,0,0.66)),
-        url("assets/texture_web1_3.png") center center / cover no-repeat fixed;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(circle at 18% 20%, rgba(255,95,0,0.14), transparent 28%),
-        radial-gradient(circle at 82% 22%, rgba(255,0,184,0.12), transparent 25%),
-        radial-gradient(circle at 50% 85%, rgba(155,61,255,0.08), transparent 32%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    a { color: inherit; text-decoration: none; }
-
-    .display-title {
-      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 0.045em;
-    }
-
-    .container {
-      width: min(calc(100% - 48px), var(--max-width));
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* ── Header ── */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(18px);
-      background: rgba(10, 10, 10, 0.55);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .site-header .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      padding: 18px 0;
-    }
-
-    .brand-title {
-      margin: 0;
-      font-size: 1.8rem;
-      line-height: 1;
-      color: #ff8a7a;
-      text-shadow: 0 0 20px rgba(255,90,130,0.16);
-    }
-
-    .brand-subtitle {
-      margin: 4px 0 0;
-      font-size: 0.72rem;
-      letter-spacing: 0.34em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.58);
-    }
-
-    .nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .nav a {
-      padding: 10px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.04);
-      color: rgba(255,255,255,0.88);
-      transition: background var(--ease), border-color var(--ease), transform var(--ease);
-    }
-
-    .nav a:hover,
-    .nav a.active {
-      background: rgba(255,255,255,0.08);
-      border-color: rgba(255,255,255,0.2);
-      transform: translateY(-1px);
-    }
-
-    /* ── Page shell ── */
     .page-shell {
       padding: 56px 0 80px;
     }
 
-    /* ── Forum hero ── */
     .forum-hero {
       position: relative;
       overflow: hidden;
       border-radius: var(--radius-xl);
       padding: 34px 34px 28px;
       background:
-        linear-gradient(180deg, rgba(20,20,20,0.70), rgba(10,10,10,0.84));
+              linear-gradient(180deg, rgba(20,20,20,0.70), rgba(10,10,10,0.84));
       border: 1px solid var(--panel-border);
       box-shadow: var(--shadow);
       backdrop-filter: blur(12px);
@@ -150,8 +30,8 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(120deg, rgba(255,95,0,0.08), transparent 32%),
-        linear-gradient(300deg, rgba(255,0,184,0.08), transparent 30%);
+              linear-gradient(120deg, rgba(255,95,0,0.08), transparent 32%),
+              linear-gradient(300deg, rgba(255,0,184,0.08), transparent 30%);
       pointer-events: none;
     }
 
@@ -187,7 +67,6 @@
       max-width: 620px;
     }
 
-    /* ── New post button ── */
     .btn-primary {
       flex-shrink: 0;
       padding: 13px 26px;
@@ -208,9 +87,10 @@
       box-shadow: 0 10px 32px rgba(255,95,0,0.38);
     }
 
-    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:active {
+      transform: translateY(0);
+    }
 
-    /* ── Toolbar (categories + sort) ── */
     .forum-toolbar {
       display: flex;
       align-items: center;
@@ -237,7 +117,10 @@
       transition: background var(--ease), border-color var(--ease), color var(--ease);
     }
 
-    .cat-tab:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .cat-tab:hover {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+    }
 
     .cat-tab.active {
       background: linear-gradient(135deg, rgba(255,95,0,0.22), rgba(255,0,184,0.18));
@@ -261,10 +144,16 @@
       transition: background var(--ease), color var(--ease);
     }
 
-    .sort-tab:hover { color: #fff; }
-    .sort-tab.active { background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.18); }
+    .sort-tab:hover {
+      color: #fff;
+    }
 
-    /* ── Post list ── */
+    .sort-tab.active {
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      border-color: rgba(255,255,255,0.18);
+    }
+
     .post-list {
       display: flex;
       flex-direction: column;
@@ -290,7 +179,6 @@
       transform: translateY(-2px);
     }
 
-    /* Vote column */
     .post-vote {
       display: flex;
       flex-direction: column;
@@ -314,9 +202,22 @@
       transition: background var(--ease), color var(--ease), border-color var(--ease);
     }
 
-    .vote-btn:hover { background: rgba(255,255,255,0.10); color: #fff; }
-    .vote-btn.up.voted { background: rgba(255,95,0,0.22); border-color: rgba(255,95,0,0.5); color: var(--peach); }
-    .vote-btn.down.voted { background: rgba(155,61,255,0.18); border-color: rgba(155,61,255,0.4); color: var(--purple); }
+    .vote-btn:hover {
+      background: rgba(255,255,255,0.10);
+      color: #fff;
+    }
+
+    .vote-btn.up.voted {
+      background: rgba(255,95,0,0.22);
+      border-color: rgba(255,95,0,0.5);
+      color: var(--peach);
+    }
+
+    .vote-btn.down.voted {
+      background: rgba(155,61,255,0.18);
+      border-color: rgba(155,61,255,0.4);
+      color: var(--purple);
+    }
 
     .vote-score {
       font-size: 0.85rem;
@@ -325,8 +226,9 @@
       line-height: 1;
     }
 
-    /* Post body */
-    .post-body { min-width: 0; }
+    .post-body {
+      min-width: 0;
+    }
 
     .post-meta {
       display: flex;
@@ -401,7 +303,6 @@
       border-radius: 999px;
     }
 
-    /* ── Empty / loading states ── */
     .state-message {
       text-align: center;
       padding: 64px 24px;
@@ -409,7 +310,6 @@
       font-size: 1rem;
     }
 
-    /* ── Pagination ── */
     .pagination {
       display: flex;
       justify-content: center;
@@ -428,11 +328,22 @@
       transition: background var(--ease), color var(--ease);
     }
 
-    .page-btn:hover:not(:disabled) { background: rgba(255,255,255,0.10); color: #fff; }
-    .page-btn:disabled { opacity: 0.35; cursor: default; }
-    .page-btn.current { background: rgba(255,95,0,0.18); border-color: rgba(255,95,0,0.35); color: #fff; }
+    .page-btn:hover:not(:disabled) {
+      background: rgba(255,255,255,0.10);
+      color: #fff;
+    }
 
-    /* ── Post detail view ── */
+    .page-btn:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+
+    .page-btn.current {
+      background: rgba(255,95,0,0.18);
+      border-color: rgba(255,95,0,0.35);
+      color: #fff;
+    }
+
     .post-detail {
       display: none;
     }
@@ -460,7 +371,10 @@
       transition: background var(--ease), color var(--ease);
     }
 
-    .back-btn:hover { background: rgba(255,255,255,0.10); color: #fff; }
+    .back-btn:hover {
+      background: rgba(255,255,255,0.10);
+      color: #fff;
+    }
 
     .detail-panel {
       border-radius: var(--radius-xl);
@@ -496,7 +410,10 @@
       font-size: 1rem;
     }
 
-    .detail-content { flex: 1; min-width: 0; }
+    .detail-content {
+      flex: 1;
+      min-width: 0;
+    }
 
     .detail-title {
       margin: 0 0 14px;
@@ -512,7 +429,6 @@
       word-break: break-word;
     }
 
-    /* ── Replies ── */
     .replies-section {
       margin-top: 8px;
     }
@@ -595,10 +511,16 @@
       transition: transform var(--ease), opacity var(--ease);
     }
 
-    .btn-sm:hover { transform: translateY(-1px); }
-    .btn-sm:disabled { opacity: 0.5; cursor: default; transform: none; }
+    .btn-sm:hover {
+      transform: translateY(-1px);
+    }
 
-    /* Reply tree */
+    .btn-sm:disabled {
+      opacity: 0.5;
+      cursor: default;
+      transform: none;
+    }
+
     .reply-tree {
       display: flex;
       flex-direction: column;
@@ -619,11 +541,26 @@
     .reply-card[data-depth="2"] { margin-left: 56px; }
     .reply-card[data-depth="3"] { margin-left: 72px; }
 
-    .reply-vote { display: flex; flex-direction: column; align-items: center; gap: 3px; }
-    .reply-vote .vote-btn { width: 26px; height: 26px; font-size: 0.78rem; }
-    .reply-vote .vote-score { font-size: 0.78rem; }
+    .reply-vote {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
 
-    .reply-body { min-width: 0; }
+    .reply-vote .vote-btn {
+      width: 26px;
+      height: 26px;
+      font-size: 0.78rem;
+    }
+
+    .reply-vote .vote-score {
+      font-size: 0.78rem;
+    }
+
+    .reply-body {
+      min-width: 0;
+    }
 
     .reply-meta {
       display: flex;
@@ -633,8 +570,16 @@
       flex-wrap: wrap;
     }
 
-    .reply-author { font-size: 0.82rem; color: var(--soft); }
-    .reply-date { font-size: 0.75rem; color: rgba(255,255,255,0.35); margin-left: auto; }
+    .reply-author {
+      font-size: 0.82rem;
+      color: var(--soft);
+    }
+
+    .reply-date {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      margin-left: auto;
+    }
 
     .reply-text {
       font-size: 0.92rem;
@@ -655,14 +600,18 @@
       transition: color var(--ease);
     }
 
-    .reply-action:hover { color: rgba(255,255,255,0.7); }
+    .reply-action:hover {
+      color: rgba(255,255,255,0.7);
+    }
 
     .inline-reply-form {
       margin-top: 10px;
       display: none;
     }
 
-    .inline-reply-form.open { display: block; }
+    .inline-reply-form.open {
+      display: block;
+    }
 
     .inline-reply-form textarea {
       width: 100%;
@@ -707,7 +656,6 @@
       color: rgba(255,255,255,0.3);
     }
 
-    /* ── New Post Modal ── */
     .forum-modal {
       position: fixed;
       inset: 0;
@@ -718,7 +666,9 @@
       padding: 20px;
     }
 
-    .forum-modal.hidden { display: none; }
+    .forum-modal.hidden {
+      display: none;
+    }
 
     .forum-modal-backdrop {
       position: absolute;
@@ -745,7 +695,11 @@
       font-size: 1.7rem;
     }
 
-    .forum-form { display: flex; flex-direction: column; gap: 14px; }
+    .forum-form {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
 
     .forum-form label {
       font-size: 0.8rem;
@@ -782,9 +736,14 @@
       color: rgba(255,255,255,0.28);
     }
 
-    .forum-form select option { background: #1a1a1a; }
+    .forum-form select option {
+      background: #1a1a1a;
+    }
 
-    .forum-form textarea { min-height: 130px; resize: vertical; }
+    .forum-form textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
 
     .forum-form-actions {
       display: flex;
@@ -793,7 +752,9 @@
       margin-top: 6px;
     }
 
-    .forum-form-actions button { cursor: pointer; }
+    .forum-form-actions button {
+      cursor: pointer;
+    }
 
     .cancel-btn {
       padding: 11px 22px;
@@ -805,7 +766,10 @@
       transition: background var(--ease), color var(--ease);
     }
 
-    .cancel-btn:hover { background: rgba(255,255,255,0.06); color: #fff; }
+    .cancel-btn:hover {
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+    }
 
     .submit-btn {
       padding: 11px 26px;
@@ -818,10 +782,15 @@
       transition: transform var(--ease), opacity var(--ease);
     }
 
-    .submit-btn:hover { transform: translateY(-1px); }
-    .submit-btn:disabled { opacity: 0.5; transform: none; }
+    .submit-btn:hover {
+      transform: translateY(-1px);
+    }
 
-    /* ── Auth button in nav ── */
+    .submit-btn:disabled {
+      opacity: 0.5;
+      transform: none;
+    }
+
     .auth-btn {
       padding: 10px 18px;
       border-radius: 999px;
@@ -862,9 +831,10 @@
       transition: color var(--ease);
     }
 
-    .signout-btn:hover { color: rgba(255,255,255,0.8); }
+    .signout-btn:hover {
+      color: rgba(255,255,255,0.8);
+    }
 
-    /* ── Auth modal tabs ── */
     .auth-tabs {
       display: flex;
       gap: 0;
@@ -889,10 +859,14 @@
       border-bottom-color: var(--peach);
     }
 
-    .auth-panel { display: none; }
-    .auth-panel.active { display: block; }
+    .auth-panel {
+      display: none;
+    }
 
-    /* ── Toast ── */
+    .auth-panel.active {
+      display: block;
+    }
+
     .toast {
       position: fixed;
       bottom: 28px;
@@ -912,10 +886,15 @@
       pointer-events: none;
     }
 
-    .toast.show { transform: translateY(0); opacity: 1; }
-    .toast.error { border-color: rgba(255,61,61,0.3); }
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
 
-    /* ── Footer ── */
+    .toast.error {
+      border-color: rgba(255,61,61,0.3);
+    }
+
     .site-footer {
       padding: 32px 0 42px;
       border-top: 1px solid rgba(255,255,255,0.08);
@@ -931,18 +910,31 @@
       margin: 6px 0 0;
     }
 
-    /* ── Responsive ── */
     @media (max-width: 900px) {
-      .forum-hero-inner { flex-direction: column; align-items: flex-start; }
-      .nav { display: none; }
+      .forum-hero-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
 
     @media (max-width: 600px) {
-      .container { width: min(calc(100% - 28px), var(--max-width)); }
-      .forum-hero { padding: 22px; }
-      .detail-panel { padding: 20px; }
-      .forum-modal-content { padding: 22px; }
-      .post-card { grid-template-columns: 36px 1fr; padding: 14px 16px; }
+      .forum-hero {
+        padding: 22px;
+      }
+
+      .detail-panel {
+        padding: 20px;
+      }
+
+      .forum-modal-content {
+        padding: 22px;
+      }
+
+      .post-card {
+        grid-template-columns: 36px 1fr;
+        padding: 14px 16px;
+      }
+
       .reply-card[data-depth="1"] { margin-left: 14px; }
       .reply-card[data-depth="2"] { margin-left: 20px; }
       .reply-card[data-depth="3"] { margin-left: 24px; }
@@ -951,27 +943,28 @@
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="site-header">
-    <div class="container">
-      <div class="brand">
-        <h1 class="display-title brand-title">T.K.O!™ Official Site</h1>
-        <p class="brand-subtitle">Visual world / rhythm narrative</p>
-      </div>
-      <nav class="nav">
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/music">Music</a>
-        <a href="/community" class="active">Community</a>
-        <a href="/news">Newsletter</a>
-      </nav>
-      <div id="authNavArea">
-        <button class="auth-btn" id="openAuthBtn">Sign In / Sign Up</button>
-      </div>
+<header class="site-header">
+  <div class="container">
+    <div class="brand">
+      <h1 class="display-title brand-title">T.K.O!™ Official Site</h1>
+      <p class="brand-subtitle">Visual world / rhythm narrative</p>
     </div>
-  </header>
 
-  <!-- Page -->
+    <nav class="nav">
+      <a href="/" class="active">Home</a>
+      <a href="/about">About</a>
+      <a href="/music">Music</a>
+      <a href="/community">Community</a>
+      <a href="/news">Newsletter</a>
+    </nav>
+
+    <div id="authNavArea">
+      <button class="auth-btn">Sign In</button>
+    </div>
+  </div>
+</header>
+
+  <!-- page -->
   <main class="page-shell">
     <div class="container">
 
@@ -987,7 +980,7 @@
         </div>
       </section>
 
-      <!-- List view -->
+
       <div class="forum-list-view" id="listView">
         <div class="forum-toolbar">
           <div class="cat-tabs" id="catTabs">
@@ -1007,7 +1000,7 @@
         <div class="pagination" id="pagination"></div>
       </div>
 
-      <!-- Detail view -->
+
       <div class="post-detail" id="detailView">
         <button class="back-btn" id="backBtn">← Back to forum</button>
 
@@ -1071,7 +1064,7 @@
     </div>
   </div>
 
-  <!-- Toast -->
+
   <div class="toast" id="toast"></div>
 
   <!-- Auth Modal -->
@@ -1142,7 +1135,7 @@
   <script>
     const API_BASE = "https://tko-api-server.onrender.com";
 
-    // ── State ──────────────────────────────────────────────────────────
+    // ── State
     let state = {
       categories: [],
       posts: [],
@@ -1156,7 +1149,7 @@
       currentReplies: [],
     };
 
-    // ── Auth helpers ───────────────────────────────────────────────────
+    // ── Auth helpers
     function getToken() {
       return localStorage.getItem("tko_token") || null;
     }
@@ -1166,7 +1159,7 @@
       return token ? { Authorization: `Bearer ${token}` } : {};
     }
 
-    // ── Toast ──────────────────────────────────────────────────────────
+    // ── Toast
     let toastTimer = null;
     function showToast(msg, isError = false) {
       const el = document.getElementById("toast");
@@ -1177,7 +1170,7 @@
       toastTimer = setTimeout(() => el.classList.remove("show"), 3200);
     }
 
-    // ── Relative date ──────────────────────────────────────────────────
+    // ── Relative date
     function relativeDate(iso) {
       const diff = Date.now() - new Date(iso).getTime();
       const mins = Math.floor(diff / 60000);
@@ -1190,7 +1183,7 @@
       return new Date(iso).toLocaleDateString();
     }
 
-    // ── Escape HTML ────────────────────────────────────────────────────
+    // ── Escape HTML
     function esc(str) {
       return String(str || "")
         .replace(/&/g, "&amp;")
@@ -1199,7 +1192,7 @@
         .replace(/"/g, "&quot;");
     }
 
-    // ── Load categories ────────────────────────────────────────────────
+    // ── Load categories
     async function loadCategories() {
       try {
         const res = await fetch(`${API_BASE}/api/tko/forum/categories`);
@@ -1251,7 +1244,7 @@
       ).join("");
     }
 
-    // ── Load posts ─────────────────────────────────────────────────────
+    // ── Load posts
     async function loadPosts() {
       const list = document.getElementById("postList");
       list.innerHTML = `<div class="state-message">Loading posts…</div>`;
@@ -1331,7 +1324,7 @@
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    // ── Vote ───────────────────────────────────────────────────────────
+    // ── Vote
     async function handleVote(postId, voteType, cardEl) {
       try {
         const res = await fetch(`${API_BASE}/api/tko/forum/posts/${postId}/vote`, {
@@ -1357,7 +1350,7 @@
       }
     }
 
-    // ── Open post detail ───────────────────────────────────────────────
+    // ── Open post detail
     async function openPost(postId) {
       state.currentPostId = postId;
       document.getElementById("listView").classList.add("hidden");
@@ -1469,7 +1462,7 @@
       }
     }
 
-    // ── Top-level reply ────────────────────────────────────────────────
+    // ── Top-level reply
     document.getElementById("submitReplyBtn").addEventListener("click", async () => {
       const content = document.getElementById("replyContent").value.trim();
       const displayName = document.getElementById("replyDisplayName").value.trim();
@@ -1503,7 +1496,7 @@
       }
     });
 
-    // ── Back button ────────────────────────────────────────────────────
+    // ── Back button
     document.getElementById("backBtn").addEventListener("click", () => {
       state.currentPostId = null;
       document.getElementById("detailView").classList.remove("active");
@@ -1511,7 +1504,7 @@
       loadPosts();
     });
 
-    // ── New Post Modal ─────────────────────────────────────────────────
+    // ── New Post Modal
     document.getElementById("openNewPostBtn").addEventListener("click", () => {
       document.getElementById("newPostModal").classList.remove("hidden");
     });
@@ -1561,7 +1554,7 @@
       }
     });
 
-    // ── Sort tabs ──────────────────────────────────────────────────────
+    // ── Sort tabs
     document.querySelectorAll(".sort-tab").forEach(btn => {
       btn.addEventListener("click", () => {
         state.sort = btn.dataset.sort;
@@ -1571,7 +1564,7 @@
       });
     });
 
-    // ── Auth ───────────────────────────────────────────────────────────
+    // ── Auth
     function renderAuthNav() {
       const area = document.getElementById("authNavArea");
       const token = getToken();
@@ -1686,7 +1679,7 @@
       }
     });
 
-    // ── Init ───────────────────────────────────────────────────────────
+    // ── Init
     renderAuthNav();
     loadCategories();
     loadPosts();
