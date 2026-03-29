@@ -38,7 +38,6 @@
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
     html, body {
       margin: 0;
       padding: 0;
@@ -659,14 +658,9 @@
     }
 
     .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 700ms cubic-bezier(.2,.8,.2,1), transform 700ms cubic-bezier(.2,.8,.2,1);
-    }
-
-    .reveal.is-visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: none;
+      filter: none;
     }
 
     @media (max-width: 1100px) {

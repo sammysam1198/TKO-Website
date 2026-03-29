@@ -1167,7 +1167,6 @@
       el.classList.toggle("error", isError);
       el.classList.add("show");
       clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => el.classList.remove("show"), 3200);
     }
 
     // ── Relative date
@@ -1321,7 +1320,6 @@
     function goPage(p) {
       state.page = p;
       loadPosts();
-      window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     // ── Vote
@@ -1357,7 +1355,6 @@
       document.getElementById("detailView").classList.add("active");
       document.getElementById("detailPanel").innerHTML = `<div class="state-message">Loading…</div>`;
       document.getElementById("repliesSection").style.display = "none";
-      window.scrollTo({ top: 0, behavior: "smooth" });
 
       try {
         const res = await fetch(`${API_BASE}/api/tko/forum/posts/${postId}`);

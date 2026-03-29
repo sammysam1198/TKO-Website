@@ -29,10 +29,6 @@
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-    }
-
     body {
       margin: 0;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -569,14 +565,9 @@
     }
 
     .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 700ms ease, transform 700ms ease;
-    }
-
-    .reveal.visible {
       opacity: 1;
-      transform: translateY(0);
+      transform: none;
+      filter: none;
     }
 
       .photo-section {
