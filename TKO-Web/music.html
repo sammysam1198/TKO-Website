@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="/static/css/tko-auth.css">
   <link rel="stylesheet" href="/static/css/tko-base.css">
   <link rel="stylesheet" href="/static/css/tko-header.css">
   <meta charset="UTF-8" />
@@ -580,9 +581,7 @@
           <a href="/news">Newsletter</a>
         </nav>
 
-        <div id="authNavArea">
-          <button class="auth-btn">Sign In</button>
-        </div>
+        <div id="authMount"></div>
       </div>
     </header>
 
@@ -774,5 +773,9 @@
       revealObserver.observe(item);
     });
   </script>
+
+    <div id="authModalMount"></div>
+    <script src="/static/js/tko-auth.js"></script>
+
 </body>
 </html>

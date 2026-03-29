@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="/static/css/tko-auth.css">
   <link rel="stylesheet" href="/static/css/tko-base.css">
   <link rel="stylesheet" href="/static/css/tko-header.css">
   <meta charset="UTF-8" />
@@ -1450,7 +1451,7 @@
 
            <div class="header-right">
         <nav class="nav">
-          <a href="/">Home</a>
+          <a href="/" class="active">Home</a>
           <a href="/about">About</a>
           <a href="/music">Music</a>
           <a href="/community">Community</a>
@@ -1458,7 +1459,7 @@
         </nav>
 
        <div id="authSection">
-  <!-- Logged OUT -->
+
   <div id="loggedOutView">
     <button id="openSigninBtn" class="auth-btn signin">Sign In</button>
     <button id="openSignupBtn" class="auth-btn signup">Sign Up</button>
@@ -2519,6 +2520,10 @@ document.getElementById("logoutBtn").addEventListener("click", () => {
 loadUser();
 
 </script>
+
+  <div id="authModalMount"></div>
+  <script src="/static/js/tko-auth.js"></script>
+
 </body>
 </html>
 
