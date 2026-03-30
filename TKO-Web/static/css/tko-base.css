@@ -40,7 +40,7 @@ html, body {
     color: var(--text);
     background:
             linear-gradient(rgba(0,0,0,0.52), rgba(0,0,0,0.66)),
-            url("/static/assets/texture_web1_3.png") center / cover no-repeat fixed;
+            url("//static/tko/textures/texture_web1_3.png") center / cover no-repeat fixed;
 }
 
 body::before {
